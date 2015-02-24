@@ -1,6 +1,6 @@
 #!/bin/bash
 while true;
 do
-  curl -L -X PUT http://$ETCD_ENDPOINT/v2/keys/services/loadbalancer/$HOST_PRIVATE_IPV4:80?ttl=10 -d value=$HOST_PRIVATE_IPV4:80
+  curl -L -X PUT http://$ETCD_ENDPOINT/v2/keys/services/loadbalancer/$HOST_PRIVATE_IPV4:80?ttl=10 -d value=$HOST_PRIVATE_IPV4:80;
   sleep 7;
 done
