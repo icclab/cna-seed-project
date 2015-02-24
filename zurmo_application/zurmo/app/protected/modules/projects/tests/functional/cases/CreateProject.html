@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/" />
+<title>CreateProject</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Create Project</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>45000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>javascript{Math.floor(Math.random()*11000)}</td>
+	<td>randomSuffix</td>
+</tr>
+<!--create account to link with project-->
+<tr>
+  <td>open</td>
+  <td>index.php/accounts/default/create</td>
+  <td></td>
+</tr>
+<tr>
+  <td>waitForPageToLoad</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td>waitForCondition</td>
+  <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+  <td>30000</td>
+</tr>
+<tr>
+  <td>waitForTextPresent</td>
+  <td>Create Account</td>
+  <td></td>
+</tr>
+<tr>
+  <td>type</td>
+  <td>Account_name</td>
+  <td>Test Account ${randomSuffix}</td>
+</tr>
+<tr>
+  <td>clickAndWait</td>
+  <td>save</td>
+  <td></td>
+</tr>
+<tr>
+  <td>waitForPageToLoad</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td>waitForCondition</td>
+  <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+  <td>30000</td>
+</tr>
+<tr>
+  <td>waitForText</td>
+  <td>//div[@id='AccountDetailsPortletView']/div/div/div/table/tbody/tr[1]/td</td>
+  <td>Test Account ${randomSuffix}</td>
+</tr>
+<!--create contact to link with project-->
+<tr>
+    <td>open</td>
+    <td>index.php/contacts/default/create</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForPageToLoad</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>waitForTextPresent</td>
+    <td>Create Contact</td>
+    <td></td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>Contact_firstName</td>
+    <td>Test</td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>Contact_lastName</td>
+    <td>Contact ${randomSuffix}</td>
+</tr>
+<tr>
+    <td>clickAndWait</td>
+    <td>save</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForPageToLoad</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>assertTextPresent</td>
+    <td>Test Contact ${randomSuffix}</td>
+    <td></td>
+</tr>
+<!--create opportunity to link with project-->
+<tr>
+    <td>open</td>
+    <td>index.php/opportunities/default/create</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForPageToLoad</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>waitForTextPresent</td>
+    <td>Create Opportunity</td>
+    <td></td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>Opportunity_name</td>
+    <td>Test Opportunity ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//form[@id='edit-form']/div[2]/div[1]/div/table/tbody/tr[4]/td/div[1]/button</td>
+	<td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=19</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=19</td>
+	<td></td>
+</tr>
+<tr>
+    <td>clickAndWait</td>
+    <td>save</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForPageToLoad</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>assertTextPresent</td>
+    <td>Test Opportunity ${randomSuffix}</td>
+    <td></td>
+</tr>
+<!--Go to create project-->
+<tr>
+	<td>open</td>
+	<td>index.php/projects/default/dashboardDetails</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Projects</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//li[@id='list-view-massActionSelected']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//li[@id='list-view-exportActionSelected']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='SecuredActionBarForProjectsDashboardView']/div[1]/nav[1]/div[2]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//li[@id='list-view-massActionSelected']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//li[@id='list-view-exportActionSelected']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='SecuredActionBarForProjectsSearchAndListView']/div/nav/div[2]/ul/li/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Create Project</td>
+	<td></td>
+</tr>
+<!--check validation-->
+<tr>
+	<td>clickAndWait</td>
+	<td>save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Name cannot be blank.</td>
+	<td></td>
+</tr>
+<!--add project details-->
+<tr>
+	<td>type</td>
+	<td>Project_name</td>
+	<td>Test Project ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Project_description</td>
+	<td>Test Project description</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>Project_owner_SelectLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>UsersSearchForm_anyMixedAttributes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UsersSearchForm_anyMixedAttributes</td>
+	<td>Sam Smith</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>UsersSearchForm_anyMixedAttributes</td>
+	<td>\10</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td> 
+	<td>//div[@id='list-viewmodal']/div[2]/table/tbody/tr[1]/td/a</td>
+	<td>Sam Smith</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Sam Smith</td>
+	<td>Sam Smith</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Sam Smith</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>Project_owner_name</td>
+	<td>Sam Smith</td>
+</tr>
+<!--link account to project-->
+<tr>
+	<td>type</td>
+	<td>id=token-input-ProjectAccountsForm_Account_ids</td>
+	<td>Test Account ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>//*[@id=&quot;token-input-ProjectAccountsForm_Account_ids&quot;]</td>
+	<td>Jil</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>//*[@id=&quot;token-input-ProjectAccountsForm_Account_ids&quot;]</td>
+	<td>Jil</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Test Account ${randomSuffix}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<!--link contact to project-->
+<tr>
+	<td>type</td>
+	<td>id=token-input-ProjectContactsForm_Contact_ids</td>
+	<td>Test Contact ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>//*[@id=&quot;token-input-ProjectContactsForm_Contact_ids&quot;]</td>
+	<td>Jil</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>//*[@id=&quot;token-input-ProjectContactsForm_Contact_ids&quot;]</td>
+	<td>Jil</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Test Contact ${randomSuffix}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<!--link opportunity to project-->
+<tr>
+	<td>type</td>
+	<td>id=token-input-ProjectOpportunitiesForm_Opportunity_ids</td>
+	<td>Test Opportunity ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>//*[@id=&quot;token-input-ProjectOpportunitiesForm_Opportunity_ids&quot;]</td>
+	<td>Jil</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>//*[@id=&quot;token-input-ProjectOpportunitiesForm_Opportunity_ids&quot;]</td>
+	<td>Jil</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Test Opportunity ${randomSuffix}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=Project_status_value</td>
+	<td>label=Active</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<!--verify values after creating account-->
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Test Project ${randomSuffix}</td>
+	<td></td>
+</tr>

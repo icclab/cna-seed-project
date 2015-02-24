@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/" />
+<title>CreateTagCloudAttribute</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Create TagCloud Attribute</td></tr>
+</thead><tbody>
+<tr>
+    <td>setTimeout</td>
+    <td>45000</td>
+    <td></td>
+</tr>
+<tr>
+    <td>store</td>
+    <td>javascript{Math.floor(Math.random()*11000)}</td>
+    <td>randomSuffix</td>
+</tr>
+<tr>
+    <td>open</td>
+    <td>index.php/designer/default</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForPageToLoad</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>clickAndWait</td>
+    <td>//div[@id='TitleBarAndDesignerPageMenuView']/div/ul/li[3]/a/span</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForPageToLoad</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Fields</td>
+	<td>Fields</td>
+</tr>
+<tr>
+    <td>clickAndWait</td>
+    <td>link=Fields</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForPageToLoad</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>verifyTextPresent</td>
+    <td>Accounts: Standard Fields</td>
+    <td></td>
+</tr>
+<tr>
+    <td>verifyTextPresent</td>
+    <td>Create Field</td>
+    <td></td>
+</tr>
+<tr>
+    <td>assertTextNotPresent</td>
+    <td>tag${randomSuffix}</td>
+    <td></td>
+</tr>
+<tr>
+    <td>select</td>
+    <td>attributeTypeName</td>
+    <td>label=Tag Cloud</td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>clickAndWait</td>
+    <td>attributeTypeNameButton</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForPageToLoad</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>TagCloudAttributeForm_attributeName</td>
+    <td>tag${randomSuffix}</td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>TagCloudAttributeForm_attributeLabels_en</td>
+    <td>tag${randomSuffix}</td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>customFieldDataData_AddInput</td>
+    <td>test1</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>customFieldDataData_AddInputButton</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>customFieldDataData_AddInput</td>
+    <td>test2</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>customFieldDataData_AddInputButton</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>customFieldDataData_AddInput</td>
+    <td>test3</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>customFieldDataData_AddInputButton</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>select</td>
+    <td>TagCloudAttributeForm_defaultValueOrder</td>
+    <td>label=test3</td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>verifyValue</td>
+    <td>TagCloudAttributeForm_isRequired</td>
+    <td>off</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>TagCloudAttributeForm_isRequired</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>verifyValue</td>
+    <td>TagCloudAttributeForm_isRequired</td>
+    <td>on</td>
+</tr>
+<tr>
+    <td>verifyValue</td>
+    <td>TagCloudAttributeForm_isAudited</td>
+    <td>off</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>TagCloudAttributeForm_isAudited</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>verifyValue</td>
+    <td>TagCloudAttributeForm_isAudited</td>
+    <td>on</td>
+</tr>
+<tr>
+    <td>clickAndWait</td>
+    <td>save</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForPageToLoad</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>waitForTextNotPresent</td>
+    <td>//div[@id='DesignerBreadCrumbView']/div/span</td>
+    <td>Create Field:</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='StandardAndCustomAttributesListView']/div[2]/div/h1</td>
+    <td>Create Field</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='StandardAndCustomAttributesListView']/div[2]/div[2]/h1</td>
+    <td>Accounts: Custom Fields</td>
+</tr>
+<tr>
+    <td>verifyTextPresent</td>
+    <td>tag${randomSuffix}</td>
+    <td></td>
+</tr>
+<tr>
+    <td>verifyTextPresent</td>
+    <td>Accounts: Standard Fields</td>
+    <td></td>
+</tr>
+<tr>
+    <td>clickAndWait</td>
+    <td>id=edit-link-tag${randomSuffix}Cstm</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForPageToLoad</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='TagCloudAttributeEditView']/div/h1</td>
+    <td>exact:Edit Field: tag${randomSuffix}</td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>customFieldDataData_AddInput</td>
+    <td>test4</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>customFieldDataData_AddInputButton</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>select</td>
+    <td>TagCloudAttributeForm_defaultValueOrder</td>
+    <td>label=test4</td>
+</tr>
+<tr>
+    <td>verifyValue</td>
+    <td>TagCloudAttributeForm_isAudited</td>
+    <td>on</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>TagCloudAttributeForm_isAudited</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>verifyValue</td>
+    <td>TagCloudAttributeForm_isAudited</td>
+    <td>off</td>
+</tr>
+<tr>
+    <td>verifyValue</td>
+    <td>TagCloudAttributeForm_isRequired</td>
+    <td>on</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>TagCloudAttributeForm_isRequired</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>verifyValue</td>
+    <td>TagCloudAttributeForm_isRequired</td>
+    <td>off</td>
+</tr>
+<tr>
+    <td>clickAndWait</td>
+    <td>save</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForPageToLoad</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>waitForTextNotPresent</td>
+    <td>//div[@id='DesignerBreadCrumbView']/div/span</td>
+    <td>Edit Field:</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='StandardAndCustomAttributesListView']/div[2]/div[2]/h1</td>
+    <td>Accounts: Custom Fields</td>
+</tr>
+<tr>
+    <td>verifyTextPresent</td>
+    <td></td>
+    <td>tag${randomSuffix}</td>
+</tr>
+<tr>
+    <td>verifyTextPresent</td>
+    <td>Accounts: Standard Fields</td>
+    <td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

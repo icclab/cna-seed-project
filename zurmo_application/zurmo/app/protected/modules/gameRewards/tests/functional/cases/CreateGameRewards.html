@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/" />
+<title>CreateGameRewards</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Create Game Rewards</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>45000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>javascript{Math.floor(Math.random()*11000)}</td>
+	<td>randomSuffix</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>index.php/gameRewards/default/create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Create Game Reward</td>
+	<td></td>
+</tr>
+<!--check validation of input fields-->
+<tr>
+	<td>clickAndWait</td>
+	<td>save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Name cannot be blank.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Cost in Coins cannot be blank.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Quantity Available cannot be blank.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>GameReward_cost</td>
+	<td>test cost</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>GameReward_quantity</td>
+	<td>test cost</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Cost in Coins must be a number.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Quantity Available must be a number.</td>
+	<td></td>
+</tr>
+<!--create game rewards-->
+<tr>
+	<td>type</td>
+	<td>GameReward_name</td>
+	<td>Test Game Reward ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>GameReward_cost</td>
+	<td>1000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>GameReward_quantity</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>GameReward_description</td>
+	<td>Game Rewards Description</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<!--verifying game reward created or not-->
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='GameRewardDetailsAndRelationsView']/div/div/ul/li[1]/div[1]/h3</td>
+	<td>Test Game Reward ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='GameRewardDetailsPortletView']/div/div/div/table/tbody/tr[2]/td</td>
+	<td>1,000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='GameRewardDetailsPortletView']/div/div/div/table/tbody/tr[3]/td</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='GameRewardDetailsPortletView']/div/div/div/table/tbody/tr[5]/td</td>
+	<td>Game Rewards Description</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='GameRewardDetailsAndRelationsView']/div/div/ul/li[1]/div[1]/h3</td>
+	<td>Test Game Reward ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='GameRewardDetailsPortletView']/div/div/div/table/tbody/tr[2]/td</td>
+	<td>1,000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='GameRewardDetailsPortletView']/div/div/div/table/tbody/tr[3]/td</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='GameRewardDetailsPortletView']/div/div/div/table/tbody/tr[5]/td</td>
+	<td>Game Rewards Description</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

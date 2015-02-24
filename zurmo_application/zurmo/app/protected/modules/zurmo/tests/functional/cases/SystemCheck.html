@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/app/" />
+<title>ParentGroupTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Parent Group Test</td></tr>
+</thead><tbody>
+<tr>
+    <td>setTimeout</td>
+    <td>45000</td>
+    <td></td>
+</tr>
+<!-- create a parent group -->
+<tr>
+  <td>open</td>
+  <td>index.php/configuration</td>
+  <td></td>
+</tr>
+<tr>
+  <td>waitForPageToLoad</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>waitForTextPresent</td>
+    <td>Administration</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForTextPresent</td>
+    <td>Developer Tools</td>
+    <td></td>
+</tr>
+<tr>
+  <td>clickAndWait</td>
+  <td>//div[@id='ConfigureModulesMenuView']/ul/li[4]/a/span</td>
+  <td></td>
+</tr>
+<tr>
+  <td>waitForPageToLoad</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+  <td>clickAndWait</td>
+  <td>//div[@id='DevelopmentMenuView']/ul/li[5]/a/span</td>
+  <td></td>
+</tr>
+<tr>
+  <td>waitForPageToLoad</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>waitForTextPresent</td>
+    <td>System Diagnostics</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForTextPresent</td>
+    <td>Below you will find the results of the system check.</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForTextPresent</td>
+    <td>Failed Optional Services</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[1]/tbody/tr[2]/td[1]</td>
+    <td>Database max_allowed_packet size is: 1M minimum requirement is: 20M</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[1]/tbody/tr[2]/td[2]/span</td>
+    <td>FAIL</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[1]/tbody/tr[3]/td[1]</td>
+    <td>Database does not support LOAD LOCAL INFILE.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[1]/tbody/tr[3]/td[2]/span</td>
+    <td>FAIL</td>
+</tr>
+<tr>
+    <td>waitForTextPresent</td>
+    <td>Correctly Installed Services</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[2]/td[1]</td>
+    <td>Apache version installed: 2.2.15 Minimum version required: 2.2.1</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[2]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[3]/td[1]</td>
+    <td>PHP version installed: 5.4.11 Minimum version required: 5.3.3</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[3]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[4]/td[1]</td>
+    <td>PHP date.timezone is set.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[4]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[5]/td[1]</td>
+    <td>PHP memory_limit meets minimum requirement.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[5]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[6]/td[1]</td>
+    <td>PHP file_uploads is on which is ok.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[6]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[7]/td[1]</td>
+    <td>PHP upload_max_filesize value meets minimum requirement.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[7]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[8]/td[1]</td>
+    <td>PHP post_max_size meets minimum requirement.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[8]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[9]/td[1]</td>
+    <td>$_SERVER is accessible.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[9]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[10]/td[1]</td>
+    <td>PCRE extension is loaded.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[10]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[11]/td[1]</td>
+    <td>SPL extension is loaded.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[11]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[12]/td[1]</td>
+    <td>Ctype extension is loaded.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[12]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[13]/td[1]</td>
+    <td>The instance folders are present and writable.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[13]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[14]/td[1]</td>
+    <td>APC version installed: 3.1.14 Minimum version required: 1.0.0</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[14]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[15]/td[1]</td>
+    <td>SOAP is installed.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[15]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[16]/td[1]</td>
+    <td>Curl version installed: 7.19.7 Minimum version required: 6.0</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[16]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[17]/td[1]</td>
+    <td>Yii version installed: 1.1.13 Minimum version required: 1.1.13</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[17]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[18]/td[1]</td>
+    <td>RedBean version installed: 3.2 Minimum version required: 3.2</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[18]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[19]/td[1]</td>
+    <td>Mbstring is installed.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[19]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[20]/td[1]</td>
+    <td>Memcache extension version installed: 3.0.7 Minimum version required: 2.2.0	</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[20]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[21]/td[1]</td>
+    <td>Minify library is included.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[21]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[22]/td[1]</td>
+    <td>IMAP extension is loaded.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[22]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[23]/td[1]</td>
+    <td>pdo is installed.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[23]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[24]/td[1]</td>
+    <td>pdo_mysql is installed.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[24]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[25]/td[1]</td>
+    <td>Ldap is installed.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[25]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[26]/td[1]</td>
+    <td>Mcrypt extension is loaded.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[26]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[27]/td[1]</td>
+    <td>Mysql version installed: 5.5.29 Minimum version required: 5.0.0</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[27]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[28]/td[1]</td>
+    <td>Database is not in strict mode.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[28]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[29]/td[1]</td>
+    <td>Database max_sp_recursion_depth size meets minimum requirement.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[29]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[30]/td[1]</td>
+    <td>Database thread_stack value meets minimum requirement.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[30]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[31]/td[1]</td>
+    <td>Database default collation meets minimum requirement.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[31]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[32]/td[1]</td>
+    <td>Database log_bin=off and therefore satisfies this requirement.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[32]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[33]/td[1]</td>
+    <td>Database optimizer_search_depth size meets requirement.</td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DiagnosticCheckServicesView']/div/div/table[2]/tbody/tr[33]/td[2]/span</td>
+    <td>PASS</td>
+</tr>
+</tbody></table>
+</body>
+</html>

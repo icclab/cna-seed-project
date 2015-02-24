@@ -1,0 +1,759 @@
+<?php
+    /*********************************************************************************
+     * Zurmo is a customer relationship management program developed by
+     * Zurmo, Inc. Copyright (C) 2014 Zurmo Inc.
+     *
+     * Zurmo is free software; you can redistribute it and/or modify it under
+     * the terms of the GNU Affero General Public License version 3 as published by the
+     * Free Software Foundation with the addition of the following permission added
+     * to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
+     * IN WHICH THE COPYRIGHT IS OWNED BY ZURMO, ZURMO DISCLAIMS THE WARRANTY
+     * OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
+     *
+     * Zurmo is distributed in the hope that it will be useful, but WITHOUT
+     * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+     * FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+     * details.
+     *
+     * You should have received a copy of the GNU Affero General Public License along with
+     * this program; if not, see http://www.gnu.org/licenses or write to the Free
+     * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+     * 02110-1301 USA.
+     *
+     * You can contact Zurmo, Inc. with a mailing address at 27 North Wacker Drive
+     * Suite 370 Chicago, IL 60606. or at email address contact@zurmo.com.
+     *
+     * The interactive user interfaces in original and modified versions
+     * of this program must display Appropriate Legal Notices, as required under
+     * Section 5 of the GNU Affero General Public License version 3.
+     *
+     * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
+     * these Appropriate Legal Notices must retain the display of the Zurmo
+     * logo and Zurmo copyright notice. If the display of the logo is not reasonably
+     * feasible for technical reasons, the Appropriate Legal Notices must display the words
+     * "Copyright Zurmo Inc. 2014. All rights reserved".
+     ********************************************************************************/
+
+    class WorkflowActionProcessingHelperTest extends WorkflowBaseTest
+    {
+        protected static $superUserId;
+
+        protected static $bobbyUserId;
+
+        protected static $sarahUserId;
+
+        protected static $marketingListId;
+
+        public static function setUpBeforeClass()
+        {
+            parent::setUpBeforeClass();
+            $super = User::getByUsername('super');
+            $bobby = UserTestHelper::createBasicUser('bobby');
+            $sarah = UserTestHelper::createBasicUser('sarah');
+            self::$superUserId = $super->id;
+            self::$bobbyUserId = $bobby->id;
+            self::$sarahUserId = $sarah->id;
+            $marketingList = MarketingListTestHelper::createMarketingListByName('testList');
+            self::$marketingListId = $marketingList->id;
+        }
+
+        public static function getDependentTestModelClassNames()
+        {
+            return array('WorkflowModelTestItem',
+                            'WorkflowModelTestItem2',
+                            'WorkflowModelTestItem3',
+                            'WorkflowModelTestItem5',
+                            'WorkflowModelTestItem9'
+                        );
+        }
+
+        public function testSubscribeContactToList()
+        {
+            $marketingList                = MarketingList::getById(self::$marketingListId);
+            $this->assertEquals(0, $marketingList->marketingListMembers->count());
+            $action                       = new ActionForWorkflowForm('Contact', Workflow::TYPE_ON_SAVE);
+            $action->type                 = ActionForWorkflowForm::TYPE_SUBSCRIBE_TO_LIST;
+            $attributes                   = array('marketingList' => array('shouldSetValue'    => '1',
+                                                  'type'          => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                  'value'         => self::$marketingListId));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $contact = ContactTestHelper::createContactByNameForOwner('jason', Yii::app()->user->userModel);
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $contact, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $marketingList->forget();
+            $marketingList = MarketingList::getById(self::$marketingListId);
+            $this->assertEquals(1, $marketingList->marketingListMembers->count());
+            $this->assertEquals(0, $marketingList->marketingListMembers[0]->unsubscribed);
+
+            //Try adding the same contact again to the list, it should not add the contact again.
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $contact, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $marketingList->forget();
+            $marketingList = MarketingList::getById(self::$marketingListId);
+            $this->assertEquals(1, $marketingList->marketingListMembers->count());
+            $this->assertEquals(0, $marketingList->marketingListMembers[0]->unsubscribed);
+
+            //Unsubscribe contact from list, then resubscribe
+            $marketingListMembers = MarketingListMember::getAll();
+            $this->assertEquals(1, count($marketingListMembers));
+            $marketingListMembers[0]->unsubscribed = true;
+            $marketingListMembers[0]->unrestrictedSave();
+            $marketingList->forget();
+            $marketingList = MarketingList::getById(self::$marketingListId);
+            $this->assertEquals(1, $marketingList->marketingListMembers->count());
+            $this->assertEquals(1, $marketingList->marketingListMembers[0]->unsubscribed);
+
+            //Try to resubscribe the contact, it should not resubscribe them
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $contact, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $marketingList->forget();
+            $marketingList = MarketingList::getById(self::$marketingListId);
+            $this->assertEquals(1, $marketingList->marketingListMembers->count());
+            $this->assertEquals(1, $marketingList->marketingListMembers[0]->unsubscribed);
+
+            //Test gracefully handling trying to subscribe to a marketing list that does not exist
+            $this->assertEquals(0, count(Notification::getAll()));
+            $action                       = new ActionForWorkflowForm('Contact', Workflow::TYPE_ON_SAVE);
+            $action->type                 = ActionForWorkflowForm::TYPE_SUBSCRIBE_TO_LIST;
+            $attributes                   = array('marketingList' => array('shouldSetValue'    => '1',
+                'type'          => WorkflowActionAttributeForm::TYPE_STATIC,
+                'value'         => 123456789));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $contact, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $notifications = Notification::getAll();
+            $this->assertEquals(1, count($notifications));
+
+            //Test gracefully handling trying to unsubscribe to a marketing list that does not exist
+            $this->assertTrue($notifications[0]->delete());
+            $this->assertEquals(0, count(Notification::getAll()));
+            $action                       = new ActionForWorkflowForm('Contact', Workflow::TYPE_ON_SAVE);
+            $action->type                 = ActionForWorkflowForm::TYPE_UNSUBSCRIBE_FROM_LIST;
+            $attributes                   = array('marketingList' => array('shouldSetValue'    => '1',
+                'type'          => WorkflowActionAttributeForm::TYPE_STATIC,
+                'value'         => 123456789));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $contact, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $this->assertEquals(1, count(Notification::getAll()));
+        }
+
+        /**
+         * @expectedException NotSupportedException
+         */
+        public function testSubscribeNonContactToList()
+        {
+            $action                       = new ActionForWorkflowForm('Contact', Workflow::TYPE_ON_SAVE);
+            $action->type                 = ActionForWorkflowForm::TYPE_SUBSCRIBE_TO_LIST;
+            $attributes                   = array('marketingList' => array('shouldSetValue'    => '1',
+                                                  'type'          => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                  'value'         => self::$marketingListId));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $account = AccountTestHelper::createAccountByNameForOwner('jason', Yii::app()->user->userModel);
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $account, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+        }
+
+        public function testUnsubscribeContactFromList()
+        {
+            //Empty members from the test marketing list
+            $marketingList                = MarketingList::getById(self::$marketingListId);
+            foreach ($marketingList->marketingListMembers as $marketingListMember)
+            {
+                $marketingListMember->delete();
+            }
+            $marketingList->forget();
+            $marketingList                = MarketingList::getById(self::$marketingListId);
+            $this->assertEquals(0, $marketingList->marketingListMembers->count());
+            //Subscribe new member
+            $contact = ContactTestHelper::createContactByNameForOwner('jason', Yii::app()->user->userModel);
+            $marketingList->addNewMember($contact->id);
+            $marketingList->forget();
+            $marketingList                = MarketingList::getById(self::$marketingListId);
+            $this->assertEquals(1, $marketingList->marketingListMembers->count());
+            $this->assertEquals(0, $marketingList->marketingListMembers[0]->unsubscribed);
+            //Try to unsubscribe the contact, it should unsubscribe them
+            $action                       = new ActionForWorkflowForm('Contact', Workflow::TYPE_ON_SAVE);
+            $action->type                 = ActionForWorkflowForm::TYPE_UNSUBSCRIBE_FROM_LIST;
+            $attributes                   = array('marketingList' => array('shouldSetValue'    => '1',
+                                                  'type'          => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                  'value'         => self::$marketingListId));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $contact, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $marketingList->forget();
+            $marketingList = MarketingList::getById(self::$marketingListId);
+            $this->assertEquals(1, $marketingList->marketingListMembers->count());
+            $this->assertEquals(1, $marketingList->marketingListMembers[0]->unsubscribed);
+
+            //Subscribe contact from list, then unsubscribe
+            $marketingListMembers = MarketingListMember::getAll();
+            $this->assertEquals(1, count($marketingListMembers));
+            $marketingListMembers[0]->unsubscribed = false;
+            $marketingListMembers[0]->unrestrictedSave();
+            $marketingList->forget();
+            $marketingList = MarketingList::getById(self::$marketingListId);
+            $this->assertEquals(1, $marketingList->marketingListMembers->count());
+            $this->assertEquals(0, $marketingList->marketingListMembers[0]->unsubscribed);
+
+            //Try to unsubscribe the contact, it should unsubscribe them
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $contact, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $marketingList->forget();
+            $marketingList = MarketingList::getById(self::$marketingListId);
+            $this->assertEquals(1, $marketingList->marketingListMembers->count());
+            $this->assertEquals(1, $marketingList->marketingListMembers[0]->unsubscribed);
+        }
+
+        /**
+         * @expectedException NotSupportedException
+         */
+        public function testUnsubscribeNonContactFromList()
+        {
+            $action                       = new ActionForWorkflowForm('Contact', Workflow::TYPE_ON_SAVE);
+            $action->type                 = ActionForWorkflowForm::TYPE_UNSUBSCRIBE_FROM_LIST;
+            $attributes                   = array('marketingList' => array('shouldSetValue'    => '1',
+                                                  'type'          => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                  'value'         => self::$marketingListId));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $account = AccountTestHelper::createAccountByNameForOwner('jason', Yii::app()->user->userModel);
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $account, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+        }
+
+        /**
+         * Confirms that values for boolean, date, and dateTime get set on creating new records.
+         */
+        public function testCreateProperlySetsNullAlternativeValues()
+        {
+            $action                       = new ActionForWorkflowForm('WorkflowModelTestItem2', Workflow::TYPE_ON_SAVE);
+            $action->type                 = ActionForWorkflowForm::TYPE_CREATE;
+            $action->relation             = 'hasMany2';
+            $attributes                   = array(  'lastName'   => array('shouldSetValue'    => '1',
+                                                        'type'     => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                        'value'    => 'some new better name'),
+                                                    'string'   => array('shouldSetValue'    => '1',
+                                                        'type'     => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                        'value'    => 'some new better string'));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $model = new WorkflowModelTestItem2();
+            $model->name = 'some name';
+            $relatedModel = new WorkflowModelTestItem();
+            $relatedModel->lastName = 'some old name';
+            $relatedModel->string   = 'some old string';
+            $model->hasMany2->add($relatedModel);
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $model, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $this->assertEquals('some old name', $model->hasMany2[0]->lastName);
+            $this->assertEquals('some old string', $model->hasMany2[0]->string);
+            $this->assertTrue($model->id > 0);
+            $this->assertTrue($model->hasMany2[0]->id > 0);
+            $this->assertTrue($model->hasMany2[1]->id > 0);
+
+            $this->assertEquals('some new better name', $model->hasMany2[1]->lastName);
+            $this->assertEquals('some new better string', $model->hasMany2[1]->string);
+            $this->assertTrue($model->hasMany2[1]->boolean !== null);
+            $this->assertEquals('0000-00-00', $model->hasMany2[1]->date);
+            $this->assertEquals('0000-00-00 00:00:00', $model->hasMany2[1]->dateTime);
+            $this->assertEquals('0', $model->hasMany2[1]->boolean);
+        }
+
+        /**
+         * @depends testCreateProperlySetsNullAlternativeValues
+         */
+        public function testUpdateSelf()
+        {
+            $action                       = new ActionForWorkflowForm('WorkflowModelTestItem', Workflow::TYPE_ON_SAVE);
+            $action->type                 = ActionForWorkflowForm::TYPE_UPDATE_SELF;
+            $attributes                   = array('string' => array('shouldSetValue'    => '1',
+                                                  'type'   => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                  'value'  => 'jason'));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $model = new WorkflowModelTestItem();
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $model, Yii::app()->user->userModel);
+            $helper->processUpdateSelfAction();
+            $this->assertEquals('jason', $model->string);
+            $this->assertTrue($model->id < 0);
+        }
+
+        /**
+         * @depends testUpdateSelf
+         */
+        public function testUpdateRelatedHasOneNonOwned()
+        {
+            $action                       = new ActionForWorkflowForm('WorkflowModelTestItem', Workflow::TYPE_ON_SAVE);
+            $action->type                 = ActionForWorkflowForm::TYPE_UPDATE_RELATED;
+            $action->relation             = 'hasOne';
+            $attributes                   = array('name'   => array('shouldSetValue'    => '1',
+                                                  'type'   => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                  'value'  => 'some new better name'));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $model = new WorkflowModelTestItem();
+            $model->hasOne       = new WorkflowModelTestItem2();
+            $model->hasOne->name = 'some old name';
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $model, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $this->assertEquals('some new better name', $model->hasOne->name);
+            $this->assertTrue($model->id < 0);
+            $this->assertTrue($model->hasOne->id > 0);
+        }
+
+        /**
+         * @depends testUpdateRelatedHasOneNonOwned
+         */
+        public function testUpdateRelatedHasManyNonOwned()
+        {
+            $action                       = new ActionForWorkflowForm('WorkflowModelTestItem', Workflow::TYPE_ON_SAVE);
+            $action->type                 = ActionForWorkflowForm::TYPE_UPDATE_RELATED;
+            $action->relation             = 'hasMany';
+            $attributes                   = array('name'   => array('shouldSetValue'    => '1',
+                                                  'type'   => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                  'value'  => 'some new better name'));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $model = new WorkflowModelTestItem();
+            $model->lastName = 'something';
+            $model->string   = 'somethingElse';
+            $relatedModel = new WorkflowModelTestItem3();
+            $relatedModel->name = 'some old name';
+            $relatedModel2 = new WorkflowModelTestItem3();
+            $relatedModel2->name = 'some old name 2';
+            $model->hasMany->add($relatedModel);
+            $model->hasMany->add($relatedModel2);
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $model, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $this->assertEquals('some new better name', $model->hasMany[0]->name);
+            $this->assertEquals('some new better name', $model->hasMany[1]->name);
+            $this->assertTrue($model->id > 0); //get saved by related model because of new RedBeanOneToManyRelatedModels override 'add' method
+            $this->assertTrue($model->hasMany[0]->id > 0);
+            $this->assertTrue($model->hasMany[1]->id > 0);
+        }
+
+        /**
+         * @depends testUpdateRelatedHasManyNonOwned
+         */
+        public function testUpdateRelatedManyManyNonOwned()
+        {
+            $action                       = new ActionForWorkflowForm('WorkflowModelTestItem2', Workflow::TYPE_ON_SAVE);
+            $action->type                 = ActionForWorkflowForm::TYPE_UPDATE_RELATED;
+            $action->relation             = 'hasMany3';
+            $attributes                   = array('name'   => array('shouldSetValue'    => '1',
+                                                  'type'   => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                  'value'  => 'some new better name'));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $model = new WorkflowModelTestItem2();
+            $relatedModel = new WorkflowModelTestItem3();
+            $relatedModel->name = 'some old name';
+            $relatedModel2 = new WorkflowModelTestItem3();
+            $relatedModel2->name = 'some old name 2';
+            $model->hasMany3->add($relatedModel);
+            $model->hasMany3->add($relatedModel2);
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $model, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $this->assertEquals('some new better name', $model->hasMany3[0]->name);
+            $this->assertEquals('some new better name', $model->hasMany3[1]->name);
+            $this->assertTrue($model->id < 0);
+            $this->assertTrue($model->hasMany3[0]->id > 0);
+            $this->assertTrue($model->hasMany3[1]->id > 0);
+        }
+
+        /**
+         * @depends testUpdateRelatedManyManyNonOwned
+         */
+        public function testCreateHasOneNonOwned()
+        {
+            $action                       = new ActionForWorkflowForm('WorkflowModelTestItem', Workflow::TYPE_ON_SAVE);
+            $action->type                 = ActionForWorkflowForm::TYPE_CREATE;
+            $action->relation             = 'hasOne';
+            $attributes                   = array('name'   => array('shouldSetValue'    => '1',
+                                                  'type'   => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                  'value'  => 'some new model'));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $model = new WorkflowModelTestItem();
+            $model->lastName = 'lastName';
+            $model->string   = 'string';
+            $this->assertTrue($model->hasOne->id < 0);
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $model, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $this->assertEquals('some new model', $model->hasOne->name);
+            $this->assertTrue($model->id > 0);
+            $this->assertTrue($model->hasOne->id > 0);
+        }
+
+        /**
+         * @depends testCreateHasOneNonOwned
+         */
+        public function testCreateHasManyNonOwned()
+        {
+            $action                       = new ActionForWorkflowForm('WorkflowModelTestItem', Workflow::TYPE_ON_SAVE);
+            $action->type                 = ActionForWorkflowForm::TYPE_CREATE;
+            $action->relation             = 'hasMany';
+            $attributes                   = array('name'   => array('shouldSetValue'    => '1',
+                                                  'type'   => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                  'value'  => 'some new better name'));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $model           = new WorkflowModelTestItem();
+            $model->lastName = 'lastName';
+            $model->string   = 'string';
+            $relatedModel = new WorkflowModelTestItem3();
+            $relatedModel->name = 'some old name';
+            $model->hasMany->add($relatedModel);
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $model, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $this->assertEquals('some old name', $model->hasMany[0]->name);
+            $this->assertEquals('some new better name', $model->hasMany[1]->name);
+            $this->assertTrue($model->id > 0);
+            $this->assertEquals(2, $model->hasMany->count());
+            $this->assertTrue($model->hasMany[0]->id > 0);
+            $this->assertTrue($model->hasMany[1]->id > 0);
+        }
+
+        /**
+         * @depends testCreateHasManyNonOwned
+         */
+        public function testCreateManyManyNonOwned()
+        {
+            $action                       = new ActionForWorkflowForm('WorkflowModelTestItem2', Workflow::TYPE_ON_SAVE);
+            $action->type                 = ActionForWorkflowForm::TYPE_CREATE;
+            $action->relation             = 'hasMany3';
+            $attributes                   = array('name'   => array('shouldSetValue'    => '1',
+                                                  'type'   => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                  'value'  => 'some new better name'));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $model = new WorkflowModelTestItem2();
+            $relatedModel = new WorkflowModelTestItem3();
+            $relatedModel->name = 'some old name';
+            $model->hasMany3->add($relatedModel);
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $model, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $this->assertEquals('some old name', $model->hasMany3[0]->name);
+            $this->assertEquals('some new better name', $model->hasMany3[1]->name);
+            $this->assertTrue($model->id > 0);
+            $this->assertTrue($model->hasMany3[0]->id > 0);
+            $this->assertTrue($model->hasMany3[1]->id > 0);
+        }
+
+        /**
+         * @depends testCreateManyManyNonOwned
+         */
+        public function testCreateRelatedHasOnesHasOneNonOwned()
+        {
+            $action                         = new ActionForWorkflowForm('WorkflowModelTestItem9', Workflow::TYPE_ON_SAVE);
+            $action->type                   = ActionForWorkflowForm::TYPE_CREATE_RELATED;
+            $action->relation               = 'hasOne';
+            $action->relatedModelRelation   = 'hasOne';
+            $attributes                     = array('name'   => array('shouldSetValue'    => '1',
+                                                    'type'   => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                    'value'  => 'some new model 2'));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $model = new WorkflowModelTestItem9();
+            $relatedModel = new WorkflowModelTestItem();
+            $relatedModel->lastName = 'lastName';
+            $relatedModel->string   = 'string';
+            $model->hasOne = $relatedModel;
+            $this->assertTrue($model->hasOne->id < 0);
+            $this->assertTrue($model->hasOne->hasOne->id < 0);
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $model, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $this->assertEquals('some new model 2', $model->hasOne->hasOne->name);
+            $this->assertTrue($model->id < 0);
+            $this->assertTrue($model->hasOne->id > 0);
+            $this->assertTrue($model->hasOne->hasOne->id > 0);
+        }
+
+        /**
+         * @depends testCreateRelatedHasOnesHasOneNonOwned
+         */
+        public function testCreateRelatedHasManysHasManyNonOwned()
+        {
+            $action                         = new ActionForWorkflowForm('WorkflowModelTestItem2', Workflow::TYPE_ON_SAVE);
+            $action->type                   = ActionForWorkflowForm::TYPE_CREATE_RELATED;
+            $action->relation               = 'hasMany2';
+            $action->relatedModelRelation   = 'hasMany';
+            $attributes                     = array('name'   => array('shouldSetValue'    => '1',
+                                                    'type'   => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                    'value'  => 'some new model'));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $model = new WorkflowModelTestItem2();
+            $model->name = 'a name';
+            $relatedModel = new WorkflowModelTestItem();
+            $relatedModel->lastName = 'lastName';
+            $relatedModel->string   = 'string';
+            $model->hasMany2->add($relatedModel);
+            $this->assertTrue($model->hasMany2->count() == 1);
+            $this->assertTrue($model->hasMany2[0]->id < 0);
+            $this->assertTrue($model->hasMany2[0]->hasMany->count() == 0);
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $model, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $this->assertEquals('some new model', $model->hasMany2[0]->hasMany[0]->name);
+            $this->assertTrue($model->id > 0); //get saved by related model because of new RedBeanOneToManyRelatedModels override 'add' method
+            $this->assertTrue($model->hasMany2->count() == 1);
+            $this->assertTrue($model->hasMany2[0]->id > 0);
+            $this->assertTrue($model->hasMany2[0]->hasMany->count() == 1);
+            $this->assertTrue($model->hasMany2[0]->hasMany[0]->id > 0);
+        }
+
+        /**
+         * @depends testCreateRelatedHasManysHasManyNonOwned
+         * Similar to an account updating all related tasks.
+         */
+        public function testUpdateRelatedDerived()
+        {
+            $action                       = new ActionForWorkflowForm('WorkflowModelTestItem', Workflow::TYPE_ON_SAVE);
+            $action->type                 = ActionForWorkflowForm::TYPE_UPDATE_RELATED;
+            $action->relation             = 'model5ViaItem';
+            $attributes                   = array('name'   => array('shouldSetValue'    => '1',
+                                                  'type'   => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                  'value'  => 'a new derived name'));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $model           = new WorkflowModelTestItem();
+            $model->lastName = 'lastName';
+            $model->string   = 'string';
+            $saved           = $model->save();
+            $this->assertTrue($saved);
+            $derivedModel = new WorkflowModelTestItem5();
+            $derivedModel->name = 'some old name';
+            $derivedModel->workflowItems->add($model);
+            $saved = $derivedModel->save();
+            $this->assertTrue($saved);
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $model, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $derivedModelId = $derivedModel->id;
+            $derivedModel->forget();
+            $derivedModel   = WorkflowModelTestItem5::getById($derivedModelId);
+            $this->assertEquals('a new derived name', $derivedModel->name);
+
+            //Test where there are no derived models
+            $model           = new WorkflowModelTestItem();
+            $model->lastName = 'lastName';
+            $model->string   = 'string';
+            $this->assertEquals(1, WorkflowModelTestItem5::getCount());
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $model, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $derivedModels = WorkflowModelTestItem5::getAll();
+            $this->assertEquals(1, count($derivedModels));
+            $deleted = $derivedModels[0]->delete();
+            $this->assertTrue($deleted);
+        }
+
+        /**
+         * @depends testUpdateRelatedDerived
+         * Similar to an account updating all related tasks.
+         */
+        public function testCreateDerived()
+        {
+            $this->assertEquals(0, WorkflowModelTestItem5::getCount());
+            $action                       = new ActionForWorkflowForm('WorkflowModelTestItem', Workflow::TYPE_ON_SAVE);
+            $action->type                 = ActionForWorkflowForm::TYPE_CREATE;
+            $action->relation             = 'model5ViaItem';
+            $attributes                   = array('name'   => array('shouldSetValue'    => '1',
+                                                  'type'   => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                  'value'  => 'a new derived name'));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $model           = new WorkflowModelTestItem();
+            $model->lastName = 'lastName';
+            $model->string   = 'string';
+            $saved           = $model->save();
+            $this->assertTrue($saved);
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $model, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $derivedModels = WorkflowModelTestItem5::getAll();
+            $this->assertEquals(1, count($derivedModels));
+            $this->assertEquals('a new derived name', $derivedModels[0]->name);
+            $this->assertEquals(1, $derivedModels[0]->workflowItems->count());
+            $this->assertEquals($derivedModels[0]->workflowItems[0]->getClassId('Item'), $model->getClassId('Item'));
+            $deleted = $derivedModels[0]->delete();
+            $this->assertTrue($deleted);
+        }
+
+        /**
+         * @depends testCreateDerived
+         * Similar to an account updating all related tasks.
+         */
+        public function testCreateRelatedHasOnesDerivedNonOwned()
+        {
+            $this->assertEquals(0, WorkflowModelTestItem5::getCount());
+            $action                         = new ActionForWorkflowForm('WorkflowModelTestItem9', Workflow::TYPE_ON_SAVE);
+            $action->type                   = ActionForWorkflowForm::TYPE_CREATE_RELATED;
+            $action->relation               = 'hasOne';
+            $action->relatedModelRelation   = 'model5ViaItem';
+            $attributes                     = array('name'   => array('shouldSetValue'    => '1',
+                                              'type'   => WorkflowActionAttributeForm::TYPE_STATIC,
+                                              'value'  => 'some new model 2'));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $model = new WorkflowModelTestItem9();
+            $saved = $model->save();
+            $this->assertTrue($saved);
+            $relatedModel = new WorkflowModelTestItem();
+            $relatedModel->lastName = 'lastName';
+            $relatedModel->string   = 'string';
+            $saved = $relatedModel->save();
+            $this->assertTrue($saved);
+            $model->hasOne          = $relatedModel;
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $model, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $derivedModels = WorkflowModelTestItem5::getAll();
+            $this->assertEquals(1, count($derivedModels));
+            $this->assertEquals('some new model 2', $derivedModels[0]->name);
+            $this->assertEquals(1, $derivedModels[0]->workflowItems->count());
+            $this->assertEquals($derivedModels[0]->workflowItems[0]->getClassId('Item'), $relatedModel->getClassId('Item'));
+            $deleted = $derivedModels[0]->delete();
+            $this->assertTrue($deleted);
+        }
+
+        /**
+         * @depends testCreateRelatedHasOnesDerivedNonOwned
+         * Similar to an account updating all related tasks.
+         */
+        public function testCreateRelatedDerivedsHasOneNonOwned()
+        {
+            $this->assertEquals(0, WorkflowModelTestItem5::getCount());
+            $action                         = new ActionForWorkflowForm('WorkflowModelTestItem', Workflow::TYPE_ON_SAVE);
+            $action->type                   = ActionForWorkflowForm::TYPE_CREATE_RELATED;
+            $action->relation               = 'model5ViaItem';
+            $action->relatedModelRelation   = 'hasOne';
+            $attributes                     = array('name'   => array('shouldSetValue'    => '1',
+                                                    'type'   => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                    'value'  => 'some new model 2'));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $model           = new WorkflowModelTestItem();
+            $model->lastName = 'lastName';
+            $model->string   = 'string';
+            $saved = $model->save();
+            $this->assertTrue($saved);
+            $relatedModel       = new WorkflowModelTestItem5();
+            $relatedModel->name = 'my derived model';
+            $relatedModel->workflowItems->add($model);
+            $saved = $relatedModel->save();
+            $this->assertTrue($saved);
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $model, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $derivedModels = WorkflowModelTestItem5::getAll();
+            $this->assertEquals(1, count($derivedModels));
+            $this->assertEquals('some new model 2', $derivedModels[0]->hasOne->name);
+            $deleted = $derivedModels[0]->delete();
+            $this->assertTrue($deleted);
+        }
+
+        /**
+         * @depends testCreateRelatedDerivedsHasOneNonOwned
+         * Similar to a meeting updating its related contacts
+         */
+        public function testUpdateRelatedInferred()
+        {
+            $action                       = new ActionForWorkflowForm('WorkflowModelTestItem5', Workflow::TYPE_ON_SAVE);
+            $action->type                 = ActionForWorkflowForm::TYPE_UPDATE_RELATED;
+            $action->relation             = 'WorkflowModelTestItem__workflowItems__Inferred';
+            $attributes                   = array('string'   => array('shouldSetValue'    => '1',
+                                                  'type'     => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                  'value'    => 'a new derived name'));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $inferredModel           = new WorkflowModelTestItem();
+            $inferredModel->lastName = 'lastName';
+            $inferredModel->string   = 'string';
+            $saved           = $inferredModel->save();
+            $this->assertTrue($saved);
+            $inferredModelId = $inferredModel->id;
+            $model = new WorkflowModelTestItem5();
+            $model->workflowItems->add($inferredModel);
+            $saved = $model->save();
+            $this->assertTrue($saved);
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $model, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $this->assertEquals(1, $model->workflowItems->count());
+            $inferredModel->forget();
+            $inferredModel = WorkflowModelTestItem::getById($inferredModelId);
+            $this->assertEquals('a new derived name', $inferredModel->string);
+            $this->assertTrue($model->delete());
+        }
+
+        /**
+         * @depends testCreateRelatedDerivedsHasOneNonOwned
+         * Similar to a meeting updating its related contacts
+         */
+        public function testCreateInferred()
+        {
+            $action                       = new ActionForWorkflowForm('WorkflowModelTestItem5', Workflow::TYPE_ON_SAVE);
+            $action->type                 = ActionForWorkflowForm::TYPE_CREATE;
+            $action->relation             = 'WorkflowModelTestItem__workflowItems__Inferred';
+            $attributes                   = array(  'string'   => array('shouldSetValue'    => '1',
+                                                        'type'     => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                        'value'    => 'a new derived name'),
+                                                    'lastName'   => array('shouldSetValue'    => '1',
+                                                        'type'     => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                        'value'    => 'a new last name'));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $model = new WorkflowModelTestItem5();
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $model, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $this->assertEquals(1, $model->workflowItems->count());
+            $this->assertEquals('a new derived name', $model->workflowItems[0]->string);
+            $this->assertTrue($model->id > 0);
+            $this->assertTrue($model->delete());
+        }
+
+        /**
+         * @depends testCreateInferred
+         * Similar to a meeting updating its related contacts
+         */
+        public function testCreateRelatedHasOnesInferredNonOwned()
+        {
+            $this->assertEquals(0, WorkflowModelTestItem5::getCount());
+            $action                         = new ActionForWorkflowForm('WorkflowModelTestItem9', Workflow::TYPE_ON_SAVE);
+            $action->type                   = ActionForWorkflowForm::TYPE_CREATE_RELATED;
+            $action->relation               = 'hasOne2';
+            $action->relatedModelRelation   = 'WorkflowModelTestItem__workflowItems__Inferred';
+            $attributes                   = array(  'string'   => array('shouldSetValue'    => '1',
+                                                    'type'     => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                    'value'    => 'a new derived name'),
+                                                    'lastName'   => array('shouldSetValue'    => '1',
+                                                        'type'     => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                        'value'    => 'a new last name'));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $model = new WorkflowModelTestItem9();
+            $saved = $model->save();
+            $this->assertTrue($saved);
+            $relatedModel = new WorkflowModelTestItem5();
+            $saved = $relatedModel->save();
+            $this->assertTrue($saved);
+            $model->hasOne2 = $relatedModel;
+            $saved = $model->save();
+            $this->assertTrue($saved);
+            $this->assertEquals(0, $model->hasOne2->workflowItems->count());
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $model, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $this->assertEquals(1, $model->hasOne2->workflowItems->count());
+            $this->assertEquals('a new derived name', $model->hasOne2->workflowItems[0]->string);
+        }
+
+        /**
+         * @depends testCreateRelatedHasOnesInferredNonOwned
+         * Similar to a meeting updating its related contacts
+         */
+        public function testCreateRelatedInferredsHasOneNonOwned()
+        {
+            $action                         = new ActionForWorkflowForm('WorkflowModelTestItem5', Workflow::TYPE_ON_SAVE);
+            $action->type                   = ActionForWorkflowForm::TYPE_CREATE_RELATED;
+            $action->relation               = 'WorkflowModelTestItem__workflowItems__Inferred';
+            $action->relatedModelRelation   = 'hasOne';
+            $attributes                     = array('name'   => array('shouldSetValue'    => '1',
+                                                    'type'   => WorkflowActionAttributeForm::TYPE_STATIC,
+                                                    'value'  => 'some new model 2'));
+            $action->setAttributes(array(ActionForWorkflowForm::ACTION_ATTRIBUTES => $attributes));
+            $model                  = new WorkflowModelTestItem5();
+            $relatedModel           = new WorkflowModelTestItem();
+            $relatedModel->lastName = 'lastName';
+            $relatedModel->string   = 'string';
+            $saved                  = $relatedModel->save();
+            $this->assertTrue($saved);
+            $model->workflowItems->add($relatedModel);
+            $saved                  = $model->save();
+            $this->assertTrue($saved);
+            $this->assertTrue($model->workflowItems[0]->hasOne->id < 0);
+            $helper = new WorkflowActionProcessingHelper(88, 'some name', $action, $model, Yii::app()->user->userModel);
+            $helper->processNonUpdateSelfAction();
+            $this->assertTrue($model->workflowItems[0]->hasOne->id > 0);
+            $this->assertEquals('some new model 2', $model->workflowItems[0]->hasOne->name);
+        }
+    }
+?>

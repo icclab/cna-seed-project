@@ -1,0 +1,369 @@
+.project-create,
+.project-collaborate,
+.project-track{
+	.icon{
+		position: relative;
+		margin: 0px 15px 0 0;
+		display: inline-block;
+		height: 100%;
+	}
+	.icon:before{
+		content: '\02DB';
+		.symbly(145px);
+		line-height: 60px;
+		position: absolute;
+		top:10px;
+		.t-shadow(0 -1px 0 #000);
+	}
+}
+
+.project-collaborate{
+	p{
+		margin-left: 110px;
+	}
+	.icon:before{
+		left: 10px;
+		content: '\00AF';
+	}
+}
+
+.project-track{
+	p{
+		margin-left: 110px;
+	}
+	.icon:before{
+		left: 10px;
+		content: '\02DA';
+	}
+}
+
+#ActiveProjectsListView{
+	float: none;
+	margin-bottom: 0;
+	.items{
+		background: #fff;
+	}
+	.edit-autoresponder-link{
+		display: block;
+		text-align: left;
+		margin-bottom: 5px;
+	}
+}
+
+#ProjectsFeedListView{
+	float: none;
+	margin-bottom: 0;
+	.items{
+		background: #fff;
+	}
+}
+
+.type-tasks{
+	.items-wrapper{
+		border: 1px solid #dfdfdf;
+	}
+}
+
+.task-dialog{
+	.clearfix();
+	min-width: 1000px;
+	max-width: 1000px;
+	border: none;
+	background: #f0f0f0;
+	.radius(3px);
+	//0 0 15px 0 rgba(51, 51, 51, 0.25)
+	// 1px 1px 1px 0px rgba(153, 153, 153, 0.15)
+	.b-shadow(~'inset 0 0 0 1px rgba(204, 204, 204, 0.3) ,0 0 15px 0 rgba(51, 51, 51, 0.25)');
+	.col-0{
+		width: 15%;
+	}
+	.col-1{
+		width: 85%;
+	}
+	.ui-dialog-title{
+		padding:0 !important;
+		margin:0 !important;
+		font-size:15px;
+		font-weight:bold;
+		.t-shadow( rgba( 255, 255, 255, 0.8 ) 0 1px 0 );
+		line-height: 40px;
+		background: none;
+		.b-shadow(none);
+		border-bottom:none;
+		text-indent:15px;
+		width: 100%;
+		height: 100%;
+		display: block;
+	}
+	.toolbar-mbmenu{
+		position: absolute;
+		right: 0;
+		top: 12px;
+	}
+	.view-toolbar .parent > ul{
+		right: 0;
+	}
+	.wrapper,
+	.details-table{
+		margin: 0;
+		padding: 0;
+		border: none !important;
+		.b-shadow(none) !important;
+		background: none !important;
+	}
+	table{
+		border: none;
+	}
+	td{
+		padding-bottom: 15px;
+	}
+	.attributesContainer{
+		padding-bottom: 0;
+	}
+	.float-bar{
+		margin-bottom: 0;
+	}
+	.right-side-edit-view-panel{
+		background: rgba(236, 240, 241, 0.25) url("@{path}stripes.png") left top repeat;
+		.radius(3px);
+	}
+}
+
+.task-modal-details-options-menu{
+	.parent > a{
+		padding: 0;
+	}
+	.parent > a span{
+		display: none;
+	}
+	.parent > a:before{
+		content:'n';
+		.symbly(26px);
+	}
+	.parent > a:after{
+		margin-left: 2px;
+		position: relative;
+		top: -2px;
+	}
+}
+
+#task-left-column-form-data{
+	label{
+		margin-top: 15px;
+		float: none;
+		display: block;
+	}
+}
+
+#task-right-column-form-data{
+	label{
+		float: none;
+	}
+	#status-box{
+		margin-bottom: 15px;
+	}
+	.owner-box{
+		position: relative;
+		margin-bottom: 15px;
+	}
+}
+
+#task-subscriber-box{
+	margin-top: 15px;
+	h4{
+		margin-bottom: 4px;
+	}
+	img{
+		margin-right:5px;
+	}
+}
+
+.check-list{
+	margin-top: 30px;
+	h3{
+		margin-bottom: 10px;
+	}
+}
+
+.check-list-item{
+	margin-top: 3px;
+	position: relative;
+	.hasCheckBox{
+		float: left;
+		position: relative;
+		top:-5px;
+		margin-right: 5px;
+	}
+	&.ui-sortable-helper{
+		height: auto !important;
+		padding: 8px 8px 4px 8px;
+		.radius(3px);
+		background: #f5f5f5;
+		
+		.task-check-item-actions{
+			visibility: hidden !important;
+		}
+	}
+	&:hover{
+		.task-check-item-actions{
+			visibility: visible;
+		}
+	}
+	p{
+		line-height: 1.4;
+		padding-left: 22px;
+	}
+}
+
+.task-check-item-actions{
+	visibility: hidden;
+	position: absolute;
+	right: 0;
+	top: 0;
+	background: #f0f0f0;
+	//#gradient > .horizontal(~"rgba(240, 240, 240, 0.1)", ~"rgba(240, 240, 240, 0.9)");
+	.b-shadow(-10px 0 15px 5px #f0f0f0);
+	a{
+		margin-left: 5px;
+	}
+	i{
+		color: #a7a7a7;
+	}
+}
+
+.editable-task-input{
+	padding-left: 22px;
+	input{
+		width: 100%;
+		.text-input();
+	}
+}
+
+#task-check-item-inline-edit-form{
+	margin-top: 10px;
+	padding: 8px;
+	.radius(3px);
+	background: rgba(236, 240, 241, 0.25) url("@{path}stripes.png") left top repeat;
+	display:table;
+	width: 100%;
+	input{
+		.text-input();
+	}
+	.task-input{
+		padding-right: 10px;
+		display: table-cell;
+		vertical-align: middle;
+		width: 99%;
+	}
+	.task-add-button{
+		display: table-cell;
+		width: 1%;
+		vertical-align: middle;
+	}
+}
+
+.task-activity{
+	margin-top: 30px;
+	#CommentsForRelatedModelView{
+		width: 100%;
+		max-width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	#CommentInlineEditForModelView{
+		width: 100%;
+		max-width: 100%;
+		margin: 10px 0 0 0;
+		padding: 8px;
+		.radius(3px);
+		background: rgba(236, 240, 241, 0.25) url("@{path}stripes.png") left top repeat;
+		
+	}
+	#CommentList{
+		margin: 0 0 0 0;
+	}
+	#comment-inline-edit-form{
+		margin:0;
+		.form-toolbar{
+			margin-top: 5px;
+			padding-right: 0;
+		}
+	}
+	.comment{
+		.clearfix();
+		margin-top: 10px;
+	}
+	.left-column{
+		padding-right: 0;
+	}
+	.show-file-upload-box{
+		z-index: 99999;
+		position: relative;
+	}
+}
+
+.right-side-details-view-panel{
+	margin-top: 15px;
+	.col-0{
+		width: 100%;
+	}
+	td{
+		padding: 0 0 5px 0;
+		font-weight: normal;
+		strong{
+			display: block;
+		}
+	}
+}
+
+.ProjectsActivityFeedPortletView{
+	tr:first-child td{
+		border-top:none;
+	}
+}
+
+.edit-project-link{
+	color: @themeColor;
+	font-size: 14px;
+	font-weight: bold;
+	font-style: normal;
+	display: block;
+	text-align: left;
+	margin-bottom: 5px;
+}
+
+.project-extra-info{
+	margin-bottom:10px;
+	font-style: italic;
+}
+
+.project-stats{
+	padding-right:5px;
+	width:20%;
+	float: left;
+	text-align: left;
+	font-size: 12px;
+	strong{
+		font-size: 26px;
+		font-weight: bold;
+		display: block;
+	}
+	span{
+		//font-weight: bold;
+	}
+}
+
+a + .project-stats{
+	margin-left: 0;
+}
+
+.percent-complete.percent-green strong{
+	color: #6fa82d;
+}
+
+.percent-complete.percent-yellow strong{
+	color: #ffcc00;
+}
+.percent-complete.percent-red strong{
+	color: #a82d31;
+}

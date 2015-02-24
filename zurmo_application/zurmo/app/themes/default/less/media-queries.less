@@ -1,0 +1,290 @@
+/*********************************************************************************
+ * Zurmo is a customer relationship management program developed by
+ * Zurmo, Inc. Copyright (C) 2014 Zurmo Inc.
+ *
+ * Zurmo is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Affero General Public License version 3 as published by the
+ * Free Software Foundation with the addition of the following permission added
+ * to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
+ * IN WHICH THE COPYRIGHT IS OWNED BY ZURMO, ZURMO DISCLAIMS THE WARRANTY
+ * OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
+ *
+ * Zurmo is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License along with
+ * this program; if not, see http://www.gnu.org/licenses or write to the Free
+ * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301 USA.
+ *
+ * You can contact Zurmo, Inc. with a mailing address at 27 North Wacker Drive
+ * Suite 370 Chicago, IL 60606. or at email address contact@zurmo.com.
+ *
+ * The interactive user interfaces in original and modified versions
+ * of this program must display Appropriate Legal Notices, as required under
+ * Section 5 of the GNU Affero General Public License version 3.
+ *
+ * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
+ * these Appropriate Legal Notices must retain the display of the Zurmo
+ * logo and Zurmo copyright notice. If the display of the logo is not reasonably
+ * feasible for technical reasons, the Appropriate Legal Notices must display the words
+ * "Copyright Zurmo Inc. 2014. All rights reserved".
+ ********************************************************************************/
+
+@media screen and (min-width: 1601px) {
+   /* .AppContainer{
+        margin:0 auto !important;
+    }
+    #HeaderLinksView > div {
+        margin: 0 !important;
+    }
+    #app-search {
+        margin-left:0 !important;
+    }
+    #ShortcutsMenu{
+        position: relative !important;
+        top:-25px !important;
+        right:0 !important;
+    }*/
+}
+
+@media screen and (max-width: 1000px) {
+	/*.view-toolbar{
+		> a,
+		.parent > a {
+			padding-left: 10px;
+			&:before{
+				display: none;
+			}
+		}
+	}
+	#HeaderView{
+		.container{
+			min-width: 0;
+			max-width: 100%;
+		}
+	}*/
+}
+
+@media all and (max-width: 900px) {
+	#HeaderView{
+		min-width:0 !important;
+	}
+	#corp-logo span{
+		display: none;
+	}
+	.juiportlet-column{
+		width:100%;
+		float:none;
+	}
+	.juiportlet-widget{
+		min-width:auto;
+		margin-right:0px;
+	}
+	//Details View
+	.DetailsAndRelationsView{
+		> div{
+			float:none;
+			width:100% !important;
+		}
+	}
+	.breadcrumbs{
+		padding-bottom:10px;
+	}
+	.details-table{
+		margin-right:0;
+	}
+	.juiportlet-widget{
+		margin-right:0 !important;
+	}
+    //edit view
+	.right-column,
+	.left-column{
+		width: 100%;
+	}
+	.right-side-edit-view-panel{
+		padding: 0 0 0 0;
+		background: none;
+	}
+    //intro steps
+	.module-intro-steps > div{
+		width: 100%;
+		float: none;
+		margin:0 0 15px 0;
+	}
+	#AboutView{
+		#rightCol,
+		#leftCol{
+			width: 100%;
+			float: none;
+			padding: 15px 15px 0 15px;
+			> div{
+				float: none;
+			}
+		}
+	}
+	.task-dialog{
+		min-width: 100%;
+		max-width: 100%;
+	}
+}
+
+
+@media all and (max-width: 801px){ /*and (max-height: 451px)*/
+	#LoginPageView{
+		padding-top:0;
+		> div{
+			padding:10px;
+			display:block;
+			display: flex;
+			flex-flow: column wrap;
+			justify-content: flex-start;
+			width:100% !important;
+			height:100% !important;
+		}
+		#FooterView{
+			flex: 1 0 auto;
+			margin:10px 10px 5px 10px;
+		}
+		#credit-link{
+			margin-left:0;
+		}
+	}
+	#LoginView{
+		min-width:0 !important;
+		margin:0;
+		padding: 50px 0;
+		background-position: left bottom;// 120px;
+		height:auto;
+		flex: 1 0 auto;
+	}
+	#login-box{
+		width:100%;
+		height:auto;
+		float:none;
+		margin:10px 0 0 0;
+		top:0;
+		left:0;
+		.form{
+			float:none;
+			width:100%;
+			margin-bottom: 15px;
+			form{
+				border:none;
+				padding:0 10px 10px 10px;
+			}
+		}
+		#LoginLogo{
+			float:none;
+			width:100%;
+			height:80px;
+			padding:0;
+			background-position:50% 50%;
+		}
+	}
+	#login-form{
+		padding:0 20px !important;
+	}
+    #FooterView{
+	    margin-left: 0 !important;
+    }
+    #ShortcutsMenu{
+	    > li > a{
+		    &:before{
+			    content: "Y";
+			    .symbly(24px);
+		    }
+		    > span{
+			    display: none;
+		    }
+	    }
+    }
+}
+
+@media all and (max-width: 500px){
+	.logo-and-search{
+		left: 5px;
+		padding-right: 15px;
+		padding-bottom: 3px;
+	}
+	#app-search{
+		margin-left: 0;
+	}
+	#corp-log{
+		img{
+			margin-right: 4px;
+		}
+	}
+	.global-search-loopa{
+		border-right:1px solid #d5d4d4;
+	}
+	#globalSearchInput{
+		display: none;
+	}
+	.user-actions{
+		padding-right: 0;
+	}
+	#ShortcutsMenu{
+		display: none;
+	}
+    .AppContent{
+	    padding: 65px 10px 0 10px;
+    }
+    .list-view-items-summary-clone,
+    .search-form-tools{
+	    display: none;
+    }
+    .view-toolbar-container{
+	    .pillbox:first-child{
+		    .flexbox();
+		    width: 100%;
+		    background-size: auto 100%;
+		    .split-button,
+		    .default-button{
+			    .flex(1 1 auto);
+			    float: none;
+			    + .default-button,
+			    + .split-button{
+
+			    }
+			    > a{
+				    float: none;
+				    width: 100%;
+				    //flex: 1;
+				    text-align: center;
+				    line-height: 40px;
+			    }
+			    .button-label{
+				    padding:0 3px;
+				    width: 100%;
+				    overflow: hidden;
+				    text-overflow: ellipsis;
+				    position: absolute;
+				    top: 13px;
+				    left: 0;
+			    }
+			    i{
+				    top:-10px
+			    }
+			    .icon-trigger:before{
+				    top: 28px;
+			    }
+		    }
+		    .split-button{
+			    .button-action{
+				    float: left;
+				    width: 80%;
+			    }
+			    .button-trigger{
+				    float: right;
+				    width: 20%;
+				    i{
+					    top: 0;
+				    }
+			    }
+		    }
+	    }
+    }
+}

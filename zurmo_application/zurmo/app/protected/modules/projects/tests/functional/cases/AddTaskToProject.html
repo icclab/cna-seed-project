@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/" />
+<title>AddTaskToProject</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Add Task To Project</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>45000</td>
+	<td></td>
+</tr>
+<!--Go to project list-->
+<tr>
+	<td>open</td>
+	<td>index.php/projects/default/dashboardDetails</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Projects</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//li[@id='list-view-massActionSelected']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//li[@id='list-view-exportActionSelected']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='SecuredActionBarForProjectsDashboardView']/div[1]/nav[1]/div[2]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//li[@id='list-view-massActionSelected']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//li[@id='list-view-exportActionSelected']/a</td>
+	<td></td>
+</tr>
+<!--select project created in functional test-->
+<tr>
+	<td>type</td>
+	<td>ProjectsSearchForm_anyMixedAttributes</td>
+	<td>Test Project ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>ProjectsSearchForm_anyMixedAttributes</td>
+	<td>\10</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='list-view']/div[2]/table/tbody/tr/td[2]/a</td>
+	<td>Test Project ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Project ${randomSuffix}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ProjectsSearchForm_anyMixedAttributes</td>
+	<td>Test Project ${randomSuffix}</td>
+</tr>
+<!--go in detail view of project-->
+<tr>
+	<td>setSpeed</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='list-view']/div[2]/table/tbody/tr[1]/td[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<!--create task-->
+<tr>
+	<td>click</td>
+	<td>//nav[contains(@class, 'pillbox clearfix')]/div[3]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+  <td>type</td>
+  <td>Task_name</td>
+  <td>Test Task ${randomSuffix}</td>
+</tr>
+<tr>
+  <td>type</td>
+  <td>Task_description</td>
+  <td>test description</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=More Details</td>
+	<td>More Details</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=More Details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=Task_status_value</td>
+	<td>label=In Progress</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='Task_requestedByUser_SelectLink']/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>UsersSearchForm_anyMixedAttributes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UsersSearchForm_anyMixedAttributes</td>
+	<td>Sam Smith</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>UsersSearchForm_anyMixedAttributes</td>
+	<td>\10</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td> 
+	<td>//div[@id='list-viewmodal']/div[2]/table/tbody/tr[1]/td/a</td>
+	<td>Sam Smith</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Sam Smith</td>
+	<td>Sam Smith</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Sam Smith</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>Task_requestedByUser_name</td>
+	<td>Sam Smith</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='Task_owner_SelectLink']/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>UsersSearchForm_anyMixedAttributes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UsersSearchForm_anyMixedAttributes</td>
+	<td>Sam Smith</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>UsersSearchForm_anyMixedAttributes</td>
+	<td>\10</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td> 
+	<td>//div[@id='list-viewmodal']/div[2]/table/tbody/tr[1]/td/a</td>
+	<td>Sam Smith</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Sam Smith</td>
+	<td>Sam Smith</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Sam Smith</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>Task_owner_name</td>
+	<td>Sam Smith</td>
+</tr>
+
+<tr>
+	<td>click</td>
+	<td>//a[@id='TaskActivityItemForm_Account_SelectLink']/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>AccountsSearchForm_anyMixedAttributes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>AccountsSearchForm_anyMixedAttributes</td>
+	<td>Test Account ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>AccountsSearchForm_anyMixedAttributes</td>
+	<td>\10</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td> 
+	<td>//div[@id='list-viewmodal']/div[2]/table/tbody/tr[1]/td/a</td>
+	<td>Test Account ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='list-viewmodal']/div[2]/table/tbody/tr[1]/td/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>TaskActivityItemForm_Account_name</td>
+	<td>Test Account ${randomSuffix}</td>
+</tr>
+
+<tr>
+	<td>click</td>
+	<td>//a[@id='TaskActivityItemForm_Contact_SelectLink']/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>ContactsSearchForm_anyMixedAttributes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ContactsSearchForm_anyMixedAttributes</td>
+	<td>Test Contact ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>ContactsSearchForm_anyMixedAttributes</td>
+	<td>\10</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td> 
+	<td>//div[@id='list-viewmodal']/div[2]/table/tbody/tr[1]/td/a</td>
+	<td>Test Contact ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='list-viewmodal']/div[2]/table/tbody/tr[1]/td/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>TaskActivityItemForm_Contact_name</td>
+	<td>Test Contact ${randomSuffix}</td>
+</tr>
+
+<tr>
+	<td>click</td>
+	<td>//a[@id='TaskActivityItemForm_Opportunity_SelectLink']/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>OpportunitiesSearchForm_anyMixedAttributes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>OpportunitiesSearchForm_anyMixedAttributes</td>
+	<td>Test Opportunity ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>OpportunitiesSearchForm_anyMixedAttributes</td>
+	<td>\10</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td> 
+	<td>//div[@id='list-viewmodal']/div[2]/table/tbody/tr[1]/td/a</td>
+	<td>Test Opportunity ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='list-viewmodal']/div[2]/table/tbody/tr[1]/td/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>TaskActivityItemForm_Opportunity_name</td>
+	<td>Test Opportunity ${randomSuffix}</td>
+</tr>
+<tr>
+  <td>click</td>
+  <td>//form[@id='task-modal-edit-form']/div[3]/div/div/a/span[3]</td>
+  <td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>index.php/projects/default/list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=clear-search-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>Criteria Selected</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

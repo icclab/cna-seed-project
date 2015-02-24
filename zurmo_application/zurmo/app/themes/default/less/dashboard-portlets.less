@@ -1,0 +1,273 @@
+// Zurmo is a customer relationship management program developed by
+// Zurmo, Inc. Copyright (C) 2014 Zurmo Inc.
+//
+// Zurmo is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Affero General Public License version 3 as published by the
+// Free Software Foundation with the addition of the following permission added
+// to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
+// IN WHICH THE COPYRIGHT IS OWNED BY ZURMO, ZURMO DISCLAIMS THE WARRANTY
+// OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
+//
+// Zurmo is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+// FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+// details.
+//
+// You should have received a copy of the GNU Affero General Public License along with
+// this program; if not, see http://www.gnu.org/licenses or write to the Free
+// Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// 02110-1301 USA.
+//
+// You can contact Zurmo, Inc. with a mailing address at 27 North Wacker Drive
+// Suite 370 Chicago, IL 60606. or at email address contact@zurmo.com.
+//
+// The interactive user interfaces in original and modified versions
+// of this program must display Appropriate Legal Notices, as required under
+// Section 5 of the GNU Affero General Public License version 3.
+//
+// In accordance with Section 7(b) of the GNU Affero General Public License version 3,
+// these Appropriate Legal Notices must retain the display of the Zurmo
+// logo and Zurmo copyright notice. If the display of the logo is not reasonably
+// feasible for technical reasons, the Appropriate Legal Notices must display the words
+// "Copyright Zurmo Inc. 2014. All rights reserved".
+
+.available-portlets{
+	padding: 15px 15px 0 15px;
+	list-style: none;
+	.clearfix();
+	max-height: 400px;
+	overflow-y: scroll;
+	li{
+		//width: 50%;
+		//float:left;
+		margin-bottom:15px;
+		color:#666;
+		vertical-align:middle;
+	}
+	h3{
+		position: relative;
+	}
+	h3 a{
+		padding-left: 40px;
+	}
+	h3 span:before{
+		content: "z";
+		.symbly(40px);
+		line-height: 1;
+		position: absolute;
+		top:-8px;
+		border:none;
+		outline: none !important;
+		display:inline-block;
+		color:#666;
+		margin: 0;
+	}
+	a{
+		outline: none !important;
+		cursor:pointer;
+		&:foucs{
+			outline: none;
+		}
+	}
+	div{
+		padding-left: 40px;
+	}
+	.mini-button{
+		float:right;
+		position: relative;
+		margin-left: 0;
+		top: -10px;
+		span{
+			//color:@textColor;
+			display: block;
+			padding: 0 6px 0 6px;
+			background: none;
+		}
+	}
+	.icon-contacts:before{
+		content: "y";
+	}
+	.icon-leads:before{
+		content: ".";
+	}
+	.icon-opportunities:before{
+		content: "9";
+	}
+	.icon-reports:before{
+		content: '\V';
+	}
+	.icon-products{
+		&:before{
+			content: '\003E';
+		}
+		&:after{
+			content: '';
+			display: none;
+		}
+	}
+	.icon-rssReader:before{
+		content: "z";
+	}
+	.icon-tasks:before{
+		content: "4";
+	}
+	.icon-missions:before{
+		content: 'Q';
+	}
+	.icon-accounts:before{
+		content: "P";
+	}
+	.icon-activities:before{
+		content: '\00A5';
+	}
+	.icon-socialItems:before{
+		content: "u";
+	}
+	.icon-iframe:before{
+		content: '\2211';
+		font-size: 48px;
+	}
+	.icon-maps:before{
+		content: 'L';
+		font-size: 46px;
+	}
+	.icon-googleWebTracking:before{
+		content: '\00DA';
+		font-size: 46px;
+	}
+	.icon-marketingLists:before{
+		content: '\0022';
+		font-size: 46px;
+	}
+	.icon-projects:before{
+		content: '\02C7';
+	}
+	.icon-notes:before{
+		content: '3';
+	}
+	.icon-meetings:before{
+		content: 'U';
+	}
+	.icon-accountAccountAffiliations:before{
+		content: '\00FB';
+	}
+	.icon-accountContactAffiliations:before{
+		content: '\00F4';
+	}
+	/*
+	.icon-:before{
+		content: "z";
+	}
+	.icon-:before{
+		content: "z";
+	}
+	.icon-:before{
+		content: "z";
+	}
+	*/
+}
+
+/*Edit Portlet*/
+#modal-edit-form{
+	th{
+		line-height: 24px;
+	}
+	th, td{
+		padding:0 0 15px 0;
+	}
+	//for opt in email checkboxes
+	input[type="checkbox"] + label{
+		width:60px;
+		margin-top:0;
+	}
+	//for address fields
+	td > label{
+		&:first-child{
+			margin-top:5px;
+		}
+		margin-top:10px;
+	}
+	.panelTitle{
+		padding-left:0;
+		padding-top:0;
+	}
+}
+
+.panelTitle{
+	font-size:13px;
+	font-weight:bold;
+    color: @themeColor;
+	margin:10px 0;
+}
+
+/*Edit+Add Dashboard*/
+#DashboardEditView{
+	.panel{
+		width:100% !important;
+	}
+}
+
+/*Missions*/
+#MyMissionsForPortletView{
+	> div{
+		float: none;
+		margin-bottom: 0;
+	}
+	.items{
+		td{
+			padding-left:15px !important;
+			padding-right:15px !important;
+		}
+		td:last-child{
+			border-top:none;
+		}
+	}
+	.missionStatusChangeArea{
+		a{
+			&:first-child{
+				margin-left: 0 !important;
+			}
+			&:last-child{
+				margin-right: 0 !important;
+			}
+		}
+	}
+	.actions-column{
+		width: 200px;
+	}
+	td:first-child{
+		border-top:none;
+	}
+	.mission-status{
+		.smaller();
+	}
+}
+
+/*Charts*/
+.missing-chart{
+	display: block;
+	text-align: center;
+	position: relative;
+	top: 50%;
+	margin-top: -34px;
+	font-size: 12px;
+	color: @themeColor;
+	&:before{
+		content:"j";
+		.symbly(24px);
+		margin-right:10px;
+		position: relative;
+		top: 1px;
+	}
+}
+
+/*Map*/
+.mapCanvasPortlet{
+	width: 100%;
+	height: 400px;
+}
+
+/*Products*/
+#product-portlet-grid-view{
+	overflow-x: scroll;
+}

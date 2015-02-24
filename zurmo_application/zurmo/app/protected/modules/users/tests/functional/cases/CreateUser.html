@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/" />
+<title>CreateUser</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Create User</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>45000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=My Profile</td>
+	<td>My Profile</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=My Profile</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Users</td>
+	<td>Users</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>index.php/users/default/create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>UserPasswordForm_title_value</td>
+	<td>label=Mr.</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UserPasswordForm_firstName</td>
+	<td>Janny${randomSuffix}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UserPasswordForm_lastName</td>
+	<td>Jingo${randomSuffix}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UserPasswordForm_username</td>
+	<td>janny${randomSuffix}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UserPasswordForm_newPassword</td>
+	<td>abc123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UserPasswordForm_newPassword_repeat</td>
+	<td>abc123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UserPasswordForm_jobTitle</td>
+	<td>Jingo Factory</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UserPasswordForm_officePhone</td>
+	<td>123456789</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UserPasswordForm_mobilePhone</td>
+	<td>123455555</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UserPasswordForm_department</td>
+	<td>Mail</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UserPasswordForm_primaryEmail_emailAddress</td>
+	<td>janny${randomSuffix}.jingo.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UserPasswordForm_primaryAddress_street1</td>
+	<td>123 Jingo Street</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UserPasswordForm_primaryAddress_state</td>
+	<td>IL</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UserPasswordForm_primaryAddress_city</td>
+	<td>Chicago</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UserPasswordForm_primaryAddress_postalCode</td>
+	<td>60614</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UserPasswordForm_primaryAddress_country</td>
+	<td>USA</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Email Address is not a valid email address.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UserPasswordForm_primaryEmail_emailAddress</td>
+	<td>janny${randomSuffix}@jingo.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<!--Business Card View-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='businessCardView']/div[1]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Change Profile Picture: Janny${randomSuffix} Jingo${randomSuffix}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.ui-icon.ui-icon-closethick</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='zurmoView']/div[1]/table/tbody/tr[5]/td/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Compose Email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.ui-icon.ui-icon-closethick</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=123 Jingo Street Chicago IL, 60614 USA</td>
+	<td>123 Jingo Street Chicago IL, 60614 USA</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=123 Jingo Street Chicago IL, 60614 USA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.ui-icon.ui-icon-closethick</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//div[@id='businessCardView']/div[@class='contact-details']/span[@class='icon-office-phone']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//div[@id='businessCardView']/div[@class='contact-details']/span[@class='icon-mobile-phone']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//div[@id='businessCardView']/div[@class='contact-details']/span[@class='icon-email']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//div[@id='businessCardView']/div[@class='gravatar-container']/a/img[@class='gravatar']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>//div[@id='zurmoView']/div[1]/table/tbody/tr[3]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>//div[@id='zurmoView']/div[1]/table/tbody/tr[4]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>//div[@id='zurmoView']/div[1]/table/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=sliding-panel-toggle</td>
+	<td></td>
+</tr>
+<!--Full View-->
+<tr>
+	<td>assertText</td>
+	<td>link=More Details</td>
+	<td>More Details</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=More Details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Edit</td>
+	<td>Edit</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>janny${randomSuffix}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Mail</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=janny${randomSuffix}@jingo.com</td>
+	<td>janny${randomSuffix}@jingo.com</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='zurmoView']/div[1]/table/tbody/tr[3]/td</td>
+	<td>123456789</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='zurmoView']/div[1]/table/tbody/tr[4]/td</td>
+	<td>123455555</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='zurmoView']/div[1]/table/tbody/tr[1]/td</td>
+	<td>Jingo Factory</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//div[@id='zurmoView']/div[1]/table/tbody/tr[3]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//div[@id='zurmoView']/div[1]/table/tbody/tr[4]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//div[@id='zurmoView']/div[1]/table/tbody/tr[1]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>//div[@id='businessCardView']/div[@class='contact-details']/span[@class='icon-office-phone']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>//div[@id='businessCardView']/div[@class='contact-details']/span[@class='icon-mobile-phone']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>//div[@id='businessCardView']/div[@class='contact-details']/span[@class='icon-email']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>//div[@id='businessCardView']/div[@class='gravatar-container']/a/img[@class='gravatar']</td>
+	<td></td>
+</tr>
+<!-- Assiginig this user to super admin group -->
+<tr>
+	<td>open</td>
+	<td>index.php/zurmo/group</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Super Administrators</td>
+	<td>Super Administrators</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Super Administrators</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=User Membership</td>
+	<td>User Membership</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=User Membership</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id=edit-form_userNonMembershipData</td>
+	<td>label=Janny${randomSuffix} Jingo${randomSuffix}</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=yw1moveRight</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Sign out</td>
+	<td>Sign out</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sign out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>LoginForm_username</td>
+	<td>janny${randomSuffix}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>LoginForm_password</td>
+	<td>abc123</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>Login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>janny${randomSuffix}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Save</td>
+	<td>Save</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Sign out</td>
+	<td>Sign out</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sign out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>0</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

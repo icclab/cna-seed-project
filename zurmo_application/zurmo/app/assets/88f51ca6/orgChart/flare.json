@@ -1,0 +1,27 @@
+{
+    "name": "General Electric",
+    "children": [{
+        "name": "Company 1",
+        "size": 3938
+    }, {
+        "name": "Some other company",
+        "size": 3812
+    }, {
+        "name": "A third factory",
+        "size": 6714
+    }, {
+        "name": "X Division",
+        "size": 743,
+        "children": [{
+            "name": "D1",
+            "size": 3938,
+            "children": [{
+                "name": "C1",
+                "size": 3938
+            }]
+        }, {
+            "name": "D2",
+            "size": 3812
+        }]
+    }]
+}

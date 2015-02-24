@@ -1,0 +1,96 @@
+#FullCalendarForCombinedView .fc-content
+{
+  clear:none;
+  zoom:1;
+}
+.wrapper{
+        position: relative;
+    }
+.view-toolbar-container{
+    position: absolute;
+    top: 6px;
+    right: 0;
+}
+#calendar {
+    width: 100%;
+    margin: 0 auto;
+}
+.fc-header{
+    text-transform: capitalize;
+}
+#calendar td{
+    padding: 0;
+}
+.calendar-view .left-column{
+    width: 25%;
+}
+.calendar-view .right-column{
+    width: 75%;
+}
+.calendars-list{
+    margin-top: 30px;
+}
+.calendars-list ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.calendars-list > ul > li{
+    display: block;
+    padding: 5px 0;
+    line-height: 1;
+}
+.calendars-list .edit-row-menu > li > a:before{
+    line-height: 12px;
+}
+.calendars-list  a{
+    color: #545454 !important;
+}
+.cal-color{
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    background: #3A87AD;
+    margin-right: 4px;
+    position: relative;
+    top: 1px;
+}
+.cal-color.outline{
+    background: none;
+    border:1px solid salmon;
+}
+.calendars-list + .calendars-list{
+    margin-top:30px;
+}
+.calendars-list + .calendars-list .cal-color{
+    background: darkgoldenrod;
+}
+.calendars-list + .calendars-list .cal-color.outline{
+    background: none;
+    border:1px solid rosybrown;
+}
+.task-subscribers{
+    border-top:none;
+    padding: 0 0 0 16px;
+    margin-top:5px;
+    box-shadow: none;
+}
+.quick-insert{
+    padding: 0;
+    margin-top: 30px;
+}
+.quick-insert .details-item-editable{
+    padding-left: 0;
+    padding-bottom: 5px;
+}
+.quick-insert .simple-link{
+    margin: 5px 0 0 0;
+    display: block;
+}
+.symbly{
+     font-weight:normal !important;
+     font-size:20px;
+     font-family: "zurmo_gamification_symbly_rRg";
+}
+

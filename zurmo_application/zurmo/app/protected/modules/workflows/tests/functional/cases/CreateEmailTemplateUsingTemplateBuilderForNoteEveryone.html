@@ -1,0 +1,886 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/" />
+<title>CreateEmailTemplateUsingTemplateBuilderForAccountEveryone</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Create Email Template Using Template Builder For Account Everyone</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>45000</td>
+	<td></td>
+</tr>
+<!--Go to create email template-->
+<tr>
+	<td>open</td>
+	<td>index.php/workflows/default</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Workflows</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Templates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Time Queue</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Message Queue</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Ordering</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Create Template</td>
+	<td>Create Template</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Create Template</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email Template Wizard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Plain Text</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>HTML</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Template Builder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='EmailTemplateTypeView']/ul/li[1]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='EmailTemplateTypeView']/ul/li[2]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='EmailTemplateTypeView']/ul/li[2]/a/span</td>
+	<td></td>
+</tr>
+<!--use template builder-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='EmailTemplateTypeView']/ul/li[1]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email Template Wizard - Template Builder</td>
+	<td></td>
+</tr>
+<!--check validation-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='GeneralDataForEmailTemplateWizardView']/div[2]/div/div/a[2]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please fix the following input errors:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Name cannot be blank.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Subject cannot be blank.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>BuilderEmailTemplateWizardForm_modelClassName_value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>BuilderEmailTemplateWizardForm_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>BuilderEmailTemplateWizardForm_subject</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>BuilderEmailTemplateWizardForm_files</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>componentType</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>BuilderEmailTemplateWizardForm_type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>BuilderEmailTemplateWizardForm_builtType</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>BuilderEmailTemplateWizardForm_isDraft</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>BuilderEmailTemplateWizardForm_language</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>BuilderEmailTemplateWizardForm_hiddenId</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>modelClassNameForMergeTagsViewId</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>BuilderEmailTemplateWizardForm_ownerId</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>BuilderEmailTemplateWizardForm_hiddenId</td>
+	<td>0</td>
+</tr>
+<!--add email template details-->
+<tr>
+	<td>select</td>
+	<td>id=BuilderEmailTemplateWizardForm_modelClassName_value</td>
+	<td>label=Notes</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=BuilderEmailTemplateWizardForm_name</td>
+	<td>Test Email Template Using Template Builder ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=BuilderEmailTemplateWizardForm_subject</td>
+	<td>test email subject.</td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>id=BuilderEmailTemplateWizardForm_files</td>
+    <td>C:\selenium\zurmo\app\protected\modules\emailTemplates\tests\functional\files\testLogo.png</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@id='BuilderEmailTemplateWizardForm_explicitReadWriteModelPermissions_type_2']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='GeneralDataForEmailTemplateWizardView']/div[2]/div/div/a[2]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertNotValue</td>
+	<td>BuilderEmailTemplateWizardForm_hiddenId</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>modelClassNameForMergeTagsViewId</td>
+	<td>Note</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>BuilderEmailTemplateWizardForm_serializedData_baseTemplateId</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='chooser-overlay']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Blank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>1 Column</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>2 Column</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>2 Columns with strong right</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>3 Columns</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>3 Columns with Hero</td>
+	<td></td>
+</tr>
+
+<!--check 1st layout-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='BuilderEmailTemplateWizardForm_baseTemplateId_list_view']/ul/li[1]/a[2]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[@id='preview-iframe-container-close-link']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='preview-iframe-container-close-link']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email Template Wizard - Template Builder</td>
+	<td></td>
+</tr>
+<!--check 2nd layout-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='BuilderEmailTemplateWizardForm_baseTemplateId_list_view']/ul/li[2]/a[2]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[@id='preview-iframe-container-close-link']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='preview-iframe-container-close-link']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email Template Wizard - Template Builder</td>
+	<td></td>
+</tr>
+<!--check 3rd layout-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='BuilderEmailTemplateWizardForm_baseTemplateId_list_view']/ul/li[3]/a[2]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[@id='preview-iframe-container-close-link']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='preview-iframe-container-close-link']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email Template Wizard - Template Builder</td>
+	<td></td>
+</tr>
+<!--check 4th layout-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='BuilderEmailTemplateWizardForm_baseTemplateId_list_view']/ul/li[4]/a[2]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[@id='preview-iframe-container-close-link']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='preview-iframe-container-close-link']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email Template Wizard - Template Builder</td>
+	<td></td>
+</tr>
+<!--check 5th layout-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='BuilderEmailTemplateWizardForm_baseTemplateId_list_view']/ul/li[5]/a[2]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[@id='preview-iframe-container-close-link']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='preview-iframe-container-close-link']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email Template Wizard - Template Builder</td>
+	<td></td>
+</tr>
+<!--check 6th layout-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='BuilderEmailTemplateWizardForm_baseTemplateId_list_view']/ul/li[6]/a[2]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[@id='preview-iframe-container-close-link']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='preview-iframe-container-close-link']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email Template Wizard - Template Builder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='BuilderEmailTemplateWizardForm_baseTemplateId_list_view']/ul/li[1]/a[1]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>BuilderEmailTemplateWizardForm_serializedData_baseTemplateId</td>
+	<td>1</td>
+</tr>
+
+<!--go to saved templates-->
+<tr>
+	<td>click</td>
+	<td>//a[@id='chooser-overlay']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Saved Templates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='templates']/div[1]/div/a[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Test Email Template Using Template Builder ${randomSuffix}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=cancel</td>
+	<td>cancel</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Blank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='selectBaseTemplateNextLink']/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='BuilderCanvasWizardView']/div[1]/h3</td>
+	<td>Canvas</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='builder-elements-menu-button']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='builder-elements-menu-button']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//ul[@id='building-blocks']/li[1]/div/span</td>
+	<td>Button</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//ul[@id='building-blocks']/li[2]/div/span</td>
+	<td>Divider</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//ul[@id='building-blocks']/li[3]/div/span</td>
+	<td>Expander</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//ul[@id='building-blocks']/li[4]/div/span</td>
+	<td>Fancy Divider</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//ul[@id='building-blocks']/li[5]/div/span</td>
+	<td>Footer</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//ul[@id='building-blocks']/li[6]/div/span</td>
+	<td>Header</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//ul[@id='building-blocks']/li[7]/div/span</td>
+	<td>Image</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//ul[@id='building-blocks']/li[8]/div/span</td>
+	<td>Plain Text</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//ul[@id='building-blocks']/li[9]/div/span</td>
+	<td>Social</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//ul[@id='building-blocks']/li[10]/div/span</td>
+	<td>Rich Text</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//ul[@id='building-blocks']/li[11]/div/span</td>
+	<td>Title</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='builder-canvas-configuration-menu-button']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='element-edit-form-overlay-container']/div/h3</td>
+	<td>Canvas</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='canvas1-edit-form']/table/tbody/tr[1]/th/label</td>
+	<td>Background Color</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='canvas1-edit-form']/table/tbody/tr[2]/th/label</td>
+	<td>Text Color</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='canvas1-edit-form']/table/tbody/tr[3]/th/label</td>
+	<td>Text Size</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='canvas1-edit-form']/table/tbody/tr[4]/th/label</td>
+	<td>Text Style</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='canvas1-edit-form']/table/tbody/tr[5]/th/label</td>
+	<td>Text Weight</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='canvas1-edit-form']/table/tbody/tr[6]/th/label</td>
+	<td>Text Alignment</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='canvas1-edit-form']/table/tbody/tr[7]/th/label</td>
+	<td>Line Height</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='canvas1-edit-form']/table/tbody/tr[8]/th/label</td>
+	<td>Border Color</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='canvas1-edit-form']/table/tbody/tr[9]/th/label</td>
+	<td>Border Width</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='canvas1-edit-form']/table/tbody/tr[10]/th/label</td>
+	<td>Border Radius</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='canvas1-edit-form']/table/tbody/tr[11]/th/label</td>
+	<td>Border Style</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='canvas1-edit-form']/table/tbody/tr[12]/th/label</td>
+	<td>Position</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='builderCanvasSaveLink']/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=BuilderEmailTemplateWizardForm_textContent</td>
+	<td>html content</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='contentFinishLink']/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Test Email Template Using Template Builder ${randomSuffix}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='EmailTemplateDetailsView']/div/div[2]/div[1]/table/tbody/tr[1]/td</td>
+	<td>Notes</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='EmailTemplateDetailsView']/div/div[2]/div[1]/table/tbody/tr[2]/td</td>
+	<td>Test Email Template Using Template Builder ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='EmailTemplateDetailsView']/div/div[2]/div[1]/table/tbody/tr[3]/td</td>
+	<td>test email subject.</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>html content</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>0</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

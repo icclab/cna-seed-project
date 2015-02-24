@@ -1,0 +1,506 @@
+// Zurmo is a customer relationship management program developed by
+// Zurmo, Inc. Copyright (C) 2014 Zurmo Inc.
+//
+// Zurmo is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Affero General Public License version 3 as published by the
+// Free Software Foundation with the addition of the following permission added
+// to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
+// IN WHICH THE COPYRIGHT IS OWNED BY ZURMO, ZURMO DISCLAIMS THE WARRANTY
+// OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
+//
+// Zurmo is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+// FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+// details.
+//
+// You should have received a copy of the GNU Affero General Public License along with
+// this program; if not, see http://www.gnu.org/licenses or write to the Free
+// Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// 02110-1301 USA.
+//
+// You can contact Zurmo, Inc. with a mailing address at 27 North Wacker Drive
+// Suite 370 Chicago, IL 60606. or at email address contact@zurmo.com.
+//
+// The interactive user interfaces in original and modified versions
+// of this program must display Appropriate Legal Notices, as required under
+// Section 5 of the GNU Affero  General Public License version 3.
+//
+// In accordance with Section 7(b) of the GNU Affero General Public License version 3,
+// these Appropriate Legal Notices must retain the display of the Zurmo
+// logo and Zurmo copyright notice. If the display of the logo is not reasonably
+// feasible for technical reasons, the Appropriate Legal Notices must display the words
+// "Copyright Zurmo Inc. 2014. All rights reserved".
+
+i[class^="icon"]{
+	color: #656565;
+	font-weight:normal;
+	font-style: normal;
+	font-size:24px;
+	font-family: "zurmo_gamification_symbly_rRg";
+	vertical-align:middle;
+	padding:0 0 0 0;//3px;
+	margin:0 0 0 0;
+	position: relative;
+	top:-2px;
+}
+
+.z-label{
+	i[class^="icon"]{
+		margin-right: 5px;
+	}
+}
+
+.icon-general:after,
+.icon-edit:after{
+	content: "!";
+}
+
+.icon-create:after{
+	content: "Y";
+}
+
+.icon-add:after{
+	content: "Y";
+}
+
+.icon-lock{
+	font-size: 28px !important;
+	padding: 0 !important;
+	&:after{
+		content: "F";
+		margin: 0;
+	}
+}
+
+.icon-unlock{
+	font-size: 28px !important;
+	padding: 0 !important;
+	&:after{
+		content: "E";
+		margin: 0;
+	}
+}
+
+.icon-change-dashboard:after,
+.icon-marketing-dashboard:after,
+.icon-project-dashboard:after{
+	content: "/";
+}
+
+.icon-push-dashboard:after{
+	content: '\03BC'; //03C0
+}
+
+.icon-export:after{
+	content: "(";
+}
+
+.icon-details:after{
+	content: 'T';
+}
+
+.icon-config:after,
+.icon-options:after{
+	content: "n";
+}
+
+#list-view-massAction:after{
+	content: "2";
+}
+
+#MassDeleteLinkActionElement .parent > a:after,
+#ListViewDeleteMassActionMenu .parent > a:after{
+	content: '\2014'; //emdash!
+	font-size:22px;
+}
+
+#MarketingListMembersSubscribeLinkActionElement:after{
+	content: "c";
+}
+
+#MarketingListMembersUnsubscribeLinkActionElement:after{
+	content: "d";
+}
+
+.icon-note:after{
+	content: "3";
+}
+
+.icon-task:after{
+	content: "4";
+}
+
+.icon-meeting:after{
+	content: "U";
+}
+
+.icon-memberships:after{
+	content: "y";
+}
+
+.icon-permissions:after{
+	content: "E";
+}
+
+.icon-rights:after{
+	content: "u";
+}
+
+.icon-policies:after{
+	content: "x";
+}
+
+.icon-delete:after{
+	content: "—";
+}
+
+.icon-left-arrow:after{
+	content: "8";
+}
+
+.icon-right-arrow:after{
+	content: "7";
+}
+
+.icon-fields:after{
+	content: "0";
+}
+
+.icon-layout:after{
+	content: "C";
+}
+
+.icon-user:after,
+.icon-user-details:after{
+	content: "e";
+}
+
+.icon-password:after{
+	content: "J";
+}
+
+.icon-audit:after{
+	content: "I";
+}
+
+.icon-user-config:after{
+	content: "n";
+}
+
+.icon-security:after{
+	content: "F";
+}
+
+.icon-missions-created:after,
+.icon-conversations-created:after{
+	content:"w";
+}
+
+.icon-conversations-participant:after{
+	content:"b";
+	top:0;
+}
+
+.icon-conversation:after{
+	content:"O";
+}
+
+.icon-conversations-closed:after{
+	content:"l";
+}
+
+.icon-mission:after,
+.icon-missions-available:after{
+	content:"Q";
+}
+
+.icon-missions-taken-but-not-accepted:after{
+	content:"e";
+}
+
+.icon-notification:after{
+	content:'\00A5';
+}
+
+.icon-combined:after{
+	content:'\00A7';
+	font-size:26px;
+}
+
+.icon-workflows:after{
+	content:'\20AC';
+}
+
+.icon-gamification:after{
+	content:'\2202';
+}
+
+.icon-by-time-workflow-in-queues:after{
+	content:'\0071';
+	font-size:28px;
+}
+
+.icon-by-workflow-message-in-queues:after{
+	content:'\00A5';
+	font-size:22px;
+}
+
+.icon-by-workflow-manage-order:after{
+	content:'\2039';
+	font-size:25px;
+}
+
+.icon-marketing-lists:after{
+	content:'\0022';
+}
+
+.icon-email-templates:after{
+	content:'\00B6';
+	font-size:25px;
+}
+
+.icon-products:after{
+	content:'\003E';
+}
+
+.icon-catalog-items:after{
+	content:'\00AC';
+	font-size:27px;
+}
+
+.icon-product-categories:after{
+	content:'\00D7';
+	font-size:26px;
+}
+
+.icon-mobile:after{
+	content:'\2018';
+	top:0;
+}
+
+.icon-desktop:after{
+	content:'\2019';
+	top:0;
+}
+
+.icon-tablet:after{
+	content:'\201D';
+	top:0;
+}
+
+.icon-kanban-board-view-type:after{
+	font-size:26px;
+	content: '\00AE';
+}
+
+.icon-grid-view-type:after{
+	font-size:26px;
+	content: '\00B0';
+}
+
+.icon-marketing-campaigns:after{
+	font-size:28px;
+	content: '\002C';
+}
+
+.icon-webforms:after{
+	content: '\003C';
+}
+
+.icon-webforms-entries:after{
+	content: '\005E';
+}
+
+.icon-projects-list:after{
+	content: '\02C7';
+}
+
+.icon-permissions:after{
+	content: '\00CB';
+}
+
+.icon-rights:after{
+	content: '\00C8';
+}
+
+.icon-policies:after{
+	content: '\007D';
+}
+
+.icon-opportunity:after{
+	content: "9";
+}
+
+.icon-contact:after{
+	content: "y";
+}
+
+.icon-account:after{
+	content: "P";
+}
+
+.icon-merge:after{
+	content: '\00EE';
+}
+
+.icon-x:before{
+	content: "•";
+}
+
+.icon-google:after{
+	content: '\221E';
+}
+
+.icon-nav-collapse:after{
+	content: '\0394'
+}
+
+.icon-nav-expand:after{
+	content: '\03A9';
+}
+
+.icon-elements:after{
+	content:'\00C1';
+}
+
+.icon-preview:after{
+	content:'\00C0';
+}
+
+.icon-configuration:after{
+	content:'\01CD';
+}
+
+.icon-social:after{
+	content: '\011A';
+}
+
+.icon-image:after{
+	content: '\0112';
+}
+
+.icon-text:after{
+	content: '\01CF';
+}
+
+.icon-plaintext:after{
+	content: '\00CD';
+}
+
+.icon-boxed-text:after{
+	content: '\01CF';
+}
+
+.icon-title:after{
+	content: '\00CC';
+}
+
+.icon-buttonwrapper:after,
+.icon-button:after{
+	content: '\012A';
+}
+
+.icon-color-picker:after{
+	content: '\00D3';
+}
+
+.icon-divider:after{
+	content: '\00D2';
+}
+
+.icon-fancydivider:after{
+	content: '\01D1';
+}
+
+.icon-expander:after{
+	content: '\014C';
+}
+
+.icon-header:after{
+	content: '\01D3';
+}
+
+.icon-footer:after{
+	content: '\00DC';
+}
+
+.icon-image-align-left:after{
+	content: '\00E1';
+}
+
+.icon-image-align-right:after{
+	content: '\00E2';
+}
+
+.icon-image-align-center:after{
+	content: '\01CE';
+}
+
+.icon-border-all:after{
+	content: '\00E4';
+}
+
+.icon-border-left:after{
+	content: '\00E0';
+}
+
+.icon-border-top:after{
+	content: '\0101';
+}
+
+.icon-border-right:after{
+	content: '\00E5';
+}
+
+.icon-border-bottom:after{
+	content: '\00E3';
+}
+
+.icon-template-0:after{
+	content: '\016A';
+}
+
+.icon-template-1:after{
+	content: '\01D7';
+}
+
+.icon-template-2:after{
+	content: '\01D9';
+}
+
+.icon-template-3:after{
+	content: '\01DB';
+}
+
+.icon-template-4:after{
+	content: '\01D5';
+}
+
+.icon-template-5:after{
+	content: '\00D9';
+}
+
+.icon-user-template:after{
+	content: '\00DD';
+}
+
+.icon-collapse:after{
+	content: '\0394';
+}
+
+.icon-expand:after{
+	content: '\03A9';
+}
+
+
+.pillbox{
+	.icon-projects-list{
+		font-size: 22px;
+		top:-2px !important;
+	}
+	.icon-permissions,
+	.icon-rights,
+	.icon-policies{
+		top:-2px !important;
+	}
+}
