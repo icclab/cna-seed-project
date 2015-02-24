@@ -1,5 +1,0 @@
-path:
-  logs: /data/log
-  data: /data/data
-http.cors.enabled: true
-http.cors.allow-origin: "/.*/"
