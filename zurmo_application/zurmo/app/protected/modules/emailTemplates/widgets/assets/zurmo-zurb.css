@@ -1,0 +1,209 @@
+div img {
+    float: none;
+}
+
+.builder-element-non-editable p {
+    font-size: inherit;
+    line-height: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    color: inherit;
+    text-align: inherit;
+	margin:0 0 10px 0;
+}
+
+.simple-divider,
+.fancy-divider {
+    width: 100%;
+    text-align: center;
+}
+
+.fancy-divider td{
+    width: 100%;
+    text-align: center;
+}
+
+.fancy-divider img{
+    margin: 0 auto /*!important*/;
+    float: none /*!important*/;
+}
+
+table.header td.wrapper {
+    vertical-align: middle;
+}
+
+td.wrapper {
+    vertical-align: top;
+}
+
+td.button-container {
+    text-align: center;
+}
+
+.social-button strong{
+	font-weight: normal;
+}
+
+table.button,
+table.tiny-button,
+table.small-button,
+table.medium-button,
+table.large-button {
+	width: auto;
+}
+
+table.button[width="100%"],
+table.tiny-button[width="100%"],
+table.small-button[width="100%"],
+table.medium-button[width="100%"],
+table.large-button[width="100%"] {
+	width: 100% /*!important*/;
+}
+
+table.button[align="center"],
+table.tiny-button[align="center"],
+table.small-button[align="center"],
+table.medium-button[align="center"],
+table.large-button[align="center"] {
+    text-align:center /*!important*/;
+}
+
+table.button[align="right"],
+table.tiny-button[align="right"],
+table.small-button[align="right"],
+table.medium-button[align="right"],
+table.large-button[align="right"] {
+    text-align:right /*!important*/;
+}
+
+table.button td,
+table.tiny-button td,
+table.small-button td,
+table.medium-button td,
+table.large-button td {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+td.container {
+    text-align: center;
+    width: 100%;
+}
+
+table.button td.button-td {         padding: 8px 8px 7px 8px}
+table.tiny-button td.button-td {	padding: 5px 5px 4px 5px}
+table.small-button td.button-td {	padding: 8px 8px 7px 8px}
+table.medium-button td.button-td {  padding: 12px 12px 10px 12px}
+table.large-button td.button-td {	padding: 21px 21px 18px 21px}
+
+.ExternalClass table.button td.button-td {         padding: 8px 8px 7px 8px; }
+.ExternalClass table.tiny-button td.button-td {	   padding: 5px 5px 4px 5px; }
+.ExternalClass table.small-button td.button-td {   padding: 8px 8px 7px 8px;}
+.ExternalClass table.medium-button td.button-td {  padding: 12px 12px 10px 12px;}
+.ExternalClass table.large-button td.button-td {   padding: 21px 21px 18px 21px;}
+
+td.button-td{
+    text-align: center /*!important*/;
+}
+
+td.button-td a{
+    color:#ffffff;
+}
+
+table.Facebook td {
+    color: #ffffff;
+    background: #3b5998;
+    border-color: #2d4473;
+}
+
+table.Facebook:hover td {
+    background: #2d4473 /*!important*/;
+}
+
+table.Twitter td {
+    color: #ffffff;
+    background: #00acee;
+    border-color: #0087bb;
+}
+
+table.Twitter:hover td {
+    background: #0087bb /*!important*/;
+}
+
+table.GooglePlus td {
+    color: #ffffff;
+    background: #DB4A39;
+    border-color: #CC0000;
+}
+
+table.GooglePlus:hover td {
+    background: #CC0000 /*!important*/;
+}
+
+table.YouTube td {
+    color: #ffffff;
+    background: #db1925;
+    border-color: #cc0f29;
+}
+
+table.YouTube:hover td {
+    background: #cc0f29 /*!important*/;
+}
+
+table.Instagram td {
+    color: #ffffff;
+    background: #7b4829;
+    border-color: #773424;
+}
+
+table.Instagram:hover td {
+    background: #773424 /*!important*/;
+}
+
+table.Website td {
+    color: #ffffff;
+    background: #7d098b;
+    border-color: #560861;
+}
+
+table.Website:hover td {
+    background: #560861 /*!important*/;
+}
+
+table.social-button strong{
+    color: #ffffff;
+}
+
+table.horizontal {
+    width: auto;
+}
+
+table.vertical {
+    width: 100%;
+}
+
+table.vertical td,
+table.vertical table {
+    width: 100%;
+}
+
+table.vertical img {
+    width: 100% /*!important*/;
+    height: 15px;
+    display: block;
+}
+
+table.horizontal td {
+    width: auto;
+}
+
+table.horizontal img {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    clear: none;
+}
+
+td.social-horizontal-expander{
+    width:15px /*!important*/;
+}

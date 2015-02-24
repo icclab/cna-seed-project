@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/" />
+<title>CreateEmailTemplateUsingTemplateBuilder</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Create Email Template Using Plain Text</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>45000</td>
+	<td></td>
+</tr>
+<!--Go to create email template-->
+<tr>
+	<td>open</td>
+	<td>index.php/workflows/default</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Workflows</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Templates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Time Queue</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Message Queue</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Ordering</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Create Template</td>
+	<td>Create Template</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Create Template</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email Template Wizard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Plain Text</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>HTML</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Template Builder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='EmailTemplateTypeView']/ul/li[1]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='EmailTemplateTypeView']/ul/li[2]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='EmailTemplateTypeView']/ul/li[2]/a/span</td>
+	<td></td>
+</tr>
+<!--use template builder-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='EmailTemplateTypeView']/ul/li[1]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email Template Wizard - Template Builder</td>
+	<td></td>
+</tr>
+<!--check validation-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='GeneralDataForEmailTemplateWizardView']/div[2]/div/div/a[2]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please fix the following input errors:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Name cannot be blank.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Subject cannot be blank.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>BuilderEmailTemplateWizardForm_modelClassName_value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>BuilderEmailTemplateWizardForm_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>BuilderEmailTemplateWizardForm_subject</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>BuilderEmailTemplateWizardForm_files</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>componentType</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>BuilderEmailTemplateWizardForm_type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>BuilderEmailTemplateWizardForm_builtType</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>BuilderEmailTemplateWizardForm_isDraft</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>BuilderEmailTemplateWizardForm_language</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>BuilderEmailTemplateWizardForm_hiddenId</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>modelClassNameForMergeTagsViewId</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>BuilderEmailTemplateWizardForm_ownerId</td>
+	<td></td>
+</tr>
+<!--add email template details-->
+<tr>
+	<td>type</td>
+	<td>id=BuilderEmailTemplateWizardForm_name</td>
+	<td>Test Email Template Using Template Builder ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=BuilderEmailTemplateWizardForm_subject</td>
+	<td>test email subject.</td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>id=BuilderEmailTemplateWizardForm_files</td>
+    <td>C:\selenium\zurmo\app\protected\modules\emailTemplates\tests\functional\files\testLogo.png</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='GeneralDataForEmailTemplateWizardView']/div[2]/div/div/a[2]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='selectBaseTemplateNextLink']/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='builderCanvasSaveLink']/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=BuilderEmailTemplateWizardForm_textContent</td>
+	<td>html content</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='contentFinishLink']/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Test Email Template Using Template Builder ${randomSuffix}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='EmailTemplateDetailsView']/div/div[2]/div[1]/table/tbody/tr[1]/td</td>
+	<td>Accounts</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='EmailTemplateDetailsView']/div/div[2]/div[1]/table/tbody/tr[2]/td</td>
+	<td>Test Email Template Using Template Builder ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='EmailTemplateDetailsView']/div/div[2]/div[1]/table/tbody/tr[3]/td</td>
+	<td>test email subject.</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>html content</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,250 @@
+// Zurmo is a customer relationship management program developed by
+// Zurmo, Inc. Copyright (C) 2014 Zurmo Inc.
+//
+// Zurmo is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Affero General Public License version 3 as published by the
+// Free Software Foundation with the addition of the following permission added
+// to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
+// IN WHICH THE COPYRIGHT IS OWNED BY ZURMO, ZURMO DISCLAIMS THE WARRANTY
+// OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
+//
+// Zurmo is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+// FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+// details.
+//
+// You should have received a copy of the GNU Affero General Public License along with
+// this program; if not, see http://www.gnu.org/licenses or write to the Free
+// Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// 02110-1301 USA.
+//
+// You can contact Zurmo, Inc. with a mailing address at 27 North Wacker Drive
+// Suite 370 Chicago, IL 60606. or at email address contact@zurmo.com.
+//
+// The interactive user interfaces in original and modified versions
+// of this program must display Appropriate Legal Notices, as required under
+// Section 5 of the GNU Affero General Public License version 3.
+//
+// In accordance with Section 7(b) of the GNU Affero General Public License version 3,
+// these Appropriate Legal Notices must retain the display of the Zurmo
+// logo and Zurmo copyright notice. If the display of the logo is not reasonably
+// feasible for technical reasons, the Appropriate Legal Notices must display the words
+// "Copyright Zurmo Inc. 2014. All rights reserved".
+
+#calendar {
+	width:100%;
+	margin:0 auto;
+	position: relative;
+	td {
+		padding:0;
+	}
+	.big-spinner{
+		position: absolute;
+		top: 50%;
+		margin-top: -25px;
+	}
+	.fc-state-default {
+		//border: 1px solid;
+		border:1px solid #b7b7b7;
+		border-top-color: #e7e7e7;
+		border-left-color:#d7d7d7;
+		border-right-color:#d7d7d7;
+		background:url("@{path}view-toolbar-gradient.png") left bottom repeat-x;
+		color: #656565 !important;
+		text-shadow: 0 1px 0 #fff;
+		.b-shadow(none);
+		.smaller();
+		font-weight: 700;
+		&:hover{
+			color: @themeColor2 !important;
+		}
+	}
+	.fc-state-active{
+		color:#656565;
+		box-shadow: inset 0 10px 10px 4px rgba(153, 153, 153, 0.4), 0 1px 0 0 #FFF;
+	}
+	.fc-button {
+		height: auto;
+		padding: 0 6px;
+		line-height: 24px;
+		cursor: pointer;
+	}
+}
+
+.fc-header {
+	text-transform:capitalize;
+}
+
+.calendar-view .left-column {
+	width:25%;
+}
+
+.calendar-view .right-column {
+	width:75%;
+}
+
+.calendars-list-container {
+	margin-top:30px;
+	+ .calendars-list-container {
+		margin-top:30px;
+	}
+}
+.calendars-list{
+	margin:0;
+	padding:0;
+	list-style:none;
+	display:block;
+	line-height:1;
+	> li{
+		padding: 0;
+		margin-bottom: 5px;
+	}
+	.hasCheckBox{
+		display: inline-block;
+		line-height: 1;
+	}
+	.edit-row-menu{
+		margin-right: 0;
+	}
+}
+
+.cal-list-header{
+	margin-bottom: 10px;
+	h3{
+		display: inline-block;
+	}
+	a{
+		float: right;
+		.symbly(16px);
+	}
+	.z-label{
+		padding:0 2px 0 4px;
+		line-height: 16px;
+	}
+}
+
+.cal-name{
+	position: relative;
+	top: -3px;
+}
+
+.cal-color {
+	display:inline-block;
+	width:12px;
+	height:12px;
+	border-radius:3px;
+	margin:0 6px 0 3px;
+	position: relative;
+	top: -2px;
+}
+
+.cal-color.outline {
+	background:none;
+	border:1px solid salmon;
+}
+
+.task-subscribers {
+	border-top:none;
+	padding:0 0 0 16px;
+	margin-top:5px;
+	box-shadow:none;
+}
+
+.quick-insert {
+	padding:0;
+	margin-top:30px;
+	.details-item-editable {
+		padding-left:0;
+		padding-bottom:5px;
+	}
+	.simple-link {
+		margin:5px 0 0 0;
+		display:block;
+	}
+}
+
+#smallcalendar{
+	.ui-datepicker.ui-datepicker-inline{
+		margin:0;
+	}
+	.ui-datepicker-header{
+		#gradient > .vertical(#f6f6f6, #ededed) !important;
+		.b-shadow(inset 0 1px 0 0 #ffffff);
+		border:1px solid #ddd !important;
+	}
+}
+
+#SavedCalendarFiltersForReportWizardView{
+	.dynamic-droppable-area{
+		width: 70%;
+		padding-left: 0;
+	}
+}
+
+.calendar-event-tooltip{
+	.left-column{
+		padding: 5px;
+	}
+	.details-table{
+		border: none !important;
+		background: none !important;
+		.b-shadow(none) !important;
+		padding: 0 !important;
+		margin: 0 !important;
+		.reset-filter();
+	}
+	.ui-tooltip-content{
+		overflow: visible;
+	}
+	.ui-tooltip-titlebar{
+		background: none !important;
+	}
+	.toolbar-mbmenu{
+		margin: -31px 20px 0 0 !important;
+	}
+	.view-toolbar{
+		margin: 0;
+	}
+	.options-menu{
+		.parent > a{
+			padding: 0;
+			background: none !important;
+			border: none !important;
+			.b-shadow(none);
+			&:hover{
+				background: none !important;
+				.b-shadow(none) !important;
+			}
+		}
+		.parent > a span{
+			display: none;
+		}
+		.parent > a:before{
+			content:'n';
+			.symbly(26px);
+		}
+		.parent > a:after{
+			margin-left: 2px;
+			position: relative;
+			top: -2px;
+		}
+		ul{
+			top: 25px;
+		}
+	}
+	.form-fields{
+		color:@textColor;
+		ul{
+			list-style: none;
+			strong{
+				margin-right:4px;
+			}
+		}
+		li{
+			margin-bottom: 3px;
+		}
+	}
+	.after-form-details-content{
+		display: none;
+	}
+}

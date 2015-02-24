@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/" />
+<title>AddProductPortletAndCheckSorting</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Add Product Portlet And Check Sorting</td></tr>
+</thead>
+<tbody>
+<tr>
+    <td>setTimeout</td>
+    <td>45000</td>
+    <td></td>
+</tr>
+<!--load account and products related to account-->
+<tr>
+	<td>open</td>
+	<td>index.php/products/demo/loadProductsSampler</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<!--go to accounts list-->
+<tr>
+	<td>open</td>
+	<td>index.php/accounts/default</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Update</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Advanced</td>
+	<td></td>
+</tr>
+<!--select account we have created in demo controller-->
+<tr>
+	<td>type</td>
+	<td>AccountsSearchForm_anyMixedAttributes</td>
+	<td>My Account For Product Test</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>AccountsSearchForm_anyMixedAttributes</td>
+	<td>\10</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='list-view']/div[2]/table/tbody/tr[1]/td[3]/a</td>
+	<td>My Account For Product Test</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>My Account For Product Test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>AccountsSearchForm_anyMixedAttributes</td>
+	<td>My Account For Product Test</td>
+</tr>
+<!--go in detail view of account-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='list-view']/div[2]/table/tbody/tr[1]/td[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='AccountDetailsPortletView']/div/div/div/table/tbody/tr[1]/td</td>
+	<td>My Account For Product Test</td>
+</tr>
+<!--unlock to edit this screen's layout-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='AccountDetailsAndRelationsView']/div[1]/nav/nav/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//a[@id='AddPortletLink']</td>
+	<td>Add Portlet</td>
+</tr>
+<!--remove existing product portlet-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='AccountDetailsAndRelationsView']/div[2]/div/ul[2]/li[1]/div[1]/div/ul/li/ul/li/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>This portlet will be removed, ok?</td>
+	<td></td>
+</tr>
+<!--add product portlet-->
+<tr>
+	<td>click</td>
+	<td>id=AddPortletLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='DetailsPortletSelectionView']/ul/li[4]/div/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='AccountDetailsAndRelationsView']/div[2]/div/ul[2]/li[1]/div[1]/h3</td>
+	<td>Products</td>
+</tr>
+<!--check sorting of product portlet-->
+<tr>
+	<td>click</td>
+	<td>id=ProductsConfigurationForm_filteredByStage_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='product-portlet-grid-view']/table/tbody/tr[1]/td[1]/a</td>
+	<td>Product with lost stage 6</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ProductsConfigurationForm_filteredByStage_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='product-portlet-grid-view']/table/tbody/tr[1]/td[1]/a</td>
+	<td>Product with open stage 0</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ProductsConfigurationForm_filteredByStage_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='product-portlet-grid-view']/table/tbody/tr/td[1]/a</td>
+	<td>Product with lost stage 6</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ProductsConfigurationForm_filteredByStage_3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='product-portlet-grid-view']/table/tbody/tr/td[1]/a</td>
+	<td>Product with won stage 7</td>
+</tr>
+<!--check sorting after paging-->
+<tr>
+	<td>click</td>
+	<td>id=ProductsConfigurationForm_filteredByStage_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='product-portlet-grid-view']/table/tbody/tr[1]/td[1]/a</td>
+	<td>Product with open stage 0</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//ul[@id='yw0']/li[4]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='product-portlet-grid-view']/table/tbody/tr[1]/td[1]/a</td>
+	<td>Product with open stage 5</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='product-portlet-grid-view']/table/tbody/tr[1]/td[1]/a</td>
+	<td>Product with open stage 5</td>
+</tr>
+<!--clear search accounts-->
+<tr>
+	<td>open</td>
+	<td>index.php/accounts/default</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=clear-search-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>Criteria Selected</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,476 @@
+// Zurmo is a customer relationship management program developed by
+// Zurmo, Inc. Copyright (C) 2014 Zurmo Inc.
+//
+// Zurmo is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Affero General Public License version 3 as published by the
+// Free Software Foundation with the addition of the following permission added
+// to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
+// IN WHICH THE COPYRIGHT IS OWNED BY ZURMO, ZURMO DISCLAIMS THE WARRANTY
+// OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
+//
+// Zurmo is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+// FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+// details.
+//
+// You should have received a copy of the GNU Affero General Public License along with
+// this program; if not, see http://www.gnu.org/licenses or write to the Free
+// Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// 02110-1301 USA.
+//
+// You can contact Zurmo, Inc. with a mailing address at 27 North Wacker Drive
+// Suite 370 Chicago, IL 60606. or at email address contact@zurmo.com.
+//
+// The interactive user interfaces in original and modified versions
+// of this program must display Appropriate Legal Notices, as required under
+// Section 5 of the GNU Affero General Public License version 3.
+//
+// In accordance with Section 7(b) of the GNU Affero General Public License version 3,
+// these Appropriate Legal Notices must retain the display of the Zurmo
+// logo and Zurmo copyright notice. If the display of the logo is not reasonably
+// feasible for technical reasons, the Appropriate Legal Notices must display the words
+// "Copyright Zurmo Inc. 2014. All rights reserved".
+
+.toolbar-mbmenu{
+	i[class^="icon"]{
+		display: none !important;
+	}
+}
+
+.pillbox-icon{
+	color: #656565;
+	font-weight:normal;
+	font-size:24px;
+	font-family: "zurmo_gamification_symbly_rRg";
+	vertical-align:middle;
+	padding:0 0 0 0;
+	margin:0 0 0 0;
+	position: relative;
+	top:-1px;
+	
+}
+
+.pillbox{
+	line-height: 1;
+	position: relative;
+	display: inline-block;
+	z-index: 9999;
+	.smaller();
+	border:1px solid #b7b7b7;
+	border-top-color: #e7e7e7;
+	border-left-color:#d7d7d7;
+	border-right-color:#d7d7d7;
+	.radius(4px);
+	margin:0 0 30px 0;
+	#gradient > .vertical( #ffffff, #f5f5f5 );
+	.b-shadow(~"inset 0 -2px 0 0 rgb(255, 255, 255), 0 0 9px 5px rgba(153, 153, 153, 0.12)");
+	+ .pillbox{
+		float: right;
+		z-index: 0;
+	}
+	&.empty{
+		visibility: hidden;
+	}
+	i[class^="icon"]{
+		.pillbox-icon();
+	}
+	.active,
+	.nav-open{
+		> a,
+		span,
+		i[class^="icon"],
+		i[class^="icon"]:before,
+		i[class^="icon"]:after{
+			color: @themeColor2;
+		}
+	}
+}
+
+.split-button,
+.default-button{
+	cursor: pointer;
+	position: relative;
+	display: inline-block;
+	float: left;
+	line-height: 1;
+	+ .default-button,
+	+ .split-button{
+		border-left: 1px solid #bababa;
+	}
+	> a {
+		padding:0 5px 0 5px;
+	}
+	i{
+		font-style: normal;
+		line-height:30px;
+		margin-right: 3px;
+	}
+}
+
+.split-button{
+	&:last-child{
+		.button-trigger{
+			.radius(0 4px 4px 0);
+		}
+	}
+	.icon-trigger:before{
+		display: block;
+	}
+	.button-actions{
+		&:before{
+			right:4px;
+			background:url("@{path}tip.png") right bottom no-repeat; //another option is an img with 4px trasnparent padding on the right just for this class
+		}
+	}
+	&.active{
+		.icon-trigger:after{
+			color: #656565 !important;
+		}
+		.button-trigger:hover .icon-trigger:after{
+			color: @themeColor2 !important;
+		}
+		.button-actions a{
+			color: #fff;
+		}
+	}
+}
+
+.default-button{
+	&:hover{
+		.icon-trigger:before{
+			display: block !important;
+		}
+		span,
+		i[class^="icon"],
+		i[class^="icon"]:after,
+		i[class^="icon"]:before{
+			color: @themeColor2;
+		}
+	}
+}
+
+.button-label{
+	font-weight:bold;
+	padding:0 5px;
+	line-height:30px;
+	display: inline-block;
+	white-space: nowrap;
+	&:empty{
+		display: none;
+	}
+}
+
+.button-action,
+.button-action-trigger,
+.button-trigger{
+	position: relative;
+	z-index: 99999;
+	display: inline-block;
+	line-height:30px;
+	text-align: center;
+	float: right;
+	.t-shadow(rgba(255, 255, 255, 0.8) 0px 1px);
+	&:hover{
+		#gradient > .vertical-three-colors(#fff, #ddd, 50%, #fff );
+		border-left:1px solid #e7e7e7;
+		i{
+			.b-shadow(none);
+			border-left:none;
+		}
+		.icon-trigger:before{
+			display: block;
+		}
+	}
+	&:hover + .button-actions{
+		display: block;
+	}
+	.icon-trigger{
+		font-size:14px !important;
+		line-height: 1 !important;
+		.b-shadow(inset 1px 0 0 0 #fff);
+		.t-shadow(0 2px 0 #fff);
+		top: 0;
+		margin: 0;
+		padding: 0;
+		border-left:1px solid #e7e7e7;
+		&:after{
+			content: "÷";
+			padding: 0 0 0 6px;
+		}
+		&:before{
+			content: "";
+			display: none;
+			position: absolute;
+			top:24px;
+			right:-2px;
+			width:13px;
+			height:8px;
+			background: url("@{path}tip.png") right bottom no-repeat;
+		}
+	}
+}
+
+.button-trigger{
+	padding: 0 8px 0 0 !important;
+}
+
+.button-action,
+.button-action-trigger{
+	float: left;
+	&:hover{
+		background: none;
+		border-left:none;
+		i{
+			.t-shadow(none);
+			.b-shadow(none);
+			border-left:none;
+		}
+		.icon-trigger:before{
+			display: block !important;
+		}
+	}
+	.icon-options:after{
+		margin: 0 !important;
+		.pillbox-icon();
+	}
+	.icon-trigger{
+		border-left:none !important;
+		&:before{
+			right:0px;
+		}
+		&:after{
+			padding: 0 3px;
+		}
+	}
+}
+
+.button-actions{
+	cursor:text;
+	z-index: 9999; //was 999999
+	color:#EFEFEF;
+	display: none;
+	list-style: none;
+	position: absolute;
+	top: 40px;
+	right:0;
+	min-width: 100px;
+	.radius(2px);
+	white-space: nowrap;
+	border:1px solid #444;
+	background: #252525;
+	.b-shadow(~"0 0 10px 2px rgba(53, 53, 53, 0.5)");
+	a:hover{
+		color: lighten(@themeColorBtn, 75%) !important;
+		#gradient > .vertical( @themeColorBtn, darken(@themeColorBtn, 20%) ) !important;
+		.t-shadow( 0px -1px 0 darken(@themeColorBtn, 25%) ) !important;
+	}
+	&:hover, &.stayOpen, &.nav-open{
+		display: block;
+	}
+	&:before{
+		content: "";
+		display: block;
+		position: absolute;
+		top:-15px;
+		right:0;
+		width:100%;
+		height: 15px;
+		background:transparent;
+	}
+	li{
+		line-height: 100%;
+	}
+	li:first-child{
+		border-top:none;
+	}
+	li:last-child{
+		border-bottom:none;
+	}
+	.divider{
+		border-top:1px solid darken(#252525, 5%);
+		border-bottom: 1px solid lighten(#252525, 5%);
+		margin:5px 5px;
+	}
+	li > a{
+		color:#EFEFEF;
+		.smaller();
+		font-weight:normal;
+		display:block;
+		padding:6px 10px 6px 10px;
+		margin:1px;
+		.t-shadow(none);
+	}
+	label{
+		color:#EFEFEF;
+	}
+	.has-model-select{
+		.radius(0 3px 3px 0);
+		a{
+			right: -1px;
+			bottom:3px;
+			height: 23px;
+			.radius(inherit);
+		}
+		a:hover{
+			background: url("@{path}dropdown-general.png") left top no-repeat !important;
+		}
+	}
+}
+
+
+.default-button,
+.button-action,
+.button-action-trigger{
+	&:hover{
+		span,
+		i[class^="icon"],
+		i[class^="icon"]:after,
+		i[class^="icon"]:before{
+			color: @themeColor2;
+		}
+	}
+}
+
+.nav-open{
+	.button-actions{
+		display: block;
+	}
+	.icon-trigger:before{
+		display: block !important;
+	}
+	.close-flyout{
+		color:#fff !important
+	}
+	.flyout-action .close-flyout{
+		color:#333333 !important;
+	}
+}
+
+.button-actions.open-on-left{
+	right:auto;
+	left: 0;
+	&:before{
+		width: 80%;
+		right:auto;
+		background-position: 50% bottom;
+	}
+}
+
+.juiportlet-widget-content .pillbox{
+	margin: 15px 0 0 15px;
+}
+
+.unread-count{
+	display: inline-block;
+	position: relative;
+	top:-1px;
+	margin:0;
+	.radius(50%);
+	width:16px;
+	height:16px;
+	line-height: 15px;
+	text-align: center;
+	color: @textColor;
+	.t-shadow(none);
+	font-size:9px;
+	font-weight: bold !important;
+	#gradient > .vertical( #fff, #dfdfdf );
+	border:1px solid #dfdfdf;
+	&:hover{
+		color: inherit;
+	}
+}
+
+/*checkboxes in pills*/
+.hasCheckboxes{
+	float: left;
+	display: inline-block;
+	border-left: 1px solid #bababa;
+	text-indent: 0 !important;
+	vertical-align: middle;
+	padding: 0 0 0 15px;
+	line-height: 30px;
+	&:before{
+		content: "";
+		margin: 0;
+		display: none;
+	}
+	.hasCheckBox{
+		display: inline-block;
+		width: auto;
+		padding-left: 20px;
+		margin-right: 0;
+		position: relative;
+		top:3px;
+		+ label{
+			padding-right: 15px;
+			margin: 0 !important;
+			.smaller() !important;
+			font-weight: bold !important;
+		}
+	}
+}
+
+.clickable-dividedmenu:not(.nav-open){
+    .button-actions:hover,
+	.button-action-trigger:hover + .button-actions{
+		display: none;
+	}
+}
+
+/*Overlay view*/
+.overlay-view{
+	width: 500px;
+	text-align: left;
+	padding:5px 5px 10px 5px;
+	white-space: normal;
+	div{
+		background: none !important;
+		.b-shadow(none) !important;
+		border:none !important;
+		.unstyle-panel() !important;
+		margin-bottom: 5px !important;
+		line-height: 1.4;
+		font-size: 12px;
+		cursor: text;
+	}
+	.after-form-details-content{
+		padding: 0px;
+		color:#efefef !important;
+		text-align: left;
+		a{
+			display: inline;
+			color:#EFEFEF !important;
+			padding: 0;
+			text-decoration: underline !important;
+			&:hover{
+				//see after this declaration because of specificity issues
+			}
+		}
+	}
+	h3{
+		font-weight: bold;
+		font-size: 13px;
+		color:#EFEFEF !important;
+		.t-shadow(none) !important;
+	}
+	.details-description{
+		margin-bottom: 5px !important;
+		line-height: 1.4;
+		font-size: 12px;
+	}
+	strong{
+		display: block;
+	}
+}
+
+body .overlay-view .after-form-details-content a:hover{
+	background: none !important;
+	background-image: none !important;
+	color:#fff !important;
+	.t-shadow(none) !important;
+}
+
+.stay-open {
+	display: block !important;
+}

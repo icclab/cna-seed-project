@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/" />
+<title>SavedSearch</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Saved Search</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>45000</td>
+	<td></td>
+</tr>
+<!--Go to accounts list-->
+<tr>
+	<td>open</td>
+	<td>index.php/accounts/default</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Update</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Export</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Delete</td>
+	<td></td>
+</tr>
+<!--Creating saved search-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=more-search-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=more-search-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=addExtraAdvancedSearchRowButton-search-form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Modify Structure</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=AccountsSearchForm_dynamicClauses_0_attributeIndexOrDerivedType</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=AccountsSearchForm_dynamicClauses_0_attributeIndexOrDerivedType</td>
+	<td>label=Type</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=AccountsSearchForm_dynamicClauses_0_type_value</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id=AccountsSearchForm_dynamicClauses_0_type_value</td>
+	<td>label=Vendor</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=save-as-advanced-search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=AccountsSearchForm_savedSearchName</td>
+	<td>TypeVendor</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=save-advanced-search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=more-search-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>id=savedSearchId</td>
+	<td>label=TypeVendor</td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<!-- changing name immediately of saved search-->
+<tr>
+	<td>click</td>
+	<td>id=more-search-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=AccountsSearchForm_savedSearchName</td>
+	<td>TypeVen</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=save-advanced-search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=more-search-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=save-as-advanced-search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<!--Changing name of existing saved search-->
+<tr>
+	<td>click</td>
+	<td>id=clear-search-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=more-search-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>savedSearchId</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>id=savedSearchId</td>
+	<td>label=TypeVen</td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=more-search-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=save-as-advanced-search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=AccountsSearchForm_savedSearchName</td>
+	<td>TypeVendor</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=save-advanced-search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<!--Test of adding filters-->
+<tr>
+	<td>click</td>
+	<td>id=more-search-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=addExtraAdvancedSearchRowButton-search-form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=AccountsSearchForm_dynamicClauses_1_attributeIndexOrDerivedType</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=AccountsSearchForm_dynamicClauses_1_attributeIndexOrDerivedType</td>
+	<td>label=Name</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=AccountsSearchForm_dynamicClauses_1_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=AccountsSearchForm_dynamicClauses_1_name</td>
+	<td>Changing The Account ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=AccountsSearchForm_savedSearchName</td>
+	<td>TypeVendorAndName</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=save-advanced-search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<!--Clear Saved Search-->
+<tr>
+	<td>click</td>
+	<td>id=clear-search-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<!-- Deleting saved search -->
+<tr>
+	<td>click</td>
+	<td>id=more-search-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>id=savedSearchId</td>
+	<td>label=TypeVendorAndName</td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Criteria Selected</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=more-search-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=save-as-advanced-search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='removeSavedSearch']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>index.php/accounts/default?clearingSearch=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+</tbody></table>
+</body>
+</html>

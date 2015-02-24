@@ -1,0 +1,358 @@
+// Zurmo is a customer relationship management program developed by
+// Zurmo, Inc. Copyright (C) 2014 Zurmo Inc.
+//
+// Zurmo is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Affero General Public License version 3 as published by the
+// Free Software Foundation with the addition of the following permission added
+// to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
+// IN WHICH THE COPYRIGHT IS OWNED BY ZURMO, ZURMO DISCLAIMS THE WARRANTY
+// OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
+//
+// Zurmo is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+// FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+// details.
+//
+// You should have received a copy of the GNU Affero General Public License along with
+// this program; if not, see http://www.gnu.org/licenses or write to the Free
+// Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// 02110-1301 USA.
+//
+// You can contact Zurmo, Inc. with a mailing address at 27 North Wacker Drive
+// Suite 370 Chicago, IL 60606. or at email address contact@zurmo.com.
+//
+// The interactive user interfaces in original and modified versions
+// of this program must display Appropriate Legal Notices, as required under
+// Section 5 of the GNU Affero General Public License version 3.
+//
+// In accordance with Section 7(b) of the GNU Affero General Public License version 3,
+// these Appropriate Legal Notices must retain the display of the Zurmo
+// logo and Zurmo copyright notice. If the display of the logo is not reasonably
+// feasible for technical reasons, the Appropriate Legal Notices must display the words
+// "Copyright Zurmo Inc. 2014. All rights reserved".
+
+.juiportlet-columns{
+	.clearfix();
+}
+
+.juiportlet-column {
+	float: left;
+	min-height: 400px;
+	height: auto !important;
+	height: 400px;
+	+ .juiportlet-column{
+		.juiportlet-widget {
+			margin-right: 0;
+		}
+	}
+}
+.juiportlet-widget-column1 {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	float:left;
+	width:100%;
+}
+
+.juiportlet-widget-column2 {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.juiportlet-column-split-even-2 {
+	width: 50%;
+}
+
+.juiportlet-column-no-split {
+	width: 100%;
+	.juiportlet-widget{
+		margin-right: 0;
+	}
+}
+
+.juiportlet-column-split-left-75 {
+	width: 65%;
+}
+
+.juiportlet-column-split-right-25 {
+	width: 35%;
+}
+
+.juiportlet-widget {
+	min-width:265px;
+	margin: 0px 20px 20px 0px;
+	padding: 0;
+	border:1px solid #CCC;
+	.portlet-gradient();
+	.b-shadow(0 0 10px 1px rgba(175, 175, 175, 0.15)); /*999*/
+}
+
+.juiportlet-widget-head {
+	width: 100%;
+	height: 43px;
+	line-height: 43px;
+	#gradient > .vertical(#f6f6f6, #ededed);
+	.b-shadow(inset 0 1px 0 0 #ffffff);
+	position:relative;
+	border-bottom:1px solid #CCC;
+	z-index: 999;
+	h3 {
+		float: left;
+		position: relative;
+		margin-left:15px;
+	}
+	a.collapse {
+		visibility: hidden;
+		display: none; /*inline;*/
+		float: left;
+		//background: url("@{path}portlet-minimize.png") 14px 50% no-repeat;
+		width: 14px;
+		height: 40px;
+		text-indent: -9999em;
+		margin:0 8px;
+		outline: none;
+	}
+	a.remove:hover .icon:after,
+	a.edit:hover .icon:after{
+		color: @themeColor;
+	}
+}
+
+.collapse ~ h3{
+	//margin-left:0;
+}
+
+.portlet-actions-container{
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+	padding-left: 10px;
+	#gradient > .vertical(#f6f6f6, #ededed);
+	.b-shadow(inset 0 1px 0 0 #ffffff);
+}
+
+.juiportlet-widget-placeholder {
+	margin: 0 20px 20px 2px;
+	border:2px dashed @themeColor;
+}
+
+.juiportlet-widget-content{
+	padding:0 0 0 0;
+	position: relative;
+	z-index: 1;
+	> li{
+		padding:10px 15px;
+		border-bottom:1px solid #dfdfdf;
+		list-style: none;
+	}
+	> li:last-child{
+		border-bottom:none;
+	}
+}
+
+.juiportlet-widget-content .summary,
+.juiportlet-widget-content .rssHeader{
+	padding:10px 15px 0 15px;
+}
+
+.juiportlet-widget-coifrntent .items{
+	border:none !important;
+	thead > tr{
+		th, td{
+			border-top:none;
+		}
+    }
+}
+
+.juiportlet-widget-content table.items tbody tr:last-child > td{
+	border-bottom:none;
+}
+
+.juiportlet-widget-content table.items tbody tr:first-child > td{
+	//border-top:none;
+}
+
+/*ICONS..*/
+.type-opportunities{
+	h3:before{
+		content: "9";
+	}
+	.icon-empty:before{
+		content: "9";
+		.view-toolbar-icons(45px);
+	}
+}
+
+.type-contacts{
+	.icon-empty:before{
+		content: "e";
+		.view-toolbar-icons(45px);
+	}
+}
+
+.juiportlet-widget-head.type-contacts{
+	h3{
+		padding-left: 30px;
+		position: relative;
+		&:before{
+			content: "e";
+			.symbly(32px);
+			color:#7A7A7A;
+			line-height: 100%;
+			position: absolute;
+			top: 6px;
+			left: 0;
+		}
+	}
+}
+
+.type-tasks{
+	.icon-empty:before{
+		content: "4";
+		.view-toolbar-icons(45px);
+	}
+}
+
+.type-activities{
+	.icon-empty:before{
+		content: '\00A5';
+		.view-toolbar-icons(45px);
+	}
+}
+
+.type-products{
+	.icon-empty:before{
+		content: '\003E'; //'\00AC';
+		.view-toolbar-icons(45px);
+	}
+}
+
+.type-socialItems{
+	.icon-empty:before{
+		content: 'u';
+		.view-toolbar-icons(45px);
+	}
+}
+
+.type-missions{
+	.icon-empty:before{
+		content: 'Q';
+		.view-toolbar-icons(45px);
+	}
+}
+
+.type-leads{
+	.icon-empty:before{
+		content: '.';
+		.view-toolbar-icons(45px);
+	}
+}
+
+.type-accounts{
+	.icon-empty:before{
+		content: 'P';
+		.view-toolbar-icons(45px);
+	}
+}
+
+.type-contacts{
+	.icon-empty:before{
+		content: "e";
+		.view-toolbar-icons(45px);
+	}
+}
+
+.type-opportunities{
+    h3{
+	    padding-left: 30px;
+	    position: relative;
+		&:before{
+			.symbly(32px);
+			color:#7A7A7A;
+			line-height: 100%;
+			position: absolute;
+			top: 6px;
+			left: 0;
+		}
+	}
+}
+
+.type-campaigns{
+	.icon-empty:before{
+		content: '\002C';
+		.view-toolbar-icons(45px);
+	}
+}
+
+.type-achievements{
+	.icon-empty:before{
+		content: ';'; //:;
+		.view-toolbar-icons(45px);
+	}
+}
+
+.type-gameRewards{
+	.icon-empty:before{
+		content: '\2205';
+		.view-toolbar-icons(45px);
+	}
+}
+
+.type-queues{
+	.icon-empty:before{
+		content: 'GG';
+		.view-toolbar-icons(38px);
+		letter-spacing: -40px;
+	}
+}
+
+.type-projects{
+	.icon-empty:before{
+		content: '\02C7';
+		.view-toolbar-icons(45px);
+	}
+}
+
+.type-accountContactAffiliations{
+	.icon-empty:before{
+		content: '\00F4';
+		.view-toolbar-icons(55px);
+	}
+}
+
+.type-accountAccountAffiliations{
+	.icon-empty:before{
+		content: '\00FB';
+		.view-toolbar-icons(45px);
+	}
+}
+
+.type-marketingLists{
+	.icon-empty:before{
+		content: '\0022';
+		.view-toolbar-icons(45px);
+	}
+}
+
+.type-maps{
+	.icon-empty:before{
+		content: 'L';
+		.view-toolbar-icons(45px);
+	}
+}
+
+.type-users{
+	.icon-empty:before{
+		content: '\0066';
+		.view-toolbar-icons(45px);
+	}
+}
+
+.type-images{
+	.icon-empty:before{
+		content: '\0112';
+		.view-toolbar-icons(45px);
+	}
+}

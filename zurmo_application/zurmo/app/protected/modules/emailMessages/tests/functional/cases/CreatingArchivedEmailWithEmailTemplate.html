@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/" />
+<title>CreatingArchivedEmailWithEmailTemplate</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Creating Archived Email With Email Template</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>45000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>javascript{Math.floor(Math.random()*11000)}</td>
+	<td>randomSuffix</td>
+</tr>
+<!--create first html template-->
+<tr>
+	<td>open</td>
+	<td>index.php/marketing/default/index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='SecuredActionBarForMarketingSearchAndListView']/div[1]/nav[1]/div[3]/ul/li/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email Template Wizard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>HTML</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='EmailTemplateTypeView']/ul/li[3]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email Template Wizard - HTML</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ClassicEmailTemplateWizardForm_name</td>
+	<td>First HTML Template ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ClassicEmailTemplateWizardForm_subject</td>
+	<td>First HTML template</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='generalDataNextLink']/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ClassicEmailTemplateWizardForm_htmlContent</td>
+	<td>First HTML template content</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[@id='contentFinishLink']/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>First HTML Template ${randomSuffix}</td>
+	<td></td>
+</tr>
+<!--create second html template-->
+<tr>
+	<td>open</td>
+	<td>index.php/marketing/default/index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='SecuredActionBarForMarketingSearchAndListView']/div[1]/nav[1]/div[3]/ul/li/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email Template Wizard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>HTML</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='EmailTemplateTypeView']/ul/li[3]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email Template Wizard - HTML</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ClassicEmailTemplateWizardForm_name</td>
+	<td>Second HTML Template ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ClassicEmailTemplateWizardForm_subject</td>
+	<td>Second HTML template</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='generalDataNextLink']/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ClassicEmailTemplateWizardForm_htmlContent</td>
+	<td>Second HTML template content</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[@id='contentFinishLink']/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Second HTML Template ${randomSuffix}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>index.php/contacts/default/create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Create Contact</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Contact_firstName</td>
+	<td>Test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Contact_lastName</td>
+	<td>Contact ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>Contact_state_id</td>
+	<td>label=Customer</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=Contact_primaryEmail_emailAddress</td>
+	<td>test@test.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+  <td>click</td>
+  <td>//div[@id='ContactDetailsPortletView']/a</td>
+  <td></td>
+</tr>
+<tr>
+  <td>waitForCondition</td>
+  <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+  <td>30000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='zurmoView']/div/table/tbody/tr[1]/td</td>
+	<td>Test Contact ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Email</td>
+	<td>Email</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='NoUserEmailConfigurationYetView']/div/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='NoGlobalEmailConfigurationYetView']/div/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Outbound Email Configuration (SMTP)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>EmailSmtpConfigurationForm_host</td>
+	<td>localhost</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>index.php/contacts/default</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ContactsSearchForm_anyMixedAttributes</td>
+	<td>Test Contact ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=ContactsSearchForm_anyMixedAttributes</td>
+	<td>\10</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='list-view']/div[2]/table/tbody/tr/td[3]</td>
+	<td>Test Contact ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Contact ${randomSuffix}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>ContactsSearchForm_anyMixedAttributes</td>
+	<td>Test Contact ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='list-view']/div[2]/table/tbody/tr[1]/td[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Email</td>
+	<td>Email</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='NoUserEmailConfigurationYetView']/div/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=UserEmailConfigurationForm_fromAddress</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=UserEmailConfigurationForm_fromAddress</td>
+	<td>test@zurmo.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Email</td>
+	<td>Email</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=CreateEmailMessageForm_contactEmailTemplateNames_SelectLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=EmailTemplatesSearchForm_anyMixedAttributes</td>
+	<td>First HTML Template ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=EmailTemplatesSearchForm_anyMixedAttributes</td>
+	<td>\10</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='list-viewmodal']/div[2]/table/tbody/tr/td</td>
+	<td>First HTML Template ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>First HTML Template ${randomSuffix}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>EmailTemplatesSearchForm_anyMixedAttributes</td>
+	<td>First HTML Template ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='list-viewmodal']/div[2]/table/tbody/tr/td/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>CreateEmailMessageForm_content_htmlContent</td>
+	<td>&lt;html&gt;&lt;head&gt; &lt;/head&gt; &lt;body&gt; First HTML template content     &nbsp;&nbsp;&lt;/body&gt;&lt;/html&gt;</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=CreateEmailMessageForm_contactEmailTemplateNames_SelectLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=EmailTemplatesSearchForm_anyMixedAttributes</td>
+	<td>Second HTML Template ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=EmailTemplatesSearchForm_anyMixedAttributes</td>
+	<td>\10</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='list-viewmodal']/div[2]/table/tbody/tr/td</td>
+	<td>Second HTML Template ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Second HTML Template ${randomSuffix}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>EmailTemplatesSearchForm_anyMixedAttributes</td>
+	<td>Second HTML Template ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='list-viewmodal']/div[2]/table/tbody/tr/td/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>CreateEmailMessageForm_content_htmlContent</td>
+	<td>&lt;html&gt;&lt;head&gt; &lt;/head&gt; &lt;body&gt; Second HTML template content     &nbsp;&nbsp;&lt;/body&gt;&lt;/html&gt;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//form[@id='edit-form']/div[3]/div/div/a/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>0</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

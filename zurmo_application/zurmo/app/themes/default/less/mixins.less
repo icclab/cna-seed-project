@@ -1,0 +1,294 @@
+// Zurmo is a customer relationship management program developed by
+// Zurmo, Inc. Copyright (C) 2014 Zurmo Inc.
+//
+// Zurmo is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Affero General Public License version 3 as published by the
+// Free Software Foundation with the addition of the following permission added
+// to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
+// IN WHICH THE COPYRIGHT IS OWNED BY ZURMO, ZURMO DISCLAIMS THE WARRANTY
+// OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
+//
+// Zurmo is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+// FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+// details.
+//
+// You should have received a copy of the GNU Affero General Public License along with
+// this program; if not, see http://www.gnu.org/licenses or write to the Free
+// Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// 02110-1301 USA.
+//
+// You can contact Zurmo, Inc. with a mailing address at 27 North Wacker Drive
+// Suite 370 Chicago, IL 60606. or at email address contact@zurmo.com.
+//
+// The interactive user interfaces in original and modified versions
+// of this program must display Appropriate Legal Notices, as required under
+// Section 5 of the GNU Affero General Public License version 3.
+//
+// In accordance with Section 7(b) of the GNU Affero General Public License version 3,
+// these Appropriate Legal Notices must retain the display of the Zurmo
+// logo and Zurmo copyright notice. If the display of the logo is not reasonably
+// feasible for technical reasons, the Appropriate Legal Notices must display the words
+// "Copyright Zurmo Inc. 2014. All rights reserved".
+
+@import "variables.less";
+
+.symbly( @size : 32px ) {
+    font-weight:normal !important;
+    font-size:@size;
+    font-family: "zurmo_gamification_symbly_rRg";
+}
+
+.t-shadow(@style){
+    -webkit-text-shadow: @style;
+       -moz-text-shadow: @style;
+        -ms-text-shadow: @style;
+		 -o-text-shadow: @style;
+            text-shadow: @style;
+}
+
+.b-shadow(@style){
+    -webkit-box-shadow: @style;
+       -moz-box-shadow: @style;
+		-ms-box-shadow: @style;
+		 -o-box-shadow: @style;
+            box-shadow: @style;
+}
+
+.ie-shadow(@color:0, @blur:0, @alpha:0){
+    // http://www.useragentman.com/blog/2011/08/24/how-to-simulate-css3-box-shadow-in-ie7-8-without-javascript
+    zoom: 1;
+    filter:progid:DXImageTransform.Microsoft.Shadow(Color=lighten(@color, @alpha), Strength=@blur, Direction=0),
+           progid:DXImageTransform.Microsoft.Shadow(Color=lighten(@color, @alpha), Strength=@blur, Direction=90),
+           progid:DXImageTransform.Microsoft.Shadow(Color=lighten(@color, @alpha), Strength=@blur, Direction=180),
+           progid:DXImageTransform.Microsoft.Shadow(Color=lighten(@color, @alpha), Strength=@blur, Direction=270);
+}
+
+.no-ie-shadow(){
+    filter: progid:DXImageTransform.Microsoft.Shadow(enabled = false);
+}
+
+.text-overflow(){
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.radius(@style){
+    -webkit-border-radius:@style;
+    -moz-border-radius:@style;
+    -ms-border-radius:@style;
+    -o-border-radius:@style;
+    border-radius:@style;
+}
+
+.portlet-gradient(){
+    .b-shadow(inset 0 0 0 2px #ffffff );
+    #gradient > .vertical-three-colors( #ffffff, #f5f5f5, 80%, #f5f5f5 );
+}
+
+.box-sizing(){
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.border-box{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.border-box-sizing{
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.animateAll(@time: 0.5s){
+	@easeOutSine:cubic-bezier(0.390, 0.575, 0.565, 1.000);
+	@easeInOutSine:cubic-bezier(0.445, 0.050, 0.550, 0.950);
+
+	-webkit-transition: all @time @easeOutSine;//ease-in-out;
+	   -moz-transition: all @time @easeOutSine;//ease-in-out;
+	    -ms-transition: all @time @easeOutSine;//ease-in-out;
+	     -o-transition: all @time @easeOutSine;//ease-in-out;
+	        transition: all @time @easeOutSine;//ease-in-out;
+
+		    -ms-transform: translate(0px, 0);
+		   -moz-transform: translate(0px, 0);
+		-webkit-transform: translate3d(0px, 0, 0);
+		        transform: translate(0px, 0);
+	//-webkit-touch-callout: none;
+	  //-webkit-user-select: none;
+}
+
+.cf,
+.clearfix{
+    &:before,
+    &:after{
+        content:" ";
+        display:table;
+    }
+	&:after{
+        clear:both;
+    }
+    *zoom:1;
+}
+
+.debug(){
+    background-color:rgba(255, 0, 0, 0.5);
+}
+
+.hide(){
+    display:none;
+}
+
+.smaller(){
+    font-size:11px;
+}
+
+.flyout{
+    border:1px solid #b6b6b6;
+    #gradient > .vertical( #f5f5f5, #ebebeb );
+    .b-shadow(~"inset 0 0 0 2px #ffffff,  0 0 9px 5px rgba(153, 153, 153, 0.12)");
+	white-space: nowrap;
+}
+
+.headerDropDown{
+	border:1px solid #b6b6b6;
+	#gradient > .vertical( #f5f5f5, #ebebeb );
+	.b-shadow(~"inset 0 0 0 2px #ffffff,  0 0 9px 5px rgba(153, 153, 153, 0.12)");
+	z-index:99999;
+	min-width:110px;
+	display:none;
+	position:absolute;
+	left:0;
+	top:32px;
+	padding-top:3px;
+	padding-bottom:3px;
+	li{
+		line-height: 100%;
+	}
+	li > a{
+		color:#666;
+		font-size:11px;
+		font-weight:normal;
+		display:block;
+		padding:5px 10px 5px 10px;
+		margin:0 2px;
+	}
+	li > a:hover{
+		color:#fff !important;
+	}
+}
+
+.text-input(){
+	font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+	display:inline-block;
+	border:1px solid #ccc;
+	.radius(3px);
+	font-size:12px;
+	color:#666 !important;
+	text-indent:6px;
+	line-height: 24px;
+	height:26px;
+	.b-shadow(0 0 1px 1px rgba(153, 153, 153, 0.3));
+	.ie-shadow(#999999, 1, 15);
+	width:100%;
+
+	&:focus{
+		.b-shadow(0 0 1px 1px @themeColor);
+	}
+}
+
+.view-toolbar-icons(@size: 24px){
+	.symbly(@size);
+	padding:0;
+	margin:0;
+	vertical-align:middle;
+	position:relative;
+
+}
+
+// Gradients
+#gradient {
+  .horizontal (@startColor: #555, @endColor: #333) {
+    background-color: @endColor;
+    background-repeat: repeat-x;
+    background-image: -ms-linear-gradient(left, @startColor, @endColor); // IE10
+    background-image: -webkit-gradient(linear, left top, right top, color-stop(0%, @startColor), color-stop(100%, @endColor)); // Safari 4+, Chrome 2+
+    background-image: -webkit-linear-gradient(left, @startColor, @endColor); // Safari 5.1+, Chrome 10+
+    background-image: -o-linear-gradient(left, @startColor, @endColor); // Opera 11.10
+	background-image: -moz-linear-gradient(left, @startColor, @endColor); // Le standard
+	background-image: linear-gradient(left, @startColor, @endColor); // Le standard
+  }
+  .vertical (@startColor: #555, @endColor: #333) {
+    background-color: @endColor;
+    background-repeat: repeat-x;
+    background-image: -ms-linear-gradient(top, @startColor, @endColor); // IE10
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @startColor), color-stop(100%, @endColor)); // Safari 4+, Chrome 2+
+    background-image: -webkit-linear-gradient(top, @startColor, @endColor); // Safari 5.1+, Chrome 10+
+    background-image: -o-linear-gradient(top, @startColor, @endColor); // Opera 11.10
+	background-image: -moz-linear-gradient(top, @startColor, @endColor); // The standard
+    background-image: linear-gradient(top, @startColor, @endColor); // The standard
+  }
+  .directional (@startColor: #555, @endColor: #333, @deg: 45deg) {
+    background-color: @endColor;
+    background-repeat: repeat-x;
+    background-image: -ms-linear-gradient(@deg, @startColor, @endColor); // IE10
+    background-image: -webkit-linear-gradient(@deg, @startColor, @endColor); // Safari 5.1+, Chrome 10+
+    background-image: -o-linear-gradient(@deg, @startColor, @endColor); // Opera 11.10
+	background-image: -moz-linear-gradient(@deg, @startColor, @endColor); // The standard
+	background-image: linear-gradient(@deg, @startColor, @endColor); // The standard
+  }
+  .vertical-three-colors(@startColor: #00b3ee, @midColor: #7a43b6, @colorStop: 50%, @endColor: #c3325f, @importance:~"") {
+    background-color: @endColor @importance;
+    background-repeat: no-repeat @importance;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@startColor), color-stop(@colorStop, @midColor), to(@endColor)) @importance;
+    background-image: -webkit-linear-gradient(@startColor, @midColor @colorStop, @endColor) @importance;
+    background-image: -ms-linear-gradient(@startColor, @midColor @colorStop, @endColor) @importance;
+    background-image: -o-linear-gradient(@startColor, @midColor @colorStop, @endColor) @importance;
+	background-image: -moz-linear-gradient(@startColor, @midColor @colorStop, @endColor) @importance;
+	background-image: linear-gradient(@startColor, @midColor @colorStop, @endColor) @importance;
+  }
+}
+
+// Reset filters for IE
+.reset-filter() {
+  filter: e(%("progid:DXImageTransform.Microsoft.gradient(enabled = false)"));
+}
+
+.opacity(@opacity: 100) {
+  filter: e(%("alpha(opacity=%d)", @opacity));
+  -khtml-opacity: @opacity / 100;
+    -moz-opacity: @opacity / 100;
+         opacity: @opacity / 100;
+}
+
+.unstyle-panel{
+    border:none;
+    background: none;
+    .b-shadow(none);
+    padding: 0;
+    margin: 0;
+    .reset-filter();
+}
+
+.flexbox() {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+}
+
+.flex(@values) {
+	-webkit-box-flex: @values;
+	-moz-box-flex:  @values;
+	-webkit-flex:  @values;
+	-ms-flex:  @values;
+	flex:  @values;
+}

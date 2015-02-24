@@ -1,0 +1,174 @@
+/*********************************************************************************
+ * Zurmo is a customer relationship management program developed by
+ * Zurmo, Inc. Copyright (C) 2014 Zurmo Inc.
+ *
+ * Zurmo is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Affero General Public License version 3 as published by the
+ * Free Software Foundation with the addition of the following permission added
+ * to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
+ * IN WHICH THE COPYRIGHT IS OWNED BY ZURMO, ZURMO DISCLAIMS THE WARRANTY
+ * OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
+ *
+ * Zurmo is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License along with
+ * this program; if not, see http://www.gnu.org/licenses or write to the Free
+ * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301 USA.
+ *
+ * You can contact Zurmo, Inc. with a mailing address at 27 North Wacker Drive
+ * Suite 370 Chicago, IL 60606. or at email address contact@zurmo.com.
+ *
+ * The interactive user interfaces in original and modified versions
+ * of this program must display Appropriate Legal Notices, as required under
+ * Section 5 of the GNU Affero General Public License version 3.
+ *
+ * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
+ * these Appropriate Legal Notices must retain the display of the Zurmo
+ * logo and Zurmo copyright notice. If the display of the logo is not reasonably
+ * feasible for technical reasons, the Appropriate Legal Notices must display the words
+ * Copyright Zurmo Inc. 2014. All rights reserved.
+ ********************************************************************************/
+
+@z_textColor         : #545454;
+@z_themeColor        : #282A76;
+@z_themeColor2       : #7CB830;
+@z_themeColorBtn     : #97c43d;
+@z_themeColorHeader  : #464646;
+@z_path              : '../images/';
+
+@import "variables.less";
+
+body:hover{
+	.element-wrapper{
+		box-shadow: inset 0 0 0 1px rgba(255, 0, 0, 0.1);
+	}
+}
+
+.element-wrapper{
+	position: relative;
+	display:block;
+	width: 100%;
+	height: 100%;
+	&:hover{
+		> .builder-element-toolbar{
+			visibility: visible;
+		}
+	}
+}
+
+.empty-element-wrapper{
+	height: 100%;
+	width: 100%;
+	min-height: 60px;
+	background: rgba(236, 240, 241, 0.25) url("@{path}stripes.png") left top repeat;
+}
+
+.builder-element-toolbar{
+	display: block;
+	visibility: hidden;
+	position: absolute;
+	top: 1px;
+	right: 1px;
+	z-index: 1000;
+	span{
+		width: 24px;
+		height: 24px;
+		display: inline-block;
+		border: 1px solid #ccc;
+		text-align: center;
+		background:rgb(255, 255, 255);
+	}
+	i{
+		color: #545454;
+		font-weight:normal !important;
+		font-style: normal !important;
+		font-size:24px;
+		font-family: "zurmo_gamification_symbly_rRg";
+		vertical-align:middle;
+		padding:0 0 0 0;//3px;
+		margin:0 0 0 0;
+		text-shadow: none !important;
+	}
+}
+
+.builder-element-non-editable{
+	position: relative;
+	z-index: 1;
+	padding: 10px;
+	display: block;
+}
+
+table.builder-element-non-editable{
+	display: table;
+}
+
+td.sortable-elements.ui-sortable{
+	padding: 0;
+}
+
+td.wrapper{
+	//vertical-align: middle;
+	padding: 10px 10px 10px 10px; //10 20 10 0
+}
+
+.icon-action-move:before  { content: ")"; }
+.icon-action-edit:before  { content: "n"; }
+.icon-action-delete:before { content: "_"; }
+
+.ui-sortable-placeholder{
+	visibility: visible !important;
+	box-shadow: 0 0 5px 0 @themeColor !important;
+	min-height: 60px;
+}
+
+.hover{
+	box-shadow: inset 0 0 0 2px #ccc !important;
+}
+
+.editing-element{
+	box-shadow: inset 0 0 8px 0 @themeColor  !important;
+}
+
+.ghost{
+	display: block;
+	span{
+		display: block;
+		background: rgba(255, 255, 255, 0.5);
+		border:2px dashed @themeColor;
+		color: @themeColor;
+		padding: 10px 0;
+		text-align: center;
+		width: 100%;
+		letter-spacing: 1px;
+		font-size: 16px;
+	}
+}
+
+.draggable-builder-element{
+	z-index: 9999999;
+	box-shadow: inset 0 0 8px 0 @themeColor  !important;
+	.builder-element-toolbar{
+		visibility: visible;
+	}
+}
+
+.element-wrapper{
+	&:before,
+	&:after{
+		content:" ";
+		display:table;
+	}
+	&:after{
+		clear:both;
+	}
+	*zoom:1;
+}
+
+.empty-builder-image-element{
+	height:120px;
+	background: url("@{z_path}email-builder/image-placeholder.png") center center no-repeat;
+}

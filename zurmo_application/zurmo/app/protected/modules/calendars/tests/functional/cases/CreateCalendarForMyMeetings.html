@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/" />
+<title>CreateCalendarForMyMeetings</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Create Calendar For My Meetings</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>45000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>index.php/calendars/default/combinedDetails</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<!--remove existing My Meetings-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='my-calendars-list']/ul/li[1]/ul/li/ul/li[2]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this Calendar?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>My Meetings</td>
+	<td></td>
+</tr>
+<!--create calendar-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='MyCalendarListView']/div/div[1]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='SavedCalendarEditAndDetailsView']/div/h1/span/span</td>
+	<td>Create Calendar</td>
+</tr>
+<!--check validation-->
+<tr>
+	<td>click</td>
+	<td>save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Name cannot be blank.</td>
+	<td></td>
+</tr>
+<!--add calendar details-->
+<tr>
+	<td>type</td>
+	<td>SavedCalendar_name</td>
+	<td>My Meetings</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>SavedCalendar_location</td>
+	<td>Chicago</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>SavedCalendar_moduleClassName_value</td>
+	<td>label=Meetings</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>SavedCalendar_startAttributeName_value</td>
+	<td>label=Start Time</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>SavedCalendar_endAttributeName_value</td>
+	<td>label=End Time</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>SavedCalendar_timeZone_value</td>
+	<td>label=America/Chicago</td>
+</tr>
+<tr>
+	<td>doubleClick</td>
+	<td>//li[@id='Filters_owner__User']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Available At Run Time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Available At Run Time</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='SavedCalendarFiltersForReportWizardView']/div/div[2]/div[1]/div[1]/ul/li/div/div/div[2]/div/div/a/span[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>UsersSearchForm_anyMixedAttributes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UsersSearchForm_anyMixedAttributes</td>
+	<td>Super User</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>UsersSearchForm_anyMixedAttributes</td>
+	<td>\10</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td> 
+	<td>//div[@id='list-viewmodal']/div[2]/table/tbody/tr[1]/td/a</td>
+	<td>Super User</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Super User</td>
+	<td>Super User</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Super User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='SavedCalendarFiltersForReportWizardView']/div/div[2]/div[1]/div[1]/ul/li/div/div/div[2]/div/div/input</td>
+	<td>Super User</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<!--verify values after creating calendar-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='my-calendars-list']/ul/li[2]/ul/li/ul/li[1]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td> 
+	<td>//div[@id='SavedCalendarEditAndDetailsView']/div/h1/span/span</td>
+	<td>My Meetings</td>
+</tr>
+<tr>
+	<td>verifyValue</td> 
+	<td>SavedCalendar_name</td>
+	<td>My Meetings</td>
+</tr>
+<tr>
+	<td>verifyValue</td> 
+	<td>SavedCalendar_location</td>
+	<td>Chicago</td>
+</tr>
+<tr>
+	<td>verifyValue</td> 
+	<td>SavedCalendar_moduleClassName_value</td>
+	<td>MeetingsModule</td>
+</tr>
+<tr>
+	<td>verifyValue</td> 
+	<td>SavedCalendar_startAttributeName_value</td>
+	<td>startDateTime</td>
+</tr>
+<tr>
+	<td>verifyValue</td> 
+	<td>SavedCalendar_endAttributeName_value</td>
+	<td>endDateTime</td>
+</tr>
+<tr>
+	<td>verifyValue</td> 
+	<td>SavedCalendar_timeZone_value</td>
+	<td>America/Chicago</td>
+</tr>
+<tr>
+	<td>verifyValue</td> 
+	<td>//div[@id='SavedCalendarFiltersForReportWizardView']/div/div[2]/div[1]/div[1]/ul/li/div/div/div[2]/div/div/input</td>
+	<td>Super User</td>
+</tr>
+</tbody></table>
+</body>
+</html>

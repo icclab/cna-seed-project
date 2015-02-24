@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/" />
+<title>CreateDateTimeAttribute</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Create DateTime Attribute</td></tr>
+</thead><tbody>
+<tr>
+    <td>setTimeout</td>
+    <td>45000</td>
+    <td></td>
+</tr>
+<tr>
+    <td>store</td>
+    <td>javascript{Math.floor(Math.random()*11000)}</td>
+    <td>randomSuffix</td>
+</tr>
+<tr>
+    <td>open</td>
+    <td>index.php/designer/default</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForPageToLoad</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>clickAndWait</td>
+    <td>//div[@id='TitleBarAndDesignerPageMenuView']/div/ul/li[3]/a/span</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForPageToLoad</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Fields</td>
+	<td>Fields</td>
+</tr>
+<tr>
+    <td>clickAndWait</td>
+    <td>link=Fields</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForPageToLoad</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>verifyTextPresent</td>
+    <td>Accounts: Standard Fields</td>
+    <td></td>
+</tr>
+<tr>
+    <td>verifyTextPresent</td>
+    <td>Create Field</td>
+    <td></td>
+</tr>
+<tr>
+    <td>assertTextNotPresent</td>
+    <td>tfld${randomSuffix}</td>
+    <td></td>
+</tr>
+<tr>
+    <td>select</td>
+    <td>attributeTypeName</td>
+    <td>label=Date Time</td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>clickAndWait</td>
+    <td>attributeTypeNameButton</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForPageToLoad</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>DateTimeAttributeForm_attributeName</td>
+    <td>tfld${randomSuffix}</td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>DateTimeAttributeForm_attributeLabels_en</td>
+    <td>tfld${randomSuffix}</td>
+</tr>
+<tr>
+    <td>select</td>
+    <td>DateTimeAttributeForm_defaultValueCalculationType_value</td>
+    <td>label=Now</td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>verifyValue</td>
+    <td>DateTimeAttributeForm_isRequired</td>
+    <td>off</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>DateTimeAttributeForm_isRequired</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>verifyValue</td>
+    <td>DateTimeAttributeForm_isRequired</td>
+    <td>on</td>
+</tr>
+<tr>
+    <td>verifyValue</td>
+    <td>DateTimeAttributeForm_isAudited</td>
+    <td>off</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>DateTimeAttributeForm_isAudited</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>verifyValue</td>
+    <td>DateTimeAttributeForm_isAudited</td>
+    <td>on</td>
+</tr>
+<tr>
+    <td>clickAndWait</td>
+    <td>save</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForPageToLoad</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>waitForTextNotPresent</td>
+    <td>//div[@id='DesignerBreadCrumbView']/div/span</td>
+    <td>Create Field:</td>
+</tr>
+<tr>
+    <td>assertText</td>
+    <td>//div[@id='StandardAndCustomAttributesListView']/div[2]/div/h1</td>
+    <td>Create Field</td>
+</tr>
+<tr>
+    <td>assertText</td>
+    <td>//div[@id='StandardAndCustomAttributesListView']/div[2]/div[2]/h1</td>
+    <td>Accounts: Custom Fields</td>
+</tr>
+<tr>
+    <td>verifyTextPresent</td>
+    <td>tfld${randomSuffix}</td>
+    <td></td>
+</tr>
+<tr>
+    <td>verifyTextPresent</td>
+    <td>Accounts: Standard Fields</td>
+    <td></td>
+</tr>
+<tr>
+    <td>clickAndWait</td>
+    <td>id=edit-link-tfld${randomSuffix}Cstm</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForPageToLoad</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>waitForPageToLoad</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForText</td>
+    <td>//div[@id='DateTimeAttributeEditView']/div/h1</td>
+    <td>exact:Edit Field: tfld${randomSuffix}</td>
+</tr>
+<tr>
+    <td>select</td>
+    <td>DateTimeAttributeForm_defaultValueCalculationType_value</td>
+    <td>label=(None)</td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>verifyValue</td>
+    <td>DateTimeAttributeForm_isRequired</td>
+    <td>on</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>DateTimeAttributeForm_isRequired</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>verifyValue</td>
+    <td>DateTimeAttributeForm_isRequired</td>
+    <td>off</td>
+</tr>
+<tr>
+    <td>clickAndWait</td>
+    <td>save</td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForPageToLoad</td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+    <td>waitForTextNotPresent</td>
+    <td>//div[@id='DesignerBreadCrumbView']/div/span</td>
+    <td>Edit Field:</td>
+</tr>
+<tr>
+    <td>assertText</td>
+    <td>//div[@id='StandardAndCustomAttributesListView']/div[2]/div[2]/h1</td>
+    <td>Accounts: Custom Fields</td>
+</tr>
+<tr>
+    <td>verifyTextPresent</td>
+    <td>tfld${randomSuffix}</td>
+    <td></td>
+</tr>
+<tr>
+    <td>verifyTextPresent</td>
+    <td>Accounts: Standard Fields</td>
+    <td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,1836 @@
+Testing with database: 'mysql:host=db;port=3306;dbname=zurmo', username: 'zurmo'.
+Auto building database schema...
+Info  - Searching for models
+Info  - Models catalog built.
+Info  - Building Table Schema for 114 Models
+Info  - Building Column definitions for AccountAccountAffiliation
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of AccountAccountAffiliation
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of AccountAccountAffiliation
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for AccountContactAffiliation
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of AccountContactAffiliation
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of AccountContactAffiliation
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Account
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Account
+Info  - Creating/Updating schema for account_project
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Account
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of AccountStarred
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for AccountStarred
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of AccountStarred
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Activity
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Activity
+Info  - Creating/Updating schema for activity_item
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Activity
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Autoresponder
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Autoresponder
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Autoresponder
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for AutoresponderItem
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of AutoresponderItem
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of AutoresponderItem
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of AutoresponderItemActivity
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for AutoresponderItemActivity
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of AutoresponderItemActivity
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Campaign
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Campaign
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Campaign
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for CampaignItem
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of CampaignItem
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for CampaignItem
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of CampaignItem
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of CampaignItemActivity
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for CampaignItemActivity
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of CampaignItemActivity
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Comment
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Comment
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Comment
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Contact
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Contact
+Info  - Creating/Updating schema for contact_opportunity
+Info  - Creating/Updating schema for contact_project
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for Contact
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of Contact
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of ContactStarred
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for ContactStarred
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of ContactStarred
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ContactState
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of ContactState
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of ContactState
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Conversation
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Conversation
+Info  - Creating/Updating schema for conversation_item
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Conversation
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ConversationParticipant
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of ConversationParticipant
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of ConversationParticipant
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of ConversationStarred
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for ConversationStarred
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of ConversationStarred
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailAccount
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of EmailAccount
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of EmailAccount
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailBox
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of EmailBox
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of EmailBox
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailFolder
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of EmailFolder
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of EmailFolder
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailMessage
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of EmailMessage
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of EmailMessage
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailMessageActivity
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of EmailMessageActivity
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of EmailMessageActivity
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailMessageContent
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of EmailMessageContent
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailMessageRecipient
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of EmailMessageRecipient
+Info  - Creating/Updating schema for emailmessagerecipient_item
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for EmailMessageRecipient
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of EmailMessageRecipient
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailMessageSendError
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of EmailMessageSendError
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailMessageSender
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of EmailMessageSender
+Info  - Creating/Updating schema for emailmessagesender_item
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of EmailMessageSender
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailMessageUrl
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of EmailMessageUrl
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of EmailMessageUrl
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailSignature
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of EmailSignature
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of EmailSignature
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailTemplate
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of EmailTemplate
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of EmailTemplate
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for mixins of ExportFileModel
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ExportItem
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of ExportItem
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of ExportItem
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GameReward
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of GameReward
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of GameReward
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GameRewardTransaction
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of GameRewardTransaction
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of GameRewardTransaction
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GameBadge
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of GameBadge
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of GameBadge
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GameCoin
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of GameCoin
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of GameCoin
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GameCollection
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of GameCollection
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of GameCollection
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GameLevel
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of GameLevel
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of GameLevel
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GameNotification
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of GameNotification
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of GameNotification
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GamePoint
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of GamePoint
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of GamePoint
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GamePointTransaction
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of GamePointTransaction
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for GamePointTransaction
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of GamePointTransaction
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GameScore
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of GameScore
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of GameScore
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Dashboard
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of Dashboard
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Import
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of Import
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for JobInProcess
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of JobInProcess
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for JobLog
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of JobLog
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for StuckJob
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of StuckJob
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for MarketingList
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of MarketingList
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of MarketingList
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for MarketingListMember
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of MarketingListMember
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of MarketingListMember
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of PersonWhoHaveNotReadLatest
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of PersonWhoHaveNotReadLatest
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Meeting
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Meeting
+Info  - Creating/Updating schema for _user_meeting
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Meeting
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Mission
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Mission
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Mission
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Note
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Note
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Note
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Notification
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Notification
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Notification
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for NotificationMessage
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of NotificationMessage
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of NotificationMessage
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for NotificationSubscriber
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of NotificationSubscriber
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of NotificationSubscriber
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Opportunity
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Opportunity
+Info  - Creating/Updating schema for opportunity_project
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Opportunity
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of OpportunityStarred
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for OpportunityStarred
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of OpportunityStarred
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for SavedReport
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of SavedReport
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Product
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Product
+Info  - Creating/Updating schema for product_productcategory
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Product
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ProductCatalog
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of ProductCatalog
+Info  - Creating/Updating schema for productcatalog_productcategory
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of ProductCatalog
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ProductCategory
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of ProductCategory
+Info  - Creating/Updating schema for productcategory_producttemplate
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of ProductCategory
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ProductTemplate
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of ProductTemplate
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of ProductTemplate
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for SellPriceFormula
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of SellPriceFormula
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of SellPriceFormula
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ByTimeWorkflowInQueue
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of ByTimeWorkflowInQueue
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of ByTimeWorkflowInQueue
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for SavedWorkflow
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of SavedWorkflow
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for WorkflowMessageInQueue
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of WorkflowMessageInQueue
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of WorkflowMessageInQueue
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for SocialItem
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of SocialItem
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of SocialItem
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Task
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Task
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Task
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for TaskCheckListItem
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of TaskCheckListItem
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of TaskCheckListItem
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Address
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of Address
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for AuditEvent
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of AuditEvent
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of AuditEvent
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of BaseStarredModel
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of BaseStarredModel
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Currency
+Info  - Column definitions Built
+Info  - Building Indexes definitions for Currency
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of Currency
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for CurrencyValue
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of CurrencyValue
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of CurrencyValue
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Email
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of Email
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for FileModel
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of FileModel
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of FileModel
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Group
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Group
+Info  - Creating/Updating schema for _group__user
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for Group
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of Group
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ImageFileModel
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of ImageFileModel
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Item
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Item
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Item
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for NamedSecurableItem
+Info  - Column definitions Built
+Info  - Building Indexes definitions for NamedSecurableItem
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of NamedSecurableItem
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of OwnedSecurableItem
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for OwnedSecurableItem
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of OwnedSecurableItem
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Permission
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Permission
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Permission
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of Permitable
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for Permitable
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of Permitable
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Person
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Person
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for Person
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of Person
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Policy
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Policy
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Policy
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Right
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Right
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Right
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Role
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Role
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for Role
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of Role
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for SavedSearch
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of SavedSearch
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of SecurableItem
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of SecurableItem
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ShortUrl
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of ShortUrl
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for User
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of User
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for User
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of User
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ContactWebForm
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of ContactWebForm
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of ContactWebForm
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ContactWebFormEntry
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of ContactWebFormEntry
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of ContactWebFormEntry
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Project
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Project
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Project
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ProjectAuditEvent
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of ProjectAuditEvent
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of ProjectAuditEvent
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for SavedCalendar
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of SavedCalendar
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of SavedCalendar
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for SavedCalendarSubscription
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of SavedCalendarSubscription
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of SavedCalendarSubscription
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ActiveLanguage
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of ActiveLanguage
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for BaseCustomField
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of BaseCustomField
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of BaseCustomField
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for CalculatedDerivedAttributeMetadata
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of CalculatedDerivedAttributeMetadata
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for CustomField
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of CustomField
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of CustomField
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for CustomFieldData
+Info  - Column definitions Built
+Info  - Building Indexes definitions for CustomFieldData
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of CustomFieldData
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for CustomFieldValue
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of CustomFieldValue
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for CustomFieldValue
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of CustomFieldValue
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for DerivedAttributeMetadata
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of DerivedAttributeMetadata
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for DropDownDependencyDerivedAttributeMetadata
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of DropDownDependencyDerivedAttributeMetadata
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for FileContent
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of FileContent
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GlobalMetadata
+Info  - Column definitions Built
+Info  - Building Indexes definitions for GlobalMetadata
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of GlobalMetadata
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for MessageSource
+Info  - Column definitions Built
+Info  - Building Indexes definitions for MessageSource
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of MessageSource
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for MessageTranslation
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of MessageTranslation
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for MessageTranslation
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of MessageTranslation
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for MultipleValuesCustomField
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of MultipleValuesCustomField
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for MultipleValuesCustomField
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of MultipleValuesCustomField
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for PerUserMetadata
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of PerUserMetadata
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of PerUserMetadata
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Portlet
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Portlet
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Portlet
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for KanbanItem
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of KanbanItem
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of KanbanItem
+Info  - Column definitions for mixins Built
+Info  - Creating/Updating schema for accountaccountaffiliation
+Info  - Scheme generated for accountaccountaffiliation.
+Info  - Creating/Updating schema for accountcontactaffiliation
+Info  - Scheme generated for accountcontactaffiliation.
+Info  - Creating/Updating schema for account
+Info  - Scheme generated for account.
+Info  - Creating/Updating schema for accountstarred
+Info  - Scheme generated for accountstarred.
+Info  - Creating/Updating schema for activity
+Info  - Scheme generated for activity.
+Info  - Creating/Updating schema for autoresponder
+Info  - Scheme generated for autoresponder.
+Info  - Creating/Updating schema for autoresponderitem
+Info  - Scheme generated for autoresponderitem.
+Info  - Creating/Updating schema for autoresponderitemactivity
+Info  - Scheme generated for autoresponderitemactivity.
+Info  - Creating/Updating schema for campaign
+Info  - Scheme generated for campaign.
+Info  - Creating/Updating schema for campaignitem
+Info  - Scheme generated for campaignitem.
+Info  - Creating/Updating schema for campaignitemactivity
+Info  - Scheme generated for campaignitemactivity.
+Info  - Creating/Updating schema for comment
+Info  - Scheme generated for comment.
+Info  - Creating/Updating schema for contact
+Info  - Scheme generated for contact.
+Info  - Creating/Updating schema for contactstarred
+Info  - Scheme generated for contactstarred.
+Info  - Creating/Updating schema for contactstate
+Info  - Scheme generated for contactstate.
+Info  - Creating/Updating schema for conversation
+Info  - Scheme generated for conversation.
+Info  - Creating/Updating schema for conversationparticipant
+Info  - Scheme generated for conversationparticipant.
+Info  - Creating/Updating schema for conversationstarred
+Info  - Scheme generated for conversationstarred.
+Info  - Creating/Updating schema for emailaccount
+Info  - Scheme generated for emailaccount.
+Info  - Creating/Updating schema for emailbox
+Info  - Scheme generated for emailbox.
+Info  - Creating/Updating schema for emailfolder
+Info  - Scheme generated for emailfolder.
+Info  - Creating/Updating schema for emailmessage
+Info  - Scheme generated for emailmessage.
+Info  - Creating/Updating schema for emailmessageactivity
+Info  - Scheme generated for emailmessageactivity.
+Info  - Creating/Updating schema for emailmessagecontent
+Info  - Scheme generated for emailmessagecontent.
+Info  - Creating/Updating schema for emailmessagerecipient
+Info  - Scheme generated for emailmessagerecipient.
+Info  - Creating/Updating schema for emailmessagesenderror
+Info  - Scheme generated for emailmessagesenderror.
+Info  - Creating/Updating schema for emailmessagesender
+Info  - Scheme generated for emailmessagesender.
+Info  - Creating/Updating schema for emailmessageurl
+Info  - Scheme generated for emailmessageurl.
+Info  - Creating/Updating schema for emailsignature
+Info  - Scheme generated for emailsignature.
+Info  - Creating/Updating schema for emailtemplate
+Info  - Scheme generated for emailtemplate.
+Info  - Creating/Updating schema for exportfilemodel
+Info  - Scheme generated for exportfilemodel.
+Info  - Creating/Updating schema for exportitem
+Info  - Scheme generated for exportitem.
+Info  - Creating/Updating schema for gamereward
+Info  - Scheme generated for gamereward.
+Info  - Creating/Updating schema for gamerewardtransaction
+Info  - Scheme generated for gamerewardtransaction.
+Info  - Creating/Updating schema for gamebadge
+Info  - Scheme generated for gamebadge.
+Info  - Creating/Updating schema for gamecoin
+Info  - Scheme generated for gamecoin.
+Info  - Creating/Updating schema for gamecollection
+Info  - Scheme generated for gamecollection.
+Info  - Creating/Updating schema for gamelevel
+Info  - Scheme generated for gamelevel.
+Info  - Creating/Updating schema for gamenotification
+Info  - Scheme generated for gamenotification.
+Info  - Creating/Updating schema for gamepoint
+Info  - Scheme generated for gamepoint.
+Info  - Creating/Updating schema for gamepointtransaction
+Info  - Scheme generated for gamepointtransaction.
+Info  - Creating/Updating schema for gamescore
+Info  - Scheme generated for gamescore.
+Info  - Creating/Updating schema for dashboard
+Info  - Scheme generated for dashboard.
+Info  - Creating/Updating schema for import
+Info  - Scheme generated for import.
+Info  - Creating/Updating schema for jobinprocess
+Info  - Scheme generated for jobinprocess.
+Info  - Creating/Updating schema for joblog
+Info  - Scheme generated for joblog.
+Info  - Creating/Updating schema for stuckjob
+Info  - Scheme generated for stuckjob.
+Info  - Creating/Updating schema for marketinglist
+Info  - Scheme generated for marketinglist.
+Info  - Creating/Updating schema for marketinglistmember
+Info  - Scheme generated for marketinglistmember.
+Info  - Creating/Updating schema for personwhohavenotreadlatest
+Info  - Scheme generated for personwhohavenotreadlatest.
+Info  - Creating/Updating schema for meeting
+Info  - Scheme generated for meeting.
+Info  - Creating/Updating schema for mission
+Info  - Scheme generated for mission.
+Info  - Creating/Updating schema for note
+Info  - Scheme generated for note.
+Info  - Creating/Updating schema for notification
+Info  - Scheme generated for notification.
+Info  - Creating/Updating schema for notificationmessage
+Info  - Scheme generated for notificationmessage.
+Info  - Creating/Updating schema for notificationsubscriber
+Info  - Scheme generated for notificationsubscriber.
+Info  - Creating/Updating schema for opportunity
+Info  - Scheme generated for opportunity.
+Info  - Creating/Updating schema for opportunitystarred
+Info  - Scheme generated for opportunitystarred.
+Info  - Creating/Updating schema for savedreport
+Info  - Scheme generated for savedreport.
+Info  - Creating/Updating schema for product
+Info  - Scheme generated for product.
+Info  - Creating/Updating schema for productcatalog
+Info  - Scheme generated for productcatalog.
+Info  - Creating/Updating schema for productcategory
+Info  - Scheme generated for productcategory.
+Info  - Creating/Updating schema for producttemplate
+Info  - Scheme generated for producttemplate.
+Info  - Creating/Updating schema for sellpriceformula
+Info  - Scheme generated for sellpriceformula.
+Info  - Creating/Updating schema for bytimeworkflowinqueue
+Info  - Scheme generated for bytimeworkflowinqueue.
+Info  - Creating/Updating schema for savedworkflow
+Info  - Scheme generated for savedworkflow.
+Info  - Creating/Updating schema for workflowmessageinqueue
+Info  - Scheme generated for workflowmessageinqueue.
+Info  - Creating/Updating schema for socialitem
+Info  - Scheme generated for socialitem.
+Info  - Creating/Updating schema for task
+Info  - Scheme generated for task.
+Info  - Creating/Updating schema for taskchecklistitem
+Info  - Scheme generated for taskchecklistitem.
+Info  - Creating/Updating schema for address
+Info  - Scheme generated for address.
+Info  - Creating/Updating schema for auditevent
+Info  - Scheme generated for auditevent.
+Info  - Creating/Updating schema for basestarredmodel
+Info  - Scheme generated for basestarredmodel.
+Info  - Creating/Updating schema for currency
+Info  - Scheme generated for currency.
+Info  - Creating/Updating schema for currencyvalue
+Info  - Scheme generated for currencyvalue.
+Info  - Creating/Updating schema for email
+Info  - Scheme generated for email.
+Info  - Creating/Updating schema for filemodel
+Info  - Scheme generated for filemodel.
+Info  - Creating/Updating schema for _group
+Info  - Scheme generated for _group.
+Info  - Creating/Updating schema for imagefilemodel
+Info  - Scheme generated for imagefilemodel.
+Info  - Creating/Updating schema for item
+Info  - Scheme generated for item.
+Info  - Creating/Updating schema for namedsecurableitem
+Info  - Scheme generated for namedsecurableitem.
+Info  - Creating/Updating schema for ownedsecurableitem
+Info  - Scheme generated for ownedsecurableitem.
+Info  - Creating/Updating schema for permission
+Info  - Scheme generated for permission.
+Info  - Creating/Updating schema for permitable
+Info  - Scheme generated for permitable.
+Info  - Creating/Updating schema for person
+Info  - Scheme generated for person.
+Info  - Creating/Updating schema for policy
+Info  - Scheme generated for policy.
+Info  - Creating/Updating schema for _right
+Info  - Scheme generated for _right.
+Info  - Creating/Updating schema for role
+Info  - Scheme generated for role.
+Info  - Creating/Updating schema for savedsearch
+Info  - Scheme generated for savedsearch.
+Info  - Creating/Updating schema for securableitem
+Info  - Scheme generated for securableitem.
+Info  - Creating/Updating schema for shorturl
+Info  - Scheme generated for shorturl.
+Info  - Creating/Updating schema for _user
+Info  - Scheme generated for _user.
+Info  - Creating/Updating schema for contactwebform
+Info  - Scheme generated for contactwebform.
+Info  - Creating/Updating schema for contactwebformentry
+Info  - Scheme generated for contactwebformentry.
+Info  - Creating/Updating schema for project
+Info  - Scheme generated for project.
+Info  - Creating/Updating schema for projectauditevent
+Info  - Scheme generated for projectauditevent.
+Info  - Creating/Updating schema for savedcalendar
+Info  - Scheme generated for savedcalendar.
+Info  - Creating/Updating schema for savedcalendarsubscription
+Info  - Scheme generated for savedcalendarsubscription.
+Info  - Creating/Updating schema for activelanguage
+Info  - Scheme generated for activelanguage.
+Info  - Creating/Updating schema for basecustomfield
+Info  - Scheme generated for basecustomfield.
+Info  - Creating/Updating schema for calculatedderivedattributemetadata
+Info  - Scheme generated for calculatedderivedattributemetadata.
+Info  - Creating/Updating schema for customfield
+Info  - Scheme generated for customfield.
+Info  - Creating/Updating schema for customfielddata
+Info  - Scheme generated for customfielddata.
+Info  - Creating/Updating schema for customfieldvalue
+Info  - Scheme generated for customfieldvalue.
+Info  - Creating/Updating schema for derivedattributemetadata
+Info  - Scheme generated for derivedattributemetadata.
+Info  - Creating/Updating schema for dropdowndependencyderivedattributemetadata
+Info  - Scheme generated for dropdowndependencyderivedattributemetadata.
+Info  - Creating/Updating schema for filecontent
+Info  - Scheme generated for filecontent.
+Info  - Creating/Updating schema for globalmetadata
+Info  - Scheme generated for globalmetadata.
+Info  - Creating/Updating schema for messagesource
+Info  - Scheme generated for messagesource.
+Info  - Creating/Updating schema for messagetranslation
+Info  - Scheme generated for messagetranslation.
+Info  - Creating/Updating schema for multiplevaluescustomfield
+Info  - Scheme generated for multiplevaluescustomfield.
+Info  - Creating/Updating schema for perusermetadata
+Info  - Scheme generated for perusermetadata.
+Info  - Creating/Updating schema for portlet
+Info  - Scheme generated for portlet.
+Info  - Creating/Updating schema for kanbanitem
+Info  - Scheme generated for kanbanitem.
+Info  - Schema generation completed
+Info  - Searching for models
+Info  - Models catalog built.
+Info  - Building Table Schema for 114 Models
+Info  - Building Column definitions for AccountAccountAffiliation
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of AccountAccountAffiliation
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of AccountAccountAffiliation
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for AccountContactAffiliation
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of AccountContactAffiliation
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of AccountContactAffiliation
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Account
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Account
+Info  - Creating/Updating schema for account_project
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Account
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of AccountStarred
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for AccountStarred
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of AccountStarred
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Activity
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Activity
+Info  - Creating/Updating schema for activity_item
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Activity
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Autoresponder
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Autoresponder
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Autoresponder
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for AutoresponderItem
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of AutoresponderItem
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of AutoresponderItem
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of AutoresponderItemActivity
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for AutoresponderItemActivity
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of AutoresponderItemActivity
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Campaign
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Campaign
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Campaign
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for CampaignItem
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of CampaignItem
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for CampaignItem
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of CampaignItem
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of CampaignItemActivity
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for CampaignItemActivity
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of CampaignItemActivity
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Comment
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Comment
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Comment
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Contact
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Contact
+Info  - Creating/Updating schema for contact_opportunity
+Info  - Creating/Updating schema for contact_project
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for Contact
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of Contact
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of ContactStarred
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for ContactStarred
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of ContactStarred
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ContactState
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of ContactState
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of ContactState
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Conversation
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Conversation
+Info  - Creating/Updating schema for conversation_item
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Conversation
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ConversationParticipant
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of ConversationParticipant
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of ConversationParticipant
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of ConversationStarred
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for ConversationStarred
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of ConversationStarred
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailAccount
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of EmailAccount
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of EmailAccount
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailBox
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of EmailBox
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of EmailBox
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailFolder
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of EmailFolder
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of EmailFolder
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailMessage
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of EmailMessage
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of EmailMessage
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailMessageActivity
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of EmailMessageActivity
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of EmailMessageActivity
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailMessageContent
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of EmailMessageContent
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailMessageRecipient
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of EmailMessageRecipient
+Info  - Creating/Updating schema for emailmessagerecipient_item
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for EmailMessageRecipient
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of EmailMessageRecipient
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailMessageSendError
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of EmailMessageSendError
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailMessageSender
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of EmailMessageSender
+Info  - Creating/Updating schema for emailmessagesender_item
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of EmailMessageSender
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailMessageUrl
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of EmailMessageUrl
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of EmailMessageUrl
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailSignature
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of EmailSignature
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of EmailSignature
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for EmailTemplate
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of EmailTemplate
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of EmailTemplate
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for mixins of ExportFileModel
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ExportItem
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of ExportItem
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of ExportItem
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GameReward
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of GameReward
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of GameReward
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GameRewardTransaction
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of GameRewardTransaction
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of GameRewardTransaction
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GameBadge
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of GameBadge
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of GameBadge
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GameCoin
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of GameCoin
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of GameCoin
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GameCollection
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of GameCollection
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of GameCollection
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GameLevel
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of GameLevel
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of GameLevel
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GameNotification
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of GameNotification
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of GameNotification
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GamePoint
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of GamePoint
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of GamePoint
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GamePointTransaction
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of GamePointTransaction
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for GamePointTransaction
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of GamePointTransaction
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GameScore
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of GameScore
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of GameScore
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Dashboard
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of Dashboard
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Import
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of Import
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for JobInProcess
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of JobInProcess
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for JobLog
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of JobLog
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for StuckJob
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of StuckJob
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for MarketingList
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of MarketingList
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of MarketingList
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for MarketingListMember
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of MarketingListMember
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of MarketingListMember
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of PersonWhoHaveNotReadLatest
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of PersonWhoHaveNotReadLatest
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Meeting
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Meeting
+Info  - Creating/Updating schema for _user_meeting
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Meeting
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Mission
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Mission
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Mission
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Note
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Note
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Note
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Notification
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Notification
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Notification
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for NotificationMessage
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of NotificationMessage
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of NotificationMessage
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for NotificationSubscriber
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of NotificationSubscriber
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of NotificationSubscriber
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Opportunity
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Opportunity
+Info  - Creating/Updating schema for opportunity_project
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Opportunity
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of OpportunityStarred
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for OpportunityStarred
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of OpportunityStarred
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for SavedReport
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of SavedReport
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Product
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Product
+Info  - Creating/Updating schema for product_productcategory
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Product
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ProductCatalog
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of ProductCatalog
+Info  - Creating/Updating schema for productcatalog_productcategory
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of ProductCatalog
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ProductCategory
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of ProductCategory
+Info  - Creating/Updating schema for productcategory_producttemplate
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of ProductCategory
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ProductTemplate
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of ProductTemplate
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of ProductTemplate
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for SellPriceFormula
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of SellPriceFormula
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of SellPriceFormula
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ByTimeWorkflowInQueue
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of ByTimeWorkflowInQueue
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of ByTimeWorkflowInQueue
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for SavedWorkflow
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of SavedWorkflow
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for WorkflowMessageInQueue
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of WorkflowMessageInQueue
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of WorkflowMessageInQueue
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for SocialItem
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of SocialItem
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of SocialItem
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Task
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Task
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Task
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for TaskCheckListItem
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of TaskCheckListItem
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of TaskCheckListItem
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Address
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of Address
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for AuditEvent
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of AuditEvent
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of AuditEvent
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of BaseStarredModel
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of BaseStarredModel
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Currency
+Info  - Column definitions Built
+Info  - Building Indexes definitions for Currency
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of Currency
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for CurrencyValue
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of CurrencyValue
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of CurrencyValue
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Email
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of Email
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for FileModel
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of FileModel
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of FileModel
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Group
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Group
+Info  - Creating/Updating schema for _group__user
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for Group
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of Group
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ImageFileModel
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of ImageFileModel
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Item
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Item
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Item
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for NamedSecurableItem
+Info  - Column definitions Built
+Info  - Building Indexes definitions for NamedSecurableItem
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of NamedSecurableItem
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of OwnedSecurableItem
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for OwnedSecurableItem
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of OwnedSecurableItem
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Permission
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Permission
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Permission
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of Permitable
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for Permitable
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of Permitable
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Person
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Person
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for Person
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of Person
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Policy
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Policy
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Policy
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Right
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Right
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Right
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Role
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Role
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for Role
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of Role
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for SavedSearch
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of SavedSearch
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for relations of SecurableItem
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of SecurableItem
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ShortUrl
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of ShortUrl
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for User
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of User
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for User
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of User
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ContactWebForm
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of ContactWebForm
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of ContactWebForm
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ContactWebFormEntry
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of ContactWebFormEntry
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of ContactWebFormEntry
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Project
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Project
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Project
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ProjectAuditEvent
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of ProjectAuditEvent
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of ProjectAuditEvent
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for SavedCalendar
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of SavedCalendar
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of SavedCalendar
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for SavedCalendarSubscription
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of SavedCalendarSubscription
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of SavedCalendarSubscription
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for ActiveLanguage
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of ActiveLanguage
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for BaseCustomField
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of BaseCustomField
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of BaseCustomField
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for CalculatedDerivedAttributeMetadata
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of CalculatedDerivedAttributeMetadata
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for CustomField
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of CustomField
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of CustomField
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for CustomFieldData
+Info  - Column definitions Built
+Info  - Building Indexes definitions for CustomFieldData
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of CustomFieldData
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for CustomFieldValue
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of CustomFieldValue
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for CustomFieldValue
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of CustomFieldValue
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for DerivedAttributeMetadata
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of DerivedAttributeMetadata
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for DropDownDependencyDerivedAttributeMetadata
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of DropDownDependencyDerivedAttributeMetadata
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for FileContent
+Info  - Column definitions Built
+Info  - Building Column definitions for mixins of FileContent
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for GlobalMetadata
+Info  - Column definitions Built
+Info  - Building Indexes definitions for GlobalMetadata
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of GlobalMetadata
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for MessageSource
+Info  - Column definitions Built
+Info  - Building Indexes definitions for MessageSource
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of MessageSource
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for MessageTranslation
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of MessageTranslation
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for MessageTranslation
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of MessageTranslation
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for MultipleValuesCustomField
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of MultipleValuesCustomField
+Info  - Column definitions for relations Built
+Info  - Building Indexes definitions for MultipleValuesCustomField
+Info  - Index definitions Built
+Info  - Building Column definitions for mixins of MultipleValuesCustomField
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for PerUserMetadata
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of PerUserMetadata
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of PerUserMetadata
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for Portlet
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of Portlet
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of Portlet
+Info  - Column definitions for mixins Built
+Info  - Building Column definitions for KanbanItem
+Info  - Column definitions Built
+Info  - Building Column definitions for relations of KanbanItem
+Info  - Column definitions for relations Built
+Info  - Building Column definitions for mixins of KanbanItem
+Info  - Column definitions for mixins Built
+Info  - Creating/Updating schema for accountaccountaffiliation
+Info  - Scheme generated for accountaccountaffiliation.
+Info  - Creating/Updating schema for accountcontactaffiliation
+Info  - Scheme generated for accountcontactaffiliation.
+Info  - Creating/Updating schema for account
+Info  - Scheme generated for account.
+Info  - Creating/Updating schema for accountstarred
+Info  - Scheme generated for accountstarred.
+Info  - Creating/Updating schema for activity
+Info  - Scheme generated for activity.
+Info  - Creating/Updating schema for autoresponder
+Info  - Scheme generated for autoresponder.
+Info  - Creating/Updating schema for autoresponderitem
+Info  - Scheme generated for autoresponderitem.
+Info  - Creating/Updating schema for autoresponderitemactivity
+Info  - Scheme generated for autoresponderitemactivity.
+Info  - Creating/Updating schema for campaign
+Info  - Scheme generated for campaign.
+Info  - Creating/Updating schema for campaignitem
+Info  - Scheme generated for campaignitem.
+Info  - Creating/Updating schema for campaignitemactivity
+Info  - Scheme generated for campaignitemactivity.
+Info  - Creating/Updating schema for comment
+Info  - Scheme generated for comment.
+Info  - Creating/Updating schema for contact
+Info  - Scheme generated for contact.
+Info  - Creating/Updating schema for contactstarred
+Info  - Scheme generated for contactstarred.
+Info  - Creating/Updating schema for contactstate
+Info  - Scheme generated for contactstate.
+Info  - Creating/Updating schema for conversation
+Info  - Scheme generated for conversation.
+Info  - Creating/Updating schema for conversationparticipant
+Info  - Scheme generated for conversationparticipant.
+Info  - Creating/Updating schema for conversationstarred
+Info  - Scheme generated for conversationstarred.
+Info  - Creating/Updating schema for emailaccount
+Info  - Scheme generated for emailaccount.
+Info  - Creating/Updating schema for emailbox
+Info  - Scheme generated for emailbox.
+Info  - Creating/Updating schema for emailfolder
+Info  - Scheme generated for emailfolder.
+Info  - Creating/Updating schema for emailmessage
+Info  - Scheme generated for emailmessage.
+Info  - Creating/Updating schema for emailmessageactivity
+Info  - Scheme generated for emailmessageactivity.
+Info  - Creating/Updating schema for emailmessagecontent
+Info  - Scheme generated for emailmessagecontent.
+Info  - Creating/Updating schema for emailmessagerecipient
+Info  - Scheme generated for emailmessagerecipient.
+Info  - Creating/Updating schema for emailmessagesenderror
+Info  - Scheme generated for emailmessagesenderror.
+Info  - Creating/Updating schema for emailmessagesender
+Info  - Scheme generated for emailmessagesender.
+Info  - Creating/Updating schema for emailmessageurl
+Info  - Scheme generated for emailmessageurl.
+Info  - Creating/Updating schema for emailsignature
+Info  - Scheme generated for emailsignature.
+Info  - Creating/Updating schema for emailtemplate
+Info  - Scheme generated for emailtemplate.
+Info  - Creating/Updating schema for exportfilemodel
+Info  - Scheme generated for exportfilemodel.
+Info  - Creating/Updating schema for exportitem
+Info  - Scheme generated for exportitem.
+Info  - Creating/Updating schema for gamereward
+Info  - Scheme generated for gamereward.
+Info  - Creating/Updating schema for gamerewardtransaction
+Info  - Scheme generated for gamerewardtransaction.
+Info  - Creating/Updating schema for gamebadge
+Info  - Scheme generated for gamebadge.
+Info  - Creating/Updating schema for gamecoin
+Info  - Scheme generated for gamecoin.
+Info  - Creating/Updating schema for gamecollection
+Info  - Scheme generated for gamecollection.
+Info  - Creating/Updating schema for gamelevel
+Info  - Scheme generated for gamelevel.
+Info  - Creating/Updating schema for gamenotification
+Info  - Scheme generated for gamenotification.
+Info  - Creating/Updating schema for gamepoint
+Info  - Scheme generated for gamepoint.
+Info  - Creating/Updating schema for gamepointtransaction
+Info  - Scheme generated for gamepointtransaction.
+Info  - Creating/Updating schema for gamescore
+Info  - Scheme generated for gamescore.
+Info  - Creating/Updating schema for dashboard
+Info  - Scheme generated for dashboard.
+Info  - Creating/Updating schema for import
+Info  - Scheme generated for import.
+Info  - Creating/Updating schema for jobinprocess
+Info  - Scheme generated for jobinprocess.
+Info  - Creating/Updating schema for joblog
+Info  - Scheme generated for joblog.
+Info  - Creating/Updating schema for stuckjob
+Info  - Scheme generated for stuckjob.
+Info  - Creating/Updating schema for marketinglist
+Info  - Scheme generated for marketinglist.
+Info  - Creating/Updating schema for marketinglistmember
+Info  - Scheme generated for marketinglistmember.
+Info  - Creating/Updating schema for personwhohavenotreadlatest
+Info  - Scheme generated for personwhohavenotreadlatest.
+Info  - Creating/Updating schema for meeting
+Info  - Scheme generated for meeting.
+Info  - Creating/Updating schema for mission
+Info  - Scheme generated for mission.
+Info  - Creating/Updating schema for note
+Info  - Scheme generated for note.
+Info  - Creating/Updating schema for notification
+Info  - Scheme generated for notification.
+Info  - Creating/Updating schema for notificationmessage
+Info  - Scheme generated for notificationmessage.
+Info  - Creating/Updating schema for notificationsubscriber
+Info  - Scheme generated for notificationsubscriber.
+Info  - Creating/Updating schema for opportunity
+Info  - Scheme generated for opportunity.
+Info  - Creating/Updating schema for opportunitystarred
+Info  - Scheme generated for opportunitystarred.
+Info  - Creating/Updating schema for savedreport
+Info  - Scheme generated for savedreport.
+Info  - Creating/Updating schema for product
+Info  - Scheme generated for product.
+Info  - Creating/Updating schema for productcatalog
+Info  - Scheme generated for productcatalog.
+Info  - Creating/Updating schema for productcategory
+Info  - Scheme generated for productcategory.
+Info  - Creating/Updating schema for producttemplate
+Info  - Scheme generated for producttemplate.
+Info  - Creating/Updating schema for sellpriceformula
+Info  - Scheme generated for sellpriceformula.
+Info  - Creating/Updating schema for bytimeworkflowinqueue
+Info  - Scheme generated for bytimeworkflowinqueue.
+Info  - Creating/Updating schema for savedworkflow
+Info  - Scheme generated for savedworkflow.
+Info  - Creating/Updating schema for workflowmessageinqueue
+Info  - Scheme generated for workflowmessageinqueue.
+Info  - Creating/Updating schema for socialitem
+Info  - Scheme generated for socialitem.
+Info  - Creating/Updating schema for task
+Info  - Scheme generated for task.
+Info  - Creating/Updating schema for taskchecklistitem
+Info  - Scheme generated for taskchecklistitem.
+Info  - Creating/Updating schema for address
+Info  - Scheme generated for address.
+Info  - Creating/Updating schema for auditevent
+Info  - Scheme generated for auditevent.
+Info  - Creating/Updating schema for basestarredmodel
+Info  - Scheme generated for basestarredmodel.
+Info  - Creating/Updating schema for currency
+Info  - Scheme generated for currency.
+Info  - Creating/Updating schema for currencyvalue
+Info  - Scheme generated for currencyvalue.
+Info  - Creating/Updating schema for email
+Info  - Scheme generated for email.
+Info  - Creating/Updating schema for filemodel
+Info  - Scheme generated for filemodel.
+Info  - Creating/Updating schema for _group
+Info  - Scheme generated for _group.
+Info  - Creating/Updating schema for imagefilemodel
+Info  - Scheme generated for imagefilemodel.
+Info  - Creating/Updating schema for item
+Info  - Scheme generated for item.
+Info  - Creating/Updating schema for namedsecurableitem
+Info  - Scheme generated for namedsecurableitem.
+Info  - Creating/Updating schema for ownedsecurableitem
+Info  - Scheme generated for ownedsecurableitem.
+Info  - Creating/Updating schema for permission
+Info  - Scheme generated for permission.
+Info  - Creating/Updating schema for permitable
+Info  - Scheme generated for permitable.
+Info  - Creating/Updating schema for person
+Info  - Scheme generated for person.
+Info  - Creating/Updating schema for policy
+Info  - Scheme generated for policy.
+Info  - Creating/Updating schema for _right
+Info  - Scheme generated for _right.
+Info  - Creating/Updating schema for role
+Info  - Scheme generated for role.
+Info  - Creating/Updating schema for savedsearch
+Info  - Scheme generated for savedsearch.
+Info  - Creating/Updating schema for securableitem
+Info  - Scheme generated for securableitem.
+Info  - Creating/Updating schema for shorturl
+Info  - Scheme generated for shorturl.
+Info  - Creating/Updating schema for _user
+Info  - Scheme generated for _user.
+Info  - Creating/Updating schema for contactwebform
+Info  - Scheme generated for contactwebform.
+Info  - Creating/Updating schema for contactwebformentry
+Info  - Scheme generated for contactwebformentry.
+Info  - Creating/Updating schema for project
+Info  - Scheme generated for project.
+Info  - Creating/Updating schema for projectauditevent
+Info  - Scheme generated for projectauditevent.
+Info  - Creating/Updating schema for savedcalendar
+Info  - Scheme generated for savedcalendar.
+Info  - Creating/Updating schema for savedcalendarsubscription
+Info  - Scheme generated for savedcalendarsubscription.
+Info  - Creating/Updating schema for activelanguage
+Info  - Scheme generated for activelanguage.
+Info  - Creating/Updating schema for basecustomfield
+Info  - Scheme generated for basecustomfield.
+Info  - Creating/Updating schema for calculatedderivedattributemetadata
+Info  - Scheme generated for calculatedderivedattributemetadata.
+Info  - Creating/Updating schema for customfield
+Info  - Scheme generated for customfield.
+Info  - Creating/Updating schema for customfielddata
+Info  - Scheme generated for customfielddata.
+Info  - Creating/Updating schema for customfieldvalue
+Info  - Scheme generated for customfieldvalue.
+Info  - Creating/Updating schema for derivedattributemetadata
+Info  - Scheme generated for derivedattributemetadata.
+Info  - Creating/Updating schema for dropdowndependencyderivedattributemetadata
+Info  - Scheme generated for dropdowndependencyderivedattributemetadata.
+Info  - Creating/Updating schema for filecontent
+Info  - Scheme generated for filecontent.
+Info  - Creating/Updating schema for globalmetadata
+Info  - Scheme generated for globalmetadata.
+Info  - Creating/Updating schema for messagesource
+Info  - Scheme generated for messagesource.
+Info  - Creating/Updating schema for messagetranslation
+Info  - Scheme generated for messagetranslation.
+Info  - Creating/Updating schema for multiplevaluescustomfield
+Info  - Scheme generated for multiplevaluescustomfield.
+Info  - Creating/Updating schema for perusermetadata
+Info  - Scheme generated for perusermetadata.
+Info  - Creating/Updating schema for portlet
+Info  - Scheme generated for portlet.
+Info  - Creating/Updating schema for kanbanitem
+Info  - Scheme generated for kanbanitem.
+Info  - Schema generation completed
+Rebuilding read permissions
+Building account_read
+Building campaign_read
+Building contact_read
+Building conversation_read
+Building emailmessage_read
+Building emailtemplate_read
+Building exportitem_read
+Building gamereward_read
+Building marketinglist_read
+Building meeting_read
+Building mission_read
+Building note_read
+Building opportunity_read
+Building savedreport_read
+Building product_read
+Building socialitem_read
+Building task_read
+Building contactwebform_read
+Building project_read
+Building savedcalendar_read
+Read permissions rebuild complete.
+Saving auto built schema...
+
+PHPUnit 4.2.6 by Sebastian Bergmann.
+
+The schema file is not readable: /tmp/autobuilt.sql. 
+

@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/" />
+<title>CreateCampaignWithEmailTemplate</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Create Campaign With Email Template</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>45000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<!--create first html template-->
+<tr>
+	<td>open</td>
+	<td>index.php/marketing/default/dashboardDetails</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Lists</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Templates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Campaigns</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Create Template</td>
+	<td>Create Template</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Create Template</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email Template Wizard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Plain Text</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>HTML</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Template Builder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='EmailTemplateTypeView']/ul/li[1]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='EmailTemplateTypeView']/ul/li[2]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='EmailTemplateTypeView']/ul/li[2]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='EmailTemplateTypeView']/ul/li[3]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email Template Wizard - HTML</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ClassicEmailTemplateWizardForm_name</td>
+	<td>First HTML Template ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ClassicEmailTemplateWizardForm_subject</td>
+	<td>First HTML template</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='GeneralDataForEmailTemplateWizardView']/div[2]/div/div/a[2]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ClassicEmailTemplateWizardForm_htmlContent</td>
+	<td>First HTML template content</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='contentFinishLink']/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>First HTML Template ${randomSuffix}</td>
+	<td></td>
+</tr>
+<!--create second html template-->
+<tr>
+	<td>open</td>
+	<td>index.php/marketing/default/dashboardDetails</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Lists</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Templates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Campaigns</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Create Template</td>
+	<td>Create Template</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Create Template</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email Template Wizard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Plain Text</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>HTML</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Template Builder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='EmailTemplateTypeView']/ul/li[1]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='EmailTemplateTypeView']/ul/li[2]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='EmailTemplateTypeView']/ul/li[2]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='EmailTemplateTypeView']/ul/li[3]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email Template Wizard - HTML</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ClassicEmailTemplateWizardForm_name</td>
+	<td>Second HTML Template ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ClassicEmailTemplateWizardForm_subject</td>
+	<td>Second HTML template</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='GeneralDataForEmailTemplateWizardView']/div[2]/div/div/a[2]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ClassicEmailTemplateWizardForm_htmlContent</td>
+	<td>Second HTML template content</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='contentFinishLink']/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Second HTML Template ${randomSuffix}</td>
+	<td></td>
+</tr>
+<!--create campaign with email template-->
+<tr>
+	<td>open</td>
+	<td>index.php/marketing/default/dashboardDetails</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='SecuredActionBarForMarketingSearchAndListView']/div[1]/nav[1]/div[4]/ul/li/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Create Campaign</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Campaign_name</td>
+	<td>Campaign ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=Campaign_marketingList_SelectLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=MarketingListsSearchForm_anyMixedAttributes</td>
+	<td>Sales</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=MarketingListsSearchForm_anyMixedAttributes</td>
+	<td>\10</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='list-viewmodal']/div[2]/table/tbody/tr/td</td>
+	<td>Sales</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Sales</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>MarketingListsSearchForm_anyMixedAttributes</td>
+	<td>Sales</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='list-viewmodal']/div[2]/table/tbody/tr/td/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Campaign_subject</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=Campaign_contactEmailTemplateNames_SelectLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=EmailTemplatesSearchForm_anyMixedAttributes</td>
+	<td>First HTML Template ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=EmailTemplatesSearchForm_anyMixedAttributes</td>
+	<td>\10</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='list-viewmodal']/div[2]/table/tbody/tr/td</td>
+	<td>First HTML Template ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>First HTML Template ${randomSuffix}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>EmailTemplatesSearchForm_anyMixedAttributes</td>
+	<td>First HTML Template ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='list-viewmodal']/div[2]/table/tbody/tr/td/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>Campaign_htmlContent</td>
+	<td>&lt;html&gt;&lt;head&gt; &lt;/head&gt; &lt;body&gt; First HTML template content     &nbsp;&nbsp;&lt;/body&gt;&lt;/html&gt;</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=Campaign_contactEmailTemplateNames_SelectLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=EmailTemplatesSearchForm_anyMixedAttributes</td>
+	<td>Second HTML Template ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>id=EmailTemplatesSearchForm_anyMixedAttributes</td>
+	<td>\10</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='list-viewmodal']/div[2]/table/tbody/tr/td</td>
+	<td>Second HTML Template ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Second HTML Template ${randomSuffix}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>EmailTemplatesSearchForm_anyMixedAttributes</td>
+	<td>Second HTML Template ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='list-viewmodal']/div[2]/table/tbody/tr/td/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>Campaign_htmlContent</td>
+	<td>&lt;html&gt;&lt;head&gt; &lt;/head&gt; &lt;body&gt; Second HTML template content   &nbsp;&nbsp;&lt;/body&gt;&lt;/html&gt;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='CampaignEditView']/div/div/form/div[4]/div/div/a[1]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Campaign Dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>0</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

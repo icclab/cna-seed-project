@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/app/" />
+<title>ParentGroupTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Parent Group Test</td></tr>
+</thead><tbody>
+<tr>
+    <td>setTimeout</td>
+    <td>45000</td>
+    <td></td>
+</tr>
+<tr>
+  <td>store</td>
+  <td>javascript{Math.floor(Math.random()*11000)}</td>
+  <td>parentrandomSuffix</td>
+</tr>
+<tr>
+  <td>store</td>
+  <td>javascript{Math.floor(Math.random()*11000)}</td>
+  <td>childrandomSuffix</td>
+</tr>
+<!-- create a parent group -->
+<tr>
+  <td>open</td>
+  <td>index.php/zurmo/group</td>
+  <td></td>
+</tr>
+<tr>
+  <td>waitForPageToLoad</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+  <td>clickAndWait</td>
+  <td>//div[@id='GroupsActionBarAndTreeListView']/div[1]/div[1]/nav[1]/div/a/span</td>
+  <td></td>
+</tr>
+<tr>
+  <td>waitForPageToLoad</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+  <td>type</td>
+  <td>Group_name</td>
+  <td>TestGroup${parentrandomSuffix}</td>
+</tr>
+<tr>
+  <td>clickAndWait</td>
+  <td>save</td>
+  <td></td>
+</tr>
+<tr>
+  <td>waitForPageToLoad</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+  <td>assertText</td>
+  <td>//div[@id='GroupBreadCrumbView']/div/a[3]</td>
+  <td>TestGroup${parentrandomSuffix}</td>
+</tr>
+<!-- create a parent group ends here -->
+<tr>
+  <td>open</td>
+  <td>index.php/zurmo/group</td>
+  <td></td>
+</tr>
+<tr>
+  <td>waitForPageToLoad</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+  <td>clickAndWait</td>
+  <td>//div[@id='GroupsActionBarAndTreeListView']/div[1]/div[1]/nav[1]/div/a/span</td>
+  <td></td>
+</tr>
+<tr>
+  <td>waitForPageToLoad</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+  <td>type</td>
+  <td>Group_name</td>
+  <td>TestGroup${childrandomSuffix}</td>
+</tr>
+<tr>
+  <td>click</td>
+  <td>Group_group_SelectLink</td>
+  <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+  <td>waitForTextPresent</td>
+  <td>Select a Parent Group</td>
+  <td></td>
+</tr>
+<tr>
+  <td>assertText</td>
+  <td>link=TestGroup${parentrandomSuffix}</td>
+  <td>TestGroup${parentrandomSuffix}</td>
+</tr>
+<tr>
+  <td>click</td>
+  <td>link=TestGroup${parentrandomSuffix}</td>
+  <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+  <td>waitForValue</td>
+  <td>Group_group_name</td>
+  <td>TestGroup${parentrandomSuffix}</td>
+</tr>
+<tr>
+  <td>clickAndWait</td>
+  <td>save</td>
+  <td></td>
+</tr>
+<tr>
+  <td>waitForPageToLoad</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+  <td>assertTextPresent</td>
+  <td>TestGroup${childrandomSuffix}</td>
+  <td></td>
+</tr>
+<tr>
+  <td>verifyValue</td>
+  <td>Group_group_name</td>
+  <td>TestGroup${parentrandomSuffix}</td>
+</tr>
+<tr>
+  <td>clickAndWait</td>
+  <td>//div[@id='MenuView']/ul/li[5]/a/span</td>
+  <td></td>
+</tr>
+<tr>
+  <td>waitForPageToLoad</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+  <td>assertText</td>
+  <td>link=TestGroup${childrandomSuffix}</td>
+  <td>TestGroup${childrandomSuffix}</td>
+</tr>
+<tr>
+  <td>clickAndWait</td>
+  <td>link=TestGroup${childrandomSuffix}</td>
+  <td></td>
+</tr>
+<tr>
+  <td>waitForPageToLoad</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+    <td>waitForCondition</td>
+    <td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+    <td>30000</td>
+</tr>
+<tr>
+  <td>assertTextPresent</td>
+  <td>TestGroup${childrandomSuffix}</td>
+  <td></td>
+</tr>
+<tr>
+  <td>verifyValue</td>
+  <td>Group_group_name</td>
+  <td>TestGroup${parentrandomSuffix}</td>
+</tr>
+</tbody></table>
+</body>
+</html>

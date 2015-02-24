@@ -1,0 +1,325 @@
+// Zurmo is a customer relationship management program developed by
+// Zurmo, Inc. Copyright (C) 2014 Zurmo Inc.
+//
+// Zurmo is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Affero General Public License version 3 as published by the
+// Free Software Foundation with the addition of the following permission added
+// to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
+// IN WHICH THE COPYRIGHT IS OWNED BY ZURMO, ZURMO DISCLAIMS THE WARRANTY
+// OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
+//
+// Zurmo is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+// FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+// details.
+//
+// You should have received a copy of the GNU Affero General Public License along with
+// this program; if not, see http://www.gnu.org/licenses or write to the Free
+// Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// 02110-1301 USA.
+//
+// You can contact Zurmo, Inc. with a mailing address at 27 North Wacker Drive
+// Suite 370 Chicago, IL 60606. or at email address contact@zurmo.com.
+//
+// The interactive user interfaces in original and modified versions
+// of this program must display Appropriate Legal Notices, as required under
+// Section 5 of the GNU Affero General Public License version 3.
+//
+// In accordance with Section 7(b) of the GNU Affero General Public License version 3,
+// these Appropriate Legal Notices must retain the display of the Zurmo
+// logo and Zurmo copyright notice. If the display of the logo is not reasonably
+// feasible for technical reasons, the Appropriate Legal Notices must display the words
+// "Copyright Zurmo Inc. 2014. All rights reserved".
+
+body.flat-cement{
+	*{
+		box-shadow: none !important;
+		//border-radius: 0 !important;
+	}
+	.AppContent,
+    .AppNavigation,
+    .AppContainer,
+	#MenuView,
+    #RecentlyViewedView{
+		background: none !important;
+		border: none !important;
+	}
+	#RecentlyViewedView li em{
+		background: none;
+	}
+    .AppNavigation{
+        @_time : 0.5s;
+        .animateAll(0.1s);
+        #gradient > .vertical(rgba(220, 220, 220, 0), rgba(227, 227, 227, 0)) !important;
+    }
+    .AppNavigation:hover{
+        #gradient > .vertical(#dcdcdc, #e3e3e3) !important;
+        .ui-chooser{
+            #gradient > .vertical(#dcdcdc, #e3e3e3) !important;
+        }
+    }
+    .ui-chooser{
+        background: none !important;
+        border:none;
+    }
+	.items{
+		background: #fff;
+	}
+	.juiportlet-columns .juiportlet-widget{
+		.pager{
+			border-top: 1px solid #dfdfdf
+		}
+	}
+}
+
+.color-swatch.flat-cement{
+	@themeColor        : #2c3e50;
+	@themeColor2       : #2c3e50;
+	@themeColorBtn     : #97c43d;
+	@themeColorHeader  : #95a5a6;
+	.theme-color-1{ background: @themeColor; }
+	.theme-color-2{ background: @themeColor2; }
+	.theme-color-3{ background: @themeColorHeader; }
+}
+
+.color-swatch.blue{
+	@themeColor        : #282A76;
+	@themeColor2       : #7CB830;
+	@themeColorBtn     : #97c43d;
+	@themeColorHeader  : #464646;
+	.theme-color-1{ background: @themeColor; }
+	.theme-color-2{ background: @themeColor2; }
+	.theme-color-3{ background: @themeColorHeader; }
+}
+
+.color-swatch.sunrise{
+	@themeColor        : #34495e;
+	@themeColor2       : #2c3e50;
+	@themeColorBtn     : #97c43d;
+	@themeColorHeader  : #c0392b;
+	.theme-color-1{ background: @themeColor; }
+	.theme-color-2{ background: @themeColor2; }
+	.theme-color-3{ background: @themeColorHeader; }
+}
+
+.color-swatch.marble{
+	@themeColor        : #7f8c8d;
+	@themeColor2       : #333333;
+	@themeColorBtn     : #97c43d;
+	@themeColorHeader  : @textColor;
+	.theme-color-1{ background: @themeColor; }
+	.theme-color-2{ background: @themeColor2; }
+	.theme-color-3{ background: @themeColorHeader; }
+}
+
+.color-swatch.purple-haze{
+	@themeColor        : #713b8a;
+	@themeColor2       : #854f9e;
+	@themeColorBtn     : #97c43d;
+	@themeColorHeader  : #34495e;
+	.theme-color-1{ background: @themeColor; }
+	.theme-color-2{ background: @themeColor2; }
+	.theme-color-3{ background: @themeColorHeader; }
+}
+
+.color-swatch.amazon{
+	@themeColor        : #26354A;
+	@themeColor2       : #257282;
+	@themeColorBtn     : #97c43d;
+	@themeColorHeader  : #2F9E66;
+	.theme-color-1{ background: @themeColor; }
+	.theme-color-2{ background: @themeColor2; }
+	.theme-color-3{ background: @themeColorHeader; }
+}
+
+.color-swatch.sweden{
+	@themeColor        : #034C8C;
+	@themeColor2       : #024873;
+	@themeColorBtn     : #97c43d;
+	@themeColorHeader  : #f2d632;//#94CEF2;
+	.theme-color-1{ background: @themeColor; }
+	.theme-color-2{ background: @themeColor2; }
+	.theme-color-3{ background: @themeColorHeader; }
+}
+
+.color-swatch.pink{
+	@themeColor        : #323232;
+	@themeColor2       : #565656;
+	@themeColorBtn     : #97c43d;
+	@themeColorHeader  : #ff253d;//#94CEF2;
+	.theme-color-1{ background: @themeColor; }
+	.theme-color-2{ background: @themeColor2; }
+	.theme-color-3{ background: @themeColorHeader; }
+}
+
+.color-swatch.brown{
+	@themeColor        : #547980;
+	@themeColor2       : #B88F30;
+	@themeColorBtn     : #45ADA8;
+	@themeColorHeader  : #594F4F;
+	.theme-color-1{ background: @themeColor; }
+	.theme-color-2{ background: @themeColor2; }
+	.theme-color-3{ background: @themeColorHeader; }
+}
+
+.color-swatch.lime{
+	@themeColor        : #2B434F;
+	@themeColor2       : #BCC98E;
+	@themeColorBtn     : #BCC98E;
+	@themeColorHeader  : #464646;
+	.theme-color-1{ background: @headerBarColor; }
+	.theme-color-2{ background: @themeColor2; }
+	.theme-color-3{ background: @themeColorHeader; }
+}
+
+.color-swatch.cherry{
+	@themeColor        : #6C8092;
+	@themeColor2       : #933140;
+	@themeColorBtn     : @themeColor2;
+	@themeColorHeader  : #464646;
+	.theme-color-1{ background: @themeColor; }
+	.theme-color-2{ background: @themeColor2; }
+	.theme-color-3{ background: @themeColorHeader; }
+}
+
+.color-swatch.turquoise{
+	@themeColor        : #447799;
+	@themeColor2       : #44BBCC;
+	@themeColorBtn     : @themeColor2;
+	@themeColorHeader  : #464646;
+	.theme-color-1{ background: @themeColor; }
+	.theme-color-2{ background: @themeColor2; }
+	.theme-color-3{ background: @themeColorHeader; }
+}
+
+.color-swatch.violet{
+	@themeColor        : #4A3970;
+	@themeColor2       : #91A1DC;
+	@themeColorBtn     : @themeColor2;
+	@themeColorHeader  : #464646;
+	.theme-color-1{ background: @themeColor; }
+	.theme-color-2{ background: @themeColor2; }
+	.theme-color-3{ background: @themeColorHeader; }
+}
+
+.color-swatch.honey{
+	@themeColor        : #46201C;
+	@themeColor2       : #ABBC42;
+	@themeColorBtn     : @themeColor2;
+	@themeColorHeader  : #46201C;
+	.theme-color-1{ background: @headerBarColor; }
+	.theme-color-2{ background: @themeColor2; }
+	.theme-color-3{ background: @themeColorHeader2; }
+}
+
+//background:#DDDEDE;
+
+.body-texture{
+	background-attachment: fixed;
+	.AppContent{
+		background: none !important;
+	}
+}
+
+html.light-noise-diagonal,
+.texture-swatch.light-noise-diagonal .background-texture-1{
+	background: url("@{path}patterns/light-noise-diagonal/light-noise-diagonal.png") left top repeat !important;
+	.body-texture;
+}
+
+html.french-stucco,
+.texture-swatch.french-stucco .background-texture-1{
+	background: url("@{path}patterns/french-stucco/french-stucco.png") left top repeat !important;
+	.body-texture;
+}
+
+html.exclusive-paper,
+.texture-swatch.exclusive-paper .background-texture-1{
+	background: url("@{path}patterns/exclusive-paper/exclusive-paper.png") left top repeat !important;
+	.body-texture;
+}
+
+html.diagonal-noise,
+.texture-swatch.diagonal-noise .background-texture-1{
+	background: url("@{path}patterns/diagonal-noise/diagonal-noise.png") left top repeat !important;
+	.body-texture;
+}
+
+html.paper,
+.texture-swatch.paper .background-texture-1{
+	background: url("@{path}patterns/paper/paper.png") left top repeat !important;
+	.body-texture;
+}
+
+html.light-toast,
+.texture-swatch.light-toast .background-texture-1{
+	background: url("@{path}patterns/light-toast/light-toast.png") left top repeat !important;
+	.body-texture;
+}
+
+html.black-linen-2,
+.texture-swatch.black-linen-2 .background-texture-1{
+	background: url("@{path}patterns/black-linen-v2/black-linen-v2.png") left top repeat !important;
+	.body-texture;
+}
+
+html.carbon-fibre,
+.texture-swatch.carbon-fibre .background-texture-1{
+	background: url("@{path}patterns/carbon-fibre/carbon-fibre.png") left top repeat !important;
+	.body-texture;
+}
+
+html.cartographer,
+.texture-swatch.cartographer .background-texture-1{
+	background: url("@{path}patterns/cartographer/cartographer.png") left top repeat !important;
+	.body-texture;
+}
+
+html.circles,
+.texture-swatch.circles .background-texture-1{
+	background: url("@{path}patterns/circles/circles.png") left top repeat !important;
+	.body-texture;
+}
+
+html.concrete-wall,
+.texture-swatch.concrete-wall .background-texture-1{
+	background: url("@{path}patterns/concrete-wall/concrete-wall.png") left top repeat !important;
+	.body-texture;
+}
+
+html.denim,
+.texture-swatch.denim .background-texture-1{
+	background: url("@{path}patterns/denim/denim.png") left top repeat !important;
+	.body-texture;
+}
+
+html.low-contrast-linen,
+.texture-swatch.low-contrast-linen .background-texture-1{
+	background: url("@{path}patterns/low-contrast-linen/low-contrast-linen.png") left top repeat !important;
+	.body-texture;
+}
+
+html.wood,
+.texture-swatch.wood .background-texture-1{
+	background: url("@{path}patterns/wood-pattern/wood-pattern.png") left top repeat !important;
+	.body-texture;
+}
+
+html.whitey,
+.texture-swatch.whitey .background-texture-1{
+	background: url("@{path}patterns/whitey/whitey.png") left top repeat !important;
+	.body-texture;
+}
+
+html.fabric-plaid,
+.texture-swatch.fabric-plaid .background-texture-1{
+	background: url("@{path}patterns/fabric-plaid/fabric-plaid.png") left top repeat !important;
+	.body-texture;
+}
+
+html.cartographer-light,
+.texture-swatch.cartographer-light .background-texture-1{
+	background: url("@{path}patterns/cartographer-light/cartographer-light.png") left top repeat !important;
+	.body-texture;
+}
+/*END COLOR SCHEME/THEME*/

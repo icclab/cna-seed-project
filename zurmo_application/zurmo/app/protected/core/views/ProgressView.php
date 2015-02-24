@@ -1,0 +1,209 @@
+<?php
+    /*********************************************************************************
+     * Zurmo is a customer relationship management program developed by
+     * Zurmo, Inc. Copyright (C) 2014 Zurmo Inc.
+     *
+     * Zurmo is free software; you can redistribute it and/or modify it under
+     * the terms of the GNU Affero General Public License version 3 as published by the
+     * Free Software Foundation with the addition of the following permission added
+     * to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
+     * IN WHICH THE COPYRIGHT IS OWNED BY ZURMO, ZURMO DISCLAIMS THE WARRANTY
+     * OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
+     *
+     * Zurmo is distributed in the hope that it will be useful, but WITHOUT
+     * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+     * FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+     * details.
+     *
+     * You should have received a copy of the GNU Affero General Public License along with
+     * this program; if not, see http://www.gnu.org/licenses or write to the Free
+     * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+     * 02110-1301 USA.
+     *
+     * You can contact Zurmo, Inc. with a mailing address at 27 North Wacker Drive
+     * Suite 370 Chicago, IL 60606. or at email address contact@zurmo.com.
+     *
+     * The interactive user interfaces in original and modified versions
+     * of this program must display Appropriate Legal Notices, as required under
+     * Section 5 of the GNU Affero General Public License version 3.
+     *
+     * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
+     * these Appropriate Legal Notices must retain the display of the Zurmo
+     * logo and Zurmo copyright notice. If the display of the logo is not reasonably
+     * feasible for technical reasons, the Appropriate Legal Notices must display the words
+     * "Copyright Zurmo Inc. 2014. All rights reserved".
+     ********************************************************************************/
+
+    /**
+     * Progress view is an abstraction used for processes
+     * that occur in phases. This includes import, export, and mass edit
+     * as examples.  Allows for an automatic loop of server calls using Ajax
+     * until a process is complete.
+     */
+    abstract class ProgressView extends View
+    {
+        abstract protected function headerLabelPrefixContent();
+
+        /**
+         * How many total records need to be processed in the batch
+         */
+        protected $totalRecordCount;
+
+        /**
+         * How many records to process per ajax call.
+         */
+        protected $pageSize;
+
+        /**
+         * Unique identifier for the progress bar widget that is displayed
+         */
+        protected $progressBarId;
+
+        /**
+         * Constructs a mass edit progress view specifying the controller as
+         * well as the model that will have its mass edit displayed.
+         */
+        public function __construct(
+        $controllerId,
+        $moduleId,
+        $model,
+        $totalRecordCount,
+        $start,
+        $pageSize,
+        $page,
+        $refreshActionId,
+        $title)
+        {
+            $this->controllerId        = $controllerId;
+            $this->moduleId            = $moduleId;
+            $this->model               = $model;
+            $this->totalRecordCount    = (int) $totalRecordCount;
+            $this->start               = $start;
+            $this->pageSize            = $pageSize;
+            $this->page                = $page;
+            $this->refreshActionId     = $refreshActionId;
+            $this->progressBarId       = 'progressBar';
+            $this->title               = $title;
+        }
+
+        /**
+         * Returns JSON encoded script utilized on AJAX
+         * call by ProgressView
+         * Return has three elements in the array
+         * callback, value, and message
+         */
+        public function renderRefreshJSONScript()
+        {
+            return CJSON::encode($this->renderRefreshScript());
+        }
+
+        public function renderRefreshScript()
+        {
+            $value = $this->getProgressValue();
+            if ($value < 100)
+            {
+                $callback = $this->getCreateProgressBarAjax($this->progressBarId);
+                $message  = $this->getMessage();
+            }
+            else
+            {
+                $callback = null;
+                $this->onProgressComplete();
+                $message  = $this->getCompleteMessage();
+            }
+
+            $data = array(
+
+                'callback' => $callback,
+                'value'    => $value,
+                'message'  => $message,
+            );
+            return $data;
+        }
+
+        protected function renderContent()
+        {
+            $cClipWidget = new CClipWidget();
+            $cClipWidget->beginClip("ProgressBar");
+            $cClipWidget->widget('zii.widgets.jui.CJuiProgressBar', array(
+                'id'         => $this->progressBarId,
+                'value'      => $this->getProgressValue(),
+                'options'    => array(
+                    'create' => 'js:function(event, ui)
+                    {
+                        ' . $this->getCreateProgressBarAjax($this->progressBarId) . ';
+                        $("#progress-percent").html( Math.ceil($(\'#' . $this->progressBarId . '\').progressbar("value")) + "&#37;");
+                    }',
+                    'change' => 'js:function(event, ui)
+                    {
+                        $("#progress-percent").html( Math.ceil($(\'#' . $this->progressBarId . '\').progressbar("value")) + "&#37;");
+                    }',
+                    'complete' => 'js:function(event, ui)
+                    {
+                        $(".progressbar-wrapper").fadeOut(250);
+                        $(\'#' . $this->progressBarId . '-links\').show();
+                    }',
+                ),
+            ));
+            $cClipWidget->endClip();
+            $progressBarContent =  $cClipWidget->getController()->clips['ProgressBar'];
+            $content  = "<div><h1>" . $this->headerLabelPrefixContent() . ' : ' . $this->title . '</h1>';
+            $content .= '<div class="progress-counter">';
+            $content .= '<h3><span id="' . $this->progressBarId . '-msg">' . $this->getMessage() . '</span></h3>';
+            $content .= '<div class="progressbar-wrapper"><span id="progress-percent">0&#37;</span>' . $progressBarContent . '</div>';
+            $content .= $this->renderFormLinks();
+            $content .= '</div>';
+            $content .= '</div>';
+            return $content;
+        }
+
+        protected function getCreateProgressBarAjax($progressBarId)
+        {
+            return ZurmoHtml::ajax(array(
+                    'type' => 'POST',
+                    'dataType' => 'json',
+                    'data' => Yii::app()->getUrlManager()->createPathInfo($_POST, '=', '&'),
+                    'url'  => Yii::app()->createUrl($this->moduleId . '/' . $this->controllerId . '/' . $this->refreshActionId,
+                        array_merge($_GET, array( get_class($this->model) . '_page' => ($this->page + 1), 'totalCount' => $this->totalRecordCount))
+                    ),
+                    'success' => 'function(data)
+                    {
+                        $(\'#' . $progressBarId . '-msg\').html(data.message);
+                        $(\'#' . $progressBarId . '\').progressbar({value: data.value});
+                        eval(data.callback);
+                    }',
+                ));
+        }
+
+        protected function getProgressValue()
+        {
+            $value = ($this->getEndSize() / $this->totalRecordCount) * 100;
+            if ($value >= 100)
+            {
+                return 100;
+            }
+            else
+            {
+                return $value;
+            }
+        }
+
+        protected function getEndSize()
+        {
+            $end = $this->start + $this->pageSize - 1;
+            if ($end > $this->totalRecordCount)
+            {
+                return $this->totalRecordCount;
+            }
+            return $end;
+        }
+
+        /**
+         * Override if you have a specific action to perform
+         * when the progress is completed.
+         */
+        protected function onProgressComplete()
+        {
+        }
+    }
+?>

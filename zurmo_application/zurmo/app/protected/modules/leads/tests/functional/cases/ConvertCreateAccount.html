@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/" />
+<title>ConvertCreateAccount</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Convert Create Account</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>45000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>index.php/leads/default</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>LeadsSearchForm_anyMixedAttributes</td>
+	<td>Sally ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>keyUp</td>
+	<td>LeadsSearchForm_anyMixedAttributes</td>
+	<td>\10</td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Silly Sally ${randomSuffix}</td>
+	<td>Silly Sally ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Silly Sally ${randomSuffix}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='LeadDetailsPortletView']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='zurmoView']/div/table/tbody/tr[1]/td</td>
+	<td>Mrs. Silly Sally ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Convert</td>
+	<td>Convert</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Convert</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Select Account</td>
+	<td>Select Account</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Select Account</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Skip Account</td>
+	<td>Skip Account</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Skip Account</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='account-skip-title']/a[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Account_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Name cannot be blank.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Select Account</td>
+	<td>Select Account</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Select Account</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//*[@id=&quot;AccountSelect&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='select-account-form']/table/tbody/tr/td/div[2]</td>
+	<td>Account Id cannot be blank.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[contains(text(),'Create Account')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Account_name</td>
+	<td>my created account ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='ContactDetailsPortletView']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=my created account ${randomSuffix}</td>
+	<td>my created account ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='zurmoView']/div/table/tbody/tr[2]/td</td>
+	<td>Qualified</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=my created account ${randomSuffix}</td>
+	<td>my created account ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=my created account ${randomSuffix}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='AccountDetailsPortletView']/div/div/div/table/tbody/tr[1]/td</td>
+	<td>my created account ${randomSuffix}</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='AccountDetailsPortletView']/div/div/div/table/tbody/tr[3]/td</td>
+	<td>Financial Services</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='AccountDetailsPortletView']/div/div/div/table/tbody/tr[9]/th</td>
+	<td>Billing Address</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='AccountDetailsPortletView']/div/div/div/table/tbody/tr[9]/td</td>
+	<td>123 Main Street<br> Suite 500<br> Chicago IL, 60614<br> USA</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='AccountDetailsPortletView']/div/div/div/table/tbody/tr[4]/td</td>
+	<td>5679076543</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=exact:http://www.rabbit.com</td>
+	<td>exact:http://www.rabbit.com</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='AccountDetailsPortletView']/div/div/div/table/tbody/tr[10]/td</td>
+	<td>456 Bee Street<br> Suite 400<br> Gary Indiana, 67898<br /> USA</td>
+</tr>
+</tbody></table>
+</body>
+</html>

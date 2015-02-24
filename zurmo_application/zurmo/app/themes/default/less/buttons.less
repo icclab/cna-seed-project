@@ -1,0 +1,295 @@
+// Zurmo is a customer relationship management program developed by
+// Zurmo, Inc. Copyright (C) 2014 Zurmo Inc.
+//
+// Zurmo is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Affero General Public License version 3 as published by the
+// Free Software Foundation with the addition of the following permission added
+// to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
+// IN WHICH THE COPYRIGHT IS OWNED BY ZURMO, ZURMO DISCLAIMS THE WARRANTY
+// OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
+//
+// Zurmo is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+// FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+// details.
+//
+// You should have received a copy of the GNU Affero General Public License along with
+// this program; if not, see http://www.gnu.org/licenses or write to the Free
+// Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// 02110-1301 USA.
+//
+// You can contact Zurmo, Inc. with a mailing address at 27 North Wacker Drive
+// Suite 370 Chicago, IL 60606. or at email address contact@zurmo.com.
+//
+// The interactive user interfaces in original and modified versions
+// of this program must display Appropriate Legal Notices, as required under
+// Section 5 of the GNU Affero General Public License version 3.
+//
+// In accordance with Section 7(b) of the GNU Affero General Public License version 3,
+// these Appropriate Legal Notices must retain the display of the Zurmo
+// logo and Zurmo copyright notice. If the display of the logo is not reasonably
+// feasible for technical reasons, the Appropriate Legal Notices must display the words
+// "Copyright Zurmo Inc. 2014. All rights reserved".
+
+.z-label{
+	display: inline-block;
+	color:#fff;
+	font-weight:bold;
+	padding:0 25px;
+	line-height:24px;
+	white-space: nowrap;
+	.radius(2px);
+	.t-shadow( 0px -1px 0 rgba(0, 0, 0, 0.2) ) !important;
+	#gradient > .vertical( @themeColorBtnDefault, @themeColorBtn2Default );
+}
+
+.z-label-smaller{
+	padding:0 15px;
+}
+
+a:hover,
+a:active{
+	.z-label{
+		color: darken(@themeColorBtnDefault, 40%) !important;
+		//#gradient > .vertical( @themeColorBtnDefault, darken(@themeColorBtn2Default, 10%) );
+		#gradient > .vertical( @themeColorBtn2Default, @themeColorBtnDefault);
+		.t-shadow( 0px 1px 0 lighten(@themeColorBtnDefault, 15%) ) !important;
+	}
+}
+
+a:active{
+	.z-label{
+		.b-shadow( ~"inset 0 5px 12px 0 rgba(0, 0, 0, 0.33), 0 1px 0 0 #FFF" );
+	}
+}
+
+.button-layout{
+	line-height: 1;
+	cursor:pointer;
+	.radius(2px);
+	position: relative;
+	display:inline-block;
+	text-indent:0;
+	.b-shadow(~"inset 0 1px 1px 0 rgba(255, 255, 255, 0.2), 0 0 2px 0 rgba(153, 153, 153, 0.15)");
+	.clearfix();
+	.animateAll(0.14s);
+	&:hover{
+		.b-shadow(~"inset 0 1px 1px 0 rgba(255, 255, 255, 0.5), 0 0 7px 0 rgba(75, 75, 75, 0.25)");
+	}
+	&.disabled{
+		pointer-events:none;
+		.opacity(50);
+		-webkit-filter: grayscale(85%);
+		-moz-filter: grayscale(85%);
+		-ms-filter: grayscale(85%);
+		-o-filter: grayscale(85%);
+		filter: grayscale(85%);
+		filter: gray; // IE 6-9
+	}
+}
+
+.zButton,
+.z-button{
+	.button-layout();
+	@hexToRGBA : rgba(red(@themeColorBtnDefault), green(@themeColorBtnDefault), blue(@themeColorBtnDefault), 0.8);
+	border-top:   1px solid  lighten(@hexToRGBA, 10%); /*lighter*/
+	border-left:  1px solid @hexToRGBA;
+	border-right: 1px solid @hexToRGBA;
+	border-bottom:1px solid darken(@hexToRGBA, 10%); /*darker*/
+}
+
+.secondary-button,
+.default-btn,
+.white-button,
+.cancel-button,
+.portlet-create-button{
+	.button-layout();
+	border-top:   1px solid rgba(200, 200, 200, 0.4);
+	border-left:  1px solid rgba(185, 185, 185, 0.4);
+	border-right: 1px solid rgba(185, 185, 185, 0.4);
+	border-bottom:1px solid rgba(170, 170, 170, 0.4);
+	.z-label{
+		color:#666;
+		.t-shadow( 0px -1px 0 rgba(255, 255, 255, 0.75) ) !important;
+		#gradient > .vertical( #fefefe, #f5f5f5 );
+	}
+	&:hover{
+		.z-label{
+			color: @themeColor2 !important;
+			background-image: none;
+			#gradient > .vertical( #f5f5f5, #fefefe ) !important;
+			.t-shadow( 0px -1px 0 rgba(255, 255, 255, 0.75) ) !important;
+		}
+	}
+}
+
+button[type="button"]{
+	&:focus{
+		outline: none;
+	}
+}
+
+input[type="button"]{ //because it doesn't contain a span=z-label usually
+	&.default-btn,
+	&.white-button,
+	&.cancel-button,
+	&.portlet-create-button{
+		color:#666;
+		.t-shadow( 0px -1px 0 rgba(255, 255, 255, 0.75) ) !important;
+		#gradient > .vertical( #fefefe, #f5f5f5 );
+		&:hover{
+			color: @themeColor2 !important;
+			background-image: none;
+			#gradient > .vertical( #fefefe, #ededed ) !important;
+			.t-shadow( 0px -1px 0 rgba(255, 255, 255, 0.75) ) !important;
+		}
+		&:focus{
+			outline: none;
+		}
+	}
+}
+
+.zButton.loading,
+.z-button.loading{
+	.z-spinner{
+		display:inline-block;
+		position: absolute;
+		margin: 1px 0 0 4px;
+	}
+	.z-icon{
+		display:none;
+	}
+}
+
+.z-spinner{
+	z-index:10;
+	width:23px;
+	height:23px;
+	display:none;
+	position:absolute;
+	left:0px;
+}
+
+.z-spinner.loading{
+	display:block !important;
+}
+
+.zLink, .z-link{
+	padding:2px 4px;
+	.radius(3px);
+	color:#fff !important;
+	.smaller();
+	background-color: @themeColor !important;
+}
+
+.zLink:hover, .z-link:hover{
+	color:#fff !important;
+	text-decoration:underline;
+}
+
+.z-action-link{
+	.smaller();
+	.opacity(50);
+	text-decoration: none;
+	color: @themeColor;
+	&:hover{
+		.opacity(100);
+		text-decoration: none;
+	}
+}
+
+.z-action-link-active{
+	.opacity(100);
+}
+
+a.simple-link{
+	.smaller();
+	color: @themeColor;
+	border: none !important;
+	text-decoration: underline;
+	overflow: hidden;
+	&:before, &:after{
+		display: none !important;
+	}
+	&:hover{
+		color: @themeColor2 !important;
+		.z-label{
+			color: @themeColor2 !important;
+			.t-shadow(none) !important;
+		}
+	}
+	.z-label{
+		font-weight:normal;
+		color: @themeColor;
+		background:none !important;
+		.b-shadow(none) !important;
+		.radius(0) !important;
+		padding:0  !important;
+		.t-shadow(none) !important;
+		text-decoration:underline !important;
+	}
+	.icon-x{
+		font-weight: normal !important;
+		font-size: 21px;
+		font-family: "zurmo_gamification_symbly_rRg";
+		line-height: 1;
+		border: none;
+		margin-right: 2px;
+		outline: none !important;
+		display: inline-block;
+		position: relative;
+		top: -1px;
+		color: #7CB830;
+	}
+}
+
+.action-type-accept,
+.action-accept,
+.action-complete{
+	.action-type-button(#97c43d, #6fa82d);
+}
+
+.action-type-reject,
+.action-reject{
+	.action-type-button(#c43d53, #a82d31);
+}
+
+.action-take,
+.action-type-finish{
+	.action-type-button(#ffcc00, #e4b600);
+}
+
+.action-type-restart{
+	.action-type-button(#4e6d87, #4d6c87);
+}
+
+
+.action-type-button(@topColor, @bottomColor){
+	border: 1px solid @bottomColor;
+	.z-label{
+		#gradient > .vertical(@topColor, @bottomColor ) !important;
+	}
+	&:hover{
+		.z-label{
+			color: darken(@topColor, 40%) !important;
+			#gradient > .vertical( @topColor, darken(@bottomColor, 10%) ) !important;
+			.t-shadow( 0px -1px 0 darken(@topColor, 5%) ) !important;
+		}
+	}
+	.button-label{
+		color: lighten(@topColor, 80%);
+		.t-shadow(0px -1px 0 darken(@topColor, 5%));
+		&:before{
+			#gradient > .vertical(@topColor, @bottomColor );
+		}
+	}
+	.button-action:hover{
+		.button-label{
+			color: darken(@topColor, 33%);
+			.t-shadow(0px -1px 0 darken(@topColor, 5%));
+			&:before{
+				#gradient > .vertical(@topColor, darken(@bottomColor, 10%));
+			}
+		}
+	}
+}

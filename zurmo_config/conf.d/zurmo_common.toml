@@ -1,0 +1,10 @@
+[template]
+
+src = "common.tmpl"
+
+dest = "/zurmo/zurmo/app/protected/config/common.php"
+
+keys = [ "/services/mysql" ]
+
+owner = "www-data"
+mode = "0775"

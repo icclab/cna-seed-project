@@ -1,0 +1,109 @@
+<?php
+    /*********************************************************************************
+     * Zurmo is a customer relationship management program developed by
+     * Zurmo, Inc. Copyright (C) 2014 Zurmo Inc.
+     *
+     * Zurmo is free software; you can redistribute it and/or modify it under
+     * the terms of the GNU Affero General Public License version 3 as published by the
+     * Free Software Foundation with the addition of the following permission added
+     * to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
+     * IN WHICH THE COPYRIGHT IS OWNED BY ZURMO, ZURMO DISCLAIMS THE WARRANTY
+     * OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
+     *
+     * Zurmo is distributed in the hope that it will be useful, but WITHOUT
+     * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+     * FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+     * details.
+     *
+     * You should have received a copy of the GNU Affero General Public License along with
+     * this program; if not, see http://www.gnu.org/licenses or write to the Free
+     * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+     * 02110-1301 USA.
+     *
+     * You can contact Zurmo, Inc. with a mailing address at 27 North Wacker Drive
+     * Suite 370 Chicago, IL 60606. or at email address contact@zurmo.com.
+     *
+     * The interactive user interfaces in original and modified versions
+     * of this program must display Appropriate Legal Notices, as required under
+     * Section 5 of the GNU Affero General Public License version 3.
+     *
+     * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
+     * these Appropriate Legal Notices must retain the display of the Zurmo
+     * logo and Zurmo copyright notice. If the display of the logo is not reasonably
+     * feasible for technical reasons, the Appropriate Legal Notices must display the words
+     * "Copyright Zurmo Inc. 2014. All rights reserved".
+     ********************************************************************************/
+
+    class ZurmoFileModelController extends ZurmoModuleController
+    {
+        public function actionUpload($filesVariableName)
+        {
+            try
+            {
+                $uploadedFile = UploadedFileUtil::getByNameAndCatchError($filesVariableName);
+                assert('$uploadedFile instanceof CUploadedFile');
+                $fileModel     = FileModelUtil::makeByUploadedFile($uploadedFile);
+                assert('$fileModel instanceof FileModel');
+                $fileUploadData = array('name' => $fileModel->name,
+                                        'type' => $fileModel->type,
+                                        'size' =>
+                                        FileModelDisplayUtil::convertSizeToHumanReadableAndGet($fileModel->size),
+                                        'id' => $fileModel->id,
+                                        'thumbnail_url' => null);
+            }
+            catch (FailedFileUploadException $e)
+            {
+                $fileUploadData = array('error' => Zurmo::t('Core', 'Error') . ' ' . $e->getMessage());
+            }
+            echo CJSON::encode(array($fileUploadData));
+            Yii::app()->end(0, false);
+        }
+
+        public function actionDownload($id, $modelId, $modelClassName)
+        {
+            $model = $modelClassName::getById((int)$modelId);
+            if (!ActionSecurityUtil::canCurrentUserPerformAction('Details', $model))
+            {
+                $messageView = new AccessFailureView();
+                $view        = new AccessFailurePageView($messageView);
+                echo $view->render();
+                Yii::app()->end(0, false);
+            }
+            $fileModel = FileModel::getById((int)$id);
+            Yii::app()->request->sendFile($fileModel->name, $fileModel->fileContent->content, $fileModel->type, false);
+        }
+
+        public function actionDelete($id)
+        {
+            $fileModel = FileModel::getById((int)$id);
+            $fileModel->delete();
+            //todo: add error handling.
+        }
+
+        /**
+         * @param string $commaSeparatedExistingModelIds
+         * @throws FailedFileUploadException
+         */
+        public function actionCloneExistingFiles($commaSeparatedExistingModelIds)
+        {
+            assert('is_string($commaSeparatedExistingModelIds)');
+            $existingFileModelIds   = explode(',', $commaSeparatedExistingModelIds); // Not Coding Standard
+            $newFileModelsData      = array(); //needs id, name, size at least, preferably type too.
+            foreach ($existingFileModelIds as $existingFileModelId)
+            {
+                $newFileModel           = FileModelUtil::makeByExistingFileModelId((int) $existingFileModelId, true);
+                if ($newFileModel === false)
+                {
+                    throw new FailedFileUploadException();
+                }
+                $newFileModelsData[]    = array('name' => $newFileModel->name,
+                                                'type' => $newFileModel->type,
+                                                'size' =>
+                                                FileModelDisplayUtil::convertSizeToHumanReadableAndGet($newFileModel->size),
+                                                'id' => $newFileModel->id);
+            }
+            $newFileModelsJson = CJSON::encode($newFileModelsData);
+            echo $newFileModelsJson;
+        }
+    }
+?>

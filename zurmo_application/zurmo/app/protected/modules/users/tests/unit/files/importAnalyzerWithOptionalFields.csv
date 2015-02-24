@@ -1,0 +1,11 @@
+username,password,status,firstName,lastName,role
+myusername11,mypassword,active,testFirst,testLast,dumbRole
+myusername12,mypassword,active,testFirst,testLast,1
+myusername13,mypassword,badstatus,testFirst,testLast,
+myusername14,mypassword,,testFirst,testLast,
+myusername15veryveryverylongasdddddddddddmyusernameveryveryverylongasddddddddddddddddddddd,mypassword,active,testFirst,testLast,
+myusername16,mypassword,Active,testFirst,testLast,
+myusername17,mypassword,active,testFirst,testLast,
+myusername18,mypassword,Inactive,testFirst,testLast,
+myusername19,myusernameveryveryverylongasddddddddddddddddmyusernameveryveryverylongasdddddddddddddddd,active,testFirst,testLast,
+myusername20,mypassword,inactive,testFirst,testLast,

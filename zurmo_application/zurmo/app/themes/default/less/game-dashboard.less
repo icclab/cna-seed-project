@@ -1,0 +1,820 @@
+// Zurmo is a customer relationship management program developed by
+// Zurmo, Inc. Copyright (C) 2014 Zurmo Inc.
+//
+// Zurmo is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Affero General Public License version 3 as published by the
+// Free Software Foundation with the addition of the following permission added
+// to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
+// IN WHICH THE COPYRIGHT IS OWNED BY ZURMO, ZURMO DISCLAIMS THE WARRANTY
+// OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
+//
+// Zurmo is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+// FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+// details.
+//
+// You should have received a copy of the GNU Affero General Public License along with
+// this program; if not, see http://www.gnu.org/licenses or write to the Free
+// Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// 02110-1301 USA.
+//
+// You can contact Zurmo, Inc. with a mailing address at 27 North Wacker Drive
+// Suite 370 Chicago, IL 60606. or at email address contact@zurmo.com.
+//
+// The interactive user interfaces in original and modified versions
+// of this program must display Appropriate Legal Notices, as required under
+// Section 5 of the GNU Affero General Public License version 3.
+//
+// In accordance with Section 7(b) of the GNU Affero General Public License version 3,
+// these Appropriate Legal Notices must retain the display of the Zurmo
+// logo and Zurmo copyright notice. If the display of the logo is not reasonably
+// feasible for technical reasons, the Appropriate Legal Notices must display the words
+// "Copyright Zurmo Inc. 2014. All rights reserved".
+
+.gd-dashboard-active{}
+
+#gd-overlay{
+	top:0;
+	left: 0;
+	right: 0;
+	bottom:0;
+	background: rgba(0, 0, 0, 0.65);
+	position:absolute;
+	width:100%;
+	display: block;
+	z-index: 99;
+}
+
+#gd-container{
+	z-index: 100;
+	top:0;
+	left: 0;
+	right: 0;
+	bottom:0;
+	position:absolute;
+	width:100%;
+	height:100%;
+	display:table;
+	overflow: hidden;
+}
+
+#gd-centralizer{
+	display:table-cell;
+	vertical-align:middle;
+	width:100%;
+	height:100%;
+	padding:0 30px;
+}
+
+#game-dashboard{
+	position: relative;
+	width: 100%;
+	max-width: 1200px;
+	max-height: 600px;
+	margin:auto;
+	overflow:hidden;
+	.radius(5px);
+	color:#f1f1f1;
+	background: url("@{path}game-dashboard/blue-chalkboard-blurred.jpg") left top repeat;
+	> div{
+		padding:10px 15px 15px 15px;
+		display: block;
+		&:hover{
+			//.div-hover();
+		}
+	}
+	h2, h3{
+		.t-shadow(0 -1px 0 @black);
+		color: #fff !important;
+	}
+	ul{
+		list-style: none;
+	}
+	h2{
+		margin-bottom: 15px;
+	}
+	a{
+		color: #fff;
+	}
+}
+
+.close-dashboard-button{
+	z-index: 999;
+	width: 100%;
+	height: 31px;
+	max-width: 1200px;
+	margin: auto;
+	position: relative;
+	top: 15px;
+	a{
+		margin-right: -15px;
+		float: right;
+		width:30px !important;
+		height: 31px !important;
+		.opacity(100);
+		display:block;
+		z-index:11000;
+		&:hover{
+			border:none;
+			background:none;
+		}
+	}
+	.ui-icon-closethick{
+		background: transparent url("@{path}widget-close-btn.png") left top no-repeat;
+		padding: 0 !important;
+		margin:0 !important;
+		width:30px !important;
+		height: 31px !important;
+		text-indent: -9999px;
+		display: block;
+		&:hover{
+			background: transparent url("@{path}widget-close-btn.png") left top no-repeat;
+		}
+	}
+}
+
+
+@black : #151f1f;
+@ccc : rgba(32, 50, 52, 0.5);
+@fff : rgba(83, 112, 115, 0.4);
+
+.div-hover{
+	.b-shadow(~"inset 0 5px 0 0 @{ccc}, inset 0 6px 0 0 @{fff}");
+}
+
+/*User Card*/
+#gd-profile-card{
+	padding: 0 !important;
+	height: 84%;
+	width: 20%;
+	float: left;
+	border-right:1px solid @ccc;
+	text-align:center;
+	h3{
+		margin:0 0 10px 0;
+	}
+	ul{
+		font-weight: bold;
+		li{
+			line-height: 1.15;
+		}
+		i{
+			font-style: normal;
+			margin-right: 3px;
+			color: #7cb830;
+			font-size: 16px;
+		}
+	}
+	.gravatar,
+	img{
+		max-width: 100%;
+		height: auto;
+		margin-bottom: 5px;
+		padding: 0;
+		border: none !important;
+		background: none;
+		max-width: 100%;
+	}
+}
+
+#gd-mini-stats-card{
+	margin-top: 0px;
+	.clearfix();
+	> div{
+
+	}
+	#gd-mini-stats-chart-div{
+		svg g:last-child > g:first-child{
+			display: none;
+		}
+	}
+	.gd-level{
+		margin-top: -113px;
+		.radius(4px 4px 0 0);
+		position: relative;
+		z-index: 3;
+		padding: 10px;
+		span:last-child{
+			display: none;
+			font-weight: bold;
+			position: relative;
+			top: 10px;
+		}
+	}
+	strong{
+		font-size:36px;
+		line-height: 1;
+		display: block;
+		color: #7cb830;
+		font-weight: bold;
+	}
+	strong + span{
+		display: block;
+		font-size: 14px;
+		font-weight: bold;
+		margin:0 0 10px 0;
+	}
+	.gd-num-badges, .gd-num-collections{
+		position: relative;
+		z-index: 1;
+		text-align: center;
+		padding: 5px;
+		float: right;
+		width: 45%;
+		margin:15px 0 0 0;
+		font-weight: bold;
+		strong{
+			font-size: 24px;
+			display: block;
+			font-weight: bold;
+		}
+	}
+	.gd-num-badges{
+		.radius(0 0 4px 0);
+		float: right;
+		margin-right: 5%;
+	}
+}
+
+/*Badges*/
+#gd-badges-list{
+	overflow-y: auto;
+	height: 84%;
+	width: 30%;
+	position: absolute;
+	top: 0;
+	left: 20%;
+	float: left;
+	border-left:1px solid @fff;
+	border-right:1px solid @ccc;
+	li{
+		.clearfix();
+		+ li{
+			padding-top: 10px;
+		}
+	}
+	.badge{
+		float: left;
+		margin-right: 15px;
+	}
+	.badge-grade {
+		right: auto;
+		left: -8px;
+	}
+	h3, p{
+		margin-bottom: 5px;
+	}
+	p{
+		line-height: 1.4;
+	}
+	p + span{
+		font-size: 11px;
+		color: #aaa;
+	}
+	.type-achievements{
+		.t-shadow(0 -1px 0 #151f1f);
+		margin-top: 150px;
+		font-size: 14px;
+		.icon-empty{
+			position: relative;
+			top:10px;
+		}
+		.icon-empty:before{
+			font-size: 64px;
+		}
+	}
+}
+
+/*Coins*/
+#gd-z-coins{
+	width: 15%;
+	height: 25%;
+	float: left;
+	margin-left: 30%;
+	border-left:1px solid @fff;
+	border-right:1px solid @ccc;
+	border-bottom:1px solid @ccc;
+	position: relative;
+	text-align: center;
+	a{
+		position: absolute;
+		right: 5px;
+		bottom: 5px;
+		.smaller();
+		text-decoration: underline;
+	}
+}
+
+#gd-z-coin{
+	display: block;
+	width: 85px;
+	height: 85px;
+	line-height: 85px;
+	.t-shadow(~"0 -1px 0 rgba(0, 0, 0, 0.4)");
+	.radius(50%);
+	margin:5px auto;
+	.symbly(72px);
+	cursor: default;
+	color: #e2b321;
+	background:url("@{path}game-dashboard/coin.png") left top no-repeat;
+	.animateAll(1s);
+	-webkit-transform:rotateY(0deg);
+	-moz-transform:rotateY(0deg);
+	-o-transform:rotateY(0deg);
+	-ms-transform:rotateY(0deg);
+	transform:rotateY(0deg);
+	&:hover{
+		-webkit-animation: spinCoin 1s linear infinite;
+		-moz-animation: spinCoin 1s linear infinite;
+		-o-animation: spinCoin 1s linear infinite;
+		-ms-animation: spinCoin 1s linear infinite;
+		animation: spinCoin 1s linear infinite;
+	}
+}
+
+/*Leaderboard*/
+#gd-leaderboard{
+	width: 35%;
+	height: 25%;
+	float: left;
+	border-bottom:1px solid @ccc;
+	border-left:1px solid @fff;
+}
+
+.leaderboard-rank{
+	float: left;
+	overflow: visible;
+	width: 32%;
+	margin-right: 2%;
+	padding: 10px;
+	text-align: center;
+	.radius(4px);
+	background: rgba(7, 53, 58, 0.3);
+	.b-shadow(~"inset 0 0 1px rgba(0, 0, 0, 0.2), 0 -1px 0 0 rgba(0, 0, 0, 0.3)");
+	&:last-child{
+		margin-right: 0;
+	}
+	strong, span{
+		display: block;
+	}
+	strong{
+		.t-shadow(0 -1px 0 #1c5a4f);
+		color: #fff;
+		font-size:24px;
+		line-height: 1.5;
+	}
+	span{
+		font-size: 16px;
+		font-weight: bold;
+		color: #fff;
+	}
+}
+
+/*Stats*/
+#gd-statistics{
+	width: 50%;
+	height: 59%;
+	margin-left: 30%;
+	float: left;
+	border-top:1px solid @fff;
+	border-left:1px solid @fff;
+}
+
+#gd-stats-wrapper{
+	border: 1px solid #d7d7d7;
+	border-bottom: none;
+	max-height: 320px;
+}
+
+.stat-row{
+	width: 100%;
+	padding:10px 12px 10px 5px;
+	white-space: nowrap;
+	border-bottom: 1px solid #d7d7d7;
+	&:nth-child(even){
+		background: rgba(0, 0, 0, 0.05);
+	}
+	h3{
+		width: 35%;
+		text-align: right;
+		display: inline-block;
+	}
+	.stat-level,
+	.stat-points{
+		float: none;
+		display: inline-block;
+		width: 5%;
+		text-align: center;
+	}
+	.stat-level{
+		font-weight: bold;
+	}
+	.stat-points{
+		width: 10%;
+		position: relative;
+		top: -8px;
+		font-weight: 800;
+		em{
+			position: absolute;
+			top: 14px;
+			left: 0;
+			text-align: center;
+			.smaller();
+			width: 100%;
+			font-style: normal;
+			font-weight: 100;
+			color: #fff;
+		}
+	}
+	.percentHolder{
+		width: 45%;
+		margin-left: 5%;
+	}
+}
+
+/*Collections*/
+#gd-collections{
+	width: 100%;
+	height: 100px;
+	float: left;
+	border-top:1px solid @fff;
+	padding:0 !important;
+	position: relative;
+	z-index: 100;
+}
+
+#gd-carousel-wrapper{
+	width: 95%;
+	height: 100px;
+	float: left;
+	border-left:1px solid @fff;
+	border-right:1px solid @ccc;
+	position: relative;
+	z-index: 0;
+}
+
+#gd-carousel{
+	width: 100%;
+	height: 100px;
+	position: absolute;
+	z-index: 1;
+}
+
+.nav-button{
+	width: 2.5%;
+	height: 100%;
+	text-align: center;
+	line-height: 100px;
+	font-size: 22px;
+	float: left;
+	display: block;
+	.t-shadow(0 -1px 0 #fff);
+	position: relative;
+	z-index: 10;
+	overflow: hidden;
+	background:url("@{path}game-dashboard/blue-chalkboard-blurred.jpg") left top repeat;
+	z-index: 100;
+	.symbly(42px);
+}
+
+#nav-left{
+	border-right:1px solid @ccc;
+}
+
+#nav-right{
+	border-left:1px solid @fff;
+}
+
+.gd-collection-panel{
+	position: relative;
+	width: 285px;
+	height: 300px;
+	float: left;
+	border-left:1px solid @ccc;
+	border-right:1px solid @fff;
+	h3{
+		margin-top: 5px;
+	}
+	.collection-badge{
+		float: left;
+		display: inline-block;
+		height:70px;
+		margin: 0;
+		margin:0 15px 0 0;
+		background-size: 100% auto;
+	}
+	> div{
+		-webkit-transform:translate(0);
+		-moz-transform:translate(0);
+		-o-transform:translate(0);
+		-ms-transform:translate(0);
+		transform:translate(0);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 200%;
+		padding:15px 15px;
+		.b-shadow(~"inset 0 30px 30px 0 rgba(0, 0, 0, 0.1)");
+		background:url("@{path}game-dashboard/blue-chalkboard-blurred.jpg") center top repeat;
+		&.open-panel,
+		&:hover{
+			.div-hover();
+		}
+	}
+	.gd-number-collected{
+		visibility: hidden;
+		margin:-2px 0 0 0;
+		white-space: nowrap;
+		.have-it,
+		.have-it-not{
+			.symbly(34px);
+			line-height: 1;
+			margin:0 0 0 -2px;
+			color: #7cb830;
+		}
+		.have-it-not{
+			.opacity(50);
+
+		}
+	}
+	.gd-total-completed{
+		position: relative;
+		top: -3px;
+		font-size: 14px;
+		font-weight: bold;
+		position: relative;
+		text-align: center;
+		line-height: 34px;
+	}
+}
+
+.gd-collection-items{
+	margin-top: 70px;
+	position: relative;
+	clear: left;
+	.num-collected{
+		width: 20px;
+		height: 20px;
+		line-height: 20px;
+		text-align: center;
+		display: block;
+		position: absolute;
+		top: -6px;
+		left: -10px;
+		color: #fff;
+		.smaller();
+		font-weight: bold;
+		background:#7cb830;
+		.radius(50%);
+		.b-shadow(~"inset 0 0 1px rgba(0, 0, 0, 0.3), 0 -1px 0 0 rgba(90, 142, 44, 0.9)");
+	}
+	.missing{
+		img{
+			.opacity(50);
+			-webkit-filter: grayscale(85%);
+			-moz-filter: grayscale(85%);
+			-ms-filter: grayscale(85%);
+			-o-filter: grayscale(85%);
+			filter: grayscale(85%);
+			filter: gray; /* IE 6-9 */
+		}
+		.num-collected{
+			background: #c0392b;
+			.b-shadow(~"inset 0 0 1px rgba(0, 0, 0, 0.3), 0 -1px 0 0 rgba(161, 45, 37, 0.9)");
+		}
+	}
+}
+
+.gd-collection-item{
+	position: relative;
+	display: inline-block;
+	float: left;
+	margin-right: 25px;
+	img{
+		max-height: 55px;
+		width: auto;
+	}
+}
+
+.gd-collection-item-redeemed{
+	margin-top: -10px;
+	display: inline-block;
+	float: right;
+	text-align: center;
+	img{
+		max-width: 70px;
+		height: auto;
+		text-align: center;
+	}
+	.num-collected{
+		width: 24px;
+		height: 24px;
+		line-height: 24px;
+		z-index: 9999;
+	}
+}
+
+.redeemable{
+	h3{
+		background:url("@{path}game-dashboard/redeemable-coin-2.png") right 2px no-repeat;
+	}
+}
+
+.zurmo body .coin-button{
+	position: relative;
+	z-index: 1;
+	overflow: visible;
+	background:url("@{path}game-dashboard/coin-button.png") center center no-repeat;
+	width: 90px;
+	height: 70px;
+	border: none !important;
+	.b-shadow(none) !important;
+	.z-label{
+		text-indent: 0;
+		display: block;
+		text-align: center;
+		font-size: 13px;
+		width: 100%;
+		padding: 0;
+		margin: 22px 0 0 0;
+		color: darken(#f58a1f, 30%) !important;
+		.t-shadow( 0px 1px 0 lighten(#f58a1f, 20%) ) !important;
+		#gradient > .vertical( rgba(255, 241, 0, 0.8), rgba(246, 146, 30, 0.8) ) !important;
+		border-top:1px solid    rgba(255, 241, 0, 0.3);
+		border-bottom:1px solid rgba(255, 241, 0, 0.3);
+		border-left: 1px solid  rgba(255, 241, 0, 0.5);
+		border-right:1px solid  rgba(255, 241, 0, 0.5);
+		.b-shadow(0 0 3px 0 rgba(255, 241, 0, 0.1));
+	}
+	&:hover,
+	&:active{
+		span.z-label{
+			color: darken(#f58a1f, 40%) !important;
+			#gradient > .vertical( rgba(255, 241, 0, 0.8), darken( rgba(246, 146, 30, 0.8), 10%) ) !important;
+			.t-shadow( 0px 1px 0 lighten(#f58a1f, 15%) ) !important;
+		}
+	}
+	&.loading{
+		.z-label{
+			text-indent: 20px;
+		}
+	}
+	.z-spinner{
+		display: block !important;
+		top:24px;
+		left: 2px;
+	}
+}
+
+.coin-button.disabled{
+	pointer-events:none;
+	.opacity(50);
+	-webkit-filter: grayscale(85%);
+	-moz-filter: grayscale(85%);
+	-ms-filter: grayscale(85%);
+	-o-filter: grayscale(85%);
+	filter: grayscale(85%);
+	filter: gray; /* IE 6-9 */
+}
+
+.random-game-coin{
+	position: fixed;
+	z-index: 999999999;
+	left: 20px;
+	bottom: 40px;
+	display: block;
+	width: 128px;
+	height: 128px;
+	line-height: 85px;
+	.t-shadow(~"0 -1px 0 rgba(0, 0, 0, 0.4)");
+	margin:0;
+	> div{
+		position: relative;
+	}
+}
+
+.game-coin{
+	position: absolute;
+	top:0;
+	left: 0;
+	height: 128px;
+	width: 128px;
+	display: block;
+	cursor: pointer;
+	color: #e2b321;
+	background:url("@{path}game-dashboard/random-coin.png") center bottom no-repeat;
+}
+
+.smoke {
+	position: absolute;
+	top:50px;
+	left: 0;
+	height: 128px;
+	width: 128px;
+	background-image: url("@{path}game-dashboard/smoke_1_40_128_corrected.png");
+	display: none;
+}
+
+.game-coin-quantity{
+	font-weight:bold;
+	font-size: 14px;
+	line-height:16px;
+	float: left;
+	position: relative;
+	top: 50px;
+	margin-right: 10px;
+	color: #FFF;
+	i{
+		display: inline-block;
+		line-height: inherit;
+		position:relative;
+		top:3px;
+		margin-left:4px;
+		height: 16px;
+		width: 16px;
+		background-image: url("@{path}game-dashboard/z-coin-small.png");
+		-webkit-animation: spinCoin .7s linear infinite;
+		   -moz-animation: spinCoin .7s linear infinite;
+		    -ms-animation: spinCoin .7s linear infinite;
+		     -o-animation: spinCoin .7s linear infinite;
+		        animation: spinCoin .7s linear infinite;
+	}
+}
+
+/*Notification*/
+#header-game-dashboard-link-wrapper{
+	position: relative;
+	overflow: visible;
+}
+
+#game-notification{
+	position:absolute;
+	min-width: 280px;
+	padding: 15px;
+	.radius(4px);
+	color:#EFEFEF;
+	top: 38px;
+	right:0;
+	border:1px solid #444;
+	background: #252525;
+	.b-shadow(~"0 0 10px 2px rgba(53, 53, 53, 0.5)");
+	h5{
+		color:#EFEFEF;
+		.t-shadow(none);
+		font-size: 14px;
+		margin-bottom: 15px;
+	}
+	.notification-wrapper{
+		float: left;
+	}
+	p{
+		line-height: 1.5;
+	}
+	a{
+		color:#ccc;
+		font-size:12px;
+		line-height: 1;
+		display: inline;
+		margin: 0;
+		padding: 0;
+		text-decoration: underline;
+	}
+}
+
+.collection-item-image{
+	position: relative;
+	display: inline-block;
+	float: left;
+	overflow: hidden;
+	margin-right: 15px;
+	margin-bottom: 15px;
+	height: 85px;
+	min-width: 45px;
+	width: auto;
+	text-align: center;
+	img{
+		position: relative;
+		top:0;
+	}
+}
+
+a#claim-item-link{
+	.smaller();
+	font-weight:bold;
+	text-decoration: none;
+	color: #545454;
+	line-height: 1;
+	padding: 2px 6px;
+	position: relative;
+	top:2px;
+	z-index: 5;
+}
+
+.animate-spin{
+	-webkit-animation: spinCoin 1.2s linear infinite;
+	   -moz-animation: spinCoin 1.2s linear infinite;
+	     -o-animation: spinCoin 1.2s linear infinite;
+	    -ms-animation: spinCoin 1.2s linear infinite;
+	        animation: spinCoin 1.2s linear infinite;
+}

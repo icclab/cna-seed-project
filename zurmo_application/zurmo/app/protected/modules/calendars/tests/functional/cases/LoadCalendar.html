@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost/" />
+<title>LoadCalendar</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Load Calendar</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>45000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>javascript{Math.floor(Math.random()*11000)}</td>
+	<td>randomSuffix</td>
+</tr>
+<!--store current date-->
+<tr>
+	<td>storeGlobal</td>
+	<td>javascript{new Date().getDate().toString()}</td>
+	<td>date</td>
+</tr>
+<!--store current month-->
+<tr>
+	<td>storeGlobal</td>
+	<td>javascript{(new Date().getMonth()) + 1}</td>
+	<td>month</td>
+</tr>
+<!--store current year-->
+<tr>
+	<td>storeGlobal</td>
+	<td>javascript{new Date().getFullYear()}</td>
+	<td>year</td>
+</tr>
+<!--store current month name-->
+<tr>
+	<td>storeGlobal</td>
+	<td>javascript{var d = new Date().toString().split(/[ ,]+/); d[1];}</td>
+	<td>monthName</td>
+</tr>
+<!--store current month short name-->
+<tr>
+	<td>storeGlobal</td>
+	<td>javascript{var d = new Date().toString(); d[4]+d[5]+d[6];}</td>
+	<td>monthShortName</td>
+</tr>
+<!--store current day name-->
+<tr>
+	<td>storeGlobal</td>
+	<td>javascript{var d = new Date().toLocaleString().split(/[ ,]+/); d[0];}</td>
+	<td>dayName</td>
+</tr>
+<!--store current day short name-->
+<tr>
+	<td>storeGlobal</td>
+	<td>javascript{var d = new Date().toString(); d[0]+d[1]+d[2];}</td>
+	<td>dayShortName</td>
+</tr>
+<!--time in 12h format-->
+<tr>
+	<td>storeGlobal</td>
+	<td>javascript{new Date().toLocaleTimeString().replace(/:\d+ /, ' ');}</td>
+	<td>time</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>index.php/home/default</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='header-calendar-link']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='CombinedCalendarView']/div/h1</td>
+	<td>Calendar</td>
+</tr>
+<!--tr>
+	<td>waitForText</td>
+	<td>//div[@id='calendar']/table/tbody/tr/td[2]/span/h2</td>
+	<td>${monthName} ${year}</td>
+</tr-->
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='MyCalendarListView']/div/div[1]/h3</td>
+	<td>My Calendars</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='my-calendars-list']/ul/li[1]/strong</td>
+	<td>My Meetings</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='my-calendars-list']/ul/li[2]/strong</td>
+	<td>My Tasks</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='MySharedCalendarListView']/div/div[1]/h3</td>
+	<td>My Shared Calendars</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='calendar']/table/tbody/tr/td[1]/span[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<!--tr>
+	<td>waitForText</td>
+	<td>//div[@id='calendar']/table/tbody/tr/td[2]/span/h2</td>
+	<td>${dayName}, ${monthShortName} ${date}, ${year}</td>
+</tr-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='calendar']/table/tbody/tr/td[3]/span[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<!--tr>
+	<td>waitForText</td>
+	<td>//div[@id='calendar']/table/tbody/tr/td[2]/span/h2</td>
+	<td>${monthName} ${year}</td>
+</tr-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='calendar']/table/tbody/tr/td[3]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<!--tr>
+	<td>waitForText</td>
+	<td>//div[@id='calendar']/table/tbody/tr/td[2]/span/h2</td>
+	<td>${dayName}, ${monthShortName} ${date}, ${year}</td>
+</tr-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='calendar']/table/tbody/tr/td[3]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+<!--tr>
+	<td>waitForTextPresent</td>
+	<td>${dayShortName} ${month}/${date}</td>
+	<td></td>
+</tr-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='calendar']/table/tbody/tr/td[3]/span[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().jQuery.active == 0</td>
+	<td>30000</td>
+</tr>
+</tbody></table>
+</body>
+</html>
