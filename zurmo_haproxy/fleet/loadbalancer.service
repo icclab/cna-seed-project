@@ -1,0 +1,23 @@
+# loadbalancer.service
+
+[Unit]
+Description=Loadbalancer Service (HAProxy)
+After=docker.service
+Requires=docker.service
+
+[Service]
+
+# Get CoreOS environmental variables
+EnvironmentFile=/etc/environment
+Environment="ETCD_ENDPOINT='$(ifconfig docker0 | awk '/\<inet\>/ { print $2}'):4001'"
+
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill Loadbalancer
+ExecStartPre=-/usr/bin/docker rm loadbalancer
+ExecStartPre=/usr/bin/docker pull sandorkan/haproxy
+ExecStart=/usr/bin/docker run --rm --name loadbalancer -p 80:80 -p 1936:1936 -e "ETCD_ENDPOINT=${ETCD_ENDPOINT}" -e "HOST_PRIVATE_IPV4=${COREOS_PRIVATE_IPV4}" sandorkan/haproxy
+ExecStop=/usr/bin/docker stop loadbalancer
+ExecStopPost=/bin/etcdctl rm /services/loadbalancer/${COREOS_PRIVATE_IPV4}:80
+
+[X-Fleet]
+Conflicts=loadbalancer.service
