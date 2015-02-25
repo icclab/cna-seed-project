@@ -11,14 +11,14 @@ Requires=docker.service
 EnvironmentFile=/etc/environment
 Environment="ETCD_ENDPOINT=10.1.42.1:4001"
 # Does not (yet) work dynamically
-# Environment="ETCD_ENDPOINT='$(ifconfig docker0 | awk '/\<inet\>/ { print $2}'):4001'"
+# ExecStart=/bin/bash -c "ETCD_ENDPOINT=$(/bin/ifconfig docker0 | awk '/inet /{print $2}') && exec /usr/bin/docker run --rm --name loadbalancer -p 80:80 -p 1936:1936 -e 'ETCD_ENDPOINT=${ETCD_ENDPOINT}' -e 'HOST_PRIVATE_IPV4=${COREOS_PRIVATE_IPV4}' icclabcna/zurmo_haproxy"
 
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill loadbalancer
 ExecStartPre=-/usr/bin/docker rm loadbalancer
-ExecStartPre=/usr/bin/docker pull sandorkan/haproxy
+ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_haproxy
 
-ExecStart=/usr/bin/docker run --rm --name loadbalancer -p 80:80 -p 1936:1936 -e "ETCD_ENDPOINT=${ETCD_ENDPOINT}" -e "HOST_PRIVATE_IPV4=${COREOS_PRIVATE_IPV4}" sandorkan/haproxy
+ExecStart=/usr/bin/docker run --rm --name loadbalancer -p 80:80 -p 1936:1936 -e "ETCD_ENDPOINT=${ETCD_ENDPOINT}" -e "HOST_PRIVATE_IPV4=${COREOS_PRIVATE_IPV4}" icclabcna/zurmo_haproxy
 
 ExecStop=/usr/bin/docker stop loadbalancer
 
