@@ -17,13 +17,15 @@ changes or memcache servers are added/removed:
 ```
 
 #### Confd configuration
-The configuration files of confd listens for the keys:  
+The configuration files of confd listens for the etcd keys:
+
 ```
 /services/database
 /services/memcache
 ```
 
-Keys used in the configuration:  
+Keys used in the configuration:
+
 ```
 /services/database/host
 /services/database/port
@@ -32,14 +34,16 @@ Keys used in the configuration:
 ```
 
 #### Add volumes of this container in your container
-Basic usage:  
+Basic usage:
+
 ```
 docker create --name zurmo_config icclabcna/zurmo_config
 docker run --volumes-from zurmo_config your_container
 ```
 
 Typical usage:  
-The typical usage is using the zurmo_apache and the zurmo_application container together with this zurmo_config container  
+The typical usage is using the zurmo_apache and the zurmo_application container together with this zurmo_config container
+
 ```
 docker create --name zurmo_config icclabcna/zurmo_config
 docker run --name zurmo_apache -p 80:80 --volumes-from zurmo_application --volumes-from zurmo_config icclabcna/zurmo_apache /apache-run.sh
