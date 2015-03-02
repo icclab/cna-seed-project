@@ -12,7 +12,6 @@ The start script will run confd to modify the zurmo configuration dynamically. T
 
 Confd needs etcd to be running on 10.1.42.1:4001 (default settings). If you want to change this, define the environment variables ETCD_PORT and HOST_IP.
 
-
 #### Example usage
 Usually this container is used with the data only containers zurmo_config and zurmo_application. For the configuration of the zurmo application please read the readme of the 
 zurmo_config image.

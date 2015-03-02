@@ -4,7 +4,7 @@ src = "perInstance.tmpl"
 
 dest = "/zurmo/zurmo/app/protected/config/perInstance.php"
 
-keys = [ "/services/database" ]
+keys = [ "/services/database", "/services/cache" ]
 
 owner = "www-data"
 mode = "0775"
