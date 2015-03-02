@@ -1,6 +1,21 @@
 #!/bin/bash
+
+UUID=$(cat /proc/sys/kernel/random/uuid)
+
+curl -L -X PUT http://$ETCD_ENDPOINT/v2/keys/services/loadbalancer/$UUID  -d ttl=10 -d dir=true
+curl -L -X PUT http://$ETCD_ENDPOINT/v2/keys/services/loadbalancer/$UUID/settings  -d ttl=10 -d dir=true
+
 while true;
 do
-  curl -L -X PUT http://$ETCD_ENDPOINT/v2/keys/services/loadbalancer/$HOST_PRIVATE_IPV4:80?ttl=10 -d value=$HOST_PRIVATE_IPV4:80;
+  curl -L -X PUT http://$ETCD_ENDPOINT/v2/keys/services/loadbalancer/$UUID  -d ttl=10 -d dir=true -d prevExist=true
+  curl -L -X PUT http://$ETCD_ENDPOINT/v2/keys/services/loadbalancer/$UUID/host -d ttl=10 -d value=$HOST_NAME;
+  curl -L -X PUT http://$ETCD_ENDPOINT/v2/keys/services/loadbalancer/$UUID/ip -d ttl=10 -d value=$HOST_PRIVATE_IPV4;
+  curl -L -X PUT http://$ETCD_ENDPOINT/v2/keys/services/loadbalancer/$UUID/port -d ttl=10 -d value=80;
+  curl -L -X PUT http://$ETCD_ENDPOINT/v2/keys/services/loadbalancer/$UUID/endpoint -d ttl=10 -d value=$HOST_PRIVATE_IPV4:80;
+  curl -L -X PUT http://$ETCD_ENDPOINT/v2/keys/services/loadbalancer/$UUID/distribution -d ttl=10 -d value=roundrobin;
+  
+  curl -L -X PUT http://$ETCD_ENDPOINT/v2/keys/services/loadbalancer/$UUID/settings  -d ttl=10 -d dir=true -d prevExist=true
+  curl -L -X PUT http://$ETCD_ENDPOINT/v2/keys/services/loadbalancer/$UUID/settings/distribution  -d ttl=10 -d value=roundrobin
+
   sleep 7;
 done

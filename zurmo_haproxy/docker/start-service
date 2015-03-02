@@ -6,11 +6,7 @@ service rsyslog start
 
 export ETCD_ENDPOINT=${ETCD_ENDPOINT:-10.1.42.1:4001}
 
-# export ETCD_PORT=${ETCD_PORT:-4001}
-# export HOST_IP=${HOST_IP:-10.1.42.1}
-# export ETCD=$HOST_IP:$ETCD_PORT
-
-echo "[haproxy] booting container. ETCD: $ETCD."
+echo "[haproxy] booting container"
 
 # Try to make initial configuration every 5 seconds until successful
 until confd -onetime -node $ETCD_ENDPOINT -config-file /etc/confd/conf.d/haproxy.toml; do
@@ -23,12 +19,12 @@ done
 confd -interval 10 -node $ETCD_ENDPOINT -config-file /etc/confd/conf.d/haproxy.toml &
 echo "[haproxy] confd is now monitoring etcd for changes..."
 
-# Start announcing HAProxy to etcd
-echo "[haproxy] Start announcing service to etcd"
-haproxy-etcd-service-announcer &
-
 # Start the HAProxy service using the generated config
 echo "[haproxy] starting haproxy service..."
 service haproxy start
+
+# Start announcing HAProxy to etcd
+echo "[haproxy] Start announcing service to etcd"
+haproxy-etcd-service-announcer &
 
 tail -f /var/log/haproxy.log
