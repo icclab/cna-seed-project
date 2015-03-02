@@ -1,0 +1,12 @@
+[Unit]
+Description=Announce Memcache
+BindsTo=zurmo_memcache@%i.service
+After=zurmo_memcache@%i.service
+
+[Service]
+EnvironmentFile=/etc/environment
+ExecStart=/bin/sh -c "ID=`uuidgen`; echo $ID > /tmp/zurmo_memcache@%i.uuid; while true; do etcdctl setdir /services/cache/$ID --ttl 60; etcdctl set /services/cache/$ID/host %H --ttl 60; etcdctl set /services/cache/$ID/port %i --ttl 60; etcdctl set /services/cache/$ID/ip ${COREOS_PUBLIC_IPV4} --ttl 60; sleep 45;done"
+ExecStop=/bin/sh -c "etcdctl rm --recursive /services/cache/`cat /tmp/zurmo_memcache@%i.uuid` && rm /tmp/zurmo_memcache@%i.service"
+
+[X-Fleet]
+MachineOf=zurmo_memcache@%i.service

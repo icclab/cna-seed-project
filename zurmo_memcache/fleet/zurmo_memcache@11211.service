@@ -1,11 +1,12 @@
 [Unit]
-Description=Announce Memcache
-BindsTo=zurmo_memcache@%i.service
-After=zurmo_memcache@%i.service
+Description=Zurmo Memcache
+After=docker.service
+Requires=docker.service
 
 [Service]
-ExecStart=/bin/sh -c "ID=`uuidgen`; echo $ID > /tmp/zurmo_memcache@%i.uuid; while true; do etcdctl setdir /services/cache/$ID --ttl 60; etcdctl set /services/cache/$ID/host %H --ttl 60; etcdctl set /services/cache/$ID/port %i --ttl 60;sleep 45;done"
-ExecStop=/bin/sh -c "etcdctl rm --recursive /services/cache/`cat /tmp/zurmo_memcache@%i.uuid` && rm /tmp/zurmo_memcache@%i.service"
-
-[X-Fleet]
-MachineOf=zurmo_memcache@%i.service
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill zurmo_memcache.%i
+ExecStartPre=-/usr/bin/docker rm zurmo_memcache.%i
+ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_memcache
+ExecStart=/usr/bin/docker run --name zurmo_memcache.%i -p %i:11211 icclabcna/zurmo_memcache
+ExecStop=/usr/bin/docker stop zurmo_memcache.%i
