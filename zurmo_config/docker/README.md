@@ -21,7 +21,7 @@ The configuration files of confd listens for the etcd keys:
 
 ```
 /services/database
-/services/memcache
+/services/cache
 ```
 
 Keys used in the configuration:
@@ -29,8 +29,8 @@ Keys used in the configuration:
 ```
 /services/database/host
 /services/database/port
-/services/memcache/any-identifier/host
-/services/memcache/any-identifier/port
+/services/cache/any-identifier/host
+/services/cache/any-identifier/port
 ```
 
 #### Add volumes of this container in your container

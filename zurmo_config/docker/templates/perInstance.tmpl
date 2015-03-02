@@ -38,22 +38,26 @@
     $language         = 'en'; // As per language codes under the messages directory.
     $currencyBaseCode = 'USD';
     $theme            = 'default';
-    $connectionString = 'mysql:host={{getv "/services/mysql/host"}};port={{getv "/services/mysql/port"}};dbname=zurmo'; // Not Coding Standard
+    $connectionString = 'mysql:host={{getv "/services/database/host"}};port={{getv "/services/database/port"}};dbname=zurmo'; // Not Coding Standard
     $username         = 'zurmo';
     $password         = 'zurmo';
     $memcacheServers  = array( // An empty array means memcache is not used.
-                            array(
-                                'host'   => 'memcache',
-                                'port'   => 11211,  // This is the default memcached port.
-                                'weight' => 100,
-                            ),
+                            {{range $dir := lsdir "/services/cache"}}
+                              {{$hostpath := printf "/services/cache/%s/host" $dir}}
+                              {{$portpath := printf "/services/cache/%s/port" $dir}}
+			      array(
+				  'host'   => '{{getv $hostpath}}',
+				  'port'   => {{getv $portpath}}, 
+				  'weight' => 100,
+			      ),
+                            {{end}}
                         );
     $adminEmail       = 'info@zurmo.com';
     $installed = true; // Set to true by the installation process.
     $maintenanceMode  = false; // Set to true during upgrade process or other maintenance tasks.
     $instanceConfig   = array(); //Set any parameters you want to have merged into configuration array.
                                  //@see CustomManagement
-    $instanceConfig['components']['request']['hostInfo']         = 'http://localhost';
+    // $instanceConfig['components']['request']['hostInfo']         = 'http://localhost';
     $instanceConfig['components']['request']['scriptUrl']         = '/zurmo/app/index.php';
 
     $urlManager = array (); // Set any parameters you want to customize url manager.
