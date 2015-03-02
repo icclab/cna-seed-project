@@ -39,5 +39,5 @@ backend webserver_nodes
   option forwardfor
   http-request set-header X-Forwarded-Port %[dst_port]
   http-request add-header X-Forwarded-Proto https if { ssl_fc }
-  option httpchk HEAD / HTTP/1.1\r\nHost:localhosts {{ range getvs "/services/webserver/*" }}
-  server webserver_{{.}} {{ . }} check {{ end }}
+  option httpchk HEAD / HTTP/1.1\r\nHost:localhosts {{ range $dir := ls "/services/webserver/" }} {{ $hostpath := printf "/services/webserver/%s" $dir }}
+  server webserver_{{ getv $hostpath }} {{ getv $hostpath }} check {{ end }}
