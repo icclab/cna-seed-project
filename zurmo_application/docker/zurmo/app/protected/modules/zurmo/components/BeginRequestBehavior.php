@@ -214,12 +214,16 @@
             {
                 $filesToInclude   = FileUtil::getFilesFromDir(Yii::app()->basePath . '/modules', Yii::app()->basePath . '/modules', 'application.modules');
                 $filesToIncludeFromCore = FileUtil::getFilesFromDir(Yii::app()->basePath . '/core', Yii::app()->basePath . '/core', 'application.core');
+                
+                //$commonFilesToInclude = FileUtil::getFilesFromDir(COMMON_ROOT . '/../common', COMMON_ROOT . '/../common', 'common');
+                //Yii::log(implode(",", $commonFilesToInclude));
                 $totalFilesToIncludeFromModules = count($filesToInclude);
 
                 foreach ($filesToIncludeFromCore as $key => $file)
                 {
                     $filesToInclude[$totalFilesToIncludeFromModules + $key] = $file;
                 }
+                //$filesToInclude = array_merge($filesToInclude, $commonFilesToInclude);
                 foreach ($filesToInclude as $file)
                 {
                     Yii::import($file);
@@ -439,6 +443,7 @@
         public function handleStartPerformanceClock($event)
         {
             Yii::app()->performance->startClock();
+            
         }
 
         public function handleSetupDatabaseConnection($event)

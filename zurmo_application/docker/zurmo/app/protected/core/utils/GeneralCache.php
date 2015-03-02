@@ -123,5 +123,9 @@
             }
             static::clearMemcacheCache();
         }
+        
+        public static function dumpPhpCachedItemsAsJson(){
+            return json_encode(static::$cachedEntries);
+        }
     }
 ?>

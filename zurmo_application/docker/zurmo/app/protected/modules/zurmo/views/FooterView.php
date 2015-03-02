@@ -57,6 +57,7 @@
             $copyrightHtml  = '<a href="http://www.zurmo.com" id="credit-link" class="clearfix"><span>' .
                              'Copyright &#169; Zurmo Inc., 2014. All rights reserved.</span></a>';
             $copyrightHtml .= $this->renderPerformance();
+            $copyrightHtml .= $this->renderCacheInfo();
             $content = ZurmoHtml::tag('div', array('class' => 'container'), $copyrightHtml);
             return $content;
         }
@@ -93,6 +94,9 @@
                     $endTime      = microtime(true);
                     $endTotalTime = Yii::app()->performance->endClockAndGet();
                     $performanceMessage .= 'Load time: <strong>' . number_format(($endTotalTime), 3) . ' seconds.</strong><br />';
+                    
+                    //$performanceMessage = $this->addHtmlForSqlPerformance($performanceMessage);
+                    //$performanceMessage = $this->addHtmlForCachePerformance($performanceMessage);
                 }
             }
             if (SHOW_PERFORMANCE && Yii::app()->isApplicationInstalled())
@@ -110,6 +114,49 @@
             return $performanceMessage;
         }
 
+        private function addHtmlForSqlPerformance($performanceMessage){
+            $totalQueryTime = 0;
+            $queryCount = 0;
+            $queryTimes = '';
+            foreach($_SESSION[SessionPerformanceTimer::SESSION_VAR_NAME_SQL] as $sqlTime){
+                $queryTimes .= 'Sql query time: <strong>'. number_format($sqlTime, 6) .' s</strong><br />';
+                $totalQueryTime += $sqlTime;
+                $queryCount++;
+            }
+            $performanceMessage .= 'Made ' . $queryCount . ' Queries in ' . number_format($totalQueryTime, 3) . ' seconds <br />';
+            $performanceMessage .= $queryTimes;
+            return $performanceMessage;
+        }
+        
+        private function addHtmlForCachePerformance($performanceMessage){
+            $totalCacheTime = 0;
+            $cacheRequests = 0;
+            $html = '';
+            
+            foreach($_SESSION[SessionPerformanceTimer::SESSION_VAR_NAME_MEMCACHE] as $cacheTime){
+                $html .= 'Cache request time: ' . number_format($cacheTime, 6) . ' s<br/>';
+                $totalCacheTime += $cacheTime;
+                $cacheRequests++;
+            }
+            $performanceMessage .= 'Made ' . $cacheRequests . ' cache requests in ' . number_format($totalCacheTime, 3) . ' seconds <br />';
+            return $performanceMessage . $html;
+        }
+
+        protected function renderCacheInfo(){
+            if(defined('SHOW_CACHE_DUMP') && SHOW_CACHE_DUMP){
+                $test = GeneralCache::getEntry('iamatestidentifier',0);
+                GeneralCache::cacheEntry('iamatestidentifier', $test + 1);
+                $cacheJson = GeneralCache::dumpPhpCachedItemsAsJson();
+                $cacheJson = str_replace("{", "{<br/>", $cacheJson);
+                $cacheJson = str_replace("}", "}<br/>", $cacheJson);
+                $cacheJson = str_replace(",", ",<br/>", $cacheJson);
+
+                return "<strong>PHP-Cache content:</strong><br/>".$cacheJson . "<br />";
+            }else{
+                return "";
+            }
+        }
+        
         public static function makeShowQueryDataContent()
         {
             $performanceMessage  = static::getTotalAndDuplicateQueryCountContent();

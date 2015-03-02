@@ -52,6 +52,7 @@
             $owner->attachEventHandler('onEndRequest', array($this, 'handleSaveGlobalStateCheck'));
             $owner->attachEventHandler('onEndRequest', array($this, 'handleEndLogRouteEvents'));
             $owner->attachEventHandler('onEndRequest', array($this, 'handleResolveRedBeanQueriesToFile'));
+            $owner->attachEventHandler('onEndRequest', array($this, 'handleWritePerformanceLogfile'));
             $owner->attachEventHandler('onEndRequest', array($this, 'handleEndRequest'));
         }
 
@@ -101,8 +102,26 @@
             }
         }
 
-        public function handleEndRequest($event)
+        public function handleWritePerformanceLogfile($event)
         {
+            if(isset(Yii::app()->sqlQueryPerformanceLogger))
+            {
+                Yii::app()->sqlQueryPerformanceLogger->processLogs();
+            }
+            
+            if(isset(Yii::app()->memcachePerformanceLogger))
+            {
+                Yii::app()->memcachePerformanceLogger->processLogs();
+            }
+            
+            if(isset(Yii::app()->pagePerformanceLogger))
+            {
+                Yii::app()->pagePerformanceLogger->processLogs();
+            }
+        }
+        
+        public function handleEndRequest($event)
+        {       
             RedBeanDatabase::close();
             exit;
         }

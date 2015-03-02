@@ -62,6 +62,11 @@
     require_once($yii);
     require_once($webApplication);
 
+    //this is hacky because i couldn't get it to run with yii import
+    require_once(COMMON_ROOT . '/../common/PerformanceTimer.php');
+    require_once(COMMON_ROOT . '/../common/SessionPerformanceTimer.php');
+    require_once(COMMON_ROOT . '/../common/RequestPerformanceTimer.php');
+        
     $webApplication = Yii::createApplication('WebApplication', $config);
     if (file_exists($runtimePath))
     {

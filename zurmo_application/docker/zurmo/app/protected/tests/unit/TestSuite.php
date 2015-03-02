@@ -188,11 +188,11 @@
                 $success = preg_match("/;dbname=([^;]+)/", Yii::app()->db->connectionString, $matches); // Not Coding Standard
                 assert('$success == 1');
                 $databaseName = $matches[1];
-                $systemOutput = system('mysqldump --host=db -u' . Yii::app()->db->username .
+
+                $systemOutput = system('mysqldump -u' . Yii::app()->db->username .
                                         ' -p' . Yii::app()->db->password .
                                         ' ' . $databaseName            .
                                         " > $schemaFile");
-
                 if ($systemOutput != null)
                 {
                     echo 'Dumping schema using system command. Output: ' . $systemOutput . PHP_EOL . PHP_EOL;

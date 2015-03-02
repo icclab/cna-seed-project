@@ -344,6 +344,7 @@ POSSIBILITY OF SUCH DAMAGES.
  * This source file is subject to the BSD/GPLv2 License that is bundled
  * with this source code in the file license.txt.
  */
+
 interface RedBean_Driver {
   /**
    * Runs a query and fetches results as a multi dimensional array.
@@ -1721,7 +1722,8 @@ class RedBean_Adapter_DBAdapter extends RedBean_Observable implements RedBean_Ad
    */
   private $sql = '';
 
-
+  private $performanceTimerClass = 'RequestPerformanceTimer';
+  
   /**
    * Constructor.
    * Creates an instance of the RedBean Adapter Class.
@@ -1742,7 +1744,7 @@ class RedBean_Adapter_DBAdapter extends RedBean_Observable implements RedBean_Ad
   public function getSQL() {
     return $this->sql;
   }
-
+  
   /**
    * Escapes a string for use in a Query.
    *
@@ -1753,7 +1755,7 @@ class RedBean_Adapter_DBAdapter extends RedBean_Observable implements RedBean_Ad
   public function escape( $sqlvalue ) {
     return $this->db->Escape($sqlvalue);
   }
-
+  
   /**
    * Executes SQL code; any query without
    * returning a resultset.
@@ -1776,7 +1778,12 @@ class RedBean_Adapter_DBAdapter extends RedBean_Observable implements RedBean_Ad
       $this->sql = $sql;
       $this->signal('sql_exec', $this);
     }
-    return $this->db->Execute( $sql, $aValues );
+    $timer = new $this->performanceTimerClass(PerformanceTimer::CATEGORY_SQL);
+    $timer->startTimer();
+    $res = $this->db->Execute( $sql, $aValues );
+    $timer->stopTimer();
+    $timer->saveTime();
+    return $res;
   }
 
   /**
@@ -1797,7 +1804,13 @@ class RedBean_Adapter_DBAdapter extends RedBean_Observable implements RedBean_Ad
   public function get( $sql, $aValues = array() ) {
     $this->sql = $sql;
     $this->signal('sql_exec', $this);
-    return $this->db->GetAll( $sql,$aValues );
+    
+    $timer = new $this->performanceTimerClass(PerformanceTimer::CATEGORY_SQL);
+    $timer->startTimer();
+    $res = $this->db->GetAll( $sql,$aValues );
+    $timer->stopTimer();
+    $timer->saveTime();
+    return $res;
   }
 
   /**
@@ -1818,7 +1831,13 @@ class RedBean_Adapter_DBAdapter extends RedBean_Observable implements RedBean_Ad
   public function getRow( $sql, $aValues = array() ) {
     $this->sql = $sql;
     $this->signal('sql_exec', $this);
-    return $this->db->GetRow( $sql,$aValues );
+    
+    $timer = new $this->performanceTimerClass(PerformanceTimer::CATEGORY_SQL);
+    $timer->startTimer();
+    $res = $this->db->GetRow( $sql,$aValues );
+    $timer->stopTimer();
+    $timer->saveTime();
+    return $res;
   }
 
   /**
@@ -1840,8 +1859,16 @@ class RedBean_Adapter_DBAdapter extends RedBean_Observable implements RedBean_Ad
   public function getCol( $sql, $aValues = array() ) {
     $this->sql = $sql;
     $this->signal('sql_exec', $this);
-    return $this->db->GetCol( $sql,$aValues );
+    
+    $timer = new $this->performanceTimerClass(PerformanceTimer::CATEGORY_SQL);
+    $timer->startTimer();
+    $res = $this->db->GetCol( $sql,$aValues );
+    $timer->stopTimer();
+    $timer->saveTime();
+    return $res;
   }
+
+  
 
 
   /**
@@ -1866,7 +1893,13 @@ class RedBean_Adapter_DBAdapter extends RedBean_Observable implements RedBean_Ad
   public function getAssoc( $sql, $aValues = array() ) {
     $this->sql = $sql;
     $this->signal('sql_exec', $this);
+    
+    $timer = new $this->performanceTimerClass(PerformanceTimer::CATEGORY_SQL);
+    $timer->startTimer();
     $rows = $this->db->GetAll( $sql, $aValues );
+    $timer->stopTimer();
+    $timer->saveTime();
+    
     $assoc = array();
     if ($rows) {
       foreach($rows as $row) {
@@ -1906,7 +1939,13 @@ class RedBean_Adapter_DBAdapter extends RedBean_Observable implements RedBean_Ad
   public function getCell( $sql, $aValues = array(), $noSignal = null ) {
     $this->sql = $sql;
     if (!$noSignal) $this->signal('sql_exec', $this);
+    
+    $timer = new $this->performanceTimerClass(PerformanceTimer::CATEGORY_SQL);
+    $timer->startTimer();
     $arr = $this->db->getCol( $sql, $aValues );
+    $timer->stopTimer();
+    $timer->saveTime();
+    
     if ($arr && is_array($arr))	return ($arr[0]); else return false;
   }
 
@@ -4777,7 +4816,7 @@ class RedBean_OODB extends RedBean_Observable {
     }
     $this->beanhelper = new RedBean_BeanHelperFacade();
   }
-
+  
   /**
    * Toggles fluid or frozen mode. In fluid mode the database
    * structure is adjusted to accomodate your objects. In frozen mode
@@ -7579,7 +7618,7 @@ class RedBean_Facade {
     return $duplicationManager->dup($bean, $trail,$pid);
   }
 
-  /**
+  /**l
    * Exports a collection of beans. Handy for XML/JSON exports with a
    * Javascript framework like Dojo or ExtJS.
    * What will be exported:

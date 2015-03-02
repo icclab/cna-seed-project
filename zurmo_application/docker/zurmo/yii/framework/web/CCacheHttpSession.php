@@ -40,7 +40,7 @@ class CCacheHttpSession extends CHttpSession
 	/**
 	 * @var ICache the cache component
 	 */
-	private $_cache;
+	protected $_cache;
 
 	/**
 	 * Initializes the application component.

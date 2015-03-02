@@ -76,6 +76,8 @@ class CMemCache extends CCache
 	 */
 	private $_servers=array();
 
+        private $performanceTimerClass = 'RequestPerformanceTimer';
+        
 	/**
 	 * Initializes this application component.
 	 * This method is required by the {@link IApplicationComponent} interface.
@@ -146,7 +148,13 @@ class CMemCache extends CCache
 	 */
 	protected function getValue($key)
 	{
-		return $this->_cache->get($key);
+            $timer = new $this->performanceTimerClass(PerformanceTimer::CATEGORY_MEMCACHE);
+            $timer->startTimer();
+            $result = $this->_cache->get($key);
+            $timer->stopTimer();
+            $timer->saveTime();
+            
+            return $result;
 	}
 
 	/**
@@ -156,7 +164,12 @@ class CMemCache extends CCache
 	 */
 	protected function getValues($keys)
 	{
-		return $this->useMemcached ? $this->_cache->getMulti($keys) : $this->_cache->get($keys);
+            $timer = new $this->performanceTimerClass(PerformanceTimer::CATEGORY_MEMCACHE);
+            $timer->startTimer();
+            $result = $this->useMemcached ? $this->_cache->getMulti($keys) : $this->_cache->get($keys);
+            $timer->stopTimer();
+            $timer->saveTime();
+            return $result;
 	}
 
 	/**
@@ -175,7 +188,12 @@ class CMemCache extends CCache
 		else
 			$expire=0;
 
-		return $this->useMemcached ? $this->_cache->set($key,$value,$expire) : $this->_cache->set($key,$value,0,$expire);
+                $timer = new $this->performanceTimerClass(PerformanceTimer::CATEGORY_MEMCACHE);
+                $timer->startTimer();
+                $result = $this->useMemcached ? $this->_cache->set($key,$value,$expire) : $this->_cache->set($key,$value,0,$expire);
+                $timer->stopTimer();
+                $timer->saveTime();
+                return $result;
 	}
 
 	/**
@@ -194,7 +212,13 @@ class CMemCache extends CCache
 		else
 			$expire=0;
 
-		return $this->useMemcached ? $this->_cache->add($key,$value,$expire) : $this->_cache->add($key,$value,0,$expire);
+                $timer = new $this->performanceTimerClass(PerformanceTimer::CATEGORY_MEMCACHE);
+                $timer->startTimer();
+		$result = $this->useMemcached ? $this->_cache->add($key,$value,$expire) : $this->_cache->add($key,$value,0,$expire);
+                $timer->stopTimer();
+                $timer->saveTime();
+                
+                return $result;
 	}
 
 	/**
@@ -205,7 +229,12 @@ class CMemCache extends CCache
 	 */
 	protected function deleteValue($key)
 	{
-		return $this->_cache->delete($key, 0);
+                $timer = new $this->performanceTimerClass(PerformanceTimer::CATEGORY_MEMCACHE);
+                $timer->startTimer();
+		$result = $this->_cache->delete($key, 0);
+                $timer->stopTimer();
+                $timer->saveTime();
+                return $result;
 	}
 
 	/**
@@ -216,7 +245,12 @@ class CMemCache extends CCache
 	 */
 	protected function flushValues()
 	{
-		return $this->_cache->flush();
+            $timer = new $this->performanceTimerClass(PerformanceTimer::CATEGORY_MEMCACHE);
+            $timer->startTimer();
+            $result = $this->_cache->flush();
+            $timer->stopTimer();
+            $timer->saveTime();
+            return $result;
 	}
 }
 
