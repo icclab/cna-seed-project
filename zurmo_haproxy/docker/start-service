@@ -24,7 +24,7 @@ echo "[haproxy] starting haproxy service..."
 service haproxy start
 
 # Start announcing HAProxy to etcd
-echo "[haproxy] Start announcing service to etcd"
-haproxy-etcd-service-announcer &
+# echo "[haproxy] Start announcing service to etcd"
+# haproxy-etcd-service-announcer &
 
 tail -f /var/log/haproxy.log
