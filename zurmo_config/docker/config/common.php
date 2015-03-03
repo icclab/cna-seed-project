@@ -274,6 +274,7 @@
             'session' => array(
                 'class'     => 'application.modules.zurmo.components.ZurmoSession',
                 'autoStart' => false,
+                'connectionId' => 'db',
             ),
             'themeManager' => array(
                 'basePath'  => INSTANCE_ROOT . DIRECTORY_SEPARATOR . 'themes',
