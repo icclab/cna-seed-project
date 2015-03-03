@@ -19,8 +19,8 @@ COPY haproxy.conf /etc/rsyslog.d/haproxy.conf
 COPY start-service /usr/local/bin/start-service
 RUN chmod +x /usr/local/bin/start-service
 
-COPY haproxy-etcd-service-announcer /usr/local/bin/haproxy-etcd-service-announcer
-RUN chmod +x /usr/local/bin/haproxy-etcd-service-announcer
+# COPY haproxy-etcd-service-announcer /usr/local/bin/haproxy-etcd-service-announcer
+# RUN chmod +x /usr/local/bin/haproxy-etcd-service-announcer
 
 EXPOSE 80 1936
 

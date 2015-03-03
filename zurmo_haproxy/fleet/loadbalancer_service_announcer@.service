@@ -1,0 +1,28 @@
+[Unit]
+Description=Announces Loadbalancer
+BindsTo=loadbalancer@%i.service
+After=loadbalancer@%i.service
+
+[Service]
+EnvironmentFile=/etc/environment
+
+ExecStart=/bin/sh -c "UUID=`uuidgen`; echo $UUID > /tmp/loadbalancer_service_announcer@%i.uuid; \
+  etcdctl setdir /services/loadbalancer/$UUID --ttl 10; \
+  etcdctl setdir /services/loadbalancer/$UUID/settings --ttl 10; \
+    while true; \
+      do \
+        etcdctl updatedir /services/loadbalancer/$UUID --ttl 10; \
+        etcdctl updatedir /services/loadbalancer/$UUID/settings --ttl 10; \
+        etcdctl set /services/loadbalancer/$UUID/host %H --ttl 10; \
+        etcdctl set /services/loadbalancer/$UUID/ip ${COREOS_PRIVATE_IPV4}; \
+        etcdctl set /services/loadbalancer/$UUID/port 80 --ttl 10; \
+        etcdctl set /services/loadbalancer/$UUID/endpoint ${COREOS_PRIVATE_IPV4}:80 --ttl 10; \
+        etcdctl set /services/loadbalancer/$UUID/distribution roundrobin --ttl 10; \
+        etcdctl set /services/loadbalancer/$UUID/settings/distribution roundrobin --ttl 10; \
+        sleep 7; \
+      done"
+
+ExecStop=/bin/sh -c "etcdctl rm --recursive /services/loadbalancer/`cat /tmp/loadbalancer_service_announcer@%i.uuid` && rm /tmp/zurmo_memcache@%i.uuid"
+
+[X-Fleet]
+MachineOf=loadbalancer@%i.service
