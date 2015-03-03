@@ -1,0 +1,12 @@
+[Unit]
+Description=Announce apache
+BindsTo=zurmo_apache@%i.service
+After=zurmo_apache@%i.service
+
+[Service]
+EnvironmentFile=/etc/environment
+ExecStart=/bin/sh -c "ID=`uuidgen`; etcdctl setdir /services/webserver/$ID --ttl 60; echo $ID > /tmp/zurmo_apache@%i.uuid; while true; do etcdctl updatedir /services/webserver/$ID --ttl 60; etcdctl set /services/webserver/$ID/host %H --ttl 60; etcdctl set /services/webserver/$ID/port %i --ttl 60; etcdctl set /services/webserver/$ID/ip ${COREOS_PUBLIC_IPV4} --ttl 60; sleep 45;done"
+ExecStop=/bin/sh -c "etcdctl rm /services/webserver/`cat /tmp/zurmo_apache@%i.uuid` --recursive && rm /tmp/zurmo_apache@%i.uuid"
+
+[X-Fleet]
+MachineOf=zurmo_apache@%i.service
