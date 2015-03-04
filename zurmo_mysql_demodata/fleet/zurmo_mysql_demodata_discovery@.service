@@ -1,7 +1,7 @@
 [Unit]
 Description=Announce mysql
-BindsTo=zurmo_mysql@%i.service
-After=zurmo_mysql@%i.service
+BindsTo=zurmo_mysql_demodata@%i.service
+After=zurmo_mysql_demodata@%i.service
 
 [Service]
 EnvironmentFile=/etc/environment
@@ -9,4 +9,4 @@ ExecStart=/bin/sh -c "while true; do etcdctl set /services/database/host %H --tt
 ExecStop=/usr/bin/etcdctl rm --recursive /services/database
 
 [X-Fleet]
-MachineOf=zurmo_mysql@%i.service
+MachineOf=zurmo_mysql_demodata@%i.service

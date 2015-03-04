@@ -10,9 +10,11 @@ rm -r fleet
 cp -r ../zurmo_mysql/docker .
 cp -r ../zurmo_mysql/fleet .
 cp -r docker_diff/* docker/
-cp -r fleet_diff/* docker/
+cp -r fleet_diff/* fleet/
 
 cd fleet_diff
 ./apply_changes.sh
 cd ..
 
+# cleanup
+rm fleet/apply_changes.sh
