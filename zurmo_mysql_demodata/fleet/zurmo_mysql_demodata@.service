@@ -2,7 +2,7 @@
 Description=Zurmo MySQL Database
 After=docker.service
 Requires=docker.service
-Requires=zurmo_mysql_discovery@%i.service
+Requires=zurmo_mysql_demodata_discovery@%i.service
 
 [Service]
 TimeoutStartSec=0
