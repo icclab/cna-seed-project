@@ -22,7 +22,7 @@ ExecStart=/bin/sh -c "UUID=`uuidgen`; echo $UUID > /tmp/loadbalancer_service_ann
         sleep 7; \
       done"
 
-ExecStop=/bin/sh -c "etcdctl rm --recursive /services/loadbalancer/`cat /tmp/loadbalancer_service_announcer@%i.uuid` && rm /tmp/zurmo_memcache@%i.uuid"
+ExecStop=/bin/sh -c "etcdctl rm --recursive /services/loadbalancer/`cat /tmp/loadbalancer_service_announcer@%i.uuid` && rm -f /tmp/zurmo_memcache@%i.uuid"
 
 [X-Fleet]
 MachineOf=zurmo_haproxy@%i.service
