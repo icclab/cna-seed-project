@@ -4,7 +4,8 @@
 Description=Loadbalancer Service (HAProxy)
 After=docker.service
 Requires=docker.service
-Wants=loadbalancer_service_announcer@%i.service
+Before=zurmo_haproxy_discovery@%i.service
+Wants=zurmo_haproxy_discovery@%i.service
 
 [Service]
 
@@ -25,4 +26,4 @@ ExecStart=/usr/bin/docker run --rm --name loadbalancer_%i -p 80:80 -p 1936:1936 
 ExecStop=/usr/bin/docker stop loadbalancer_%i
 
 [X-Fleet]
-Conflicts=loadbalancer@*.service
+Conflicts=zurmo_haproxy@*.service
