@@ -16,8 +16,9 @@ MEMCACHE_NAME=zurmo_memcache
 MYSQL_NAME=zurmo_mysql
 MYSQL_DEMODATA_NAME=zurmo_mysql_demodata
 
-TEMPLATE_FILE_LOCATION=~/test/templates
-INSTANCE_FILE_LOCATION=~/test/instances
+#~/test/instances
+TEMPLATE_FILE_LOCATION=~/templates
+INSTANCE_FILE_LOCATION=~/instances
 TEMPLATE_PREFIX=zurmo_
 INSTANCE_PREFIX=zurmo_
 TEMPLATE_NAMES=(apache elasticsearch haproxy kibana logstash memcache mysql tsung)
@@ -27,6 +28,10 @@ DISCOVERY_SERVICE_SUFFIX=_discovery
 URL_ENCODED_AT=%40
 
 EXEC_PATH=`pwd`
+
+mkdir -p ${TEMPLATE_FILE_LOCATION}
+mkdir -p ${INSTANCE_FILE_LOCATION}
+
 
 # ----------------------
 # Download the fleet files from github
