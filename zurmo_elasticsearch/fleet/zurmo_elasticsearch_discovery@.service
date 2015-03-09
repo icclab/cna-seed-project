@@ -1,0 +1,25 @@
+[Unit]
+Description=Announces Elasticsearch
+BindsTo=zurmo_elasticsearch@%i.service
+After=zurmo_elasticsearch@%i.service
+
+[Service]
+EnvironmentFile=/etc/environment
+
+ExecStart=/bin/sh -c "UUID=`uuidgen`; echo $UUID > /tmp/zurmo_elasticsearch@%i.uuid; \
+  etcdctl setdir /services/logstorage/$UUID --ttl 10; \
+  etcdctl setdir /services/logstorage/$UUID/settings --ttl 10; \
+    while true; \
+      do \
+        etcdctl updatedir /services/logstorage/$UUID --ttl 10; \
+        etcdctl set /services/logstorage/$UUID/host %H --ttl 10; \
+        etcdctl set /services/logstorage/$UUID/ip ${COREOS_PRIVATE_IPV4}; \
+        etcdctl set /services/logstorage/$UUID/http-port 9200 --ttl 10; \
+        etcdctl set /services/logstorage/$UUID/transport-port 9300 --ttl 10; \
+        sleep 7; \
+      done"
+
+ExecStop=/bin/sh -c "etcdctl rm --recursive /services/logstorage/`cat /tmp/zurmo_elasticsearch@%i.uuid` && rm -f /tmp/zurmo_elasticsearch%i.uuid"
+
+[X-Fleet]
+MachineOf=zurmo_elasticsearch@%i.service
