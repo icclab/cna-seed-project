@@ -1,0 +1,22 @@
+[Unit]
+Description=Logstash Service
+After=docker.service
+Requires=docker.service
+Before=zurmo_logstash_discovery@%i.service
+Wants=zurmo_logstash_discovery@%i.service
+
+[Service]
+
+# Get CoreOS environmental variables
+EnvironmentFile=/etc/environment
+Environment="ETCD_ENDPOINT=10.1.42.1:4001"
+Environment="HOST_NAME=%H"
+
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill zurmo_logstash.%i
+ExecStartPre=-/usr/bin/docker rm zurmo_logstash.%i
+ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_logstash
+
+ExecStart=/usr/bin/docker run --rm --name zurmo_logstash.%i -p %i:80 -e "ETCD_ENDPOINT=${ETCD_ENDPOINT}" -e "HOST_PRIVATE_IPV4=${COREOS_PRIVATE_IPV4}" -e "HOST_NAME=${HOST_NAME}" icclabcna/zurmo_logstash
+
+ExecStop=/usr/bin/docker stop zurmo_logstash.%i
