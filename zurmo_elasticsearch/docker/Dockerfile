@@ -8,6 +8,6 @@ RUN mkdir -p /etc/confd/conf.d && \
 ADD start.sh /start.sh
 
 ADD elasticsearch.toml /etc/confd/conf.d/elasticsearch.toml
-ADD elasticsearch.yml.tmpl /etc/conf.d/templates/elasticsearch.yml.tmpl
+ADD elasticsearch.yml.tmpl /etc/confd/templates/elasticsearch.yml.tmpl
 
 CMD /start.sh
