@@ -1,0 +1,10 @@
+path:
+  logs: /data/log
+  data: /data/data
+http.cors.enabled: true
+http.cors.allow-origin: "/.*/"
+
+cluster.name: elasticsearch_zurmo
+
+discovery.zen.ping.multicast.enabled: false 
+discovery.zen.ping.unicast.hosts: [{{ range $dir := lsdir "/services/logstorage/" }} {{$hostpath := printf "/services/logstorage/%s/host" $dir}} {{$portpath := printf "/services/logstorage/%s/transport-port" $dir}} "{{ getv $hostpath }}:{{ getv $portpath }}", {{ end }}]
