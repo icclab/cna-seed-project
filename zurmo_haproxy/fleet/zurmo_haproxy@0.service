@@ -1,0 +1,21 @@
+[Unit]
+Description=Loadbalancer Service (HAProxy)
+After=docker.service
+Requires=docker.service
+Before=zurmo_haproxy_discovery@%i.service
+Wants=zurmo_haproxy_discovery@%i.service
+
+[Service]
+# Get CoreOS environmental variables
+EnvironmentFile=/etc/environment
+Environment="HOST_NAME=%H"
+
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill loadbalancer_%i
+ExecStartPre=-/usr/bin/docker rm loadbalancer_%i
+ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_haproxy
+ExecStart=/bin/bash -c 'exec /usr/bin/docker run --rm --name loadbalancer_%i -p 80:80 -p 1936:1936 -e "ETCD_ENDPOINT=$(ip route | awk \x27/docker0/ {print $NF }\x27):4001" -e "HOST_PRIVATE_IPV4=${COREOS_PRIVATE_IPV4}" -e "HOST_NAME=${HOST_NAME}" icclabcna/zurmo_haproxy'
+ExecStop=/usr/bin/docker stop loadbalancer_%i
+
+[X-Fleet]
+Conflicts=zurmo_haproxy@*.service
