@@ -11,18 +11,13 @@ Wants=zurmo_haproxy_discovery@%i.service
 
 # Get CoreOS environmental variables
 EnvironmentFile=/etc/environment
-Environment="ETCD_ENDPOINT=172.17.42.1:4001"
 Environment="HOST_NAME=%H"
 
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill loadbalancer_%i
 ExecStartPre=-/usr/bin/docker rm loadbalancer_%i
 ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_haproxy
-
-ExecStart=/usr/bin/docker run --rm --name loadbalancer_%i -p 80:80 -p 1936:1936 -e "ETCD_ENDPOINT=${ETCD_ENDPOINT}" -e "HOST_PRIVATE_IPV4=${COREOS_PRIVATE_IPV4}" -e "HOST_NAME=${HOST_NAME}" icclabcna/zurmo_haproxy
-
-# ExecStart=/bin/bash -c "ETCD_ENDPOINT=$(/bin/ifconfig docker0 | awk '/inet /{print $2}'):4001 && exec /usr/bin/docker run --rm --name loadbalancer -p 80:80 -p 1936:1936 -e 'ETCD_ENDPOINT=${ETCD_ENDPOINT}' -e 'HOST_PRIVATE_IPV4=${COREOS_PRIVATE_IPV4}' -e 'HOST_NAME=${HOST_NAME}' icclabcna/zurmo_haproxy"
-
+ExecStart=/bin/bash -c 'exec /usr/bin/docker run --rm --name loadbalancer_%i -p 80:80 -p 1936:1936 -e "ETCD_ENDPOINT=$(ip route | awk \x27/docker0/ {print $NF }\x27):4001" -e "HOST_PRIVATE_IPV4=${COREOS_PRIVATE_IPV4}" -e "HOST_NAME=${HOST_NAME}" icclabcna/zurmo_haproxy'
 ExecStop=/usr/bin/docker stop loadbalancer_%i
 
 [X-Fleet]
