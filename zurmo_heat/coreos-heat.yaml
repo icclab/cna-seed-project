@@ -1,0 +1,209 @@
+heat_template_version: 2013-05-23
+
+description: Template to deploy a CoreOS Cluster of 3 Machines
+
+parameters:
+  Flavor: 
+    default: m1.medium
+    description: "Type of instance (flavor) to be used"
+    label: "Instance Type"
+    type: string
+    constraints:
+      - allowed_values: [m1.small, m1.medium, m1.large ]
+        description: Allowed values are m1.small, m1.medium and m1.large
+  Image:
+    description: "Name of image to use"
+    default: CoreOS-stable-557.2.0
+    type: string
+    constraints:
+      - allowed_values: [CoreOS-stable-557.2.0, CoreOS-beta-584.0.0, CoreOS-alpha-607.0.0]
+        description: Allowed values are CoreOS-stable-557.2.0, CoreOS-beta-584.0.0 and CoreOS-alpha-607.0.0
+  Public Net ID:
+    type: string
+    description: ID of public network for which floating IP addresses will be allocated (default net04_ext) 
+    default: d57c7d69-a310-4f2c-bddf-4be485c3d399
+  Private Net ID:
+    type: string
+    description: ID of private network into which servers get deployed (default internal)
+    default: 4a0888f7-1ca8-480e-9d21-e80dd8564ecd
+  Private Subnet ID:
+    type: string
+    description: ID of private sub network into which servers get deployed (default internal_subnet)
+    default: 22ae589d-b2a5-49c2-bf66-529742d05d16
+  Key Name CoreOS: 
+    description: "Name of key-pair to be used for the CoreOS VMs"
+    label: "Key Name"
+    type: string
+    default: brnr_general_rsa
+
+resources:
+  coreos_init:
+    type: OS::Heat::CloudConfig
+    properties:
+      cloud_config:
+        coreos:
+          etcd:
+            discovery: https://discovery.etcd.io/e9c080bfb5de4c6acbd8df75a527aa3e
+            addr: $private_ipv4:4001
+            peer-addr: $private_ipv4:7001
+            cluster-active-size: 3
+          units:
+            - name: etcd.service
+              command: start
+            - name: fleet.service
+              command: start
+            - name: docker-tcp.socket
+              command: start
+              enable: true
+              content: |
+                [Unit]
+                Description=Docker Socket for the API
+                [Socket]
+                ListenStream=2375
+                BindIPv6Only=both
+                Service=docker.service
+                [Install]
+                WantedBy=sockets.target
+
+  zurmo_init_script:
+    type: OS::Heat::SoftwareConfig
+    properties:
+      group: ungrouped
+      config: |
+        #!/bin/bash
+        touch /tmp/saluton
+
+  vm_coreos_01_init:
+    type: OS::Heat::MultipartMime
+    properties:
+      parts:
+      - config: {get_resource: coreos_init}
+      - config: {get_resource: zurmo_init_script}
+
+  vm_coreos_01:
+    type: OS::Nova::Server
+    properties:
+      name: "CoreOS-01"
+      image: { get_param: Image }
+      flavor: { get_param: Flavor }
+      key_name: { get_param: "Key Name CoreOS" }
+      networks:
+        - port: { get_resource: vm_coreos_01_port }
+      user_data_format: RAW
+      user_data: |
+        #cloud-config
+        coreos:
+          etcd:
+            discovery: https://discovery.etcd.io/e9c080bfb5de4c6acbd8df75a527aa3e
+            addr: $private_ipv4:4001
+            peer-addr: $private_ipv4:7001
+            cluster-active-size: 3
+          fleet:
+            metadata: public=true
+          units:
+            - name: etcd.service
+              command: start
+            - name: fleet.service
+              command: start
+            - name: docker-tcp.socket
+              command: start
+              enable: true
+              content: |
+                [Unit]
+                Description=Docker Socket for the API
+                [Socket]
+                ListenStream=2375
+                BindIPv6Only=both
+                Service=docker.service
+                [Install]
+                WantedBy=sockets.target
+            - name: zurmo-init.service
+              command: start
+              content: |
+                [Unit]
+                Description=Service to initialize Zurmo Application
+                Requires=etcd.service
+                After=etcd.service
+
+                [Service]
+                Type=oneshot
+                ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
+                ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/master/init/startup.sh
+                ExecStartPre=/bin/chmod +x /tmp/zurmo/startup.sh
+                ExecStart=/bin/bash -c "/tmp/zurmo/startup.sh;"
+
+                [Install]
+                WantedBy=multi-user.target
+
+  vm_coreos_01_port:
+    type: OS::Neutron::Port
+    properties:
+      network_id: { get_param: "Private Net ID" }
+      fixed_ips:
+        - subnet_id: { get_param: "Private Subnet ID" }
+      security_groups:
+        - coreos
+
+  vm_coreos_01_floating_ip:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network_id: { get_param: "Public Net ID" }
+      port_id: { get_resource: vm_coreos_01_port }
+
+  vm_coreos_02:
+    type: OS::Nova::Server
+    properties:
+      name: "CoreOS-02"
+      image: { get_param: Image}
+      flavor: { get_param: Flavor }
+      key_name: { get_param: "Key Name CoreOS" }
+      networks:
+        - port: { get_resource: vm_coreos_02_port }
+      user_data_format: RAW
+      user_data:
+        get_resource: coreos_init
+
+  vm_coreos_02_port:
+    type: OS::Neutron::Port
+    properties:
+      network_id: { get_param: "Private Net ID" }
+      fixed_ips:
+        - subnet_id: { get_param: "Private Subnet ID" }
+      security_groups:
+        - coreos
+
+  vm_coreos_03:
+    type: OS::Nova::Server
+    properties:
+      name: "CoreOS-03"
+      image: { get_param: Image}
+      flavor: { get_param: Flavor }
+      key_name: { get_param: "Key Name CoreOS" }
+      networks:
+        - port: { get_resource: vm_coreos_03_port }
+      user_data_format: RAW
+      user_data:
+        get_resource: coreos_init
+
+  vm_coreos_03_port:
+    type: OS::Neutron::Port
+    properties:
+      network_id: { get_param: "Private Net ID" }
+      fixed_ips:
+        - subnet_id: { get_param: "Private Subnet ID" }
+      security_groups:
+        - coreos
+
+outputs:
+  CoreOS-01 Private IP:
+    description: Private IP address of the CoreOS-01 VM
+    value: { get_attr: [ vm_coreos_01, first_address ] }
+  CoreOS-01 Public IP:
+    description: Public IP address of the CoreOS-01 VM
+    value: { get_attr: [ vm_coreos_01_floating_ip, floating_ip_address ] }
+  CoreOS-02 Private IP:
+    description: Private IP address of the CoreOS-02 VM
+    value: { get_attr: [ vm_coreos_02, first_address ] }
+  CoreOS-03 Private IP:
+    description: Private IP address of the CoreOS-03 VM
+    value: { get_attr: [ vm_coreos_03, first_address ] }
