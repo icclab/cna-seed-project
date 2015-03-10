@@ -11,7 +11,7 @@ Wants=zurmo_haproxy_discovery@%i.service
 
 # Get CoreOS environmental variables
 EnvironmentFile=/etc/environment
-Environment="ETCD_ENDPOINT=10.1.42.1:4001"
+Environment="ETCD_ENDPOINT=172.17.42.1:4001"
 Environment="HOST_NAME=%H"
 
 TimeoutStartSec=0
@@ -27,3 +27,4 @@ ExecStop=/usr/bin/docker stop loadbalancer_%i
 
 [X-Fleet]
 Conflicts=zurmo_haproxy@*.service
+MachineMetadata=public=true

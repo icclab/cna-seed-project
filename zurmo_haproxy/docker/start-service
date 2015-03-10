@@ -4,7 +4,7 @@ set -eo pipefail
 
 service rsyslog start
 
-export ETCD_ENDPOINT=${ETCD_ENDPOINT:-10.1.42.1:4001}
+export ETCD_ENDPOINT=${ETCD_ENDPOINT:-172.17.42.1:4001}
 
 echo "[haproxy] booting container"
 

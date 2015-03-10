@@ -4,7 +4,7 @@
 set -eo pipefail
 
 export ETCD_PORT=${ETCD_PORT:-4001}
-export HOST_IP=${HOST_IP:-10.1.42.1}
+export HOST_IP=${HOST_IP:-172.17.42.1}
 export ETCD=$HOST_IP:$ETCD_PORT
 
 echo "[apache] booting container. ETCD: $ETCD."
