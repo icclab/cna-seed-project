@@ -27,3 +27,4 @@ ExecStop=/usr/bin/docker stop loadbalancer_%i
 
 [X-Fleet]
 Conflicts=zurmo_haproxy@*.service
+MachineMetadata=public=true
