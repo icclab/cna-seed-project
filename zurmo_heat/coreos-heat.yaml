@@ -36,7 +36,7 @@ parameters:
     type: string
     default: brnr_general_rsa
   CoreOS Cluster Discovery URL:
-    description: "URL of the Cluster-Discovery URL (get it at --> https://discovery.etcd.io/new?size=3)"
+    description: "URL of the Cluster-Discovery URL"
     type: string
     default: https://discovery.etcd.io/new?size=3
 
