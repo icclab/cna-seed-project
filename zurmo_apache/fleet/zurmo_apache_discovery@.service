@@ -7,7 +7,16 @@ After=zurmo_apache@%i.service
 [Service]
 EnvironmentFile=/etc/environment
 ExecStartPre=-/bin/sh -c "etcdctl mkdir /services/cache"
-ExecStart=/bin/sh -c "ID=`uuidgen`; etcdctl setdir /services/webserver/$ID --ttl 60; echo $ID > /tmp/zurmo_apache@%i.uuid; while true; do etcdctl updatedir /services/webserver/$ID --ttl 60; etcdctl set /services/webserver/$ID/host %H --ttl 60; etcdctl set /services/webserver/$ID/port %i --ttl 60; etcdctl set /services/webserver/$ID/ip ${COREOS_PUBLIC_IPV4} --ttl 60; sleep 45;done"
+ExecStart=/bin/sh -c "ID=`uuidgen`; echo $ID > /tmp/zurmo_apache@%i.uuid; TTL=10; SLEEP_TIME=7 \
+  etcdctl setdir /services/webserver/$ID --ttl $TTL;  \
+  while true; \
+    do \
+      etcdctl updatedir /services/webserver/$ID --ttl $TTL; \
+      etcdctl set /services/webserver/$ID/host %H --ttl $TTL; \
+      etcdctl set /services/webserver/$ID/port %i --ttl $TTL; \
+      etcdctl set /services/webserver/$ID/ip ${COREOS_PRIVATE_IPV4} --ttl $TTL; \
+      sleep $SLEEP_TIME; \
+    done"
 ExecStop=/bin/sh -c "etcdctl rm /services/webserver/`cat /tmp/zurmo_apache@%i.uuid` --recursive && rm -f /tmp/zurmo_apache@%i.uuid"
 
 [X-Fleet]
