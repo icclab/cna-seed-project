@@ -7,6 +7,7 @@ Wants=zurmo_mysql_discovery@%i.service
 
 [Service]
 TimeoutStartSec=0
+Restart=always
 ExecStartPre=-/usr/bin/docker kill zurmo_mysql.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_mysql.%i
 ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_mysql

@@ -14,6 +14,7 @@ EnvironmentFile=/etc/environment
 Environment="HOST_NAME=%H"
 
 TimeoutStartSec=0
+Restart=always
 ExecStartPre=-/usr/bin/docker kill loadbalancer_%i
 ExecStartPre=-/usr/bin/docker rm loadbalancer_%i
 ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_haproxy

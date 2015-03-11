@@ -2,10 +2,12 @@
 Description=Zurmo MySQL Database
 After=docker.service
 Requires=docker.service
-Requires=zurmo_mysql_demodata_discovery@%i.service
+Before=zurmo_mysql_demodata_discovery@%i.service
+Wants=zurmo_mysql_demodata_discovery@%i.service
 
 [Service]
 TimeoutStartSec=0
+Restart=always
 ExecStartPre=-/usr/bin/docker kill zurmo_mysql.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_mysql.%i
 ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_mysql:demodata

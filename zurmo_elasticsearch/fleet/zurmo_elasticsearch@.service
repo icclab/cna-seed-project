@@ -12,6 +12,7 @@ EnvironmentFile=/etc/environment
 Environment="ETCD_ENDPOINT=10.1.42.1:4001"
 Environment="HOST_NAME=%H"
 
+Restart=always
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill zurmo_elasticsearch.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_elasticsearch.%i
