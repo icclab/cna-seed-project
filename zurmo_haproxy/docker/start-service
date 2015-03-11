@@ -8,6 +8,10 @@ export ETCD_ENDPOINT=${ETCD_ENDPOINT:-172.17.42.1:4001}
 
 echo "[haproxy] booting container"
 
+# Start the HAProxy service using the generated config
+echo "[haproxy] starting haproxy service..."
+service haproxy start
+
 # Try to make initial configuration every 5 seconds until successful
 until confd -onetime -node $ETCD_ENDPOINT -config-file /etc/confd/conf.d/haproxy.toml; do
     echo "[haproxy] waiting for confd to create initial haproxy configuration."
@@ -18,10 +22,6 @@ done
 # for changes every 10 seconds
 confd -interval 10 -node $ETCD_ENDPOINT -config-file /etc/confd/conf.d/haproxy.toml &
 echo "[haproxy] confd is now monitoring etcd for changes..."
-
-# Start the HAProxy service using the generated config
-echo "[haproxy] starting haproxy service..."
-service haproxy start
 
 # Start announcing HAProxy to etcd
 # echo "[haproxy] Start announcing service to etcd"
