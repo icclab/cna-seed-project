@@ -19,4 +19,4 @@ ExecStart=/bin/bash -c 'exec /usr/bin/docker run --name zurmo_apache.%i -p %i:80
 ExecStop=/usr/bin/docker stop zurmo_apache.%i
 
 [X-Fleet]
-Conflicts=zurmo_apache*@.service
+Conflicts=zurmo_apache@*.service
