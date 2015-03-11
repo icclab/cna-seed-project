@@ -8,7 +8,7 @@
 IMAGE_USERNAME=${DOCKER_PRELOAD_IMAGE_USERNAME:-"icclabcna"}
 IMAGE_PREFIX=${DOCKER_PRELOAD_IMAGE_PREFIX:-"zurmo_"}
 IMAGES_NAMES=${DOCKER_PRELOAD_IMAGES:-"apache:haproxy:memcache:mysql:config:application"}
-LOG_DIR=${DOCKER_PRELOAD_LOG_DIR:-"~/docker-image-preload/logs"}
+LOG_DIR=${DOCKER_PRELOAD_LOG_DIR:-"$(pwd)/logs"}
 
 mkdir -p ${LOG_DIR}
 
