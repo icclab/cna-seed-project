@@ -38,15 +38,15 @@
     $language         = 'en'; // As per language codes under the messages directory.
     $currencyBaseCode = 'USD';
     $theme            = 'default';
-    $connectionString = 'mysql:host={{getv "/services/database/host"}};port={{getv "/services/database/port"}};dbname=zurmo'; // Not Coding Standard
+    $connectionString = 'mysql:host={{getv "/services/database/ip"}};port={{getv "/services/database/port"}};dbname=zurmo'; // Not Coding Standard
     $username         = 'zurmo';
     $password         = 'zurmo';
     $memcacheServers  = array( // An empty array means memcache is not used.
                             {{range $dir := lsdir "/services/cache"}}
-                              {{$hostpath := printf "/services/cache/%s/host" $dir}}
+                              {{$ippath := printf "/services/cache/%s/ip" $dir}}
                               {{$portpath := printf "/services/cache/%s/port" $dir}}
 			      array(
-				  'host'   => '{{getv $hostpath}}',
+				  'host'   => '{{getv $ippath}}',
 				  'port'   => {{getv $portpath}}, 
 				  'weight' => 100,
 			      ),
