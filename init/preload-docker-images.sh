@@ -5,13 +5,13 @@
 # Example DOCKER_PRELOAD_IMAGES="apache:haproxy" will download icclabcna/zurmo_apache and icclabcna/zurmo_haproxy
 # If you like to change the username and prefix of the images, define the environment variables IMAGE_USERNAME, IMAGE_PREFIX
 
-ENABLED=${DOCKER_PRELOAD_ENABLED:-1}
+ENABLED=${DOCKER_PRELOAD_ENABLED:-"true"}
 IMAGE_USERNAME=${DOCKER_PRELOAD_IMAGE_USERNAME:-"icclabcna"}
 IMAGE_PREFIX=${DOCKER_PRELOAD_IMAGE_PREFIX:-"zurmo_"}
 IMAGES_NAMES=${DOCKER_PRELOAD_IMAGES:-"apache:haproxy:memcache:mysql:config:application"}
 LOG_DIR=${DOCKER_PRELOAD_LOG_DIR:-"$(pwd)/logs"}
 
-if [ "$ENABLED" -eq 1 ]; then
+if [ "$ENABLED" == "true" ]; then
 
 	mkdir -p ${LOG_DIR}
 
