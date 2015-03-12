@@ -1,22 +1,24 @@
 #!/bin/bash
 
+# URL variables for downloading the fleet files from github
 GIT_BASE_URL=https://raw.githubusercontent.com/icclab/cna-seed-project
-GIT_BRANCH=master
+GIT_BRANCH=${ZURMO_INIT_GIT_BRANCH:-"master"}
 REL_SERVICEFILE_PATH=fleet
 
+# Number of instances per service type
 MYSQL_NUM_INSTANCES=${ZURMO_MYSQL_NUM_INSTANCES:-1}
 MEMCACHE_NUM_INSTANCES=${ZURMO_MEMCACHE_NUM_INSTANCES:-2}
 MYSQL_DEMODATA_NUM_INSTANCES=${ZURMO_MYSQL_DEMODATA_NUM_INSTANCES:-0}
 APACHE_NUM_INSTANCES=${ZURMO_APACHE_NUM_INSTANCES:-2}
 HAPROXY_NUM_INSTANCES=${ZURMO_HAPROXY_NUM_INSTANCES:-1}
 
+# Names of the services
 APACHE_NAME=zurmo_apache
 HAPROXY_NAME=zurmo_haproxy
 MEMCACHE_NAME=zurmo_memcache
 MYSQL_NAME=zurmo_mysql
 MYSQL_DEMODATA_NAME=zurmo_mysql_demodata
 
-#~/test/instances
 TEMPLATE_FILE_LOCATION=~/templates
 INSTANCE_FILE_LOCATION=~/instances
 TEMPLATE_PREFIX=zurmo_
@@ -61,6 +63,8 @@ log_and_print "\n"
 log_and_print "Delete previously used files"
 rm ${INSTANCE_FILE_LOCATION}/*${SERVICE_FILE_ENDING}
 rm ${TEMPLATE_FILE_LOCATION}/*${SERVICE_FILE_ENDING}
+
+log_and_print "Using git branch ${GIT_BRANCH}"
 
 log_and_print Get instance fleet files from github...
 for INSTANCE_NAME_PART in "${INSTANCE_NAMES[@]}"
