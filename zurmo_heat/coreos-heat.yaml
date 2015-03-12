@@ -39,12 +39,24 @@ parameters:
     description: "URL of the Cluster-Discovery URL"
     type: string
     default: https://discovery.etcd.io/new?size=3
+  Preload Docker Images:
+    description: "URL of the Cluster-Discovery URL"
+    type: string
+    default: "True"
+    constraints:
+      - allowed_values: ["True", "False"]
 
 resources:
   coreos_init:
     type: OS::Heat::CloudConfig
     properties:
       cloud_config:
+      write_files:
+        - path: /etc/environment
+          content: |
+            COREOS_PUBLIC_IPV4=$public_ipv4
+            COREOS_PRIVATE_IPV4=$private_ipv4
+            DOCKER_PRELOAD_ENABLED=$preload-docker-images$
         coreos:
           etcd:
             discovery: { get_param: "CoreOS Cluster Discovery URL" }
@@ -69,21 +81,6 @@ resources:
                 [Install]
                 WantedBy=sockets.target
 
-  zurmo_init_script:
-    type: OS::Heat::SoftwareConfig
-    properties:
-      group: ungrouped
-      config: |
-        #!/bin/bash
-        touch /tmp/saluton
-
-  vm_coreos_01_init:
-    type: OS::Heat::MultipartMime
-    properties:
-      parts:
-      - config: {get_resource: coreos_init}
-      - config: {get_resource: zurmo_init_script}
-
   vm_coreos_01:
     type: OS::Nova::Server
     properties:
@@ -98,6 +95,12 @@ resources:
         str_replace:
           template: |
             #cloud-config
+            write_files:
+            - path: /etc/environment
+              content: |
+                COREOS_PUBLIC_IPV4=$public_ipv4
+                COREOS_PRIVATE_IPV4=$private_ipv4
+                DOCKER_PRELOAD_ENABLED=$preload-docker-images$
             coreos:
               etcd:
                 discovery: $etcd_discovery_url$
@@ -123,6 +126,26 @@ resources:
                     Service=docker.service
                     [Install]
                     WantedBy=sockets.target
+                - name: zurmo-predownload-docker-images.service
+                  command: start
+                  content: |
+                    [Unit]
+                    Description=Service to Pre-Download Docker Images for Zurmo
+                    Requires=etcd.service
+                    After=etcd.service
+
+                    [Service]
+                    EnvironmentFile=/etc/environment
+
+                    Type=oneshot
+
+                    ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
+                    ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/master/init/preload-docker-images.sh
+                    ExecStartPre=/bin/chmod +x /tmp/zurmo/preload-docker-images.sh
+                    ExecStart=/bin/bash -c "/tmp/zurmo/preload-docker-images.sh;"
+
+                    [Install]
+                    WantedBy=multi-user.target
                 - name: zurmo-init.service
                   command: start
                   content: |
@@ -130,9 +153,13 @@ resources:
                     Description=Service to initialize Zurmo Application
                     Requires=etcd.service
                     After=etcd.service
+                    After=zurmo-predownload-docker-images.service
 
                     [Service]
+                    EnvironmentFile=/etc/environment
+
                     Type=oneshot
+
                     ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
                     ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/master/init/startup.sh
                     ExecStartPre=/bin/chmod +x /tmp/zurmo/startup.sh
@@ -142,6 +169,7 @@ resources:
                     WantedBy=multi-user.target
           params:
             $etcd_discovery_url$: { get_param: "CoreOS Cluster Discovery URL" }
+            $preload-docker-images$: {get_param: Preload Docker Images}
 
   vm_coreos_01_port:
     type: OS::Neutron::Port
