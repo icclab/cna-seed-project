@@ -6,10 +6,11 @@ Before=zurmo_mysql_discovery@%i.service
 Wants=zurmo_mysql_discovery@%i.service
 
 [Service]
+EnvironmentFile=/etc/environment
 TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker kill zurmo_mysql.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_mysql.%i
-ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_mysql
-ExecStart=/usr/bin/docker run --name zurmo_mysql.%i -p %i:3306 icclabcna/zurmo_mysql
+ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_mysql:${DOCKER_IMAGE_TAG}
+ExecStart=/usr/bin/docker run --name zurmo_mysql.%i -p %i:3306 icclabcna/zurmo_mysql:${DOCKER_IMAGE_TAG}
 ExecStop=/usr/bin/docker stop zurmo_mysql.%i
