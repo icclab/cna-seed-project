@@ -21,7 +21,8 @@ confd -interval 10 -node $ETCD -config-file /etc/confd/conf.d/zurmo_perInstance.
 echo "[apache] confd is now monitoring etcd for changes..."
 
 # set file permissions of www-directory
-/set_data_permissions.sh
+#/set_data_permissions.sh
+chown -R www-data /zurmo
 
 exec dockerize \
      -stdout /var/log/apache2/access.log \
