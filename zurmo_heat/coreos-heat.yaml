@@ -38,7 +38,7 @@ parameters:
   CoreOS Cluster Discovery URL:
     description: "URL of the Cluster-Discovery URL"
     type: string
-    default: https://discovery.etcd.io/new?size=3
+    default: https://discovery.etcd.io/new?size=5
   Preload Docker Images:
     description: "URL of the Cluster-Discovery URL"
     type: string
@@ -365,3 +365,6 @@ outputs:
   CoreOS-05 Private IP:
     description: Private IP address of the CoreOS-05 VM
     value: { get_attr: [ vm_coreos_05, first_address ] }
+  CoreOS Cluster ETCD Endpoint:
+    description: ETCD Endpoint of CoreOS Cluster
+    value: { get_param: "CoreOS Cluster Discovery URL" }
