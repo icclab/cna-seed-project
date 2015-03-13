@@ -51,6 +51,18 @@ parameters:
     default: "2"
     constraints:
       - allowed_values: ["2","3","4","5"]
+  Number of Cache Servers:
+    description: "Number of Cache Servers"
+    type: string
+    default: "2"
+    constraints:
+      - allowed_values: ["2","3","4","5"]
+    Zurmo Git Branch:
+      description: "Git Branch / Version of Zurmo to use"
+      type: string
+      default: "master"
+      constraints:
+        - allowed_values: ["master", "logging-dev"]
 
 resources:
   coreos_init:
@@ -65,8 +77,11 @@ resources:
                       COREOS_PUBLIC_IPV4=$public_ipv4
                       COREOS_PRIVATE_IPV4=$private_ipv4
                       DOCKER_PRELOAD_ENABLED=$preload-docker-images$
+                      DOCKER_IMAGE_TAG=$zurmo-git-branch$
+                      ZURMO_INIT_GIT_BRANCH=$zurmo-git-branch$
                     params:
-                      $preload-docker-images$: {get_param: Preload Docker Images}
+                      $preload-docker-images$: {get_param: "Preload Docker Images"}
+                      $zurmo-git-branch$: {get_param: "Zurmo Git Branch"}
             coreos:
               etcd:
                 discovery: { get_param: "CoreOS Cluster Discovery URL" }
@@ -132,6 +147,9 @@ resources:
                 COREOS_PRIVATE_IPV4=$private_ipv4
                 DOCKER_PRELOAD_ENABLED=$preload-docker-images$
                 APACHE_NUM_INSTANCES=$number-of-web-servers$
+                MEMCACHE_NUM_INSTANCES=$number-of-cache-servers$
+                DOCKER_IMAGE_TAG=$zurmo-git-branch$
+                ZURMO_INIT_GIT_BRANCH=$zurmo-git-branch$
             coreos:
               etcd:
                 discovery: $etcd_discovery_url$
@@ -200,8 +218,10 @@ resources:
                     WantedBy=multi-user.target
           params:
             $etcd_discovery_url$: { get_param: "CoreOS Cluster Discovery URL" }
-            $preload-docker-images$: {get_param: Preload Docker Images}
-            $number-of-web-servers$: {get_param: Number of Web Servers}
+            $preload-docker-images$: {get_param: "Preload Docker Images"}
+            $number-of-web-servers$: {get_param: "Number of Web Servers"}
+            $number-of-cache-servers$: {get_param: "Number of Cache Servers"}
+            $zurmo-git-branch$: {get_param: "Zurmo Git Branch"}
 
   vm_coreos_01_port:
     type: OS::Neutron::Port
