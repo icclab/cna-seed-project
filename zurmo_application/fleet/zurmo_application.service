@@ -6,11 +6,12 @@ Requires=docker.service
 Requires=zurmo_config.service
 
 [Service]
+EnvironmentFile=/etc/environment
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill zurmo_application
 ExecStartPre=-/usr/bin/docker rm zurmo_application
-ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_application
-ExecStart=/usr/bin/docker create --name zurmo_application --volumes-from zurmo_config icclabcna/zurmo_application
+ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_application:${DOCKER_IMAGE_TAG}
+ExecStart=/usr/bin/docker create --name zurmo_application --volumes-from zurmo_config icclabcna/zurmo_application:${DOCKER_IMAGE_TAG}
 # ExecStop=/usr/bin/docker stop zurmo_application
 
 [X-Fleet]
