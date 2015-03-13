@@ -57,12 +57,12 @@ parameters:
     default: "2"
     constraints:
       - allowed_values: ["2","3","4","5"]
-    Zurmo Git Branch:
-      description: "Git Branch / Version of Zurmo to use"
-      type: string
-      default: "master"
-      constraints:
-        - allowed_values: ["master", "logging-dev"]
+  Zurmo Git Branch:
+    description: "Git Branch / Version of Zurmo to use"
+    type: string
+    default: "master"
+    constraints:
+      - allowed_values: ["master", "logging-dev"]
 
 resources:
   coreos_init:
