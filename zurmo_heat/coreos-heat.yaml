@@ -146,8 +146,8 @@ resources:
                 COREOS_PUBLIC_IPV4=$public_ipv4
                 COREOS_PRIVATE_IPV4=$private_ipv4
                 DOCKER_PRELOAD_ENABLED=$preload-docker-images$
-                APACHE_NUM_INSTANCES=$number-of-web-servers$
-                MEMCACHE_NUM_INSTANCES=$number-of-cache-servers$
+                ZURMO_APACHE_NUM_INSTANCES=$number-of-web-servers$
+                ZURMO_MEMCACHE_NUM_INSTANCES=$number-of-cache-servers$
                 DOCKER_IMAGE_TAG=$zurmo-git-branch$
                 ZURMO_INIT_GIT_BRANCH=$zurmo-git-branch$
             coreos:
