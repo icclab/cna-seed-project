@@ -129,7 +129,11 @@ resources:
   vm_coreos_01:
     type: OS::Nova::Server
     properties:
-      name: "CoreOS-01"
+      name:
+        str_replace:
+          template: "$stack_name$-CoreOS-01"
+          params:
+            $stack_name$: { get_param: "OS::stack_name" }
       image: { get_param: Image }
       flavor: { get_param: Flavor }
       key_name: { get_param: "Key Name CoreOS" }
@@ -241,7 +245,11 @@ resources:
   vm_coreos_02:
     type: OS::Nova::Server
     properties:
-      name: "CoreOS-02"
+      name:
+        str_replace:
+          template: "$stack_name$-CoreOS-02"
+          params:
+            $stack_name$: { get_param: "OS::stack_name" }
       image: { get_param: Image}
       flavor: { get_param: Flavor }
       key_name: { get_param: "Key Name CoreOS" }
@@ -263,7 +271,11 @@ resources:
   vm_coreos_03:
     type: OS::Nova::Server
     properties:
-      name: "CoreOS-03"
+      name:
+        str_replace:
+          template: "$stack_name$-CoreOS-03"
+          params:
+            $stack_name$: { get_param: "OS::stack_name" }
       image: { get_param: Image}
       flavor: { get_param: Flavor }
       key_name: { get_param: "Key Name CoreOS" }
@@ -285,7 +297,11 @@ resources:
   vm_coreos_04:
     type: OS::Nova::Server
     properties:
-      name: "CoreOS-04"
+      name:
+        str_replace:
+          template: "$stack_name$-CoreOS-04"
+          params:
+            $stack_name$: { get_param: "OS::stack_name" }
       image: { get_param: Image}
       flavor: { get_param: Flavor }
       key_name: { get_param: "Key Name CoreOS" }
@@ -307,7 +323,11 @@ resources:
   vm_coreos_05:
     type: OS::Nova::Server
     properties:
-      name: "CoreOS-05"
+      name:
+        str_replace:
+          template: "$stack_name$-CoreOS-05"
+          params:
+            $stack_name$: { get_param: "OS::stack_name" }
       image: { get_param: Image}
       flavor: { get_param: Flavor }
       key_name: { get_param: "Key Name CoreOS" }
