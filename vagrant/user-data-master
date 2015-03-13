@@ -1,0 +1,74 @@
+#cloud-config
+
+---
+write_files:
+- path: /etc/environment
+  content: "COREOS_PUBLIC_IPV4=$public_ipv4 \nCOREOS_PRIVATE_IPV4=$private_ipv4 \nDOCKER_PRELOAD_ENABLED=true\nDOCKER_IMAGE_TAG=latest\nZURMO_INIT_GIT_BRANCH=latest\nZURMO_APACHE_NUM_INSTANCES=1\nZURMO_MEMCACHE_NUM_INSTANCES=1\n"
+coreos:
+  etcd:
+    discovery: https://discovery.etcd.io/7cfc9c6d8df50dcabb19397977578af4
+    addr: $public_ipv4:4001
+    peer-addr: $public_ipv4:7001
+  fleet:
+    public-ip: $public_ipv4
+    metadata: public=true
+  units:
+  - name: etcd.service
+    command: start
+  - name: fleet.service
+    command: start
+  - name: docker-tcp.socket
+    command: start
+    enable: true
+    content: |
+      [Unit]
+      Description=Docker Socket for the API
+
+      [Socket]
+      ListenStream=2375
+      Service=docker.service
+      BindIPv6Only=both
+
+      [Install]
+      WantedBy=sockets.target
+  - name: zurmo-predownload-docker-images.service
+    command: start
+    content: |
+      [Unit]
+      Description=Service to Pre-Download Docker Images for Zurmo
+      Requires=etcd.service
+      After=etcd.service
+
+      [Service]
+      EnvironmentFile=/etc/environment
+
+      Type=oneshot
+
+      ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
+      ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/master/init/preload-docker-images.sh
+      ExecStartPre=/bin/chmod +x /tmp/zurmo/preload-docker-images.sh
+      ExecStart=/bin/bash -c "/tmp/zurmo/preload-docker-images.sh;"
+
+      [Install]
+      WantedBy=multi-user.target
+  - name: zurmo-init.service
+    command: start
+    content: |
+      [Unit]
+      Description=Service to initialize Zurmo Application
+      Requires=etcd.service
+      After=etcd.service
+      After=zurmo-predownload-docker-images.service
+
+      [Service]
+      EnvironmentFile=/etc/environment
+
+      Type=oneshot
+
+      ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
+      ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/master/init/startup.sh
+      ExecStartPre=/bin/chmod +x /tmp/zurmo/startup.sh
+      ExecStart=/bin/bash -c "/tmp/zurmo/startup.sh;"
+
+      [Install]
+      WantedBy=multi-user.target
