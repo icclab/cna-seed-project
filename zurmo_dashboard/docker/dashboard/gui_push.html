@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Service topology</title>
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="viz.js"></script>
+    <script type="text/javascript">
+    function do_first_req(){
+        do_req();        
+        // creating a new websocket
+        var socket = io.connect('http://localhost:8000');
+        // on every message recived we print the new datas inside the #container div
+        socket.on('notification', function (data) {
+            // convert the json string into a valid javascript object
+            //var _data = JSON.parse(data);
+            //alert( "Data from socket: " + data );            
+            //$('#container').html(data);
+            //document.getElementById("input").innerHTML = data;
+            $('time').html('Last Update:' + new Date());
+            do_req();
+        });        
+    }
+    function do_req(){    
+        $.ajax({
+          type: "GET",
+          url: "/graph.txt",
+          mimeType: 'text/plain; charset=x-user-defined',
+          //data: "name=John&location=Boston"
+        }).done( function(msg) {          
+          document.getElementById("input").innerHTML = msg;
+          //alert( "Data Saved: " + msg );
+          //document.getElementById("input").value = msg;          
+          //$('#input').value(msg);
+          render_graph();
+        }).fail( function( xmlHttpRequest, statusText, errorThrown ) {
+          alert(
+            "Your request failed.\n\n"
+              + "XML Http Request: " + JSON.stringify( xmlHttpRequest )
+              + ",\nStatus Text: " + statusText
+              + ",\nError Thrown: " + errorThrown );
+        });
+    }
+    function render_graph(){      
+      var input = document.getElementById("input").value;      
+      var format = "svg";
+      var engine = "dot";
+      var result = Viz(input, format, engine);
+      document.getElementById("output").innerHTML = result;
+      //document.getElementById("inspect").innerHTML = inspect(result);
+    }
+    function inspect(s) {
+      return "<pre>" + s.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;") + "</pre>";
+    }
+    </script>    
+    <style>      
+    #input {
+      width: 500px;
+      height: 300px;
+      visibility: hidden;
+    }
+
+    svg {
+        margin-left: auto; 
+        margin-right: auto;
+        display: block;
+    }
+      
+    </style>
+  </head>
+  <body onload="do_first_req();">
+    <time></time>    
+    <div id="output"></div>
+    <div id="inspect"></div>
+    <textarea id="input"></textarea>
+  </body>
+</html>

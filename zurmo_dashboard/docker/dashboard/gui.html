@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="viz.js"></script>
+    <script type="text/javascript">
+    function render_graph(){
+      $.ajax({
+          type: "GET",
+          url: "graph.txt",
+          mimeType: 'text/plain; charset=x-user-defined',
+          //data: "name=John&location=Boston"
+        }).done( function(msg) {
+          //alert( "Data Saved: " + msg );
+          document.getElementById("input").value = msg;
+        }).fail( function( xmlHttpRequest, statusText, errorThrown ) {
+          alert(
+            "Your request failed.\n\n"
+              + "XML Http Request: " + JSON.stringify( xmlHttpRequest )
+              + ",\nStatus Text: " + statusText
+              + ",\nError Thrown: " + errorThrown );
+        });
+      var input = document.getElementById("input").value;
+      var format = "svg";
+      var engine = "dot";
+      var result = Viz(input, format, engine);
+      document.getElementById("output").innerHTML = result;
+    }
+    </script>
+    <title>Service topology</title>
+    <style>
+      
+    #input {
+      width: 500px;
+      height: 300px;
+      visibility: hidden;
+    }
+
+    svg {
+        margin-left: auto; 
+        margin-right: auto;
+        display: block;
+    }
+      
+    </style>
+  </head>
+  <body onload="render_graph();">
+    <div id="output" style="align: center"></div>    
+    <textarea id="input"></textarea>
+  </body>
+</html>
