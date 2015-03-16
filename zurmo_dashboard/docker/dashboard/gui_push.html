@@ -7,10 +7,18 @@
     <script src="socket.io/socket.io.js"></script>
     <script src="viz.js"></script>
     <script type="text/javascript">
+    var getLocation = function() {
+	var l = document.createElement("a");
+	l.href = location.href;
+	return l;
+    };
     function do_first_req(){
-        do_req();        
+        do_req();
+        var location = getLocation();
+        var host = location.host;
+        var port = location.port;
         // creating a new websocket
-        var socket = io.connect('http://localhost:8000');
+        var socket = io.connect('http://' + host + ':' + port + ');
         // on every message recived we print the new datas inside the #container div
         socket.on('notification', function (data) {
             // convert the json string into a valid javascript object

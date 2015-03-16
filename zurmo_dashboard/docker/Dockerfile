@@ -6,11 +6,16 @@ RUN apt-get update && \
     apt-get -yq install \
 	  nodejs \
 	  nodejs-legacy \
-	  npm && \
+	  npm \ 
+	  curl && \
     npm install socket.io && \
     npm install xml2json
 
 ADD dashboard /dashboard
+RUN curl -L https://github.com/coreos/etcd/releases/download/v2.0.5/etcd-v2.0.5-linux-amd64.tar.gz -o etcd-v2.0.5-linux-amd64.tar.gz && \
+  tar xzvf etcd-v2.0.5-linux-amd64.tar.gz
 
+ADD start.sh /start.sh
+  
 EXPOSE 8000
-CMD nodejs /dashboard/server.js
+CMD /start.sh
