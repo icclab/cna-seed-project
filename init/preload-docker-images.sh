@@ -22,7 +22,7 @@ if [ "$ENABLED" == "True" ]; then
 	do
 		IMAGE_NAME=${IMAGE_USERNAME}/${IMAGE_PREFIX}${item}:${IMAGE_TAG}
 		echo "Pulling ${IMAGE_NAME}"
-		docker pull ${IMAGE_NAME} > ${LOG_DIR}/info_${item}.log &
+		docker pull "${IMAGE_NAME}" > ${LOG_DIR}/info_${item}.log &
 	done
 	wait
 fi
