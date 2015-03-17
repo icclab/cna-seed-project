@@ -15,6 +15,7 @@ MEMCACHE_NUM_INSTANCES=${ZURMO_MEMCACHE_NUM_INSTANCES:-2}
 MYSQL_DEMODATA_NUM_INSTANCES=${ZURMO_MYSQL_DEMODATA_NUM_INSTANCES:-0}
 APACHE_NUM_INSTANCES=${ZURMO_APACHE_NUM_INSTANCES:-2}
 HAPROXY_NUM_INSTANCES=${ZURMO_HAPROXY_NUM_INSTANCES:-1}
+DASHBOARD_NUM_INSTANCES=${ZURMO_DASHBOARD_NUM_INSTANCES:-1}
 
 # Names of the services
 APACHE_NAME=zurmo_apache
@@ -22,12 +23,13 @@ HAPROXY_NAME=zurmo_haproxy
 MEMCACHE_NAME=zurmo_memcache
 MYSQL_NAME=zurmo_mysql
 MYSQL_DEMODATA_NAME=zurmo_mysql_demodata
+DASHBOARD_NAME=zurmo_dashboard
 
 TEMPLATE_FILE_LOCATION=~/templates
 INSTANCE_FILE_LOCATION=~/instances
 TEMPLATE_PREFIX=zurmo_
 INSTANCE_PREFIX=zurmo_
-TEMPLATE_NAMES=(apache elasticsearch haproxy kibana logstash memcache mysql tsung)
+TEMPLATE_NAMES=(apache elasticsearch haproxy kibana logstash memcache mysql tsung dashboard)
 INSTANCE_NAMES=(config application)
 SERVICE_FILE_ENDING=.service
 DISCOVERY_SERVICE_SUFFIX=_discovery
@@ -214,6 +216,10 @@ if [[ ${DOWNLOAD_FLEET_FILES} == "True" ]]; then
   function create_haproxy {
 	  create_instance $1 0 ${HAPROXY_NAME} 1
   }
+  
+  function create_dashboard {
+	  create_instance $1 0 ${DASHBOARD_NAME} 0
+  }
 
   log_and_print "\n"
   log_and_print "################################################"
@@ -221,12 +227,12 @@ if [[ ${DOWNLOAD_FLEET_FILES} == "True" ]]; then
   log_and_print "################################################"
   log_and_print "\n"
 
-  create_mysql MYSQL_NUM_INSTANCES
-  create_memcache MEMCACHE_NUM_INSTANCES
-  create_mysql_demodata MYSQL_DEMODATA_NUM_INSTANCES
-  create_apache APACHE_NUM_INSTANCES
-  create_haproxy HAPROXY_NUM_INSTANCES
-
+  create_mysql $MYSQL_NUM_INSTANCES
+  create_memcache $MEMCACHE_NUM_INSTANCES
+  create_mysql_demodata $MYSQL_DEMODATA_NUM_INSTANCES
+  create_apache $APACHE_NUM_INSTANCES
+  create_haproxy $HAPROXY_NUM_INSTANCES
+  create_dashboard $DASHBOARD_NUM_INSTANCES 
 fi
 
 if [[ ${START_SERVICES} == "True" ]]; then
@@ -264,6 +270,10 @@ if [[ ${START_SERVICES} == "True" ]]; then
   fleetctl start ${INSTANCES[${HAPROXY_NAME}]}
   log_and_print "\n"
 
+  log_and_print Starting dashboard instances
+  fleetctl start ${INSTANCES[${DASHBOARD_NAME}]}
+  log_and_print "\n"
+  
   cd $EXEC_PATH
   log_and_print Running instances:
   fleetctl list-units | tee -a ${LOG_FILE_PATH}
