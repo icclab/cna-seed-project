@@ -28,10 +28,11 @@ function handler(req, res) {
 
 // creating a new websocket to keep the content updated without any AJAX request
 io.sockets.on('connection', function(socket) {
-  console.log(__dirname);
-  // watching the xml file
+  console.log('watch file' + __dirname + '/graph.txt');
+  // watching the txt file
   fs.watchFile(__dirname + '/graph.txt', function(curr, prev) {
-    // on file change we can read the new xml
+    console.log('file changed!');
+    // on file change we can read the new file
     fs.readFile(__dirname + '/graph.txt', function(err, data) {
       if (err) throw err;
       // parsing the new xml data and converting them into json file

@@ -13,7 +13,7 @@ TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill zurmo_dashboard.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_dashboard.%i
 ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_dashboard:${DOCKER_IMAGE_TAG}
-ExecStart=/bin/bash -c 'exec /usr/bin/docker run --rm --name zurmo_dashboard.%i -p 8000:8000 -e "ETCD_ENDPOINT=$(ip route | awk \x27/docker0/ {print $NF }\x27):4001" -e "HOST_PRIVATE_IPV4=${COREOS_PRIVATE_IPV4}" -e "HOST_NAME=${HOST_NAME}" icclabcna/zurmo_dashboard:${DOCKER_IMAGE_TAG}'
+ExecStart=/bin/bash -c 'exec docker run --rm --name zurmo_dashboard.%i -p 8000:8000 -e "ETCDCTL_PEERS=$(ip route | awk \x27/docker0/ {print $NF }\x27):4001" icclabcna/zurmo_dashboard:${DOCKER_IMAGE_TAG}'
 ExecStop=/usr/bin/docker stop zurmo_dashboard.%i
 
 [X-Fleet]
