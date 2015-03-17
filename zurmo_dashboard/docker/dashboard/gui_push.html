@@ -74,12 +74,30 @@
         margin-right: auto;
         display: block;
     }
-      
+          
+    #input {
+      width: 500px;
+      height: 300px;
+      visibility: hidden;
+    }
+
+    svg {
+        margin-left: auto; 
+        margin-right: auto;
+        display: block;
+    }
+    
+    time {
+      text-align:center; 
+      padding-top: 20px; 
+      display: block
+    }
+    
     </style>
   </head>
   <body onload="do_first_req();">
-    <time></time>    
     <div id="output"></div>
+    <time></time>    
     <div id="inspect"></div>
     <textarea id="input"></textarea>
   </body>
