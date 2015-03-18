@@ -5,7 +5,7 @@ Description=Loadbalancer Service (HAProxy)
 After=docker.service
 Requires=docker.service
 Before=zurmo_haproxy_discovery@%i.service
-Wants=zurmo_haproxy_discovery@%i.service
+Requires=zurmo_haproxy_discovery@%i.service
 
 [Service]
 
