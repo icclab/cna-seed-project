@@ -3,7 +3,7 @@ Description=Zurmo MySQL Database
 After=docker.service
 Requires=docker.service
 Before=zurmo_mysql_discovery@%i.service
-Wants=zurmo_mysql_discovery@%i.service
+Requires=zurmo_mysql_discovery@%i.service
 
 [Service]
 EnvironmentFile=/etc/environment
