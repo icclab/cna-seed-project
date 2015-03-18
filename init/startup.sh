@@ -18,25 +18,32 @@ HAPROXY_NUM_INSTANCES=${ZURMO_HAPROXY_NUM_INSTANCES:-1}
 DASHBOARD_NUM_INSTANCES=${ZURMO_DASHBOARD_NUM_INSTANCES:-1}
 
 # Names of the services
-APACHE_NAME=zurmo_apache
-HAPROXY_NAME=zurmo_haproxy
-MEMCACHE_NAME=zurmo_memcache
-MYSQL_NAME=zurmo_mysql
-MYSQL_DEMODATA_NAME=zurmo_mysql_demodata
-DASHBOARD_NAME=zurmo_dashboard
+APACHE_NAME=apache
+HAPROXY_NAME=haproxy
+MEMCACHE_NAME=memcache
+MYSQL_NAME=mysql
+MYSQL_DEMODATA_NAME=mysql_demodata
+DASHBOARD_NAME=dashboard
+ELASTICSEARCH_NAME=elasticsearch
+KIBANA_NAME=kibana
+LOGSTASH_NAME=logstash
+TSUNG_NAME=tsung
+CONFIG_NAME=config
+APPLICATION_NAME=application
+
+TEMPLATE_NAMES=(${APACHE_NAME} ${ELASTICSEARCH_NAME} ${HAPROXY_NAME} ${KIBANA_NAME} ${LOGSTASH_NAME} ${MEMCACHE_NAME} ${MYSQL_NAME} ${TSUNG_NAME} ${DASHBOARD_NAME})
+INSTANCE_NAMES=(${CONFIG_NAME} ${APPLICATION_NAME})
 
 TEMPLATE_FILE_LOCATION=~/templates
 INSTANCE_FILE_LOCATION=~/instances
 TEMPLATE_PREFIX=zurmo_
 INSTANCE_PREFIX=zurmo_
-TEMPLATE_NAMES=(apache elasticsearch haproxy kibana logstash memcache mysql tsung dashboard)
-INSTANCE_NAMES=(config application)
 SERVICE_FILE_ENDING=.service
 DISCOVERY_SERVICE_SUFFIX=_discovery
+
+ENABLE_DISCOVERY_SERVICES=${ZURMO_INIT_ENABLE_DISCOVERY_SERVICES:-"True"}
 URL_ENCODED_AT=%40
-
 LOG_FILE_PATH=`pwd`/debug.log
-
 EXEC_PATH=`pwd`
 
 #create the directories for the template and instance files
@@ -110,47 +117,21 @@ if [[ ${DOWNLOAD_FLEET_FILES} == "True" ]]; then
 	  log_and_print File URL is ${URL}
 	  curl ${URL} > ${TEMPLATE_FILE_LOCATION}/${TEMPLATE_FILE_NAME} 2>> ${LOG_FILE_PATH}
 
-	  TEMPLATE_DISCOVERY_NAME=${TEMPLATE_PREFIX}${TEMPLATE_NAME_PART}${DISCOVERY_SERVICE_SUFFIX}
-	  TEMPLATE_DISCOVERY_FILE_NAME=${TEMPLATE_DISCOVERY_NAME}@${SERVICE_FILE_ENDING}
-	  URL=${GIT_BASE_URL}/${GIT_BRANCH}/${TEMPLATE_NAME}/${REL_SERVICEFILE_PATH}/${TEMPLATE_DISCOVERY_FILE_NAME}
-	  URL=$(url_encode_at $URL)
-	  log_and_print Get file ${TEMPLATE_DISCOVERY_FILE_NAME}
-	  log_and_print File URL is ${URL}
-	  curl ${URL} > ${TEMPLATE_FILE_LOCATION}/${TEMPLATE_DISCOVERY_FILE_NAME} 2>> ${LOG_FILE_PATH}
+	  if [[ $ENABLE_DISCOVERY_SERVICES == "True" ]]; then
+	    TEMPLATE_DISCOVERY_NAME=${TEMPLATE_PREFIX}${TEMPLATE_NAME_PART}${DISCOVERY_SERVICE_SUFFIX}
+	    TEMPLATE_DISCOVERY_FILE_NAME=${TEMPLATE_DISCOVERY_NAME}@${SERVICE_FILE_ENDING}
+	    URL=${GIT_BASE_URL}/${GIT_BRANCH}/${TEMPLATE_NAME}/${REL_SERVICEFILE_PATH}/${TEMPLATE_DISCOVERY_FILE_NAME}
+	    URL=$(url_encode_at $URL)
+	    log_and_print Get file ${TEMPLATE_DISCOVERY_FILE_NAME}
+	    log_and_print File URL is ${URL}
+	    curl ${URL} > ${TEMPLATE_FILE_LOCATION}/${TEMPLATE_DISCOVERY_FILE_NAME} 2>> ${LOG_FILE_PATH}
+	  fi
 
   done
 
   # ----------------------
   # Create instance files from templates
   # ----------------------
-
-  # transforms all lowercase characters in uppercase characters
-  # param: string
-  function uppercase {
-	  echo $1 | tr '[:lower:]' '[:upper:]'
-  }
-
-  APACHE_NAME=zurmo_apache
-  HAPROXY_NAME=zurmo_haproxy
-  MEMCACHE_NAME=zurmo_memcache
-  MYSQL_NAME=zurmo_mysql
-  MYSQL_DEMODATA_NAME=zurmo_mysql_demodata
-
-  declare -A INSTANCES
-  INSTANCES[${APACHE_NAME}]=""
-  INSTANCES[${HAPROXY_NAME}]=""
-  INSTANCES[${MEMCACHE_NAME}]=""
-  INSTANCES[${MYSQL_NAME}]=""
-  INSTANCES[${MYSQL_DEMODATA_NAME}]=""
-
-  # adds instance file names to the dictionary
-  # param: template name, instance name
-  function add_instance {
-	  TEMPLATE_NAME=$1
-	  INSTANCE_NAME=$2
-	  
-	  INSTANCES[${TEMPLATE_NAME}]+=" ${INSTANCE_NAME}"
-  }
 
   # creates a fleet instance file
   # param: (NR_INSTANCES, BASE_NR, TEMPLATE_NAME, HAS_DISCOVERY_SERVICE)
@@ -170,7 +151,6 @@ if [[ ${DOWNLOAD_FLEET_FILES} == "True" ]]; then
 		  INSTANCE_NR=$((BASE_NR + i))
 		  log_and_print Create ${TEMPLATE_NAME} instance file: ${INSTANCE_NR}
 		  INSTANCE_NAME=${TEMPLATE_NAME}@${INSTANCE_NR}${SERVICE_FILE_ENDING}
-		  add_instance $TEMPLATE_NAME $INSTANCE_NAME		
 
 		  INSTANCE_FILE_NAME=${INSTANCE_FILE_LOCATION}/${INSTANCE_NAME}
 		  rm -f ${INSTANCE_FILE_NAME}
@@ -186,39 +166,33 @@ if [[ ${DOWNLOAD_FLEET_FILES} == "True" ]]; then
 			  submit_fleet_file ${INSTANCE_FILE_NAME}
 		  fi
 	  done
-	  
-
   }
 
   function create_apache {
-	  create_instance $1 8080 ${APACHE_NAME} 1
+	  create_instance $1 8080 ${TEMPLATE_PREFIX}${APACHE_NAME} 1
   }
 
 
   function create_haproxy {
-	  create_instance $1 0 ${HAPROXY_NAME} 1
+	  create_instance $1 0 ${TEMPLATE_PREFIX}${HAPROXY_NAME} 1
   }
 
   function create_memcache {
-	  create_instance $1 11211 ${MEMCACHE_NAME} 1
+	  create_instance $1 11211 ${TEMPLATE_PREFIX}${MEMCACHE_NAME} 1
   }
 
 
   function create_mysql {
-	  create_instance $1 3306 ${MYSQL_NAME} 1        
+	  create_instance $1 3306 ${TEMPLATE_PREFIX}${MYSQL_NAME} 1        
   }
 
 
   function create_mysql_demodata {
-	  create_instance $1 3306 ${MYSQL_DEMODATA_NAME} 1        
-  }
-
-  function create_haproxy {
-	  create_instance $1 0 ${HAPROXY_NAME} 1
+	  create_instance $1 3306 ${TEMPLATE_PREFIX}${MYSQL_DEMODATA_NAME} 1        
   }
   
   function create_dashboard {
-	  create_instance $1 0 ${DASHBOARD_NAME} 0
+	  create_instance $1 0 ${TEMPLATE_PREFIX}${DASHBOARD_NAME} 0
   }
 
   log_and_print "\n"
@@ -253,26 +227,9 @@ if [[ ${START_SERVICES} == "True" ]]; then
 
   cd ${INSTANCE_FILE_LOCATION}
 
-  log_and_print Starting mysql instances
-  log_and_print instances: ${INSTANCES[${MYSQL_NAME}]}
-  fleetctl start ${INSTANCES[${MYSQL_NAME}]}
-  log_and_print "\n"
-
-  log_and_print Starting memcache instances
-  fleetctl start ${INSTANCES[${MEMCACHE_NAME}]}
-  log_and_print "\n"
-
-  log_and_print Starting apache instances
-  fleetctl start ${INSTANCES[${APACHE_NAME}]}
-  log_and_print "\n"
-
-  log_and_print Starting haproxy instances
-  fleetctl start ${INSTANCES[${HAPROXY_NAME}]}
-  log_and_print "\n"
-
-  log_and_print Starting dashboard instances
-  fleetctl start ${INSTANCES[${DASHBOARD_NAME}]}
-  log_and_print "\n"
+  log_and_print Starting instances
+  fleetctl start *${SERVICE_FILE_ENDING}
+  
   
   cd $EXEC_PATH
   log_and_print Running instances:
