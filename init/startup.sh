@@ -54,6 +54,13 @@ function submit_fleet_file {
   fi
 }
 
+# logs and prints to stdout the string provided
+# param: as many you want
+function log_and_print {
+	CONTENT=$@
+	echo -e $CONTENT | tee -a ${LOG_FILE_PATH}
+}
+
 if [[ ${DOWNLOAD_FLEET_FILES} == "True" ]]; then
 
   # ----------------------
@@ -65,13 +72,6 @@ if [[ ${DOWNLOAD_FLEET_FILES} == "True" ]]; then
   function url_encode_at {
 	  URL=$1
 	  echo ${URL/@/${URL_ENCODED_AT}}
-  }
-
-  # logs and prints to stdout the string provided
-  # param: as many you want
-  function log_and_print {
-	  CONTENT=$@
-	  echo -e $CONTENT | tee -a ${LOG_FILE_PATH}
   }
 
   log_and_print "\n"
