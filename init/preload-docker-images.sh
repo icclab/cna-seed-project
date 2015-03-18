@@ -9,7 +9,8 @@ ENABLED=${DOCKER_PRELOAD_ENABLED:-"True"}
 IMAGE_USERNAME=${DOCKER_PRELOAD_IMAGE_USERNAME:-"icclabcna"}
 IMAGE_PREFIX=${DOCKER_PRELOAD_IMAGE_PREFIX:-"zurmo_"}
 IMAGES_NAMES=${DOCKER_PRELOAD_IMAGES:-"apache:haproxy:memcache:mysql:config:application"}
-LOG_DIR=${DOCKER_PRELOAD_LOG_DIR:-"$(pwd)/logs"}
+LOG_DIR=${DOCKER_PRELOAD_LOG_DIR:-"~/docker-image-preload/logs"}
+IMAGE_TAG=${DOCKER_IMAGE_TAG:-"latest"}
 
 if [ "$ENABLED" == "True" ]; then
 
@@ -19,9 +20,9 @@ if [ "$ENABLED" == "True" ]; then
 	set ${IMAGES_NAMES}
 	for item
 	do
-		IMAGE_NAME=${IMAGE_USERNAME}/${IMAGE_PREFIX}${item}
+		IMAGE_NAME=${IMAGE_USERNAME}/${IMAGE_PREFIX}${item}:${IMAGE_TAG}
 		echo "Pulling ${IMAGE_NAME}"
-		docker pull -a ${IMAGE_NAME} > ${LOG_DIR}/info_${item}.log &
+		docker pull "${IMAGE_NAME}" > ${LOG_DIR}/info_${item}.log &
 	done
 	wait
 fi

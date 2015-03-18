@@ -1,0 +1,21 @@
+[Unit]
+Description=Dashboard for Zurmo (View running instance-graph)
+After=docker.service
+After=etcd.service
+Requires=docker.service
+Requires=etcd.service
+
+[Service]
+# Get CoreOS environmental variables
+EnvironmentFile=/etc/environment
+
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill zurmo_dashboard.%i
+ExecStartPre=-/usr/bin/docker rm zurmo_dashboard.%i
+ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_dashboard:${DOCKER_IMAGE_TAG}
+ExecStart=/bin/bash -c 'exec docker run --rm --name zurmo_dashboard.%i -p 8000:8000 -e "ETCDCTL_PEERS=$(ip route | awk \x27/docker0/ {print $NF }\x27):4001" icclabcna/zurmo_dashboard:${DOCKER_IMAGE_TAG}'
+ExecStop=/usr/bin/docker stop zurmo_dashboard.%i
+
+[X-Fleet]
+Conflicts=zurmo_dashboard@*.service
+MachineMetadata=public=true
