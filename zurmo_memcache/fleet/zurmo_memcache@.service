@@ -3,7 +3,7 @@ Description=Zurmo Memcache
 After=docker.service
 Requires=docker.service
 Before=zurmo_memcache_discovery@%i.service
-Wants=zurmo_memcache_discovery@%i.service
+Requires=zurmo_memcache_discovery@%i.service
 
 [Service]
 EnvironmentFile=/etc/environment
