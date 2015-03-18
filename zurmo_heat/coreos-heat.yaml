@@ -38,56 +38,102 @@ parameters:
   CoreOS Cluster Discovery URL:
     description: "URL of the Cluster-Discovery URL"
     type: string
-    default: https://discovery.etcd.io/new?size=3
+    default: https://discovery.etcd.io/new?size=5
+  Preload Docker Images:
+    description: "URL of the Cluster-Discovery URL"
+    type: string
+    default: "True"
+    constraints:
+      - allowed_values: ["True", "False"]
+  Number of Web Servers:
+    description: "Number of Web Servers"
+    type: string
+    default: "2"
+    constraints:
+      - allowed_values: ["2","3","4","5"]
+  Number of Cache Servers:
+    description: "Number of Cache Servers"
+    type: string
+    default: "2"
+    constraints:
+      - allowed_values: ["2","3","4","5"]
+  Zurmo Git Branch:
+    description: "Git Branch / Version of Zurmo to use"
+    type: string
+    default: "master"
+    constraints:
+      - allowed_values: ["master", "logging-dev"]
 
 resources:
   coreos_init:
     type: OS::Heat::CloudConfig
     properties:
       cloud_config:
-        coreos:
-          etcd:
-            discovery: { get_param: "CoreOS Cluster Discovery URL" }
-            addr: $private_ipv4:4001
-            peer-addr: $private_ipv4:7001
-            cluster-active-size: 3
-          units:
-            - name: etcd.service
-              command: start
-            - name: fleet.service
-              command: start
-            - name: docker-tcp.socket
-              command: start
-              enable: true
-              content: |
-                [Unit]
-                Description=Docker Socket for the API
-                [Socket]
-                ListenStream=2375
-                BindIPv6Only=both
-                Service=docker.service
-                [Install]
-                WantedBy=sockets.target
+            write_files:
+              - path: /etc/environment
+                content:
+                  str_replace:
+                    template: |
+                      COREOS_PUBLIC_IPV4=$public_ipv4
+                      COREOS_PRIVATE_IPV4=$private_ipv4
+                      DOCKER_PRELOAD_ENABLED=$preload-docker-images$
+                      DOCKER_IMAGE_TAG=$zurmo-git-branch$
+                      ZURMO_INIT_GIT_BRANCH=$zurmo-git-branch$
+                    params:
+                      $preload-docker-images$: {get_param: "Preload Docker Images"}
+                      $zurmo-git-branch$: {get_param: "Zurmo Git Branch"}
+            coreos:
+              etcd:
+                discovery: { get_param: "CoreOS Cluster Discovery URL" }
+                addr: $private_ipv4:4001
+                peer-addr: $private_ipv4:7001
+                cluster-active-size: 5
+              units:
+                - name: etcd.service
+                  command: start
+                - name: fleet.service
+                  command: start
+                - name: docker-tcp.socket
+                  command: start
+                  enable: true
+                  content: |
+                    [Unit]
+                    Description=Docker Socket for the API
+                    [Socket]
+                    ListenStream=2375
+                    BindIPv6Only=both
+                    Service=docker.service
+                    [Install]
+                    WantedBy=sockets.target
+                - name: zurmo-predownload-docker-images.service
+                  command: start
+                  content: |
+                    [Unit]
+                    Description=Service to Pre-Download Docker Images for Zurmo
+                    Requires=etcd.service
+                    After=etcd.service
 
-  zurmo_init_script:
-    type: OS::Heat::SoftwareConfig
-    properties:
-      group: ungrouped
-      config: |
-        #!/bin/bash
-        touch /tmp/saluton
+                    [Service]
+                    EnvironmentFile=/etc/environment
 
-  vm_coreos_01_init:
-    type: OS::Heat::MultipartMime
-    properties:
-      parts:
-      - config: {get_resource: coreos_init}
-      - config: {get_resource: zurmo_init_script}
+                    Type=oneshot
+
+                    ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
+                    ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/master/init/preload-docker-images.sh
+                    ExecStartPre=/bin/chmod +x /tmp/zurmo/preload-docker-images.sh
+                    ExecStart=/bin/bash -c "/tmp/zurmo/preload-docker-images.sh;"
+
+                    [Install]
+                    WantedBy=multi-user.target
 
   vm_coreos_01:
     type: OS::Nova::Server
     properties:
-      name: "CoreOS-01"
+      name:
+        str_replace:
+          template: "$stack_name$-CoreOS-01"
+          params:
+            $stack_name$: { get_param: "OS::stack_name" }
       image: { get_param: Image }
       flavor: { get_param: Flavor }
       key_name: { get_param: "Key Name CoreOS" }
@@ -98,12 +144,22 @@ resources:
         str_replace:
           template: |
             #cloud-config
+            write_files:
+            - path: /etc/environment
+              content: |
+                COREOS_PUBLIC_IPV4=$public_ipv4
+                COREOS_PRIVATE_IPV4=$private_ipv4
+                DOCKER_PRELOAD_ENABLED=$preload-docker-images$
+                ZURMO_APACHE_NUM_INSTANCES=$number-of-web-servers$
+                ZURMO_MEMCACHE_NUM_INSTANCES=$number-of-cache-servers$
+                DOCKER_IMAGE_TAG=$zurmo-git-branch$
+                ZURMO_INIT_GIT_BRANCH=$zurmo-git-branch$
             coreos:
               etcd:
                 discovery: $etcd_discovery_url$
                 addr: $private_ipv4:4001
                 peer-addr: $private_ipv4:7001
-                cluster-active-size: 3
+                cluster-active-size: 5
               fleet:
                 metadata: public=true
               units:
@@ -123,6 +179,26 @@ resources:
                     Service=docker.service
                     [Install]
                     WantedBy=sockets.target
+                - name: zurmo-predownload-docker-images.service
+                  command: start
+                  content: |
+                    [Unit]
+                    Description=Service to Pre-Download Docker Images for Zurmo
+                    Requires=etcd.service
+                    After=etcd.service
+
+                    [Service]
+                    EnvironmentFile=/etc/environment
+
+                    Type=oneshot
+
+                    ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
+                    ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/master/init/preload-docker-images.sh
+                    ExecStartPre=/bin/chmod +x /tmp/zurmo/preload-docker-images.sh
+                    ExecStart=/bin/bash -c "/tmp/zurmo/preload-docker-images.sh;"
+
+                    [Install]
+                    WantedBy=multi-user.target
                 - name: zurmo-init.service
                   command: start
                   content: |
@@ -130,9 +206,13 @@ resources:
                     Description=Service to initialize Zurmo Application
                     Requires=etcd.service
                     After=etcd.service
+                    After=zurmo-predownload-docker-images.service
 
                     [Service]
+                    EnvironmentFile=/etc/environment
+
                     Type=oneshot
+
                     ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
                     ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/master/init/startup.sh
                     ExecStartPre=/bin/chmod +x /tmp/zurmo/startup.sh
@@ -142,6 +222,10 @@ resources:
                     WantedBy=multi-user.target
           params:
             $etcd_discovery_url$: { get_param: "CoreOS Cluster Discovery URL" }
+            $preload-docker-images$: {get_param: "Preload Docker Images"}
+            $number-of-web-servers$: {get_param: "Number of Web Servers"}
+            $number-of-cache-servers$: {get_param: "Number of Cache Servers"}
+            $zurmo-git-branch$: {get_param: "Zurmo Git Branch"}
 
   vm_coreos_01_port:
     type: OS::Neutron::Port
@@ -161,7 +245,11 @@ resources:
   vm_coreos_02:
     type: OS::Nova::Server
     properties:
-      name: "CoreOS-02"
+      name:
+        str_replace:
+          template: "$stack_name$-CoreOS-02"
+          params:
+            $stack_name$: { get_param: "OS::stack_name" }
       image: { get_param: Image}
       flavor: { get_param: Flavor }
       key_name: { get_param: "Key Name CoreOS" }
@@ -183,7 +271,11 @@ resources:
   vm_coreos_03:
     type: OS::Nova::Server
     properties:
-      name: "CoreOS-03"
+      name:
+        str_replace:
+          template: "$stack_name$-CoreOS-03"
+          params:
+            $stack_name$: { get_param: "OS::stack_name" }
       image: { get_param: Image}
       flavor: { get_param: Flavor }
       key_name: { get_param: "Key Name CoreOS" }
@@ -194,6 +286,58 @@ resources:
         get_resource: coreos_init
 
   vm_coreos_03_port:
+    type: OS::Neutron::Port
+    properties:
+      network_id: { get_param: "Private Net ID" }
+      fixed_ips:
+        - subnet_id: { get_param: "Private Subnet ID" }
+      security_groups:
+        - coreos
+
+  vm_coreos_04:
+    type: OS::Nova::Server
+    properties:
+      name:
+        str_replace:
+          template: "$stack_name$-CoreOS-04"
+          params:
+            $stack_name$: { get_param: "OS::stack_name" }
+      image: { get_param: Image}
+      flavor: { get_param: Flavor }
+      key_name: { get_param: "Key Name CoreOS" }
+      networks:
+        - port: { get_resource: vm_coreos_04_port }
+      user_data_format: RAW
+      user_data:
+        get_resource: coreos_init
+
+  vm_coreos_04_port:
+    type: OS::Neutron::Port
+    properties:
+      network_id: { get_param: "Private Net ID" }
+      fixed_ips:
+        - subnet_id: { get_param: "Private Subnet ID" }
+      security_groups:
+        - coreos
+
+  vm_coreos_05:
+    type: OS::Nova::Server
+    properties:
+      name:
+        str_replace:
+          template: "$stack_name$-CoreOS-05"
+          params:
+            $stack_name$: { get_param: "OS::stack_name" }
+      image: { get_param: Image}
+      flavor: { get_param: Flavor }
+      key_name: { get_param: "Key Name CoreOS" }
+      networks:
+        - port: { get_resource: vm_coreos_05_port }
+      user_data_format: RAW
+      user_data:
+        get_resource: coreos_init
+
+  vm_coreos_05_port:
     type: OS::Neutron::Port
     properties:
       network_id: { get_param: "Private Net ID" }
@@ -215,3 +359,12 @@ outputs:
   CoreOS-03 Private IP:
     description: Private IP address of the CoreOS-03 VM
     value: { get_attr: [ vm_coreos_03, first_address ] }
+  CoreOS-04 Private IP:
+    description: Private IP address of the CoreOS-04 VM
+    value: { get_attr: [ vm_coreos_04, first_address ] }
+  CoreOS-05 Private IP:
+    description: Private IP address of the CoreOS-05 VM
+    value: { get_attr: [ vm_coreos_05, first_address ] }
+  CoreOS Cluster ETCD Endpoint:
+    description: ETCD Endpoint of CoreOS Cluster
+    value: { get_param: "CoreOS Cluster Discovery URL" }

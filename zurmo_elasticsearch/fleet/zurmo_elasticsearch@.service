@@ -3,7 +3,7 @@ Description=Elasticsearch Service
 After=docker.service
 Requires=docker.service
 Before=zurmo_elasticsearch_discovery@%i.service
-Wants=zurmo_elasticsearch_discovery@%i.service
+Requires=zurmo_elasticsearch_discovery@%i.service
 
 [Service]
 
@@ -12,12 +12,13 @@ EnvironmentFile=/etc/environment
 Environment="ETCD_ENDPOINT=10.1.42.1:4001"
 Environment="HOST_NAME=%H"
 
+Restart=always
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill zurmo_elasticsearch.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_elasticsearch.%i
-ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_elasticsearch
+ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_elasticsearch:${DOCKER_IMAGE_TAG}
 
-ExecStart=/usr/bin/docker run --rm --name zurmo_elasticsearch.%i -p 9200:9200 -p 9300:9300 -e "ETCD_ENDPOINT=${ETCD_ENDPOINT}" -e "HOST_PRIVATE_IPV4=${COREOS_PRIVATE_IPV4}" -e "HOST_NAME=${HOST_NAME}" icclabcna/zurmo_elasticsearch
+ExecStart=/usr/bin/docker run --rm --name zurmo_elasticsearch.%i -p 9200:9200 -p 9300:9300 -e "ETCD_ENDPOINT=${ETCD_ENDPOINT}" -e "HOST_PRIVATE_IPV4=${COREOS_PRIVATE_IPV4}" -e "HOST_NAME=${HOST_NAME}" icclabcna/zurmo_elasticsearch:${DOCKER_IMAGE_TAG}
 
 ExecStop=/usr/bin/docker stop zurmo_elasticsearch.%i
 

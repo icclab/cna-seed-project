@@ -1,0 +1,17 @@
+digraph G {
+lb -> as1;
+as1 -> db;
+as1 -> mc1;
+mc1 -> db;
+as1 -> mc2;
+mc2 -> db;
+lb -> as2;
+as2 -> db;
+as2 -> mc1;
+mc1 -> db;
+as2 -> mc2;
+mc2 -> db;
+lb -> as3;
+as3 -> mc1;
+as3 -> mc2;
+}

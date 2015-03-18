@@ -3,12 +3,17 @@ Description=Zurmo Memcache
 After=docker.service
 Requires=docker.service
 Before=zurmo_memcache_discovery@%i.service
-Wants=zurmo_memcache_discovery@%i.service
+Requires=zurmo_memcache_discovery@%i.service
 
 [Service]
+EnvironmentFile=/etc/environment
 TimeoutStartSec=0
+Restart=always
 ExecStartPre=-/usr/bin/docker kill zurmo_memcache.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_memcache.%i
-ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_memcache
-ExecStart=/usr/bin/docker run --name zurmo_memcache.%i -p %i:11211 icclabcna/zurmo_memcache
+ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_memcache:${DOCKER_IMAGE_TAG}
+ExecStart=/usr/bin/docker run --name zurmo_memcache.%i -p %i:11211 icclabcna/zurmo_memcache:${DOCKER_IMAGE_TAG}
 ExecStop=/usr/bin/docker stop zurmo_memcache.%i
+
+[X-Fleet]
+Conflicts=zurmo_memcache@*.service
