@@ -5,6 +5,9 @@
 # Example DOCKER_PRELOAD_IMAGES="apache:haproxy" will download icclabcna/zurmo_apache and icclabcna/zurmo_haproxy
 # If you like to change the username and prefix of the images, define the environment variables IMAGE_USERNAME, IMAGE_PREFIX
 
+# comparing strings does ignore case
+shopt -s nocasematch
+
 ENABLED=${DOCKER_PRELOAD_ENABLED:-"True"}
 IMAGE_USERNAME=${DOCKER_PRELOAD_IMAGE_USERNAME:-"icclabcna"}
 IMAGE_PREFIX=${DOCKER_PRELOAD_IMAGE_PREFIX:-"zurmo_"}
