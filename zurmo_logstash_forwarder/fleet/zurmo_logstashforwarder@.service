@@ -1,20 +1,13 @@
 [Unit]
-Description=Zurmo Apache Web server
-Before=zurmo_apache_discovery@%i.service
-After=docker.service
-After=zurmo_application.service
-After=zurmo_config.service
+Description=Zurmo logstash forwarder component
 Requires=docker.service
-Requires=zurmo_application.service
-Requires=zurmo_config.service
-Wants=zurmo_apache_discovery@%i.service
 
 [Service]
 EnvironmentFile=/etc/environment
 TimeoutStartSec=0
-ExecStartPre=-/usr/bin/docker kill zurmo_apache.%i
-ExecStartPre=-/usr/bin/docker rm zurmo_apache.%i
-ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_apache
-ExecStart=/usr/bin/docker run --name zurmo_apache.%i -p %i:80 --volumes-from zurmo_application --volumes-from zurmo_config icclabcna/zurmo_apache /apache-run.sh
-ExecStop=/usr/bin/docker stop zurmo_apache.%i
+ExecStartPre=-/usr/bin/docker kill zurmo_logstash_forwarder.%i
+ExecStartPre=-/usr/bin/docker rm zurmo_logstash_forwarder.%i
+ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_logstash_forwarder
+ExecStart=/usr/bin/docker run --name zurmo_logstash_forwarder.%i icclabcna/zurmo_logstash_forwarder
+ExecStop=/usr/bin/docker stop zurmo_logstash_forwarder.%i
 
