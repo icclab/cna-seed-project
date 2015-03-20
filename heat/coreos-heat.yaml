@@ -63,6 +63,12 @@ parameters:
     default: "master"
     constraints:
       - allowed_values: ["master", "logging-dev"]
+  Zurmo Start Fleet Services:
+    description: "Start Zurmo Application (Fleet Services)"
+    type: string
+    default: "True"
+    constraints:
+      - allowed_values: ["True", "False"]
 
 resources:
   coreos_init:
@@ -77,8 +83,8 @@ resources:
                       COREOS_PUBLIC_IPV4=$public_ipv4
                       COREOS_PRIVATE_IPV4=$private_ipv4
                       DOCKER_PRELOAD_ENABLED=$preload-docker-images$
-                      DOCKER_IMAGE_TAG=$zurmo-git-branch$
                       ZURMO_INIT_GIT_BRANCH=$zurmo-git-branch$
+                      DOCKER_IMAGE_TAG=$zurmo-git-branch$
                     params:
                       $preload-docker-images$: {get_param: "Preload Docker Images"}
                       $zurmo-git-branch$: {get_param: "Zurmo Git Branch"}
@@ -152,8 +158,9 @@ resources:
                 DOCKER_PRELOAD_ENABLED=$preload-docker-images$
                 ZURMO_APACHE_NUM_INSTANCES=$number-of-web-servers$
                 ZURMO_MEMCACHE_NUM_INSTANCES=$number-of-cache-servers$
-                DOCKER_IMAGE_TAG=$zurmo-git-branch$
                 ZURMO_INIT_GIT_BRANCH=$zurmo-git-branch$
+                DOCKER_IMAGE_TAG=$zurmo-git-branch$
+                ZURMO_INIT_START_SERVICES=$zurmo-start-fleet-services$
             coreos:
               etcd:
                 discovery: $etcd_discovery_url$
@@ -226,6 +233,7 @@ resources:
             $number-of-web-servers$: {get_param: "Number of Web Servers"}
             $number-of-cache-servers$: {get_param: "Number of Cache Servers"}
             $zurmo-git-branch$: {get_param: "Zurmo Git Branch"}
+            $zurmo-start-fleet-services$: {get_param: "Zurmo Start Fleet Services"}
 
   vm_coreos_01_port:
     type: OS::Neutron::Port
