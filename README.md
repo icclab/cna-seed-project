@@ -1,4 +1,4 @@
-# Cloud optimized Zurmo
+# Cloud-Native Applications Seed Project
  
 This repository contains the source files for the cloud optimized version of zurmo. This Application is part of the Cloud-Native Application Seed Project where we try to migrate an existing OpenSource Business Application to the cloud.  
 More information about the project and the whole cloud-native application research topic can be found on our [blog](http://blog.zhaw.ch/icclab/category/research-approach/themes/cloud-native-applications/).
