@@ -9,6 +9,8 @@ Requires=etcd.service
 # Get CoreOS environmental variables
 EnvironmentFile=/etc/environment
 
+Restart=always
+
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill zurmo_dashboard.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_dashboard.%i
