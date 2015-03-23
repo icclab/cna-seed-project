@@ -25,9 +25,9 @@ How to start a cluster with vagrant:
 ### OpenStack
 #### Heat Command Line Client
  1. Make file '/heat/heat-zurmo-stack-create' executable
-  * chmod +x heat-zurmo-stack-create
+  * `$ chmod +x heat-zurmo-stack-create`
  2. Change Parameters in 'heat-zurmo-stack-create' file to your liking
- 3. Create Zurmo Stack with command: $ source heat-zurmo-stack-create <stack-name>
+ 3. Create Zurmo Stack with command: `$ source heat-zurmo-stack-create <stack-name>`
   
 #### Horizon Dashboard
 How to start a cluster with OpenStack/Heat:
