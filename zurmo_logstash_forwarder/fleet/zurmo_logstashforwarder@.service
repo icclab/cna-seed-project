@@ -14,7 +14,7 @@ EnvironmentFile=/etc/environment
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill zurmo_apache.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_apache.%i
-ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_apache
+#ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_apache
 ExecStart=/usr/bin/docker run --name zurmo_apache.%i -p %i:80 --volumes-from zurmo_application --volumes-from zurmo_config icclabcna/zurmo_apache /apache-run.sh
 ExecStop=/usr/bin/docker stop zurmo_apache.%i
 
