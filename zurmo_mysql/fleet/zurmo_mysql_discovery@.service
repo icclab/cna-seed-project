@@ -5,6 +5,7 @@ After=zurmo_mysql@%i.service
 
 [Service]
 EnvironmentFile=/etc/environment
+Restart=always
 ExecStart=/bin/sh -c "TTL=10; SLEEP_TIME=7; \
   etcdctl setdir /services/database --ttl $TTL; \
   while true; \

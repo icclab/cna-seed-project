@@ -5,6 +5,7 @@ After=zurmo_memcache@%i.service
 
 [Service]
 EnvironmentFile=/etc/environment
+Restart=always
 ExecStart=/bin/sh -c "ID=`uuidgen`; echo $ID > /tmp/zurmo_memcache@%i.uuid; \
 	TTL=10; SLEEP_TIME=7; \
 	etcdctl setdir /services/cache/$ID --ttl $TTL; \

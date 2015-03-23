@@ -6,6 +6,7 @@ After=zurmo_apache@%i.service
 
 [Service]
 EnvironmentFile=/etc/environment
+Restart=always
 ExecStartPre=-/bin/sh -c "etcdctl mkdir /services/cache"
 ExecStart=/bin/sh -c "ID=`uuidgen`; echo $ID > /tmp/zurmo_apache@%i.uuid; TTL=10; SLEEP_TIME=7; \
   etcdctl setdir /services/webserver/$ID --ttl $TTL;  \
