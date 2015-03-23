@@ -8,7 +8,7 @@ The folders prefixed with *zurmo_* contain the source files for the docker image
 ## Start a cluster
  
 The most simple way to try the whole application is to start a cluster.  
-We provide both a vagrant and a heat file to start a cluster on your local computer or on your OpenStack cloud:
+We provide both a vagrant and a OpenStack Heat template to start a cluster on your local computer or on your OpenStack cloud:
  
 ### Vagrant
  
@@ -23,7 +23,13 @@ How to start a cluster with vagrant:
  7. run `vagrant up`
  
 ### OpenStack
- 
+#### Heat Command Line Client
+ 1. Make file '/heat/heat-zurmo-stack-create' executable
+  * chmod +x heat-zurmo-stack-create
+ 2. Change Parameters in 'heat-zurmo-stack-create' file to your liking
+ 3. Create Zurmo Stack with command: $ source heat-zurmo-stack-create <stack-name>
+  
+#### Horizon Dashboard
 How to start a cluster with OpenStack/Heat:
 
  1. Launch a stack on OpenStack
@@ -32,7 +38,7 @@ How to start a cluster with OpenStack/Heat:
  3. Use the URL under *CoreOS Cluster Discovery URL* to generate a discovery url and write it back to this field
  4. Modify the rest of the parameters as you like
  
-#### Heat Template Parameters
+##### Heat Template Parameters
 - **Flavor**:
  - Type of instance (flavor) to be used
  - default: m1.medium
