@@ -93,7 +93,7 @@ resources:
                 discovery: { get_param: "CoreOS Cluster Discovery URL" }
                 addr: $private_ipv4:4001
                 peer-addr: $private_ipv4:7001
-                cluster-active-size: 5
+                cluster-active-size: 3
               units:
                 - name: etcd.service
                   command: start
@@ -166,7 +166,7 @@ resources:
                 discovery: $etcd_discovery_url$
                 addr: $private_ipv4:4001
                 peer-addr: $private_ipv4:7001
-                cluster-active-size: 5
+                cluster-active-size: 3
               fleet:
                 metadata: public=true
               units:
