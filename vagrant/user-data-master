@@ -3,10 +3,10 @@
 ---
 write_files:
 - path: /etc/environment
-  content: "COREOS_PUBLIC_IPV4=$public_ipv4 \nCOREOS_PRIVATE_IPV4=$private_ipv4 \nDOCKER_PRELOAD_ENABLED=true\nDOCKER_IMAGE_TAG=latest\nZURMO_INIT_GIT_BRANCH=latest\nZURMO_APACHE_NUM_INSTANCES=1\nZURMO_MEMCACHE_NUM_INSTANCES=1\n"
+  content: "COREOS_PUBLIC_IPV4=$public_ipv4 \nCOREOS_PRIVATE_IPV4=$private_ipv4 \nDOCKER_PRELOAD_ENABLED=True\nDOCKER_IMAGE_TAG=latest\nZURMO_INIT_GIT_BRANCH=master\nZURMO_APACHE_NUM_INSTANCES=2\nZURMO_MEMCACHE_NUM_INSTANCES=2\nZURMO_INIT_ENABLE_DISCOVERY_SERVICES=True\nZURMO_INIT_DOWNLOAD_FLEET_FILES=true\nZURMO_INIT_START_SERVICES=True"
 coreos:
   etcd:
-    discovery: https://discovery.etcd.io/7cfc9c6d8df50dcabb19397977578af4
+    discovery: https://discovery.etcd.io/a36b439b4f5db74d1d4f36fdaa0ac7ab
     addr: $public_ipv4:4001
     peer-addr: $public_ipv4:7001
   fleet:
@@ -57,7 +57,9 @@ coreos:
       [Unit]
       Description=Service to initialize Zurmo Application
       Requires=etcd.service
+      Requires=fleet.service
       After=etcd.service
+      After=fleet.service
       After=zurmo-predownload-docker-images.service
 
       [Service]
