@@ -6,6 +6,7 @@ After=zurmo_logstash_forwarder%i.service
 
 [Service]
 EnvironmentFile=/etc/environment
+Restart=always
 ExecStartPre=-/bin/sh -c "\
   etcdctl mkdir /services/log_collector"
 ExecStart=/bin/sh -c "\

@@ -16,7 +16,7 @@ Restart=always
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill zurmo_elasticsearch.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_elasticsearch.%i
-ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_elasticsearch:${DOCKER_IMAGE_TAG}
+#ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_elasticsearch:${DOCKER_IMAGE_TAG}
 
 ExecStart=/usr/bin/docker run --rm --name zurmo_elasticsearch.%i -p 9200:9200 -p 9300:9300 -e "ETCD_ENDPOINT=${ETCD_ENDPOINT}" -e "HOST_PRIVATE_IPV4=${COREOS_PRIVATE_IPV4}" -e "HOST_NAME=${HOST_NAME}" icclabcna/zurmo_elasticsearch:${DOCKER_IMAGE_TAG}
 
