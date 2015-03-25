@@ -31,7 +31,7 @@ end
 # after the equals sign..
 
 # Size of the CoreOS cluster created by Vagrant
-$num_instances=2
+$num_instances=3
 
 # Change basename of the VM
 # The default value is "core", which results in VMs named starting with

@@ -3,7 +3,7 @@
 ---
 coreos:
   etcd:
-    discovery: https://discovery.etcd.io/60c301ec4a7e239a3adff7e24fa4f98d
+    discovery: https://discovery.etcd.io/a36b439b4f5db74d1d4f36fdaa0ac7ab
     addr: $public_ipv4:4001
     peer-addr: $public_ipv4:7001
     cluster-active-size: 5
@@ -51,6 +51,4 @@ coreos:
       WantedBy=multi-user.target
 write_files:
 - path: /etc/environment
-  content: "COREOS_PUBLIC_IPV4=$public_ipv4 \nCOREOS_PRIVATE_IPV4=$private_ipv4 \nDOCKER_PRELOAD_ENABLED=True\nDOCKER_IMAGE_TAG=latest
-    \nZURMO_INIT_GIT_BRANCH=master \nZURMO_INIT_ENABLE_DISCOVERY_SERVICES=true \nZURMO_INIT_DOWNLOAD_FLEET_FILES=true
-    \nZURMO_INIT_START_SERVICES=true"
+  content: "COREOS_PUBLIC_IPV4=$public_ipv4 \nCOREOS_PRIVATE_IPV4=$private_ipv4 \nDOCKER_PRELOAD_ENABLED=True\nDOCKER_IMAGE_TAG=latest\nZURMO_INIT_GIT_BRANCH=master\nZURMO_INIT_ENABLE_DISCOVERY_SERVICES=True\nZURMO_INIT_DOWNLOAD_FLEET_FILES=True\nZURMO_INIT_START_SERVICES=True"
