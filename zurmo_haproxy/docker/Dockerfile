@@ -13,9 +13,6 @@ RUN mkdir -p /etc/confd/{conf.d,templates}
 COPY haproxy.toml /etc/confd/conf.d/haproxy.toml
 COPY haproxy.cfg.tmpl /etc/confd/templates/haproxy.cfg.tmpl
 
-COPY logstash_forwarder.toml /logstash_forwarder/logstash_forwarder.toml
-COPY logstash_forwarder.json.tmpl /logstash_forwarder/logstash_forwarder.json.tmpl
-
 # rsyskig config for haproxy
 COPY haproxy.conf /etc/rsyslog.d/haproxy.conf
 
@@ -28,6 +25,6 @@ RUN chmod +x /usr/local/bin/start-service
 EXPOSE 80 1936
 
 VOLUME /var/log
-VOLUME /logstash-forwarder
+# VOLUME /logstash_forwarder
 
 CMD ["/usr/local/bin/start-service"]
