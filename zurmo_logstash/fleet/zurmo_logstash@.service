@@ -1,0 +1,19 @@
+[Unit]
+Description=Logstash Service that writes logs to elasticsearch
+After=docker.service
+Requires=docker.service
+Requires=zurmo_logstash_discovery@%i.service
+Before=zurmo_logstash_discovery@%i.service
+
+[Service]
+# Get CoreOS environmental variables
+EnvironmentFile=/etc/environment
+
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill zurmo_logstash.%i
+ExecStartPre=-/usr/bin/docker rm zurmo_logstash.%i
+# ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_logstash
+
+ExecStart=docker run --name zurmo_logstash.0 -p %i:5000 -e "ETCD_ENDPOINT=${ETCD_ENDPOINT}" -e "HOST_PRIVATE_IPV4=${COREOS_PRIVATE_IPV4}" icclabcna/zurmo_logstash
+
+ExecStop=/usr/bin/docker stop zurmo_logstash.%i

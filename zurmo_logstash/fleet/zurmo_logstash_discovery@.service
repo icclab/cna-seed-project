@@ -1,0 +1,24 @@
+[Unit]
+Description=Announces Logstash
+BindsTo=zurmo_logstash@%i.service
+After=zurmo_logstash@%i.service
+
+[Service]
+EnvironmentFile=/etc/environment
+
+ExecStart=/bin/sh -c "UUID=`uuidgen`; SERVICE_NAME=logcollector; TTL=10; SLEEP_TIME=7; \
+  echo $UUID > /tmp/zurmo_logstash@%i.uuid; \
+  etcdctl setdir /services/$SERVICE_NAME/$UUID --ttl $TTL; \
+  etcdctl setdir /services/$SERVICE_NAME/$UUID/settings --ttl $TTL; \
+    while true; \
+      do \
+        etcdctl updatedir /services/$SERVICE_NAME/$UUID --ttl $TTL; \
+        etcdctl updatedir /services/$SERVICE_NAME/$UUID/settings --ttl $TTL; \
+        etcdctl set /services/$SERVICE_NAME/$UUID/host %H --ttl $TTL; \
+        etcdctl set /services/$SERVICE_NAME/$UUID/ip ${COREOS_PRIVATE_IPV4} --ttl $TTL; \
+        etcdctl set /services/$SERVICE_NAME/$UUID/port %i --ttl $TTL; \
+        sleep $SLEEP_TIME; \
+      done"
+
+ExecStop=/bin/sh -c "etcdctl rm --recursive /services/logcollector/`cat /tmp/zurmo_logstash@%i.uuid` && rm -f /tmp/zurmo_logstash@%i.uuid"
+
