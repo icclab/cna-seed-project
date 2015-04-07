@@ -10,4 +10,11 @@ ADD start.sh /start.sh
 ADD elasticsearch.toml /etc/confd/conf.d/elasticsearch.toml
 ADD elasticsearch.yml.tmpl /etc/confd/templates/elasticsearch.yml.tmpl
 
-CMD /start.sh
+# single instance version
+ADD elasticsearch.yml /data/elasticsearch.yml
+
+# single instance version
+CMD /elasticsearch/bin/elasticsearch -Des.config=/data/elasticsearch.yml
+
+# Self configuring version
+# CMD /start.sh
