@@ -76,18 +76,30 @@ resources:
     properties:
       cloud_config:
             write_files:
-              - path: /etc/environment
-                content:
-                  str_replace:
-                    template: |
-                      COREOS_PUBLIC_IPV4=$public_ipv4
-                      COREOS_PRIVATE_IPV4=$private_ipv4
-                      DOCKER_PRELOAD_ENABLED=$preload-docker-images$
-                      ZURMO_INIT_GIT_BRANCH=$zurmo-git-branch$
-                      DOCKER_IMAGE_TAG=$zurmo-git-branch$
-                    params:
-                      $preload-docker-images$: {get_param: "Preload Docker Images"}
-                      $zurmo-git-branch$: {get_param: "Zurmo Git Branch"}
+            - path: /etc/environment
+              content:
+                str_replace:
+                  template: |
+                    COREOS_PUBLIC_IPV4=$public_ipv4
+                    COREOS_PRIVATE_IPV4=$private_ipv4
+                    DOCKER_PRELOAD_ENABLED=$preload-docker-images$
+                    ZURMO_INIT_GIT_BRANCH=$zurmo-git-branch$
+                    DOCKER_IMAGE_TAG=$zurmo-git-branch$
+                  params:
+                    $preload-docker-images$: {get_param: "Preload Docker Images"}
+                    $zurmo-git-branch$: {get_param: "Zurmo Git Branch"}
+            - path: /etc/ssh/sshd_config
+              permissions: '0600'
+              owner: root:root
+              content: |
+                # Use most defaults for sshd configuration.
+                UsePrivilegeSeparation sandbox
+                Subsystem sftp internal-sftp
+
+                PermitRootLogin no
+                AllowUsers core
+                PasswordAuthentication no
+                ChallengeResponseAuthentication no
             coreos:
               etcd:
                 discovery: { get_param: "CoreOS Cluster Discovery URL" }
@@ -161,6 +173,18 @@ resources:
                 ZURMO_INIT_GIT_BRANCH=$zurmo-git-branch$
                 DOCKER_IMAGE_TAG=$zurmo-git-branch$
                 ZURMO_INIT_START_SERVICES=$zurmo-start-fleet-services$
+            - path: /etc/ssh/sshd_config
+              permissions: '0600'
+              owner: root:root
+              content: |
+                # Use most defaults for sshd configuration.
+                UsePrivilegeSeparation sandbox
+                Subsystem sftp internal-sftp
+
+                PermitRootLogin no
+                AllowUsers core
+                PasswordAuthentication no
+                ChallengeResponseAuthentication no
             coreos:
               etcd:
                 discovery: $etcd_discovery_url$
