@@ -6,6 +6,7 @@ export ETCD_ENDPOINT=${ETCD_ENDPOINT:-172.17.42.1:4001}
 TOML_PATH=/etc/confd/conf.d/elasticsearch.toml
 
 echo "[logstash] booting container"
+echo "[logstash] using etcd endpoint ${ETCD_ENDPOINT}"
 
 # Try to make initial configuration every 5 seconds until successful
 until confd -onetime -node $ETCD_ENDPOINT -config-file ${TOML_PATH}; do
