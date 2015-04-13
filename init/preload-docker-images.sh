@@ -11,9 +11,9 @@ shopt -s nocasematch
 ENABLED=${DOCKER_PRELOAD_ENABLED:-"True"}
 IMAGE_USERNAME=${DOCKER_PRELOAD_IMAGE_USERNAME:-"icclabcna"}
 IMAGE_PREFIX=${DOCKER_PRELOAD_IMAGE_PREFIX:-"zurmo_"}
-IMAGES_NAMES=${DOCKER_PRELOAD_IMAGES:-"apache:haproxy:memcache:mysql:config:application"}
+IMAGES_NAMES=${DOCKER_PRELOAD_IMAGES:-"apache:haproxy:memcache:mysql:config:application:logstash:elasticsearch:log_courier_haproxy:kibana"}
 LOG_DIR=${DOCKER_PRELOAD_LOG_DIR:-"~/docker-image-preload/logs"}
-IMAGE_TAG=${DOCKER_IMAGE_TAG:-"latest"}
+IMAGE_TAG=${DOCKER_IMAGE_TAG:-"logging-dev"}
 
 if [ "$ENABLED" == "True" ]; then
 
