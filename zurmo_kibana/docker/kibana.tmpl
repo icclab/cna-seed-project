@@ -29,7 +29,11 @@ function (Settings) {
      *  +elasticsearch: {server: "http://localhost:9200", withCredentials: true}+
      *
      */
-    elasticsearch: "http://{{getv "/services/elasticsearch/host"}}:{{getv "/services/elasticsearch/port"}}",
+    {{ range $dir := lsdir "/services/logstorage/" }} 
+	{{$ippath := printf "/services/logstorage/%s/ip" $dir}} 
+	{{$portpath := printf "/services/logstorage/%s/port" $dir}} 
+    elasticsearch: "http://{{ getv $ippath }}:{{ getv $portpath }}",
+    {{ end }}
 
     /** @scratch /configuration/config.js/5
      *
