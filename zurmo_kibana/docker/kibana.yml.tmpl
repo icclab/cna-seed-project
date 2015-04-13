@@ -7,7 +7,7 @@ host: "0.0.0.0"
 # The Elasticsearch instance to use for all your queries.
 {{ range $dir := lsdir "/services/logstorage/" }}
 	{{$ippath := printf "/services/logstorage/%s/ip" $dir}}
-        {{$portpath := printf "/services/logstorage/%s/port" $dir}}
+        {{$portpath := printf "/services/logstorage/%s/http-port" $dir}}
 elasticsearch_url: "http://{{ getv $ippath }}:{{ getv $portpath }}"
 {{ end }}
 
