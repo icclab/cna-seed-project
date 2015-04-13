@@ -1,3 +1,3 @@
 cluster.name: elasticsearch
 node.name: logstash_shipper01
-discovery.zen.ping.unicast.hosts: [ {{ range $dir := lsdir "/services/logstorage/" }} {{$ippath := printf "/services/logstorage/%s/ip" $dir}} {{$portpath := printf "/services/logstorage/%s/port" $dir}} "{{ getv $ippath }}:{{ getv $portpath }}", {{ end }} ""]
+discovery.zen.ping.unicast.hosts: [ {{ range $dir := lsdir "/services/logstorage/" }} {{$ippath := printf "/services/logstorage/%s/ip" $dir}} {{$portpath := printf "/services/logstorage/%s/http-port" $dir}} "{{ getv $ippath }}:{{ getv $portpath }}", {{ end }} ""]
