@@ -1,0 +1,19 @@
+[Unit]
+Description=Kibana
+After=docker.service
+Requires=docker.service
+
+[Service]
+
+# Get CoreOS environmental variables
+EnvironmentFile=/etc/environment
+
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill zurmo_kibana.%i
+ExecStartPre=-/usr/bin/docker rm zurmo_kibana.%i
+ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_kibana:${DOCKER_IMAGE_TAG}
+ExecStart=/bin/bash -c 'exec /usr/bin/docker run --rm --name zurmo_kibana.%i -p %i:80 -e "ETCD_ENDPOINT=$(ip route | awk \x27/docker0/ {print $NF }\x27):4001" -e "HOST_PRIVATE_IPV4=${COREOS_PRIVATE_IPV4}" icclabcna/zurmo_kibana:${DOCKER_IMAGE_TAG}'
+ExecStop=/usr/bin/docker stop zurmo_kibana.%i
+
+[X-Fleet]
+MachineMetadata=public=true

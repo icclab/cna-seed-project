@@ -6,7 +6,7 @@ After=docker.service
 Requires=docker.service
 Before=zurmo_haproxy_discovery@%i.service
 Requires=zurmo_haproxy_discovery@%i.service
-Requires=zurmo_logstash_forwarder@haproxy_%i.service
+Requires=zurmo_log_courier@haproxy_%i.service
 
 [Service]
 
@@ -18,7 +18,7 @@ TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill loadbalancer_%i
 ExecStartPre=-/usr/bin/docker rm loadbalancer_%i
 ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_haproxy:${DOCKER_IMAGE_TAG}
-ExecStart=/bin/bash -c 'exec /usr/bin/docker run --rm --name loadbalancer_%i -p 80:80 -p 1936:1936 -e "ETCD_ENDPOINT=$(ip route | awk \x27/docker0/ {print $NF }\x27):4001" -e "HOST_PRIVATE_IPV4=${COREOS_PRIVATE_IPV4}" -e "HOST_NAME=${HOST_NAME}" --volumes-from zurmo_logstash_forwarder.haproxy_%i icclabcna/zurmo_haproxy:${DOCKER_IMAGE_TAG}'
+ExecStart=/bin/bash -c 'exec /usr/bin/docker run --rm --name loadbalancer_%i -p 80:80 -p 1936:1936 -e "ETCD_ENDPOINT=$(ip route | awk \x27/docker0/ {print $NF }\x27):4001" -e "HOST_PRIVATE_IPV4=${COREOS_PRIVATE_IPV4}" -e "HOST_NAME=${HOST_NAME}" icclabcna/zurmo_haproxy:${DOCKER_IMAGE_TAG}'
 ExecStop=/usr/bin/docker stop loadbalancer_%i
 
 [X-Fleet]
