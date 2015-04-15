@@ -14,6 +14,6 @@ ExecStartPre=-/usr/bin/docker kill zurmo_logstash.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_logstash.%i
 ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_logstash:${DOCKER_IMAGE_TAG}
 
-ExecStart=docker run --rm --name zurmo_logstash.0 -p %i:5000 -e "ETCD_ENDPOINT=$(ip route | awk \x27/docker0/ {print $NF }\x27):4001" -e "HOST_PRIVATE_IPV4=${COREOS_PRIVATE_IPV4}" icclabcna/zurmo_logstash:${DOCKER_IMAGE_TAG}
+ExecStart=/bin/bash -c '/usr/bin/docker run --rm --name zurmo_logstash.%i -p %i:5000 -e "ETCD_ENDPOINT=$(ip route | awk \x27/docker0/ {print $NF }\x27):4001" -e "HOST_PRIVATE_IPV4=${COREOS_PRIVATE_IPV4}" icclabcna/zurmo_logstash:${DOCKER_IMAGE_TAG}'
 
 ExecStop=/usr/bin/docker stop zurmo_logstash.%i
