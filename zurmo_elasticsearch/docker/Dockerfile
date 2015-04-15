@@ -14,7 +14,7 @@ ADD elasticsearch.yml.tmpl /etc/confd/templates/elasticsearch.yml.tmpl
 ADD elasticsearch.yml /data/elasticsearch.yml
 
 # single instance version
-CMD /elasticsearch/bin/elasticsearch -Des.config=/data/elasticsearch.yml
+CMD elasticsearch -Des.config=/data/elasticsearch.yml
 
 # Self configuring version
 # CMD /start.sh
