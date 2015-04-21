@@ -9,8 +9,8 @@ echo "[logstash] booting container"
 echo "[logstash] using etcd endpoint ${ETCD_ENDPOINT}"
 
 echo "[logstash] set publish ip ${HOST_PRIVATE_IPV4}"
-sed -i /<HOST_IP>/${HOST_PRIVATE_IPV4}/g /etc/confd/templates/elasticsearch.yml.tmpl
-sed -i /<NODE_NAME>/logstash_${HOST_PRIVATE_IPV4}/g /etc/confd/templates/elasticsearch.yml.tmpl
+sed -i "s/<HOST_IP>/${HOST_PRIVATE_IPV4}/g" /etc/confd/templates/elasticsearch.yml.tmpl
+sed -i "s/<NODE_NAME>/logstash_${HOST_PRIVATE_IPV4}/g" /etc/confd/templates/elasticsearch.yml.tmpl 
 
 echo "[logstash] elasticsearch cluster configuration template is now:"
 cat /etc/confd/templates/elasticsearch.yml.tmpl
