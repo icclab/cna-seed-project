@@ -3,3 +3,7 @@ path:
   data: /data/data
 http.cors.enabled: true
 http.cors.allow-origin: "/.*/"
+
+network.publish_host: "<HOST_IP>"
+discovery.zen.ping.multicast.enabled: false
+

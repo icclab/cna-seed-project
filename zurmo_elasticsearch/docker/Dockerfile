@@ -5,7 +5,8 @@ RUN chmod u+x /usr/local/bin/confd
 RUN mkdir -p /etc/confd/conf.d && \
   mkdir -p /etc/confd/templates
 
-ADD start.sh /start.sh
+# single instance version
+ADD start-single.sh /start.sh
 
 ADD elasticsearch.toml /etc/confd/conf.d/elasticsearch.toml
 ADD elasticsearch.yml.tmpl /etc/confd/templates/elasticsearch.yml.tmpl
@@ -14,7 +15,5 @@ ADD elasticsearch.yml.tmpl /etc/confd/templates/elasticsearch.yml.tmpl
 ADD elasticsearch.yml /data/elasticsearch.yml
 
 # single instance version
-CMD elasticsearch -Des.config=/data/elasticsearch.yml
+CMD /start.sh
 
-# Self configuring version
-# CMD /start.sh
