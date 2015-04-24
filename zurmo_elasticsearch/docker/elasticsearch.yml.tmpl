@@ -7,6 +7,7 @@ http.cors.allow-origin: "/.*/"
 cluster.name: elasticsearch_zurmo
 
 network.publish_host: "<HOST_IP>"
+transport.publish_host: "<HOST_IP>"
 
 discovery.zen.ping.multicast.enabled: false 
 discovery.zen.ping.unicast.hosts: [{{ range $dir := lsdir "/services/logstorage/" }} {{$hostpath := printf "/services/logstorage/%s/host" $dir}} {{$portpath := printf "/services/logstorage/%s/transport-port" $dir}} "{{ getv $hostpath }}:{{ getv $portpath }}", {{ end }}]

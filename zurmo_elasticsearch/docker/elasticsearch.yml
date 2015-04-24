@@ -5,5 +5,7 @@ http.cors.enabled: true
 http.cors.allow-origin: "/.*/"
 
 network.publish_host: "<HOST_IP>"
+transport.publish_host: "<HOST_IP>"
+
 discovery.zen.ping.multicast.enabled: false
 
