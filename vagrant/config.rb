@@ -1,25 +1,41 @@
 $new_discovery_url='https://discovery.etcd.io/new'
 
+$cloud_config_variables = {
+	"$preload-docker-images$" => "True",
+	"$zurmo-git-branch$" => "logging-dev",
+	"$number-of-web-servers$" => "2",
+	"$number-of-cache-servers$" => "2",
+	"$zurmo-start-fleet-services$" => "True",
+	"$enable_discovery_services$" => "True",
+	"$download_fleet_files$" => "True"
+}
+
+def replace_cloud_config_variables(cloud_config_path)
+	contents = File.read(cloud_config_path)
+	
+	# replace the occurences of the variables defined above
+	$cloud_config_variables.each do |key,value|
+		contents.gsub! key, value
+	end
+	
+	cloud_config_path.gsub! ".tmpl", ""
+	
+	#write back to file
+	File.open(cloud_config_path, 'w') { |file| file.write(contents) }
+end
+
 # To automatically replace the discovery token on 'vagrant up', uncomment
 # the lines below:
 #
-if File.exists?('user-data') && File.exists?('user-data-master') && ARGV[0].eql?('up')
+if File.exists?('user-data.tmpl') && File.exists?('user-data-master.tmpl') && ARGV[0].eql?('up')
   require 'open-uri'
-  require 'yaml'
  
-  token = open($new_discovery_url).read
+  etcd_token = open($new_discovery_url).read
+  $cloud_config_variables["$etcd_token$"] = etcd_token
  
-  data = YAML.load(IO.readlines('user-data')[1..-1].join)
-  data['coreos']['etcd']['discovery'] = token
-  
-  yaml = YAML.dump(data)
-  File.open('user-data', 'w') { |file| file.write("#cloud-config\n\n#{yaml}") }
-  
-  data = YAML.load(IO.readlines('user-data-master')[1..-1].join)
-  data['coreos']['etcd']['discovery'] = token
-  
-  yaml = YAML.dump(data)
-  File.open('user-data-master', 'w') { |file| file.write("#cloud-config\n\n#{yaml}") }
+  replace_cloud_config_variables('user-data.tmpl')
+  replace_cloud_config_variables('user-data-master.tmpl')
+ 
 end
 
 
