@@ -6,7 +6,6 @@ After=docker.service
 Requires=docker.service
 Before=zurmo_haproxy_discovery@%i.service
 Requires=zurmo_haproxy_discovery@%i.service
-Requires=zurmo_log_courier@haproxy_%i.service
 
 [Service]
 

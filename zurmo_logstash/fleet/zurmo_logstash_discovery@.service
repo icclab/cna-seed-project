@@ -22,3 +22,6 @@ ExecStart=/bin/sh -c "UUID=`uuidgen`; SERVICE_NAME=logcollector; TTL=10; SLEEP_T
 
 ExecStop=/bin/sh -c "etcdctl rm --recursive /services/logcollector/`cat /tmp/zurmo_logstash@%i.uuid` && rm -f /tmp/zurmo_logstash@%i.uuid"
 
+[X-Fleet]
+MachineOf=zurmo_logstash@%i.service
+
