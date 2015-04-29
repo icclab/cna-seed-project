@@ -4,7 +4,9 @@ RUN apt-get update && apt-get install -y \
     golang \
     git \
     make \
-    wget && \
+    wget \
+    supervisor && \
+  mkdir -p /var/log/supervisor && \
   git clone https://github.com/driskell/log-courier && \
   cd log-courier && \
   make && \
@@ -17,7 +19,11 @@ RUN wget --no-check-certificate https://github.com/kelseyhightower/confd/release
 
 ADD log-courier.toml /etc/confd/conf.d/log-courier.toml
 ADD log-courier.conf /etc/log-courier.conf
-ADD start.sh /start.sh
-RUN chmod +x /start.sh
+ADD confd.sh /confd.sh
+RUN chmod +x /confd.sh
 
-CMD /start.sh
+ADD supervisor/log_courier_supervisor.conf /etc/supervisor/conf.d/log_courier_supervisord.conf
+ADD supervisor/supervisord.conf /etc/supervisor/supervisord.conf
+ADD supervisor/kill_supervisor.py /usr/bin/kill_supervisor.py
+
+CMD /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
