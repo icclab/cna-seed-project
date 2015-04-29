@@ -15,6 +15,7 @@ RUN wget --no-check-certificate https://github.com/kelseyhightower/confd/release
   mv confd-0.7.1-linux-amd64 /usr/local/bin/confd && \
   mkdir -p /etc/confd/conf.d && mkdir -p /etc/confd/templates
 
+ADD log-courier.toml /etc/confd/conf.d/log-courier.toml
 ADD log-courier.conf /etc/log-courier.conf
 ADD start.sh /start.sh
 RUN chmod +x /start.sh
