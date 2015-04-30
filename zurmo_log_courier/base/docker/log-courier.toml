@@ -1,5 +1,3 @@
-# /etc/confd/conf.d/logstash_forwarder.toml
-
 [template]
 
 # The name of the template that will be used to render the application's configuration file
@@ -20,4 +18,5 @@ mode = "0644"
 # These are the commands that will be used to check whether the rendered config is
 # valid and to reload the actual service once the new config is in place
 # check_cmd = "/usr/sbin/haproxy -f /etc/haproxy/haproxy.cfg -c"
-reload_cmd = "kill -HUP `cat /var/run/log-courier.pid`"
+# reload_cmd = "kill -HUP `cat /var/run/log-courier.pid`"
+reload_cmd = "supervisorctl restart logcourier"
