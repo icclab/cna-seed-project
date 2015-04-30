@@ -26,4 +26,4 @@ ADD supervisor/log_courier_supervisor.conf /etc/supervisor/conf.d/log_courier_su
 ADD supervisor/supervisord.conf /etc/supervisor/supervisord.conf
 ADD supervisor/kill_supervisor.py /usr/bin/kill_supervisor.py
 
-CMD /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
+CMD mkdir -p /var/log/supervisor && /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
