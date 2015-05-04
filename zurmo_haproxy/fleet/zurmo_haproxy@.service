@@ -8,7 +8,6 @@ Before=zurmo_haproxy_discovery@%i.service
 Requires=zurmo_haproxy_discovery@%i.service
 
 [Service]
-
 # Get CoreOS environmental variables
 EnvironmentFile=/etc/environment
 Environment="HOST_NAME=%H"
