@@ -74,5 +74,7 @@ RUN wget --no-check-certificate https://github.com/kelseyhightower/confd/release
 ADD apache-run.sh /apache-run.sh
 RUN chmod 0500 /apache-run.sh
 
+VOLUME /var/log/apache2
+
 EXPOSE 80
 CMD ["/apache-run.sh"]
