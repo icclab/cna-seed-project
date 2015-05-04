@@ -1,0 +1,29 @@
+[Unit]
+Description=Log-courier Service (shipping logs from apache to logstash)
+After=docker.service
+Requires=docker.service
+Requires=zurmo_apache@%i.service
+After=zurmo_apache@%i.service
+
+[Service]
+# Get CoreOS environmental variables
+EnvironmentFile=/etc/environment
+
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill zurmo_log_courier_apache.%i
+ExecStartPre=-/usr/bin/docker rm zurmo_log_courier_apache.%i
+# ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_log_courier_apache:${DOCKER_IMAGE_TAG}
+
+ExecStartPre=/bin/sh -c "while ! $(docker inspect -f {{.State.Running}} zurmo_apache.%i); \
+do \
+    echo 'Waiting for container apache to start'; \
+    sleep 1; \
+done; \
+echo 'Container apache started';"
+
+ExecStart=/bin/bash -c '/usr/bin/docker run --name zurmo_log_courier_apache.%i -e "ETCD_ENDPOINT=$(ip route | awk \x27/docker0/ {print $NF }\x27):4001" --volumes-from zurmo_apache.%i icclabcna/zurmo_log_courier_apache:${DOCKER_IMAGE_TAG}'
+
+ExecStop=/usr/bin/docker stop zurmo_log_courier_apache.%i
+
+[X-Fleet]
+MachineOf=zurmo_apache@%i.service

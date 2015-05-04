@@ -1,0 +1,29 @@
+{
+  "general": {
+        "log file": "/var/log/log-courier/log-courier.log"
+  },
+  "network": {
+    "servers": [ 
+      {{range $dir := lsdir "/services/logcollector"}}
+	{{$ippath := printf "/services/logcollector/%s/ip" $dir}}
+	{{$portpath := printf "/services/logcollector/%s/port" $dir}}
+	  "{{getv $ippath}}:{{getv $portpath}}",
+      {{end}}
+      ""
+    ],
+    "timeout": 15,
+    "transport": "tcp"
+  },
+
+  "files": [
+    {
+      "paths": [
+        "/zurmo/zurmo/app/protected/runtime/application.log",
+	"/zurmo/zurmo/app/protected/runtime/sqlProfiling.log",
+	"/zurmo/zurmo/app/protected/runtime/memcacheProfiling.log",
+	"/zurmo/zurmo/app/protected/runtime/pageProfiling.log"
+      ],
+      "fields": { "type": "apache" }
+    }
+  ]
+}
