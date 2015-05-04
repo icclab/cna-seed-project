@@ -1,3 +1,5 @@
+confdir = "/etc/confd/apache"
+
 [template]
 
 src = "perInstance.tmpl"
