@@ -1,11 +1,10 @@
 FROM ubuntu
 
 ADD config /zurmo/zurmo/app/protected/config
-ADD conf.d /etc/confd/conf.d
-ADD templates /etc/confd/templates
+ADD conf.d /etc/confd/apache/conf.d
+ADD templates /etc/confd/apache/templates
 
 RUN chown -R www-data /zurmo
 
 VOLUME /zurmo/zurmo/app/protected/config
-VOLUME /etc/confd/templates
-VOLUME /etc/confd/conf.d
+VOLUME /etc/confd/apache

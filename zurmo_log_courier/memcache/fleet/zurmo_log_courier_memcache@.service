@@ -1,0 +1,29 @@
+[Unit]
+Description=Log-courier Service (shipping logs from memcache to logstash)
+After=docker.service
+Requires=docker.service
+Requires=zurmo_memcache@%i.service
+After=zurmo_memcache@%i.service
+
+[Service]
+# Get CoreOS environmental variables
+EnvironmentFile=/etc/environment
+
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill zurmo_log_courier_memcache.%i
+ExecStartPre=-/usr/bin/docker rm zurmo_log_courier_memcache.%i
+# ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_log_courier_memcache:${DOCKER_IMAGE_TAG}
+
+ExecStartPre=/bin/sh -c "while ! $(docker inspect -f {{.State.Running}} zurmo_memcache.%i); \
+do \
+    echo 'Waiting for container memcache to start'; \
+    sleep 1; \
+done; \
+echo 'Container memcache started';"
+
+ExecStart=/bin/bash -c '/usr/bin/docker run --name zurmo_log_courier_memcache.%i -e "ETCD_ENDPOINT=$(ip route | awk \x27/docker0/ {print $NF }\x27):4001" --volumes-from zurmo_memcache.%i icclabcna/zurmo_log_courier_memcache:${DOCKER_IMAGE_TAG}'
+
+ExecStop=/usr/bin/docker stop zurmo_log_courier_memcache.%i
+
+[X-Fleet]
+MachineOf=zurmo_memcache@%i.service
