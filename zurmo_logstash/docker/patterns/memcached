@@ -1,0 +1,3 @@
+COMMUNICATIONDIR [<>]{1}
+MESSAGE .*
+MEMCACHED %{COMMUNICATIONDIR:communictaion_direction}?%{INT:connection_socket_descriptor}? %{MESSAGE:message}

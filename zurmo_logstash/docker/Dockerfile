@@ -31,4 +31,6 @@ ADD confd.sh /confd.sh
 ADD supervisord.conf /etc/supervisor/supervisord.conf
 ADD kill_supervisor.py /usr/bin/kill_supervisor.py
 ADD logstash_supervisord.conf /etc/supervisor/conf.d/logstash_supervisord.conf
+ADD patterns /logstash/patterns
+
 CMD /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
