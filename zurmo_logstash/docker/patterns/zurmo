@@ -1,0 +1,2 @@
+DURATION \d+(\.\d+)?
+ZURMO %{NOTSPACE:request_id} %{DURATION:time_elapsed:float}
