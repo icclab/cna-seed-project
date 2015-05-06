@@ -34,8 +34,11 @@ TSUNG_NAME=tsung
 CONFIG_NAME=config
 APPLICATION_NAME=application
 LOG_COURIER_HAPROXY_NAME=log_courier_haproxy
+LOG_COURIER_APACHE_NAME=log_courier_apache
+LOG_COURIER_MYSQL_NAME=log_courier_mysql
+LOG_COURIER_MEMCACHE_NAME=log_courier_memcache
 
-TEMPLATE_NAMES=(${APACHE_NAME} ${ELASTICSEARCH_NAME} ${HAPROXY_NAME} ${KIBANA_NAME} ${LOGSTASH_NAME} ${MEMCACHE_NAME} ${MYSQL_NAME} ${TSUNG_NAME} ${DASHBOARD_NAME} ${LOG_COURIER_HAPROXY_NAME})
+TEMPLATE_NAMES=(${APACHE_NAME} ${ELASTICSEARCH_NAME} ${HAPROXY_NAME} ${KIBANA_NAME} ${LOGSTASH_NAME} ${MEMCACHE_NAME} ${MYSQL_NAME} ${TSUNG_NAME} ${DASHBOARD_NAME} ${LOG_COURIER_HAPROXY_NAME} ${LOG_COURIER_APACHE_NAME} ${LOG_COURIER_MYSQL_NAME} ${LOG_COURIER_MEMCACHE_NAME})
 INSTANCE_NAMES=(${CONFIG_NAME} ${APPLICATION_NAME})
 
 TEMPLATE_FILE_LOCATION=/home/core/templates
@@ -188,6 +191,7 @@ if [[ ${DOWNLOAD_FLEET_FILES} == "True" ]]; then
 
   function create_apache {
 	  create_instance $1 8080 ${TEMPLATE_PREFIX}${APACHE_NAME} 1
+	  create_instance $1 8080 ${TEMPLATE_PREFIX}${LOG_COURIER_APACHE_NAME} 0
   }
 
 
@@ -198,16 +202,19 @@ if [[ ${DOWNLOAD_FLEET_FILES} == "True" ]]; then
 
   function create_memcache {
 	  create_instance $1 11211 ${TEMPLATE_PREFIX}${MEMCACHE_NAME} 1
+	  create_instance $1 11211 ${TEMPLATE_PRFIIX}${LOG_COURIER_MEMCACHE_NAME} 0
   }
 
 
   function create_mysql {
-	  create_instance $1 3306 ${TEMPLATE_PREFIX}${MYSQL_NAME} 1        
+	  create_instance $1 3306 ${TEMPLATE_PREFIX}${MYSQL_NAME} 1
+	  create_instance $1 3306 ${TEMPLATE_PREFIX}${LOG_COURIER_MYSQL_NAME} 0        
   }
 
 
   function create_mysql_demodata {
-	  create_instance $1 3306 ${TEMPLATE_PREFIX}${MYSQL_DEMODATA_NAME} 1        
+	  create_instance $1 3306 ${TEMPLATE_PREFIX}${MYSQL_DEMODATA_NAME} 1
+	  create instance $1 3306 ${TEMPLATE_PREFIX}${LOG_COURIER_MYSQL_NAME} 0      
   }
   
   function create_dashboard {
