@@ -9,6 +9,8 @@ export ETCD=$HOST_IP:$ETCD_PORT
 
 echo "[apache] booting container. ETCD: $ETCD."
 
+collectd -C /collectd.conf
+
 # Try to make initial configuration every 5 seconds until successful
 until confd -onetime -node $ETCD -config-file /etc/confd/apache/conf.d/zurmo_perInstance.toml; do
     echo "[apache] waiting for confd to create initial apache configuration."

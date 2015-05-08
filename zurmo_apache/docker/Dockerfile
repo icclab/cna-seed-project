@@ -24,6 +24,7 @@ RUN apt-get update && \
 	php5-imap \
 	php-pear \
 	php5-dev \
+	collectd \
         git curl zip unzip vim wget && \
     rm -rf /var/lib/apt/lists/*
 
@@ -41,6 +42,7 @@ ADD my.cnf /etc/mysql/my.cnf
 ADD 000-default.conf /etc/apache2/sites-enabled/000-default.conf
 ADD apache2.conf /etc/apache2/apache2.conf
 RUN /install_xdebug.sh && mkdir /tmp/xdebug_profiling
+ADD collectd.conf /collectd.conf
 
 # Enable apache modules
 RUN a2enmod rewrite php5 vhost_alias headers unique_id
@@ -75,6 +77,7 @@ ADD apache-run.sh /apache-run.sh
 RUN chmod 0500 /apache-run.sh
 
 VOLUME /var/log/apache2
+VOLUME /var/log/collectd
 
 EXPOSE 80
 CMD ["/apache-run.sh"]
