@@ -3,11 +3,11 @@
         "log file": "/var/log/log-courier/log-courier.log"
   },
   "network": {
-    "servers": [ 
+    "servers": [
       {{range $dir := lsdir "/services/logcollector"}}
-	{{$ippath := printf "/services/logcollector/%s/ip" $dir}}
-	{{$portpath := printf "/services/logcollector/%s/port" $dir}}
-	  "{{getv $ippath}}:{{getv $portpath}}",
+        {{$ippath := printf "/services/logcollector/%s/ip" $dir}}
+        {{$portpath := printf "/services/logcollector/%s/port" $dir}}
+          "{{getv $ippath}}:{{getv $portpath}}",
       {{end}}
       ""
     ],
@@ -19,32 +19,92 @@
     {
       "paths": [
         "/zurmo/zurmo/app/protected/runtime/application.log",
-	"/zurmo/zurmo/app/protected/runtime/sqlProfiling.log",
-	"/zurmo/zurmo/app/protected/runtime/memcacheProfiling.log",
-	"/zurmo/zurmo/app/protected/runtime/pageProfiling.log",
-	"/var/log/apache2/perf.log",
-	"/var/log/apache2/access.log",
-	"/var/log/apache2/error.log"
+        "/zurmo/zurmo/app/protected/runtime/sqlProfiling.log",
+        "/zurmo/zurmo/app/protected/runtime/memcacheProfiling.log",
+        "/zurmo/zurmo/app/protected/runtime/pageProfiling.log",
+        "/var/log/apache2/perf.log",
+        "/var/log/apache2/access.log",
+        "/var/log/apache2/error.log"
       ],
       "fields": { "type": "apache" }
     },
-    {
-	"paths": [
-		"/var/log/collectd/%hostname%/cpu*/*"
-	],
-	"fields": {"type": "apache", "category":"system_metrics","resource":"cpu"}
+        {
+        "paths": [
+                "/var/log/collectd/zurmo_apache.8081/cpu*/cpu-idle-*"
+        ],
+        "fields": {"type": "apache", "category":"system_metrics","resource":"cpu", "metric":"cpu_idle"}
+    },
+        {
+                "paths": [
+                "/var/log/collectd/zurmo_apache.8081/cpu*/cpu-nice-*"
+        ],
+        "fields": {"type": "apache", "category":"system_metrics","resource":"cpu", "metric":"cpu_nice"}
+    },
+        {
+        "paths": [
+                "/var/log/collectd/zurmo_apache.8081/cpu*/cpu-steal-*"
+        ],
+        "fields": {"type": "apache", "category":"system_metrics","resource":"cpu", "metric":"cpu_steal"}
+    },
+        {
+        "paths": [
+                "/var/log/collectd/zurmo_apache.8081/cpu*/cpu-user-*"
+        ],
+        "fields": {"type": "apache", "category":"system_metrics","resource":"cpu", "metric":"cpu_user"}
+    },
+        {
+        "paths": [
+                "/var/log/collectd/zurmo_apache.8081/cpu*/cpu-interrupt-*"
+        ],
+        "fields": {"type": "apache", "category":"system_metrics","resource":"cpu", "metric":"cpu_interrupt"}
+    },
+        {
+        "paths": [
+                "/var/log/collectd/zurmo_apache.8081/cpu*/cpu-softirq-*"
+        ],
+        "fields": {"type": "apache", "category":"system_metrics","resource":"cpu", "metric":"cpu_softirq"}
+    },
+        {
+        "paths": [
+                "/var/log/collectd/zurmo_apache.8081/cpu*/cpu-system-*"
+        ],
+        "fields": {"type": "apache", "category":"system_metrics","resource":"cpu", "metric":"cpu_system"}
+    },
+        {
+        "paths": [
+                "/var/log/collectd/zurmo_apache.8081/cpu*/cpu-wait-*"
+        ],
+        "fields": {"type": "apache", "category":"system_metrics","resource":"cpu", "metric":"cpu_wait"}
     },
     {
-	"paths": [
-		"/var/log/collectd/%hostname%/load/*"
-	],
-	"fields": {"type": "apache", "category":"system_metrics","resource":"cpu_load"}
+        "paths": [
+                "/var/log/collectd/zurmo_apache.8081/load/*"
+        ],
+        "fields": {"type": "apache", "category":"system_metrics","resource":"cpu_load"}
     },
     {
-	"paths": [
-		"/var/log/collectd/%hostname%/memory/*"
-	],
-	"fields": {"type": "apache", "category":"system_metrics","resource":"memory"}
+        "paths": [
+                "/var/log/collectd/zurmo_apache.8081/memory/memory-buffered-*"
+        ],
+        "fields": {"type": "apache", "category":"system_metrics","resource":"memory", "metric":"memory_buffered"}
+    },
+        {
+        "paths": [
+                "/var/log/collectd/zurmo_apache.8081/memory/memory-cached-*"
+        ],
+        "fields": {"type": "apache", "category":"system_metrics","resource":"memory", "metric":"memory_cached"}
+    },
+        {
+        "paths": [
+                "/var/log/collectd/zurmo_apache.8081/memory/memory-free-*"
+        ],
+        "fields": {"type": "apache", "category":"system_metrics","resource":"memory", "metric":"memory_free"}
+    },
+        {
+        "paths": [
+                "/var/log/collectd/zurmo_apache.8081/memory/memory-used-*"
+        ],
+        "fields": {"type": "apache", "category":"system_metrics","resource":"memory", "metric":"memory_used"}
     }
   ]
 }
