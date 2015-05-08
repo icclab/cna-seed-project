@@ -27,6 +27,24 @@
 	"/var/log/apache2/error.log"
       ],
       "fields": { "type": "apache" }
+    },
+    {
+	"paths": [
+		"/var/log/collectd/%hostname%/cpu*/*"
+	],
+	"fields": {"type": "apache", "category":"system_metrics","resource":"cpu"}
+    },
+    {
+	"paths": [
+		"/var/log/collectd/%hostname%/load/*"
+	],
+	"fields": {"type": "apache", "category":"system_metrics","resource":"cpu_load"}
+    },
+    {
+	"paths": [
+		"/var/log/collectd/%hostname%/memory/*"
+	],
+	"fields": {"type": "apache", "category":"system_metrics","resource":"memory"}
     }
   ]
 }

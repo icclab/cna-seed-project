@@ -21,7 +21,7 @@ do \
 done; \
 echo 'Container apache started';"
 
-ExecStart=/bin/bash -c '/usr/bin/docker run --name zurmo_log_courier_apache.%i -e "ETCD_ENDPOINT=$(ip route | awk \x27/docker0/ {print $NF }\x27):4001" --volumes-from zurmo_apache.%i icclabcna/zurmo_log_courier_apache:${DOCKER_IMAGE_TAG}'
+ExecStart=/bin/bash -c '/usr/bin/docker run --name zurmo_log_courier_apache.%i -e "ETCD_ENDPOINT=$(ip route | awk \x27/docker0/ {print $NF }\x27):4001" -e "LOG_SRC_HOSTNAME=zurmo_apache.%i" --volumes-from zurmo_apache.%i icclabcna/zurmo_log_courier_apache:${DOCKER_IMAGE_TAG}'
 
 ExecStop=/usr/bin/docker stop zurmo_log_courier_apache.%i
 
