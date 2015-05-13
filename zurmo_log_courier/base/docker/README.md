@@ -20,3 +20,21 @@ The following information is used:
 #### Write service specific log-courier docker image
 To write your own log-courier docker image usually all you need to do is to modify the configuration file template.
 Specify which log file(s) you want to ship under the `files` section and it should already work.
+
+##### Log courier variables
+In the configuration file for log-courier you can use some special variables which are replaced before the configuration is loaded by log-courier:
+- %hostname% -> Hostname where the logs come from
+- %service-id% -> service ID of the service
+
+These variables get replaced when the container is started with the environment variables LOG_SRC_ID and LOG_SRC_HOSTNAME. 
+
+```
+docker run --name zurmo_log_courier_any \
+        -e "ETCD_ENDPOINT=$(ip route | awk '/docker0/ {print $NF }'):4001" \
+        -e "LOG_SRC_HOSTNAME=host1" \
+        -e "LOG_SRC_ID=1" \
+        --volumes-from name_of_the_service_container \
+        icclabcna/zurmo_log_courier_any
+```
+
+
