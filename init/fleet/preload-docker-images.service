@@ -1,0 +1,17 @@
+[Unit]
+Description=Downloads the docker images needed for zurmo (haproxy, apache, memcache, mysql, application, config)
+After=docker.service
+Requires=docker.service
+After=etcd.service
+Requires=etcd.service
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/environment
+ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
+ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/${ZURMO_INIT_GIT_BRANCH}/init/preload-docker-images.sh
+ExecStartPre=/bin/chmod +x /tmp/zurmo/preload-docker-images.sh
+ExecStart=/bin/bash -c "cd /tmp/zurmo && ./preload-docker-images.sh;"
+
+[X-Fleet]
+Global=true

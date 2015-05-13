@@ -275,7 +275,7 @@
             ),
             'request' => array(
                 'class' => 'application.core.components.ZurmoHttpRequest',
-                'enableCsrfValidation' => true,
+                'enableCsrfValidation' => false,
                 'enableCookieValidation' => false, //keep off until we can fix it on linux/windows servers.
                 'excludeCsrfValidationRoutes' => array(
                     array('route' => 'contacts/external/', 'tokenEnabled' => true),

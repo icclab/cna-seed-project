@@ -5,7 +5,7 @@ After=zurmo_logstash@%i.service
 
 [Service]
 EnvironmentFile=/etc/environment
-
+Restart=always
 ExecStart=/bin/sh -c "UUID=`uuidgen`; SERVICE_NAME=logcollector; TTL=10; SLEEP_TIME=7; \
   echo $UUID > /tmp/zurmo_logstash@%i.uuid; \
   etcdctl setdir /services/$SERVICE_NAME/$UUID --ttl $TTL; \

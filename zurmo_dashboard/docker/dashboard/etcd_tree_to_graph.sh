@@ -5,11 +5,11 @@ as=`grep -oE "webserver/.*(\/)" $input | uniq | wc -l`
 
 echo "digraph G {"
 for i in $(seq 1 $as); do 
-    echo "lb -> as$i;"
-    echo "as$i -> db;"
+    echo "HAProxy -> Zurmo$i;"
+    echo "Zurmo$i -> MySQL;"
     for j in $(seq 1 $mc); do 
-    echo "as$i -> mc$j;"
-    echo "mc$j -> db;"
+    echo "Zurmo$i -> Memcached$j;"
+    echo "Memcached$j -> MySQL;"
 done
 
 done

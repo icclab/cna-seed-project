@@ -6,6 +6,8 @@ After=zurmo_haproxy@%i.service
 [Service]
 EnvironmentFile=/etc/environment
 
+Restart=always
+
 ExecStart=/bin/sh -c "UUID=`uuidgen`; echo $UUID > /tmp/loadbalancer_service_announcer@%i.uuid; TTL=10; SLEEP_TIME=7; \
   etcdctl setdir /services/loadbalancer/$UUID --ttl $TTL; \
   etcdctl setdir /services/loadbalancer/$UUID/settings --ttl $TTL; \

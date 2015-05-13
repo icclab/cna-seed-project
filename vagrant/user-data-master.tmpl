@@ -3,6 +3,7 @@
 ---
 write_files:
 - path: /etc/environment
+
   content: |-
     COREOS_PUBLIC_IPV4=$public_ipv4
     COREOS_PRIVATE_IPV4=$private_ipv4
@@ -16,6 +17,7 @@ write_files:
     ZURMO_INIT_START_SERVICES=$zurmo-start-fleet-services$
 coreos:
   etcd:
+
     discovery: $etcd_token$
     addr: $public_ipv4:4001
     peer-addr: $public_ipv4:7001
