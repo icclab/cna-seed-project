@@ -24,6 +24,14 @@ RUN wget https://github.com/kelseyhightower/confd/releases/download/v0.7.1/confd
 	chmod u+x /usr/local/bin/confd && \
 	mkdir -p /etc/confd/{conf.d,templates}
 
+# install etcd output plugin
+RUN git clone https://github.com/icc-bloe/logstash-output-etcd.git && \
+        cd logstash-output-etcd && \
+        gem build logstash-output-etcd.gemspec && \
+        cd /logstash-1.4.2.tar.gz/logstash-1.4.2 && \
+        export GEM_HOME=vendor/bundle/jruby/1.9 && \
+        java -jar vendor/jar/jruby-complete-1.7.11.jar -S gem install /logstash-output-etcd/logstash-output-etcd-0.1.0.gem
+
 ADD elasticsearch.yml.tmpl /etc/confd/templates/elasticsearch.yml.tmpl
 ADD elasticsearch.toml /etc/confd/conf.d/elasticsearch.toml
 ADD confd.sh /confd.sh

@@ -1,5 +1,5 @@
 #!/bin/bash
 
-TAG=${DOCKER_IMAGE_TAG:-"latest"}
-
-sudo docker build -t="icclabcna/zurmo_logstash:${TAG}" .
+TAG=${DOCKER_IMAGE_TAG:-"logging-dev"}
+echo "Using tag ${TAG}"
+docker build -t="icclabcna/zurmo_logstash:${TAG}" .

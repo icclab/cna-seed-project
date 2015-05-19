@@ -1,4 +1,5 @@
 cluster.name: elasticsearch
 node.name: <NODE_NAME>
+discovery.zen.ping.multicast.enabled: false
 discovery.zen.ping.unicast.hosts: [ {{ range $dir := lsdir "/services/logstorage/" }} {{$ippath := printf "/services/logstorage/%s/ip" $dir}} {{$portpath := printf "/services/logstorage/%s/transport-port" $dir}} "{{ getv $ippath }}:{{ getv $portpath }}", {{ end }} ""]
 network.publish_host: "<HOST_IP>"
