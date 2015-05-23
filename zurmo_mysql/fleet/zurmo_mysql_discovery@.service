@@ -6,17 +6,18 @@ After=zurmo_mysql@%i.service
 [Service]
 EnvironmentFile=/etc/environment
 Restart=always
-ExecStart=/bin/sh -c "TTL=10; SLEEP_TIME=7; \
-  etcdctl setdir /services/database --ttl $TTL; \
+ExecStart=/bin/sh -c "ID=`uuidgen`; echo $ID > /tmp/zurmo_mysql@%i.uuid; TTL=10; SLEEP_TIME=7; \
+  etcdctl setdir /services/database/$ID --ttl $TTL; \
   while true; \
     do \
-      etcdctl updatedir /services/database --ttl $TTL; \
-      etcdctl set /services/database/host %H --ttl $TTL; \
-      etcdctl set /services/database/port %i --ttl $TTL; \
-      etcdctl set /services/database/ip ${COREOS_PRIVATE_IPV4} --ttl $TTL; \
+      etcdctl updatedir /services/database/$ID --ttl $TTL; \
+      etcdctl set /services/database/$ID/host %H --ttl $TTL; \
+      etcdctl set /services/database/$ID/port %i --ttl $TTL; \
+      etcdctl set /services/database/$ID/ip ${COREOS_PRIVATE_IPV4} --ttl $TTL; \
       sleep $SLEEP_TIME; \
     done"
-ExecStop=/usr/bin/etcdctl rm --recursive /services/database
+ExecStop=/usr/bin/etcdctl rm --recursive /services/database \
+/bin/sh -c "etcdctl rm --recursive /services/database/`cat /tmp/zurmo_mysql@%i.uuid` && rm -f /tmp/zurmo_mysql@%i.uuid"
 
 [X-Fleet]
 MachineOf=zurmo_mysql@%i.service
