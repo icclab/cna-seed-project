@@ -2,7 +2,9 @@
 
 set -eo pipefail
 
-export ETCD_ENDPOINT=${ETCD_ENDPOINT:-172.17.42.1:4001}
+ETCD_PORT=${ETCD_PORT:-4001}
+ETCD_IP=${ETCD_IP:-"172.17.42.1"}
+export ETCD_ENDPOINT=${ETCD_IP}:${ETCD_PORT}
 TOML_PATH=/etc/confd/conf.d/elasticsearch.toml
 
 echo "[logstash] booting container"
@@ -11,6 +13,8 @@ echo "[logstash] using etcd endpoint ${ETCD_ENDPOINT}"
 echo "[logstash] set publish ip ${HOST_PRIVATE_IPV4}"
 sed -i "s/<HOST_IP>/${HOST_PRIVATE_IPV4}/g" /etc/confd/templates/elasticsearch.yml.tmpl
 sed -i "s/<NODE_NAME>/logstash_${HOST_PRIVATE_IPV4}/g" /etc/confd/templates/elasticsearch.yml.tmpl 
+sed -i "s/<ETCD_IP>/${ETCD_IP}/g" /logstash/logstash_courier.cfg
+sed -i "s/<ETCD_PORT>/${ETCD_PORT}/g" /logstash/logstash_courier.cfg
 
 echo "[logstash] elasticsearch cluster configuration template is now:"
 cat /etc/confd/templates/elasticsearch.yml.tmpl

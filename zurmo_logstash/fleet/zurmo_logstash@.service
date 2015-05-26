@@ -12,7 +12,7 @@ EnvironmentFile=/etc/environment
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill zurmo_logstash.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_logstash.%i
-ExecStart=/bin/bash -c '/usr/bin/docker run --name zurmo_logstash.%i -p %i:5000 -p 9300:9300 -e "ETCD_ENDPOINT=$(ip route | awk \x27/docker0/ {print $NF }\x27):4001" -e "HOST_PRIVATE_IPV4=${COREOS_PRIVATE_IPV4}" icclabcna/zurmo_logstash:${DOCKER_IMAGE_TAG}'
+ExecStart=/bin/bash -c '/usr/bin/docker run --name zurmo_logstash.%i -p %i:5000 -p 9300:9300 -e "ETCD_IP=$(ip route | awk \x27/docker0/ {print $NF }\x27)" -e "ETCD_PORT=4001" -e "HOST_PRIVATE_IPV4=${COREOS_PRIVATE_IPV4}" icclabcna/zurmo_logstash:${DOCKER_IMAGE_TAG}'
 
 ExecStop=/usr/bin/docker stop zurmo_logstash.%i
 
