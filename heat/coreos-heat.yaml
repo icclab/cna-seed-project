@@ -127,24 +127,28 @@ resources:
                     WantedBy=sockets.target
                 - name: zurmo-predownload-docker-images.service
                   command: start
-                  content: |
-                    [Unit]
-                    Description=Service to Pre-Download Docker Images for Zurmo
-                    Requires=etcd.service
-                    After=etcd.service
+                  content:
+                    str_replace:
+                      template: |
+                        [Unit]
+                        Description=Service to Pre-Download Docker Images for Zurmo
+                        Requires=etcd.service
+                        After=etcd.service
 
-                    [Service]
-                    EnvironmentFile=/etc/environment
+                        [Service]
+                        EnvironmentFile=/etc/environment
 
-                    Type=oneshot
+                        Type=oneshot
 
-                    ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
-                    ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/master/init/preload-docker-images.sh
-                    ExecStartPre=/bin/chmod +x /tmp/zurmo/preload-docker-images.sh
-                    ExecStart=/bin/bash -c "/tmp/zurmo/preload-docker-images.sh;"
+                        ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
+                        ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/$zurmo-git-branch$/init/preload-docker-images.sh
+                        ExecStartPre=/bin/chmod +x /tmp/zurmo/preload-docker-images.sh
+                        ExecStart=/bin/bash -c "/tmp/zurmo/preload-docker-images.sh;"
 
-                    [Install]
-                    WantedBy=multi-user.target
+                        [Install]
+                        WantedBy=multi-user.target
+                      params:
+                        $zurmo-git-branch$: {get_param: "Zurmo Git Branch"}
 
   vm_coreos_01:
     type: OS::Nova::Server
@@ -228,7 +232,7 @@ resources:
                     Type=oneshot
 
                     ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
-                    ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/master/init/preload-docker-images.sh
+                    ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/$zurmo-git-branch$/init/preload-docker-images.sh
                     ExecStartPre=/bin/chmod +x /tmp/zurmo/preload-docker-images.sh
                     ExecStart=/bin/bash -c "/tmp/zurmo/preload-docker-images.sh;"
 
@@ -249,7 +253,7 @@ resources:
                     Type=oneshot
 
                     ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
-                    ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/master/init/startup.sh
+                    ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/$zurmo-git-branch$/init/startup.sh
                     ExecStartPre=/bin/chmod +x /tmp/zurmo/startup.sh
                     ExecStart=/bin/bash -c "/tmp/zurmo/startup.sh;"
 
