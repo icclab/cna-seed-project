@@ -15,8 +15,7 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker kill zurmo_apache.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_apache.%i
-ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_apache:${DOCKER_IMAGE_TAG}
-ExecStart=/bin/bash -c 'exec /usr/bin/docker run --name zurmo_apache.%i -p %i:80 -e "HOST_IP=$(ip route | awk \x27/docker0/ {print $NF }\x27)" --volumes-from zurmo_application --volumes-from zurmo_config icclabcna/zurmo_apache:${DOCKER_IMAGE_TAG} /apache-run.sh'
+ExecStart=/bin/bash -c 'exec /usr/bin/docker run --name zurmo_apache.%i -p %i:80 -e "HOST_IP=$(ip route | awk \x27/docker0/ {print $NF }\x27)" -h zurmo_apache.%i --volumes-from zurmo_application --volumes-from zurmo_config icclabcna/zurmo_apache:${DOCKER_IMAGE_TAG}'
 ExecStop=/usr/bin/docker stop zurmo_apache.%i
 
 [X-Fleet]

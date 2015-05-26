@@ -1,0 +1,1 @@
+CUSTOMAPACHE %{SYSLOG5424SD:request_received_date} %{NOTSPACE:request_id} %{QS:request_text} %{INT:http_status_code:int} %{SYSLOG5424SD} %{INT:time_serve_request_in_s:int} %{INT:time_serve_request_in_us:int} %{INT:response_size_in_bytes:int} %{IP:remote_host} %{IP:local_ip} %{IP:remote_ip} %{URIPATHPARAM}

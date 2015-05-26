@@ -1,0 +1,8 @@
+[Unit]
+Description=Deletes all outdated docker images
+
+[Service]
+ExecStart=/bin/bash -c 'docker rmi $(docker images -q -f dangling=true)'
+
+[X-Fleet]
+Global=true

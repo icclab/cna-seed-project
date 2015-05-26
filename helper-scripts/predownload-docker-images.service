@@ -1,0 +1,17 @@
+[Unit]
+Description=Service to Pre-Download Docker Images for Zurmo
+Requires=etcd.service
+After=etcd.service
+
+[Service]
+EnvironmentFile=/etc/environment
+
+Type=oneshot
+
+ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
+ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/${ZURMO_INIT_GIT_BRANCH}/init/preload-docker-images.sh
+ExecStartPre=/bin/chmod +x /tmp/zurmo/preload-docker-images.sh
+ExecStart=/bin/bash -c "/tmp/zurmo/preload-docker-images.sh;"
+
+[X-Fleet]
+Global=true

@@ -34,8 +34,11 @@ TSUNG_NAME=tsung
 CONFIG_NAME=config
 APPLICATION_NAME=application
 LOG_COURIER_HAPROXY_NAME=log_courier_haproxy
+LOG_COURIER_APACHE_NAME=log_courier_apache
+LOG_COURIER_MYSQL_NAME=log_courier_mysql
+LOG_COURIER_MEMCACHE_NAME=log_courier_memcache
 
-TEMPLATE_NAMES=(${APACHE_NAME} ${ELASTICSEARCH_NAME} ${HAPROXY_NAME} ${KIBANA_NAME} ${LOGSTASH_NAME} ${MEMCACHE_NAME} ${MYSQL_NAME} ${TSUNG_NAME} ${DASHBOARD_NAME} ${LOG_COURIER_HAPROXY_NAME})
+TEMPLATE_NAMES=(${APACHE_NAME} ${ELASTICSEARCH_NAME} ${HAPROXY_NAME} ${KIBANA_NAME} ${LOGSTASH_NAME} ${MEMCACHE_NAME} ${MYSQL_NAME} ${TSUNG_NAME} ${DASHBOARD_NAME} ${LOG_COURIER_HAPROXY_NAME} ${LOG_COURIER_APACHE_NAME} ${LOG_COURIER_MYSQL_NAME} ${LOG_COURIER_MEMCACHE_NAME})
 INSTANCE_NAMES=(${CONFIG_NAME} ${APPLICATION_NAME})
 
 TEMPLATE_FILE_LOCATION=/home/core/templates
@@ -108,7 +111,7 @@ if [[ ${DOWNLOAD_FLEET_FILES} == "True" ]]; then
 	  log_and_print Get file ${INSTANCE_FILE_NAME}
 	  log_and_print File URL is ${URL}
 	  curl ${URL} > ${INSTANCE_FILE_LOCATION}/${INSTANCE_FILE_NAME} 2>> ${LOG_FILE_PATH}
-	  submit_fleet_file ${INSTANCE_FILE_NAME}
+	  submit_fleet_file ${INSTANCE_FILE_LOCATION}/${INSTANCE_FILE_NAME}
   done
 
   log_and_print Get template fleet files from github...
@@ -119,7 +122,6 @@ if [[ ${DOWNLOAD_FLEET_FILES} == "True" ]]; then
           if [[ ${TEMPLATE_NAME_PART} == log_courier* ]] ;
           then
                 LOG_COURIER_INSTANCE=$(echo ${TEMPLATE_NAME_PART} | cut -f1,2 -d_ --complement)
-		log_and_print Splitted log_courier to $prefix1 and $prefix2 and $log_courier_instance
 
                 TEMPLATE_NAME=${INSTANCE_PREFIX}log_courier
                 TEMPLATE_FILE_NAME=${TEMPLATE_PREFIX}${TEMPLATE_NAME_PART}@${SERVICE_FILE_ENDING}
@@ -188,6 +190,7 @@ if [[ ${DOWNLOAD_FLEET_FILES} == "True" ]]; then
 
   function create_apache {
 	  create_instance $1 8080 ${TEMPLATE_PREFIX}${APACHE_NAME} 1
+	  create_instance $1 8080 ${TEMPLATE_PREFIX}${LOG_COURIER_APACHE_NAME} 0
   }
 
 
@@ -198,16 +201,19 @@ if [[ ${DOWNLOAD_FLEET_FILES} == "True" ]]; then
 
   function create_memcache {
 	  create_instance $1 11211 ${TEMPLATE_PREFIX}${MEMCACHE_NAME} 1
+	  create_instance $1 11211 ${TEMPLATE_PREFIX}${LOG_COURIER_MEMCACHE_NAME} 0
   }
 
 
   function create_mysql {
-	  create_instance $1 3306 ${TEMPLATE_PREFIX}${MYSQL_NAME} 1        
+	  create_instance $1 3306 ${TEMPLATE_PREFIX}${MYSQL_NAME} 1
+	  create_instance $1 3306 ${TEMPLATE_PREFIX}${LOG_COURIER_MYSQL_NAME} 0        
   }
 
 
   function create_mysql_demodata {
-	  create_instance $1 3306 ${TEMPLATE_PREFIX}${MYSQL_DEMODATA_NAME} 1        
+	  create_instance $1 3306 ${TEMPLATE_PREFIX}${MYSQL_DEMODATA_NAME} 1
+	  create instance $1 3306 ${TEMPLATE_PREFIX}${LOG_COURIER_MYSQL_NAME} 0      
   }
   
   function create_dashboard {
