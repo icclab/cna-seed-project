@@ -106,6 +106,8 @@ resources:
                 addr: $private_ipv4:4001
                 peer-addr: $private_ipv4:7001
                 cluster-active-size: 3
+              update:
+                reboot-strategy: 'off'
               units:
                 - name: etcd.service
                   command: start
@@ -193,6 +195,8 @@ resources:
                 cluster-active-size: 3
               fleet:
                 metadata: public=true
+              update:
+                reboot-strategy: 'off'
               units:
                 - name: etcd.service
                   command: start
