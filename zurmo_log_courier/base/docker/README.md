@@ -37,4 +37,6 @@ docker run --name zurmo_log_courier_any \
         icclabcna/zurmo_log_courier_any
 ```
 
-
+#### Log cleanup
+If there are logs in the path /var/log/collectd from collectd, they will be cleaned up by a cronjob run every day at 01:00.
+This cleanup deletes files older than one day in the given path.
