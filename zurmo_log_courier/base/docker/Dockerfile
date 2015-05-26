@@ -26,4 +26,7 @@ ADD supervisor/log_courier_supervisor.conf /etc/supervisor/conf.d/log_courier_su
 ADD supervisor/supervisord.conf /etc/supervisor/supervisord.conf
 ADD supervisor/kill_supervisor.py /usr/bin/kill_supervisor.py
 
+ADD cron_delete_old_collectd_files /cron/cron_delete_old_collectd_files
+RUN cat /cron/cron_delete_old_collectd_files | crontab
+
 CMD mkdir -p /var/log/supervisor && /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
