@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.node {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.link {
+  stroke: #000;
+  stroke-opacity: .6;  
+}
+
+
+.vm {
+  stroke: #000;
+  stroke-opacity: .2;
+  stroke-width: 1px; 
+  fill: #FFF; 
+}
+
+.node text {
+  pointer-events: none;
+  font: 12px;
+}
+
+time {
+      text-align:center;       
+      display: block;
+      font: 8px;
+      font-family: Arial;
+    }
+
+</style>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="socket.io/socket.io.js"></script>
+<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+<body>
+    <table>
+        <tr>
+            <td id="topo"></td>
+            <td id="place"></td>
+        </tr>
+    </table>
+    <div id="output">
+        <time></time>
+    </div>
+</body>
+
+<script>
+function draw_topo(){
+    $('#topo').html('<time>Last Update: ' + new Date() + '<time>');
+    var width = 400,
+        height = 400;
+
+    var color = d3.scale.category20();
+
+    var force = d3.layout.force()
+        .gravity(.05)
+        .charge(-200)
+        .linkDistance(100)
+        .linkStrength(0.7)
+        .size([width, height]);
+
+    var svg2 = d3.select("#topo").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    d3.json("topology.json", function(error, graph) {
+      force
+          .nodes(graph.nodes)
+          .links(graph.links)          
+          .start();
+
+      var link = svg2.selectAll(".link")
+          .data(graph.links)
+        .enter().append("line")
+          .attr("class", "link")
+          .style("stroke-width", function(d) { return Math.sqrt(d.value); });
+
+      var node = svg2.selectAll(".node")
+          .data(graph.nodes)
+        .enter().append("g")
+          .attr("class", "node")
+          .attr("transform", function(d,i) { return "translate(" + i * 30 + d.vm * 20  + "," + i * 30 + d.vm * 20 + ")"; })
+          .call(force.drag);
+
+      node.append("circle")
+          .attr("class", "node")
+          .attr("r", 10)
+          .style("fill", function(d) { return color(d.group); })
+          .call(force.drag);
+
+      node.append("text")
+          .attr("dx", 12)
+          .attr("dy", ".35em")
+          .text(function(d) { return d.name });
+
+      node.append("title")
+          .text(function(d) { return d.name });
+
+      force.on("tick", function() {
+        link.attr("x1", function(d) { return d.source.x; })
+            .attr("y1", function(d) { return d.source.y; })
+            .attr("x2", function(d) { return d.target.x; })
+            .attr("y2", function(d) { return d.target.y; });
+
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+      });
+    });
+};
+</script>
+
+<script>
+function draw_place(){
+    $('#place').html('<time>Last Update: ' + new Date() + '<time>');
+    var width = 400,
+        height = 400,
+        diameter = height;
+        padding = 6, // separation between nodes
+        maxRadius = 12;
+
+    var color = d3.scale.category20();
+
+
+    d3.json("topology.json", function(error, graph) {
+
+        var nodes = graph.nodes;
+        var vms = graph.vms;
+        var m = vms.length; // number of distinct clusters
+        
+        // find coordinates of the VM circle (focus of attraction)
+        function screenCoordsForElement(circ){
+          var svg_x = document.querySelector('svg');
+          var pt  = svg_x.createSVGPoint();
+          var matrix  = circ.getCTM();
+          pt.x = circ.cx.animVal.value;
+          pt.y = circ.cy.animVal.value;
+          return pt.matrixTransform(matrix);
+        }
+
+        // create svg
+        var svg = d3.select("#place").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        var svg_background = svg.append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        // make a radial tree layout
+        var tree = d3.layout.tree()
+            .size([360, diameter/3])
+            .separation(function(a, b) {
+            return a.size + b.size;
+        });
+
+        // tree-ify our vms
+        var dataTree = {
+            children: vms.map(function(d) { return { size: 60, name: d.name }; })
+        };
+
+        console.log(dataTree);
+
+        // apply the layout to the vms
+        var vm_nodes = tree.nodes(dataTree);
+        
+        // create dom elements for the vms
+        var vm_node = svg_background.selectAll(".vm")
+              .data(vm_nodes.slice(1)) // cut out the root node, we don't need it
+              .enter().append("g")
+              .attr("class", "vm")
+              .attr("transform", function(d) {
+                return "rotate(" + (d.x - 90) + ") translate(" + d.y + ")";
+               });
+
+        vm_node.append("circle")
+            .attr("r", function(d) { return d.size });
+
+        vm_node.append("text")
+          .attr("dx", 12)
+          .attr("dy", ".35em")
+          .text(function(d) { return d.name });
+
+        console.log(vm_node[0]);
+        console.log(d3.selectAll(".vm")[0][0]);
+
+        nodes.forEach(function(o, i) {      
+            o.radius = i * 5;
+            o.color = color(o.group);
+            var pt= screenCoordsForElement(vm_node[0][o.vm].childNodes[0]);
+            o.cx = pt.x; //width * (o.vm + 0.5)  / m;
+            o.cy = pt.y;// height / 2;
+            o.x = o.cx + i * 5;
+            o.y = o.cy + i * 5;
+        });
+        
+
+        var force = d3.layout.force()
+            .nodes(nodes)
+            .links(graph.links)
+            .size([width, height])
+            .gravity(0.01)
+            .charge(-150)
+            .linkStrength(0.005)
+            //.linkDistance(50)
+            .on("tick", tick)
+            .start();
+
+        var vm = svg.selectAll(".vm")
+          .data(graph.vms)
+        .enter().append("g");
+
+
+        var node = svg.selectAll(".node")
+          .data(nodes)
+        .enter().append("g")
+          .attr("class", "node")
+          .call(force.drag);
+
+        var circle = node.append("circle")
+           .attr("class", "node")
+          .attr("r", 10)
+          .style("fill", function(d) { return color(d.group); })
+          .call(force.drag);
+
+         node.append("text")
+          .attr("dx", 12)
+          .attr("dy", ".35em")
+          .text(function(d) { return d.name });
+
+
+        circle.append("title")
+          .text(function(d) { return d.name });
+
+        var link = svg.selectAll(".link")
+                  .data(graph.links)
+                  .enter().append("line")
+                  .attr("class", "link")
+                  .style("stroke-width", 2);
+
+
+        function tick(e) {
+         link.attr("x1", function(d) { return d.source.x; })
+            .attr("y1", function(d) { return d.source.y; })
+            .attr("x2", function(d) { return d.target.x; })
+            .attr("y2", function(d) { return d.target.y; });
+
+          node
+              .each(gravity(0.1 * e.alpha))
+              .each(collide(0.7))
+              .attr("cx", function(d) { return d.x; })
+              .attr("cy", function(d) { return d.y; });
+
+          node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        }
+
+        // Move nodes toward cluster focus.
+        function gravity(alpha) {
+          return function(d) {
+            d.y += (d.cy - d.y) * alpha;
+            d.x += (d.cx - d.x) * alpha;
+          };
+        }
+
+        // Resolve collisions between nodes.
+        function collide(alpha) {
+          var quadtree = d3.geom.quadtree(nodes);
+          return function(d) {
+            var r = d.radius + maxRadius + padding,
+                nx1 = d.x - r,
+                nx2 = d.x + r,
+                ny1 = d.y - r,
+                ny2 = d.y + r;
+            quadtree.visit(function(quad, x1, y1, x2, y2) {
+              if (quad.point && (quad.point !== d)) {
+                var x = d.x - quad.point.x,
+                    y = d.y - quad.point.y,
+                    l = Math.sqrt(x * x + y * y),
+                    r = d.radius + quad.point.radius + (d.color !== quad.point.color) * padding;
+                if (l < r) {
+                  l = (l - r) / l * alpha;
+                  d.x -= x *= l;
+                  d.y -= y *= l;
+                  quad.point.x += x;
+                  quad.point.y += y;
+                }
+              }
+              return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+            });
+          };
+        }
+
+    });
+};
+</script>
+<script>
+    
+    // open websocket and wait for changes
+    var getLocation = function() {
+	    var l = document.createElement("a");
+	    l.href = location.href;
+    	return l;
+    };
+    var loc = getLocation();
+    var host = loc.hostname;
+    var port = loc.port;
+    // draw both graphs
+    draw_topo();
+    draw_place();
+    // creating a new websocket
+    var socket = io.connect('http://' + host + ':' + port);
+    // on every message received we print the new datas inside the #container div
+    socket.on('notification', function (data) {
+        //alert("notification received");
+        //document.getElementById("input").innerHTML = data;        
+        // redraw
+        draw_topo();
+        draw_place();
+    });        
+    
+</script>

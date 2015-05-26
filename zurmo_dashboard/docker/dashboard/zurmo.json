@@ -1,0 +1,29 @@
+{ "vms":[
+    {"name":"vm1"},
+    {"name":"vm2"},
+    {"name":"vm3"}    
+],
+  "nodes":[
+    {"name":"lb","group":1,"vm":0},
+    {"name":"as1","group":2,"vm":0},
+    {"name":"as2","group":2,"vm":1},
+    {"name":"as3","group":2,"vm":2},
+    {"name":"mc1","group":3,"vm":1},
+    {"name":"mc2","group":3,"vm":2},
+    {"name":"db","group":4,"vm":1}
+],
+  "links":[
+    {"source":1,"target":0,"value":1},
+    {"source":2,"target":0,"value":1},
+    {"source":3,"target":0,"value":1},
+    {"source":1,"target":4,"value":1},
+    {"source":2,"target":4,"value":1},
+    {"source":3,"target":4,"value":1},
+    {"source":1,"target":5,"value":1},
+    {"source":2,"target":5,"value":1},
+    {"source":3,"target":5,"value":1},
+    {"source":1,"target":6,"value":1},
+    {"source":2,"target":6,"value":1},
+    {"source":3,"target":6,"value":1}
+]
+}
