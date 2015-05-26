@@ -9,7 +9,7 @@ coreos:
     cluster-active-size: 5
   fleet:
     public-ip: $public_ipv4
-    metadata: public=true
+    metadata: "public=true,instance_nr=$instance_nr$"
   update:
     reboot-strategy: 'off'
   units:

@@ -1,5 +1,6 @@
 $new_discovery_url='https://discovery.etcd.io/new'
 
+# define variables that are valid for any instance of the hosts
 $cloud_config_variables = {
 	"$preload-docker-images$" => "True",
 	"$zurmo-git-branch$" => "logging-dev",
@@ -47,7 +48,7 @@ end
 # after the equals sign..
 
 # Size of the CoreOS cluster created by Vagrant
-$num_instances=2
+$num_instances=3
 
 # Change basename of the VM
 # The default value is "core", which results in VMs named starting with
