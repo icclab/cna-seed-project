@@ -9,7 +9,6 @@ Requires=zurmo_elasticsearch_discovery@%i.service
 
 # Get CoreOS environmental variables
 EnvironmentFile=/etc/environment
-
 Restart=always
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill zurmo_elasticsearch.%i

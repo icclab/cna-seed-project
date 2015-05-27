@@ -7,7 +7,7 @@ Requires=docker.service
 
 # Get CoreOS environmental variables
 EnvironmentFile=/etc/environment
-
+Restart=always
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill zurmo_kibana.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_kibana.%i
