@@ -8,6 +8,7 @@ After=zurmo_memcache@%i.service
 [Service]
 # Get CoreOS environmental variables
 EnvironmentFile=/etc/environment
+KillMode=none
 Restart=always
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill zurmo_log_courier_memcache.%i

@@ -10,7 +10,7 @@ Requires=etcd.service
 EnvironmentFile=/etc/environment
 
 Restart=always
-
+KillMode=none
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill zurmo_dashboard.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_dashboard.%i

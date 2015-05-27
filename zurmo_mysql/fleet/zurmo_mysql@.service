@@ -8,6 +8,7 @@ Requires=zurmo_mysql_discovery@%i.service
 [Service]
 EnvironmentFile=/etc/environment
 TimeoutStartSec=0
+KillMode=none
 Restart=always
 ExecStartPre=-/usr/bin/docker kill zurmo_mysql.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_mysql.%i

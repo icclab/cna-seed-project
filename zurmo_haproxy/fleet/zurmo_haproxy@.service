@@ -13,7 +13,7 @@ EnvironmentFile=/etc/environment
 Environment="HOST_NAME=%H"
 
 Restart=always
-
+KillMode=none
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill loadbalancer_%i
 ExecStartPre=-/usr/bin/docker rm loadbalancer_%i

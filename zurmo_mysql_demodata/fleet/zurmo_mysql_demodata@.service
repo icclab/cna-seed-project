@@ -9,6 +9,7 @@ Requires=zurmo_mysql_demodata_discovery@%i.service
 EnvironmentFile=/etc/environment
 TimeoutStartSec=0
 Restart=always
+KillMode=none
 ExecStartPre=-/usr/bin/docker kill zurmo_mysql.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_mysql.%i
 ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_mysql:demodata_${DOCKER_IMAGE_TAG}

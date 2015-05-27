@@ -9,6 +9,7 @@ Requires=docker.service
 EnvironmentFile=/etc/environment
 Restart=always
 TimeoutStartSec=0
+KillMode=none
 ExecStartPre=-/usr/bin/docker kill zurmo_kibana.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_kibana.%i
 ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_kibana:${DOCKER_IMAGE_TAG}

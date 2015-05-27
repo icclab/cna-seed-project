@@ -11,6 +11,7 @@ Requires=zurmo_apache_discovery@%i.service
 
 [Service]
 EnvironmentFile=/etc/environment
+KillMode=none
 TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker kill zurmo_apache.%i

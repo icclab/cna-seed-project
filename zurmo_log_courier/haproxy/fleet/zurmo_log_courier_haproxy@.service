@@ -9,6 +9,7 @@ After=zurmo_haproxy@%i.service
 # Get CoreOS environmental variables
 EnvironmentFile=/etc/environment
 Restart=always
+KillMode=none
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill zurmo_log_courier_haproxy.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_log_courier_haproxy.%i

@@ -6,6 +6,7 @@ Requires=docker.service
 [Service]
 Type=oneshot
 EnvironmentFile=/etc/environment
+KillMode=none
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill zurmo_config
 ExecStartPre=-/usr/bin/docker rm zurmo_config

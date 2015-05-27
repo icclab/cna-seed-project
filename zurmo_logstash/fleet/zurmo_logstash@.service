@@ -9,6 +9,7 @@ Before=zurmo_logstash_discovery@%i.service
 # Get CoreOS environmental variables
 EnvironmentFile=/etc/environment
 Restart=always
+KillMode=none
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill zurmo_logstash.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_logstash.%i

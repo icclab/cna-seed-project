@@ -4,6 +4,7 @@ Requires=docker.service
 
 [Service]
 EnvironmentFile=/etc/environment
+KillMode=none
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill zurmo_logstash_forwarder_haproxy.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_logstash_forwarder_haproxy.%i
