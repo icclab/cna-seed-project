@@ -13,11 +13,11 @@ parameters:
         description: Allowed values are m1.small, m1.medium and m1.large
   Image:
     description: "Name of image to use"
-    default: CoreOS-stable-607.0.0
+    default: CoreOS-stable-647.2.0
     type: string
     constraints:
-      - allowed_values: [CoreOS-stable-557.2.0, CoreOS-stable-607.0.0]
-        description: Allowed values are CoreOS-stable-557.2.0, CoreOS-stable-607.0.0
+      - allowed_values: [CoreOS-stable-557.2.0, CoreOS-stable-607.0.0, CoreOS-stable-647.2.0]
+        description: Allowed values are CoreOS-stable-557.2.0, CoreOS-stable-607.0.0, CoreOS-stable-647.2.0
   Public Net ID:
     type: string
     description: ID of public network for which floating IP addresses will be allocated (default net04_ext) 
