@@ -253,3 +253,15 @@ Field set:
 ```
 metric-period=long_term
 ```
+## Starting a Container
+The following command starts the logstash container whose Ports are mapped 1:1 to the host.  
+You should also set the Environment Variables for the etcd port and ip as well as the ip of the host.
+```
+docker run --name zurmo_logstash \
+  -p 5000:5000 \
+  -p 9300:9300 \ 
+  -e "ETCD_IP=10.1.42.1" \
+  -e "ETCD_PORT=4001" \
+  -e "HOST_PRIVATE_IPV4=10.1.42.1" \
+  icclabcna/zurmo_logstash
+```
