@@ -13,5 +13,5 @@ if [ $# -lt 2 ]; then
 	exit;
 fi
 
-docker run --rm -it -e "ELASTICSEARCH=${ELASTICSEARCH_INSTANCE}" icclabcna/elasticdump:logging-dev /export.sh > ${DUMP_FILE_PATH}
+docker run --rm -it -e "ELASTICSEARCH=${ELASTICSEARCH_INSTANCE}" icclabcna/elasticdump /export.sh > ${DUMP_FILE_PATH}
 

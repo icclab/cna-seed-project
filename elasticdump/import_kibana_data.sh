@@ -13,4 +13,4 @@ if [ $# -lt 2 ]; then
 	exit;
 fi
 
-docker run --rm -t -e "ELASTICSEARCH=${ELASTICSEARCH_ENDPOINT}" -v ${DUMP_FILE_PATH}:/dump.json icclabcna/elasticdump:logging-dev /import.sh
+docker run --rm -t -e "ELASTICSEARCH=${ELASTICSEARCH_ENDPOINT}" -v ${DUMP_FILE_PATH}:/dump.json icclabcna/elasticdump /import.sh

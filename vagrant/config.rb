@@ -3,7 +3,7 @@ $new_discovery_url='https://discovery.etcd.io/new'
 # define variables that are valid for any instance of the hosts
 $cloud_config_variables = {
 	"$preload-docker-images$" => "True",
-	"$zurmo-git-branch$" => "logging-dev",
+	"$zurmo-git-branch$" => "master",
 	"$number-of-web-servers$" => "2",
 	"$number-of-cache-servers$" => "2",
 	"$zurmo-start-fleet-services$" => "True",
