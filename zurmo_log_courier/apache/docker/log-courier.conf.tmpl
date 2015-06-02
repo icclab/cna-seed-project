@@ -4,7 +4,7 @@
   },
   "network": {
     "servers": [
-      {{range $dir := lsdir "/services/logcollector", "hostname_of_service":"%hostname%"}}
+      {{range $dir := lsdir "/services/logcollector"}}
         {{$ippath := printf "/services/logcollector/%s/ip" $dir}}
         {{$portpath := printf "/services/logcollector/%s/port" $dir}}
           "{{getv $ippath}}:{{getv $portpath}}",
