@@ -4,7 +4,7 @@
   },
   "network": {
     "servers": [
-      {{range $dir := lsdir "/services/logcollector"}}
+      {{range $dir := lsdir "/services/logcollector", "hostname_of_service":"%hostname%"}}
         {{$ippath := printf "/services/logcollector/%s/ip" $dir}}
         {{$portpath := printf "/services/logcollector/%s/port" $dir}}
           "{{getv $ippath}}:{{getv $portpath}}",
@@ -32,181 +32,181 @@
         "paths": [
                 "/var/log/collectd/%hostname%/cpu*/cpu-idle-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"cpu", "metric":"cpu_idle"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"cpu", "metric":"cpu_idle", "hostname_of_service":"%hostname%"}
     },
 	{
 		"paths": [
                 "/var/log/collectd/%hostname%/cpu*/cpu-nice-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"cpu", "metric":"cpu_nice"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"cpu", "metric":"cpu_nice", "hostname_of_service":"%hostname%"}
     },
 	{
         "paths": [
                 "/var/log/collectd/%hostname%/cpu*/cpu-steal-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"cpu", "metric":"cpu_steal"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"cpu", "metric":"cpu_steal", "hostname_of_service":"%hostname%"}
     },
 	{
         "paths": [
                 "/var/log/collectd/%hostname%/cpu*/cpu-user-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"cpu", "metric":"cpu_user"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"cpu", "metric":"cpu_user", "hostname_of_service":"%hostname%"}
     },
 	{
         "paths": [
                 "/var/log/collectd/%hostname%/cpu*/cpu-interrupt-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"cpu", "metric":"cpu_interrupt"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"cpu", "metric":"cpu_interrupt", "hostname_of_service":"%hostname%"}
     },
 	{
         "paths": [
                 "/var/log/collectd/%hostname%/cpu*/cpu-softirq-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"cpu", "metric":"cpu_softirq"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"cpu", "metric":"cpu_softirq", "hostname_of_service":"%hostname%"}
     },
 	{
         "paths": [
                 "/var/log/collectd/%hostname%/cpu*/cpu-system-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"cpu", "metric":"cpu_system"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"cpu", "metric":"cpu_system", "hostname_of_service":"%hostname%"}
     },
 	{
         "paths": [
                 "/var/log/collectd/%hostname%/cpu*/cpu-wait-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"cpu", "metric":"cpu_wait"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"cpu", "metric":"cpu_wait", "hostname_of_service":"%hostname%"}
     },
     {
         "paths": [
                 "/var/log/collectd/%hostname%/load/*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"cpu", "metric":"cpu_load"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"cpu", "metric":"cpu_load", "hostname_of_service":"%hostname%"}
     },
     {
         "paths": [
                 "/var/log/collectd/%hostname%/memory/memory-buffered-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"memory", "metric":"memory_buffered"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"memory", "metric":"memory_buffered", "hostname_of_service":"%hostname%"}
     },
 	{
         "paths": [
                 "/var/log/collectd/%hostname%/memory/memory-cached-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"memory", "metric":"memory_cached"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"memory", "metric":"memory_cached", "hostname_of_service":"%hostname%"}
     },
 	{
         "paths": [
                 "/var/log/collectd/%hostname%/memory/memory-free-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"memory", "metric":"memory_free"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"memory", "metric":"memory_free", "hostname_of_service":"%hostname%"}
     },
 	{
         "paths": [
                 "/var/log/collectd/%hostname%/memory/memory-used-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"memory", "metric":"memory_used"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"memory", "metric":"memory_used", "hostname_of_service":"%hostname%"}
     },
 	{
         "paths": [
                 "/var/log/collectd/%hostname%/df-root/df_complex-free-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"disk", "disk-category": "Usage","metric":"free_space"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"disk", "disk-category": "Usage","metric":"free_space", "hostname_of_service":"%hostname%"}
     },
 	{
         "paths": [
                 "/var/log/collectd/%hostname%/df-root/df_complex-reserved-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"disk", "disk-category": "Usage","metric":"reserved_space"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"disk", "disk-category": "Usage","metric":"reserved_space", "hostname_of_service":"%hostname%"}
     },
 	{
         "paths": [
                 "/var/log/collectd/%hostname%/df-root/df_complex-used-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"disk", "disk-category": "Usage","metric":"used_space"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"disk", "disk-category": "Usage","metric":"used_space", "hostname_of_service":"%hostname%"}
     },
         {
         "paths": [
                 "/var/log/collectd/%hostname%/disk-*/disk_time-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"disk", "disk-category": "I/O","metric":"disk_time"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"disk", "disk-category": "I/O","metric":"disk_time", "hostname_of_service":"%hostname%"}
     },
     {
         "paths": [
                 "/var/log/collectd/%hostname%/disk-*/disk_ops-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"disk", "disk-category": "I/O","metric":"disk_operations"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"disk", "disk-category": "I/O","metric":"disk_operations", "hostname_of_service":"%hostname%"}
     },
 	{
         "paths": [
                 "/var/log/collectd/%hostname%/disk-*/disk_octets-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"disk", "disk-category": "I/O","metric":"disk_octets"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"disk", "disk-category": "I/O","metric":"disk_octets", "hostname_of_service":"%hostname%"}
     },
 	{
         "paths": [
                 "/var/log/collectd/%hostname%/disk-*/disk_merged-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"disk", "disk-category": "I/O","metric":"disk_merged"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"disk", "disk-category": "I/O","metric":"disk_merged", "hostname_of_service":"%hostname%"}
     },
 	{
         "paths": [
                 "/var/log/collectd/%hostname%/processes/fork_rate-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"process", "metric":"fork_rate"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"process", "metric":"fork_rate", "hostname_of_service":"%hostname%"}
     },
     {
         "paths": [
                 "/var/log/collectd/%hostname%/processes/ps_state-blocked-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"process", "metric":"blocked"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"process", "metric":"blocked", "hostname_of_service":"%hostname%"}
     },
 	{
         "paths": [
                 "/var/log/collectd/%hostname%/processes/ps_state-paging-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"process", "metric":"paging"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"process", "metric":"paging", "hostname_of_service":"%hostname%"}
     },
 	{
         "paths": [
                 "/var/log/collectd/%hostname%/processes/ps_state-running-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"process", "metric":"running"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"process", "metric":"running", "hostname_of_service":"%hostname%"}
     },
 	{
         "paths": [
                 "/var/log/collectd/%hostname%/processes/ps_state-sleeping-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"process", "metric":"sleeping"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"process", "metric":"sleeping", "hostname_of_service":"%hostname%"}
     },
 	{
         "paths": [
                 "/var/log/collectd/%hostname%/processes/ps_state-stopped-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"process", "metric":"stopped"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"process", "metric":"stopped", "hostname_of_service":"%hostname%"}
     },
 	{
         "paths": [
                 "/var/log/collectd/%hostname%/processes/ps_state-zombies-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"process", "metric":"zombies"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"process", "metric":"zombies", "hostname_of_service":"%hostname%"}
     },
         {
         "paths": [
                 "/var/log/collectd/%hostname%/swap/swap_io-in-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"swap", "metric":"swap_in"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"swap", "metric":"swap_in", "hostname_of_service":"%hostname%"}
     },
     {
         "paths": [
                 "/var/log/collectd/%hostname%/swap/swap_io-out-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"swap", "metric":"swap_out"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"swap", "metric":"swap_out", "hostname_of_service":"%hostname%"}
     },
     { 
         "paths": [
                 "/var/log/collectd/%hostname%/uptime/uptime-*"
         ],
-        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"uptime", "metric":"uptime"}
+        "fields": {"type": "webserver", "application": "apache", "service-id":"%service-id%", "category":"system_metrics","resource":"uptime", "metric":"uptime", "hostname_of_service":"%hostname%"}
     }
   ]
 }
