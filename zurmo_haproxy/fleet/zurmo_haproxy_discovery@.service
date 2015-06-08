@@ -26,5 +26,8 @@ ExecStart=/bin/sh -c "UUID=`uuidgen`; echo $UUID > /tmp/zurmo_haproxy@%i.uuid; T
 
 ExecStop=/bin/sh -c "etcdctl rm --recursive /services/loadbalancer/`cat /tmp/zurmo_haproxy@%i.uuid` && rm -f /tmp/zurmo_haproxy@%i.uuid"
 
+#[X-Fleet]
+#MachineOf=zurmo_haproxy@%i.service
+
 [X-Fleet]
-MachineOf=zurmo_haproxy@%i.service
+Global=true
