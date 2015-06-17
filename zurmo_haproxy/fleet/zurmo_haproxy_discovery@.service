@@ -8,7 +8,7 @@ EnvironmentFile=/etc/environment
 
 Restart=always
 
-ExecStart=/bin/sh -c "UUID=`uuidgen`; echo $UUID > /tmp/loadbalancer_service_announcer@%i.uuid; TTL=10; SLEEP_TIME=7; \
+ExecStart=/bin/sh -c "UUID=`uuidgen`; echo $UUID > /tmp/zurmo_haproxy@%i.uuid; TTL=10; SLEEP_TIME=7; \
   etcdctl setdir /services/loadbalancer/$UUID --ttl $TTL; \
   etcdctl setdir /services/loadbalancer/$UUID/settings --ttl $TTL; \
     while true; \
@@ -24,7 +24,7 @@ ExecStart=/bin/sh -c "UUID=`uuidgen`; echo $UUID > /tmp/loadbalancer_service_ann
         sleep $SLEEP_TIME; \
       done"
 
-ExecStop=/bin/sh -c "etcdctl rm --recursive /services/loadbalancer/`cat /tmp/loadbalancer_service_announcer@%i.uuid` && rm -f /tmp/zurmo_memcache@%i.uuid"
+ExecStop=/bin/sh -c "etcdctl rm --recursive /services/loadbalancer/`cat /tmp/zurmo_haproxy@%i.uuid` && rm -f /tmp/zurmo_haproxy@%i.uuid"
 
 [X-Fleet]
 MachineOf=zurmo_haproxy@%i.service

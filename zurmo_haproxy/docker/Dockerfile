@@ -65,6 +65,6 @@ RUN chmod +x /usr/local/bin/start-service
 EXPOSE 80 1936
 
 VOLUME /var/log
-VOLUME /logstash-forwarder
+# VOLUME /logstash_forwarder
 
 CMD ["/usr/local/bin/start-service"]

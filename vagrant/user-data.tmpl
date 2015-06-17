@@ -1,0 +1,64 @@
+#cloud-config
+
+---
+coreos:
+  etcd:
+    discovery: $etcd_token$
+    addr: $public_ipv4:4001
+    peer-addr: $public_ipv4:7001
+    cluster-active-size: 5
+  fleet:
+    public-ip: $public_ipv4
+    metadata: "public=true,instance_nr=$instance_nr$"
+  update:
+    reboot-strategy: 'off'
+  units:
+  - name: etcd.service
+    command: start
+  - name: fleet.service
+    command: start
+  - name: docker-tcp.socket
+    command: start
+    enable: true
+    content: |
+      [Unit]
+      Description=Docker Socket for the API
+
+      [Socket]
+      ListenStream=2375
+      Service=docker.service
+      BindIPv6Only=both
+
+      [Install]
+      WantedBy=sockets.target
+  - name: zurmo-predownload-docker-images.service
+    command: start
+    content: |
+      [Unit]
+      Description=Service to Pre-Download Docker Images for Zurmo
+      Requires=etcd.service
+      After=etcd.service
+
+      [Service]
+      EnvironmentFile=/etc/environment
+
+      Type=oneshot
+
+      ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
+      ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/$zurmo-git-branch$/init/preload-docker-images.sh
+      ExecStartPre=/bin/chmod +x /tmp/zurmo/preload-docker-images.sh
+      ExecStart=/bin/bash -c "/tmp/zurmo/preload-docker-images.sh;"
+
+      [Install]
+      WantedBy=multi-user.target
+write_files:
+- path: /etc/environment
+  content: |-
+    COREOS_PUBLIC_IPV4=$public_ipv4
+    COREOS_PRIVATE_IPV4=$private_ipv4
+    DOCKER_PRELOAD_ENABLED=$preload-docker-images$
+    DOCKER_IMAGE_TAG=$zurmo-git-branch$
+    ZURMO_INIT_GIT_BRANCH=$zurmo-git-branch$
+    ZURMO_INIT_ENABLE_DISCOVERY_SERVICES=$enable_discovery_services$
+    ZURMO_INIT_DOWNLOAD_FLEET_FILES=$download_fleet_files$
+    ZURMO_INIT_START_SERVICES=$zurmo-start-fleet-services$

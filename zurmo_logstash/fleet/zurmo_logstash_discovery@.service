@@ -1,20 +1,22 @@
 [Unit]
-Description=Announces logstash
+Description=Announces Logstash
 BindsTo=zurmo_logstash@%i.service
 After=zurmo_logstash@%i.service
 
 [Service]
 EnvironmentFile=/etc/environment
 Restart=always
-ExecStart=/bin/sh -c "UUID=`uuidgen`; echo $UUID > /tmp/zurmo_logstash@%i.uuid; TTL=10; SLEEP_TIME=7; \
-  etcdctl setdir /services/logcollector/$UUID --ttl $TTL; \
+ExecStart=/bin/sh -c "UUID=`uuidgen`; SERVICE_NAME=logcollector; TTL=10; SLEEP_TIME=7; \
+  echo $UUID > /tmp/zurmo_logstash@%i.uuid; \
+  etcdctl setdir /services/$SERVICE_NAME/$UUID --ttl $TTL; \
+  etcdctl setdir /services/$SERVICE_NAME/$UUID/settings --ttl $TTL; \
     while true; \
       do \
-        etcdctl updatedir /services/logcollector/$UUID --ttl $TTL; \
-        etcdctl set /services/logcollector/$UUID/host %H --ttl $TTL; \
-        etcdctl set /services/logcollector/$UUID/ip ${COREOS_PRIVATE_IPV4} --ttl $TTL; \
-        etcdctl set /services/logcollector/$UUID/port %i --ttl $TTL; \
-        etcdctl set /services/logcollector/$UUID/endpoint ${COREOS_PRIVATE_IPV4}:%i --ttl $TTL; \
+        etcdctl updatedir /services/$SERVICE_NAME/$UUID --ttl $TTL; \
+        etcdctl updatedir /services/$SERVICE_NAME/$UUID/settings --ttl $TTL; \
+        etcdctl set /services/$SERVICE_NAME/$UUID/host %H --ttl $TTL; \
+        etcdctl set /services/$SERVICE_NAME/$UUID/ip ${COREOS_PRIVATE_IPV4} --ttl $TTL; \
+        etcdctl set /services/$SERVICE_NAME/$UUID/port %i --ttl $TTL; \
         sleep $SLEEP_TIME; \
       done"
 
@@ -22,3 +24,4 @@ ExecStop=/bin/sh -c "etcdctl rm --recursive /services/logcollector/`cat /tmp/zur
 
 [X-Fleet]
 MachineOf=zurmo_logstash@%i.service
+

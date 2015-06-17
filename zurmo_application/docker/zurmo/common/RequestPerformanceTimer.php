@@ -37,8 +37,15 @@ class RequestPerformanceTimer extends PerformanceTimer{
     }
     
     public static function getDataForCategory($category){
-        $requestVariableName = self::$categoryRequestVariableMapping[$category];
-        $data = self::$data[$requestVariableName];
+   	$categoryVariableSet = isset(self::$categoryRequestVariableMapping[$category]);
+	$dataVariableSet = isset(self::$data[self::$categoryRequestVariableMapping[$category]]);
+	
+	if (!$categoryVariableSet || !$dataVariableSet){
+	        $data = array();
+        }else{
+                $requestVariableName = self::$categoryRequestVariableMapping[$category];
+                $data = self::$data[$requestVariableName];
+        }
         return $data;
     }
 }

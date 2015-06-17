@@ -2,16 +2,17 @@
 
 # The name of the template that will be used to render the application's configuration file
 # Confd will look in `/etc/conf.d/templates` for these files by default
-src = "kibana.tmpl"
+src = "kibana.yml.tmpl"
 
 # The location to place the rendered configuration file
-dest = "/usr/share/nginx/html/kibana-3.1.2/config.js"
-# dest = "/tmp/config.js"
+dest = "/kibana/config/kibana.yml"
 
 # The etcd keys or directory to watch.  This is where the information to fill in
 # the template will come from.
-keys = [ "/services/elasticsearch" ]
+keys = [ "/services/logstorage" ]
 
 # File ownership and mode information
 owner = "root"
 mode = "0664"
+
+reload_cmd = "supervisorctl restart kibana"

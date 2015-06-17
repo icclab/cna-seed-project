@@ -1,0 +1,10 @@
+[Unit]
+Description=Deletes all docker containers
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'docker rm -f $(docker ps -a -q)'
+
+[X-Fleet]
+Global=true
+

@@ -8,10 +8,10 @@ Requires=zurmo_memcache_discovery@%i.service
 [Service]
 EnvironmentFile=/etc/environment
 TimeoutStartSec=0
+KillMode=none
 Restart=always
 ExecStartPre=-/usr/bin/docker kill zurmo_memcache.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_memcache.%i
-#ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_memcache:${DOCKER_IMAGE_TAG}
 ExecStart=/usr/bin/docker run --name zurmo_memcache.%i -p %i:11211 icclabcna/zurmo_memcache:${DOCKER_IMAGE_TAG}
 ExecStop=/usr/bin/docker stop zurmo_memcache.%i
 

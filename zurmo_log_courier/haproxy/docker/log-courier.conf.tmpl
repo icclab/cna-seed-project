@@ -1,0 +1,26 @@
+{
+  "general": {
+        "log file": "/var/log/log-courier/log-courier.log"
+  },
+  "network": {
+    "servers": [ 
+      {{range $dir := lsdir "/services/logcollector"}}
+	{{$ippath := printf "/services/logcollector/%s/ip" $dir}}
+	{{$portpath := printf "/services/logcollector/%s/port" $dir}}
+	  "{{getv $ippath}}:{{getv $portpath}}",
+      {{end}}
+      ""
+    ],
+    "timeout": 15,
+    "transport": "tcp"
+  },
+
+  "files": [
+    {
+      "paths": [
+        "/var/log/haproxy.log"
+      ],
+      "fields": { "type": "loadbalancer", "application": "haproxy", "service-id":"%service-id%"}
+    }
+  ]
+}

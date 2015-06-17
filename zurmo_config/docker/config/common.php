@@ -51,6 +51,22 @@
         ),
 
         'components' => array(
+            'pagePerformanceLogger' => array(
+                'class' => 'application.core.models.PagePerformanceLogger',
+                'logFile' => 'pageProfiling.log',
+            ),
+            'memcachePerformanceLogger' => array(
+                'class' => 'application.core.models.PerformanceLogger',
+                'logFile' => 'memcacheProfiling.log',
+                'collapsed' => true,
+                'category' => 'memcache'
+            ),
+            'sqlQueryPerformanceLogger' => array(
+                'class' => 'application.core.models.PerformanceLogger',
+                'logFile' => 'sqlProfiling.log',
+                'collapsed' => true,
+                'category' => 'sql'
+            ),
             'accountLatestActivityDateTimeObserver' => array(
                 'class' => 'application.modules.accounts.observers.AccountLatestActivityDateTimeObserver',
             ),
