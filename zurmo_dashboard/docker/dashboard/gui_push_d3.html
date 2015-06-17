@@ -123,6 +123,11 @@ function draw_place(){
 
     var color = d3.scale.category20();
 
+    // create svg
+        var svg = d3.select("#place").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
 
     d3.json("topology.json", function(error, graph) {
 
@@ -140,10 +145,7 @@ function draw_place(){
           return pt.matrixTransform(matrix);
         }
 
-        // create svg
-        var svg = d3.select("#place").append("svg")
-            .attr("width", width)
-            .attr("height", height);
+        
 
         var svg_background = svg.append("g")
             .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
@@ -160,7 +162,7 @@ function draw_place(){
             children: vms.map(function(d) { return { size: 60, name: d.name }; })
         };
 
-        console.log(dataTree);
+        //console.log(dataTree);
 
         // apply the layout to the vms
         var vm_nodes = tree.nodes(dataTree);
@@ -182,8 +184,8 @@ function draw_place(){
           .attr("dy", ".35em")
           .text(function(d) { return d.name });
 
-        console.log(vm_node[0]);
-        console.log(d3.selectAll(".vm")[0][0]);
+        //console.log(vm_node[0]);
+        //console.log(d3.selectAll(".vm")[0][0]);
 
         nodes.forEach(function(o, i) {      
             o.radius = i * 5;
@@ -310,13 +312,15 @@ function draw_place(){
     draw_place();
     // creating a new websocket
     var socket = io.connect('http://' + host + ':' + port);
-    // on every message received we print the new datas inside the #container div
+    // on every message received we redraw
     socket.on('notification', function (data) {
         //alert("notification received");
         //document.getElementById("input").innerHTML = data;        
         // redraw
-        draw_topo();
         draw_place();
+        draw_topo();
+        //console.log(new Date());
+        //document.getElementById("place").innerHTML = new Date()
     });        
     
 </script>

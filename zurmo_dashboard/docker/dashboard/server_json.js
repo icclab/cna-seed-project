@@ -175,7 +175,7 @@ function adjust_for_zurmo(json){
     //console.log(json.types);    
     // TODO: add component links in etcd
     // convert into format that D3 can understand
-    json.vms = json.hosts.map(function(d, i) { return { name: "vm" + d.substring(26,28) }; });    
+    json.vms = json.hosts.map(function(d, i) { return { name: "vm" + i }; });    
     json.nodes = [];
     var i = 0;
     for(var key in json.components){
