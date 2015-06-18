@@ -1,0 +1,268 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "CoreOS on EC2: http://coreos.com/docs/running-coreos/cloud-providers/ec2/",
+  "Mappings" : {
+      "RegionMap" : {
+
+          "eu-central-1" : {
+              "AMI" : "ami-f86b52e5"
+          },
+
+          "ap-northeast-1" : {
+              "AMI" : "ami-9cc1119c"
+          },
+
+          "us-gov-west-1" : {
+              "AMI" : "ami-874828a4"
+          },
+
+          "sa-east-1" : {
+              "AMI" : "ami-d5b839c8"
+          },
+
+          "ap-southeast-2" : {
+              "AMI" : "ami-7b85fc41"
+          },
+
+          "ap-southeast-1" : {
+              "AMI" : "ami-da033b88"
+          },
+
+          "us-east-1" : {
+              "AMI" : "ami-c36583a8"
+          },
+ 
+          "us-west-2" : {
+              "AMI" : "ami-975f60a7"
+          },
+
+          "us-west-1" : {
+              "AMI" : "ami-857a92c1"
+          },
+
+          "eu-west-1" : {
+              "AMI" : "ami-e18cfc96"
+          }
+
+      }
+  },
+  "Parameters": {
+    "InstanceType" : {
+      "Description" : "EC2 HVM instance type (m3.medium, etc).",
+      "Type" : "String",
+      "Default" : "t2.small",
+      "ConstraintDescription" : "Must be a valid EC2 HVM instance type."
+    },
+    "ClusterSize": {
+      "Default": "3",
+      "MinValue": "3",
+      "MaxValue": "12",
+      "Description": "Number of nodes in cluster (3-12).",
+      "Type": "Number"
+    },
+    "DiscoveryURL": {
+      "Description": "An unique etcd cluster discovery URL. Grab a new token from https://discovery.etcd.io/new",
+      "Type": "String"
+    },
+    "AdvertisedIPAddress": {
+      "Description": "Use 'private' if your etcd cluster is within one region or 'public' if it spans regions or cloud providers.",
+      "Default": "private",
+      "AllowedValues": ["private", "public"],
+      "Type": "String"
+    },
+    "AllowSSHFrom": {
+      "Description": "The net block (CIDR) that SSH is available to.",
+      "Default": "0.0.0.0/0",
+      "Type": "String"
+    },
+    "KeyPair" : {
+      "Description" : "The name of an EC2 Key Pair to allow SSH access to the instance.",
+      "Type" : "String"
+    },
+    "PreloadDockerImages" : {
+      "Description" : "Whether or not to download all docker images on all hosts before units are started",
+      "Default": "True",
+      "AllowedValues": ["True", "False"],
+      "Type" : "String"
+    },
+    "ZurmoGitBranch" : {
+      "Description" : "The name of an EC2 Key Pair to allow SSH access to the instance.",
+      "Default": "master",
+      "AllowedValues": ["master", "logging-dev", "aws"],
+      "Type" : "String"
+    }
+  },
+  "Resources": {
+    "CoreOSSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "CoreOS SecurityGroup",
+        "SecurityGroupIngress": [
+          {"IpProtocol": "tcp", "FromPort": "22", "ToPort": "22", "CidrIp": {"Ref": "AllowSSHFrom"}}
+        ]
+      }
+    },
+    "Ingress4001": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "GroupName": {"Ref": "CoreOSSecurityGroup"}, "IpProtocol": "tcp", "FromPort": "4001", "ToPort": "4001", "SourceSecurityGroupId": {
+          "Fn::GetAtt" : [ "CoreOSSecurityGroup", "GroupId" ]
+        }
+      }
+    },
+    "Ingress7001": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "GroupName": {"Ref": "CoreOSSecurityGroup"}, "IpProtocol": "tcp", "FromPort": "7001", "ToPort": "7001", "SourceSecurityGroupId": {
+          "Fn::GetAtt" : [ "CoreOSSecurityGroup", "GroupId" ]
+        }
+      }
+    },
+    "IngressKibana8010": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "GroupName": {"Ref": "CoreOSSecurityGroup"}, "IpProtocol": "tcp", "FromPort": "8010", "ToPort": "8010", "CidrIp": "0.0.0.0/0"
+      }
+    },
+    "IngressDashboard8000": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "GroupName": {"Ref": "CoreOSSecurityGroup"}, "IpProtocol": "tcp", "FromPort": "8000", "ToPort": "8000", "CidrIp": "0.0.0.0/0"
+      }
+    },
+    "IngressHaproxy80": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "GroupName": {"Ref": "CoreOSSecurityGroup"}, "IpProtocol": "tcp", "FromPort": "80", "ToPort": "80", "CidrIp": "0.0.0.0/0"
+      }
+    },
+    "IngressHaproxyStatistics1936": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "GroupName": {"Ref": "CoreOSSecurityGroup"}, "IpProtocol": "tcp", "FromPort": "80", "ToPort": "80", "CidrIp": "0.0.0.0/0"
+      }
+    },
+    "CoreOSServerAutoScale": {
+      "Type": "AWS::AutoScaling::AutoScalingGroup",
+      "Properties": {
+        "AvailabilityZones": {"Fn::GetAZs": ""},
+        "LaunchConfigurationName": {"Ref": "CoreOSServerLaunchConfig"},
+        "LoadBalancerNames" : [ { "Ref" : "ElasticLoadBalancer" } ],
+        "MinSize": "3",
+        "MaxSize": "12",
+        "DesiredCapacity": {"Ref": "ClusterSize"},
+        "Tags": [
+            {"Key": "Name", "Value": { "Ref" : "AWS::StackName" }, "PropagateAtLaunch": true}
+        ]
+      }
+    },
+    "CoreOSServerLaunchConfig": {
+      "Type": "AWS::AutoScaling::LaunchConfiguration",
+      "Properties": {
+        "ImageId" : "ami-b0c9f0ad",
+        "InstanceType": {"Ref": "InstanceType"},
+        "KeyName": {"Ref": "KeyPair"},
+        "SecurityGroups": [{"Ref": "CoreOSSecurityGroup"}],
+        "UserData" : { "Fn::Base64":
+          { "Fn::Join": [ "", [
+            "#cloud-config\n\n",
+            "write_files:\n",
+            "    - path: /etc/environment\n",
+            "      content:\n",
+            "        str_replace:\n",
+            "          template: |\n",
+            "            COREOS_PUBLIC_IPV4=$public_ipv4\n",
+            "            COREOS_PRIVATE_IPV4=$private_ipv4\n",
+            "            DOCKER_PRELOAD_ENABLED=$preload-docker-images$\n",
+            "            ZURMO_INIT_GIT_BRANCH=$zurmo-git-branch$\n",
+            "            DOCKER_IMAGE_TAG=$zurmo-git-branch$\n",
+            "          params:\n",
+            "            $preload-docker-images$: ", { "Ref": "PreloadDockerImages"}, "\n",
+            "            $zurmo-git-branch$: ", { "Ref": "ZurmoGitBranch"}, "\n",
+            "    - path: /etc/ssh/sshd_config\n",
+            "      permissions: '0600'\n",
+            "      owner: root:root\n",
+            "      content: |\n",
+            "        # Use most defaults for sshd configuration.\n",
+            "        UsePrivilegeSeparation sandbox\n",
+            "        Subsystem sftp internal-sftp\n\n",
+            "        PermitRootLogin no\n",
+            "        AllowUsers core\n",
+            "        PasswordAuthentication no\n",
+            "        ChallengeResponseAuthentication no\n",
+            "    coreos:\n",
+            "      etcd:\n",
+            "        discovery: ", { "Ref": "DiscoveryURL" }, "\n",
+            "        addr: $private_ipv4:4001\n",
+            "        peer-addr: $private_ipv4:7001\n",
+            "        cluster-active-size: 3\n",
+            "      update:\n",
+            "        reboot-strategy: 'off'\n",
+            "      units:\n",
+            "        - name: etcd.service\n",
+            "          command: start\n",
+            "        - name: fleet.service\n",
+            "          command: start\n",
+            "        - name: docker-tcp.socket\n",
+            "          command: start\n",
+            "          enable: true\n",
+            "          content: |\n",
+            "            [Unit]\n",
+            "            Description=Docker Socket for the API\n",
+            "            [Socket]\n",
+            "            ListenStream=2375\n",
+            "            BindIPv6Only=both\n",
+            "            Service=docker.service\n",
+            "            [Install]\n",
+            "            WantedBy=sockets.target\n",
+            "        - name: zurmo-predownload-docker-images.service\n",
+            "          command: start\n",
+            "          content:\n",
+            "            str_replace:\n",
+            "              template: |\n",
+            "                [Unit]\n",
+            "                Description=Service to Pre-Download Docker Images for Zurmo\n",
+            "                Requires=etcd.service\n",
+            "                After=etcd.service\n\n",
+            "                [Service]\n",
+            "                EnvironmentFile=/etc/environment\n\n",
+            "                Type=oneshot\n",
+            "                ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo\n",
+            "                ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/$zurmo-git-branch$/init/preload-docker-images.sh\n",
+            "                ExecStartPre=/bin/chmod +x /tmp/zurmo/preload-docker-images.sh\n",
+            "                ExecStart=/bin/bash -c '/tmp/zurmo/preload-docker-images.sh;'\n\n",
+            "                [Install]\n",
+            "                WantedBy=multi-user.target\n",
+            "              params:\n",
+            "                $zurmo-git-branch$: ", {"Ref": "ZurmoGitBranch"}, "\n"
+            ] ]
+          }
+        }
+      }
+    },
+    "ElasticLoadBalancer" : {
+      "Type" : "AWS::ElasticLoadBalancing::LoadBalancer",
+      "Properties" : {
+        "AvailabilityZones" : {"Fn::GetAZs": ""},
+        "Listeners" : [ {
+            "LoadBalancerPort" : "80",
+            "InstancePort" : "80",
+            "Protocol" : "HTTP"
+        } ],
+        "HealthCheck" : {
+            "Target" : "HTTP:80/",
+            "HealthyThreshold" : "3",
+            "UnhealthyThreshold" : "5",
+            "Interval" : "30",
+            "Timeout" : "5"
+        }
+      }
+    }
+  },
+  "Outputs" : {
+    "URL" : {
+      "Description" : "The URL of the website",
+      "Value" :  { "Fn::Join" : [ "", [ "http://", { "Fn::GetAtt" : [ "ElasticLoadBalancer", "DNSName" ]}]]}
+    }
+  }
+}
