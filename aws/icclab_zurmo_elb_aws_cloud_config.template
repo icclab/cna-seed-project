@@ -229,7 +229,7 @@
             "        EnvironmentFile=/etc/environment\n\n",
             "        Type=oneshot\n",
             "        ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo\n",
-            "        ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/sandorkan/cna-seed-project/", { "Ref": "ZurmoGitBranch"}, "/init/startup.sh\n",
+            "        ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/", { "Ref": "ZurmoGitBranch"}, "/init/startup.sh\n",
             "        ExecStartPre=/bin/chmod +x /tmp/zurmo/startup.sh\n",
             "        ExecStart=/bin/bash -c '/tmp/zurmo/startup.sh;'\n\n",
             "        [Install]\n",
