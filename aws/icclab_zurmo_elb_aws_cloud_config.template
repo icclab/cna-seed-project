@@ -48,7 +48,7 @@
   },
   "Parameters": {
     "InstanceType" : {
-      "Description" : "EC2 HVM instance type (m3.medium, etc).",
+      "Description" : "EC2 HVM instance type (t2.small, etc).",
       "Type" : "String",
       "Default" : "t2.small",
       "ConstraintDescription" : "Must be a valid EC2 HVM instance type."
@@ -118,6 +118,14 @@
         }
       }
     },
+    "IngressFromSecGroup": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "GroupName": {"Ref": "CoreOSSecurityGroup"}, "IpProtocol": "tcp", "FromPort": "1", "ToPort": "65000", "SourceSecurityGroupId": {
+          "Fn::GetAtt" : [ "CoreOSSecurityGroup", "GroupId" ]
+        }
+      }
+    },
     "IngressKibana8010": {
       "Type": "AWS::EC2::SecurityGroupIngress",
       "Properties": {
@@ -139,7 +147,7 @@
     "IngressHaproxyStatistics1936": {
       "Type": "AWS::EC2::SecurityGroupIngress",
       "Properties": {
-        "GroupName": {"Ref": "CoreOSSecurityGroup"}, "IpProtocol": "tcp", "FromPort": "80", "ToPort": "80", "CidrIp": "0.0.0.0/0"
+        "GroupName": {"Ref": "CoreOSSecurityGroup"}, "IpProtocol": "tcp", "FromPort": "1936", "ToPort": "1936", "CidrIp": "0.0.0.0/0"
       }
     },
     "CoreOSServerAutoScale": {
@@ -169,22 +177,22 @@
             "write_files:\n",
             "- path: /etc/environment\n",
             "  content:\n",
-            "    COREOS_PUBLIC_IPV4=$public_ipv4\n",
-            "    COREOS_PRIVATE_IPV4=$private_ipv4\n",
-            "    DOCKER_PRELOAD_ENABLED=", { "Ref": "PreloadDockerImages"}, "\n",
-            "    ZURMO_INIT_GIT_BRANCH=", { "Ref": "ZurmoGitBranch"}, "\n",
-            "    DOCKER_IMAGE_TAG=", { "Ref": "ZurmoGitBranch"}, "\n",
+            "    COREOS_PUBLIC_IPV4=$public_ipv4\n\n",
+            "    COREOS_PRIVATE_IPV4=$private_ipv4\n\n",
+            "    DOCKER_PRELOAD_ENABLED=", { "Ref": "PreloadDockerImages"}, "\n\n",
+            "    ZURMO_INIT_GIT_BRANCH=", { "Ref": "ZurmoGitBranch"}, "\n\n",
+            "    DOCKER_IMAGE_TAG=", { "Ref": "ZurmoGitBranch"}, "\n\n",
             "- path: /etc/ssh/sshd_config\n",
             "  permissions: '0600'\n",
             "  owner: root:root\n",
             "  content: |\n",
-            "    # Use most defaults for sshd configuration.\n",
-            "    UsePrivilegeSeparation sandbox\n",
+            "    # Use most defaults for sshd configuration.\n\n",
+            "    UsePrivilegeSeparation sandbox\n\n",
             "    Subsystem sftp internal-sftp\n\n",
-            "    PermitRootLogin no\n",
-            "    AllowUsers core\n",
-            "    PasswordAuthentication no\n",
-            "    ChallengeResponseAuthentication no\n",
+            "    PermitRootLogin no\n\n",
+            "    AllowUsers core\n\n",
+            "    PasswordAuthentication no\n\n",
+            "    ChallengeResponseAuthentication no\n\n",
             "coreos:\n",
             "  etcd:\n",
             "    discovery: ", { "Ref": "DiscoveryURL" }, "\n",
@@ -221,7 +229,7 @@
             "        EnvironmentFile=/etc/environment\n\n",
             "        Type=oneshot\n",
             "        ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo\n",
-            "        ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/", { "Ref": "ZurmoGitBranch"}, "/init/startup.sh\n",
+            "        ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/sandorkan/cna-seed-project/", { "Ref": "ZurmoGitBranch"}, "/init/startup.sh\n",
             "        ExecStartPre=/bin/chmod +x /tmp/zurmo/startup.sh\n",
             "        ExecStart=/bin/bash -c '/tmp/zurmo/startup.sh;'\n\n",
             "        [Install]\n",
@@ -241,11 +249,11 @@
             "Protocol" : "HTTP"
         } ],
         "HealthCheck" : {
-            "Target" : "HTTP:80/",
-            "HealthyThreshold" : "3",
-            "UnhealthyThreshold" : "5",
-            "Interval" : "30",
-            "Timeout" : "5"
+            "Target" : "HTTP:80/zurmo/app/index.php/zurmo/default/login",
+            "HealthyThreshold" : "2",
+            "UnhealthyThreshold" : "10",
+            "Interval" : "60",
+            "Timeout" : "30"
         }
       }
     }
