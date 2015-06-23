@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # URL variables for downloading the fleet files from github
-GIT_BASE_URL=https://raw.githubusercontent.com/sandorkan/cna-seed-project
+GIT_BASE_URL=https://raw.githubusercontent.com/icclab/cna-seed-project
 GIT_BRANCH=${ZURMO_INIT_GIT_BRANCH:-"master"}
 REL_SERVICEFILE_PATH=fleet
 
