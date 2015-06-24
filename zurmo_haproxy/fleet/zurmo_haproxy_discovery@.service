@@ -10,6 +10,7 @@ Restart=always
 
 ExecStart=/bin/sh -c "UUID=`uuidgen`; echo $UUID > /tmp/zurmo_haproxy@%i.uuid; TTL=10; SLEEP_TIME=7; \
   etcdctl setdir /services/loadbalancer/$UUID --ttl $TTL; \
+  etcdctl set /services/loadbalancer/$UUID/service_instance_name zurmo_haproxy@%i.service; \
   etcdctl setdir /services/loadbalancer/$UUID/settings --ttl $TTL; \
     while true; \
       do \

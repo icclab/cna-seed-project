@@ -6,8 +6,9 @@ After=zurmo_mysql_demodata@%i.service
 [Service]
 EnvironmentFile=/etc/environment
 Restart=always
-ExecStart=/bin/sh -c "ID=`uuidgen`; echo $ID > /tmp/zurmo_mysql@%i.uuid; TTL=10; SLEEP_TIME=7; \
+ExecStart=/bin/sh -c "ID=`uuidgen`; echo $ID > /tmp/zurmo_mysql_demodata@%i.uuid; TTL=10; SLEEP_TIME=7; \
   etcdctl setdir /services/database/$ID --ttl $TTL; \
+  etcdctl set /services/database/$ID/service_instance_name zurmo_mysql_demodata@%i.service; \
   while true; \
     do \
       etcdctl updatedir /services/database/$ID --ttl $TTL; \
@@ -17,7 +18,7 @@ ExecStart=/bin/sh -c "ID=`uuidgen`; echo $ID > /tmp/zurmo_mysql@%i.uuid; TTL=10;
       sleep $SLEEP_TIME; \
     done"
 ExecStop=/usr/bin/etcdctl rm --recursive /services/database \
-/bin/sh -c "etcdctl rm --recursive /services/database/`cat /tmp/zurmo_mysql@%i.uuid` && rm -f /tmp/zurmo_mysql@%i.uuid"
+/bin/sh -c "etcdctl rm --recursive /services/database/`cat /tmp/zurmo_mysql_demodata@%i.uuid` && rm -f /tmp/zurmo_mysql_demodata@%i.uuid"
 
 [X-Fleet]
 MachineOf=zurmo_mysql_demodata@%i.service

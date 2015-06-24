@@ -7,6 +7,7 @@ After=zurmo_elasticsearch@%i.service
 EnvironmentFile=/etc/environment
 Restart=always
 ExecStart=/bin/sh -c "UUID=`uuidgen`; echo $UUID > /tmp/zurmo_elasticsearch@%i.uuid; TTL=10; SLEEP_TIME=7; \
+  etcdctl set /services/logstorage/$UUID/service_instance_name zurmo_elasticsearch@%i.service; \
   etcdctl setdir /services/logstorage/$UUID --ttl $TTL; \
   etcdctl setdir /services/logstorage/$UUID/settings --ttl $TTL; \
     while true; \
