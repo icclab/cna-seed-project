@@ -1,10 +1,10 @@
 heat_template_version: 2013-05-23
 
-description: Template to deploy a CoreOS Cluster of 3 Machines
+description: Template to deploy a CoreOS Cluster of 5 Machines
 
 parameters:
   Flavor: 
-    default: m1.medium
+    default: m1.small
     description: "Type of instance (flavor) to be used"
     label: "Instance Type"
     type: string
@@ -13,11 +13,11 @@ parameters:
         description: Allowed values are m1.small, m1.medium and m1.large
   Image:
     description: "Name of image to use"
-    default: CoreOS-stable-647.2.0
+    default: "CoreOS 681.2.0 (Stable Channel) [20150622]"
     type: string
     constraints:
-      - allowed_values: [CoreOS-stable-557.2.0, CoreOS-stable-607.0.0, CoreOS-stable-647.2.0]
-        description: Allowed values are CoreOS-stable-557.2.0, CoreOS-stable-607.0.0, CoreOS-stable-647.2.0
+      - allowed_values: ["CoreOS 681.2.0 (Stable Channel) [20150622]", "CoreOS 695.2.0 (Beta Channel) [20150622]", "CoreOS 717.0.0 (Alpha Channel) [20150622]"]
+        description: Allowed values are "CoreOS 681.2.0 (Stable Channel) [20150622]"
   Public Net ID:
     type: string
     description: ID of public network for which floating IP addresses will be allocated (default net04_ext) 
@@ -25,16 +25,16 @@ parameters:
   Private Net ID:
     type: string
     description: ID of private network into which servers get deployed (default internal)
-    default: 4a0888f7-1ca8-480e-9d21-e80dd8564ecd
+    default: c666051f-5d3b-4705-b8a2-00a9f3e7a0b8
   Private Subnet ID:
     type: string
     description: ID of private sub network into which servers get deployed (default internal_subnet)
-    default: 22ae589d-b2a5-49c2-bf66-529742d05d16
+    default: 952f2fc7-eeea-4cfe-926a-5cc68609cb4f
   Key Name CoreOS: 
     description: "Name of key-pair to be used for the CoreOS VMs"
     label: "Key Name"
     type: string
-    default: brnr_general_rsa
+    default: cna_key
   CoreOS Cluster Discovery URL:
     description: "URL of the Cluster-Discovery URL"
     type: string
