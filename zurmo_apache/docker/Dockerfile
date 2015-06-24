@@ -59,8 +59,8 @@ RUN export COMPOSER_HOME=/usr/local/composer && \
     composer global require phpunit/phpunit "3.*" && \
     composer global require phpunit/phpunit-story && \
     composer global require phpunit/php-invoker && \
-    composer global require phpunit/dbunit && \
-    composer global require phpunit/phpunit-selenium && \
+    composer global require phpunit/dbunit "1.3.2" && \
+    composer global require phpunit/phpunit-selenium "1.4.2" && \
     composer global require symfony/yaml && \
     ln -s /usr/local/composer/vendor/drush/drush/drush /usr/local/bin/drush
 
