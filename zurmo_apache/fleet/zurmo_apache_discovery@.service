@@ -10,6 +10,7 @@ Restart=always
 ExecStartPre=-/bin/sh -c "etcdctl mkdir /services/cache"
 ExecStart=/bin/sh -c "ID=`uuidgen`; echo $ID > /tmp/zurmo_apache@%i.uuid; TTL=10; SLEEP_TIME=7; \
   etcdctl setdir /services/webserver/$ID --ttl $TTL;  \
+  etcdctl set /services/webserver/$ID/service_instance_name zurmo_apache@%i.service; \
   while true; \
     do \
       etcdctl updatedir /services/webserver/$ID --ttl $TTL; \

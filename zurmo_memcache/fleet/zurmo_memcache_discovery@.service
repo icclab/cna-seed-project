@@ -9,6 +9,7 @@ Restart=always
 ExecStart=/bin/sh -c "ID=`uuidgen`; echo $ID > /tmp/zurmo_memcache@%i.uuid; \
 	TTL=10; SLEEP_TIME=7; \
 	etcdctl setdir /services/cache/$ID --ttl $TTL; \
+	etcdctl set /services/cache/$ID/service_instance_name zurmo_memcache@%i.service; \
 	while true; \
 		do \
 			etcdctl updatedir /services/cache/$ID --ttl $TTL; etcdctl set /services/cache/$ID/host %H --ttl $TTL; \
