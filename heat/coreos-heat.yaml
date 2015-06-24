@@ -21,7 +21,7 @@ parameters:
   Public Net ID:
     type: string
     description: ID of public network for which floating IP addresses will be allocated (default net04_ext) 
-    default: d57c7d69-a310-4f2c-bddf-4be485c3d399
+    default: 8f65289d-3c0d-4670-bf10-26b8feb24025
   Private Net ID:
     type: string
     description: ID of private network into which servers get deployed (default internal)
