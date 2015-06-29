@@ -1,14 +1,14 @@
 # Cloud-Native Applications Seed Project
  
-This repository contains the source files for the cloud optimized version of zurmo. This Application is part of the Cloud-Native Application Seed Project where we try to migrate an existing OpenSource Business Application to the cloud.  
+This repository contains the source files for the cloud optimized version of [Zurmo CRM](http://zurmo.org/). This Application is part of the Cloud-Native Application Seed Project where we try to migrate an existing OpenSource Business Application to the cloud.  
 More information about the project and the whole cloud-native application research topic can be found on our [blog](http://blog.zhaw.ch/icclab/category/research-approach/themes/cloud-native-applications/).
  
-The folders prefixed with *zurmo_* contain the source files for the docker images. The repository also contains files to start a cluster of CoreOS machines on *Vagrant* or *OpenStack*.
+The folders prefixed with *zurmo_* contain the source files for the docker images. The repository also contains files to start a cluster of CoreOS machines on *Vagrant* or *OpenStack* or *Amazon EC2*.
  
 ## Start a cluster
  
-The most simple way to try the whole application is to start a cluster.  
-We provide both a vagrant and a OpenStack Heat template to start a cluster on your local computer or on your OpenStack cloud:
+The most simple way to try the whole application is to start a cluster. (In fact, it is the only way at the moment. Running a single-instance CNA is currently not supported.)
+We provide a Vagrant file, an OpenStack Heat template and an EC2 Cloud Formation template to start a cluster on your local computer, on your OpenStack cloud or on public EC2:
  
 ### Vagrant
  
@@ -29,6 +29,10 @@ How to start a cluster with vagrant:
  2. Change Parameters in 'heat-zurmo-stack-create' file to your liking
  3. Create Zurmo Stack with command: `$ source heat-zurmo-stack-create <stack-name>`
   
+### Amazon EC2
+
+...
+
 #### Horizon Dashboard
 How to start a cluster with OpenStack/Heat:
 
