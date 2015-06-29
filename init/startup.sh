@@ -95,8 +95,12 @@ if [[ ${DOWNLOAD_FLEET_FILES} == "True" ]]; then
   log_and_print "\n"
 
   log_and_print "Delete previously used files"
-  rm ${INSTANCE_FILE_LOCATION}/*${SERVICE_FILE_ENDING}
-  rm ${TEMPLATE_FILE_LOCATION}/*${SERVICE_FILE_ENDING}
+
+  if [ -d ${INSTANCE_FILE_LOCATION} ];
+  then
+	  rm ${INSTANCE_FILE_LOCATION}/*${SERVICE_FILE_ENDING}
+	  rm ${TEMPLATE_FILE_LOCATION}/*${SERVICE_FILE_ENDING}
+  fi
 
   log_and_print "Using git branch ${GIT_BRANCH}"
 
@@ -213,7 +217,7 @@ if [[ ${DOWNLOAD_FLEET_FILES} == "True" ]]; then
 
   function create_mysql_demodata {
 	  create_instance $1 3306 ${TEMPLATE_PREFIX}${MYSQL_DEMODATA_NAME} 1
-	  create instance $1 3306 ${TEMPLATE_PREFIX}${LOG_COURIER_MYSQL_NAME} 0      
+	  create_instance $1 3306 ${TEMPLATE_PREFIX}${LOG_COURIER_MYSQL_NAME} 0      
   }
   
   function create_dashboard {
