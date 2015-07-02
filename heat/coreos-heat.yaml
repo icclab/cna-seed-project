@@ -4,20 +4,20 @@ description: Template to deploy a CoreOS Cluster of 5 Machines
 
 parameters:
   Flavor: 
-    default: m1.small
+    default: m1.tiny
     description: "Type of instance (flavor) to be used"
     label: "Instance Type"
     type: string
     constraints:
-      - allowed_values: [m1.small, m1.medium, m1.large ]
+      - allowed_values: [m1.tiny, m1.small, m1.medium, m1.large ]
         description: Allowed values are m1.small, m1.medium and m1.large
   Image:
     description: "Name of image to use"
-    default: "CoreOS 681.2.0 (Stable Channel) [20150622]"
+    default: "CoreOS-681.2.0"
     type: string
     constraints:
-      - allowed_values: ["CoreOS 681.2.0 (Stable Channel) [20150622]", "CoreOS 695.2.0 (Beta Channel) [20150622]", "CoreOS 717.0.0 (Alpha Channel) [20150622]"]
-        description: Allowed values are "CoreOS 681.2.0 (Stable Channel) [20150622]"
+      - allowed_values: ["CoreOS-681.2.0"]
+        description: Allowed values are "CoreOS-681.2.0"
   Public Net ID:
     type: string
     description: ID of public network for which floating IP addresses will be allocated (default net04_ext) 
@@ -192,17 +192,18 @@ resources:
                 PasswordAuthentication no
                 ChallengeResponseAuthentication no
             coreos:
-              etcd:
+              etcd2:
                 discovery: $etcd_discovery_url$
-                addr: $private_ipv4:4001
-                peer-addr: $private_ipv4:7001
-                cluster-active-size: 3
+                advertise-client-urls: $private_ipv4:2379
+                initial-advertise-peer-urls: $private_ipv4:2380
+                listen-client-urls: http://0.0.0.0:2379,http://0.0.0.0:4001
+                listen-peer-urls: $private_ipv4:2380
               fleet:
                 metadata: public=true
               update:
                 reboot-strategy: 'off'
               units:
-                - name: etcd.service
+                - name: etcd2.service
                   command: start
                 - name: fleet.service
                   command: start
