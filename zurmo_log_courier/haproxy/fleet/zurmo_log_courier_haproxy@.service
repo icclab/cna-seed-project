@@ -33,4 +33,5 @@ ExecStart=/bin/bash -c '/usr/bin/docker run \
 ExecStop=/usr/bin/docker stop zurmo_log_courier_haproxy.%i
 
 [X-Fleet]
-MachineOf=zurmo_haproxy@%i.service
+#MachineOf=zurmo_haproxy@%i.service
+Global=true
