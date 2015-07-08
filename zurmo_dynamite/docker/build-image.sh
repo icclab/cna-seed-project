@@ -1,1 +1,1 @@
-sudo docker build -t="icclabcna/zurmo_dynamite" .
+sudo docker build -t="icclabcna/zurmo_dynamite:master" .

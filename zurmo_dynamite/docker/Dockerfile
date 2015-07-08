@@ -7,8 +7,9 @@ RUN apt-get update && apt-get install -yq python3 \
 	libssl-dev \
 	libffi-dev \
 	rabbitmq-server \
-	supervisor \
-	&& git clone https://github.com/icclab/dynamite.git \
+	supervisor 
+
+RUN git clone https://github.com/icclab/dynamite.git \
 	&& cd dynamite \
 	&& ./setup.py install \
 	&& cd dist \
