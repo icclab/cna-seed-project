@@ -216,6 +216,8 @@
             "    initial-advertise-peer-urls: http://$", { "Ref": "AdvertisedIPAddress" }, "_ipv4:2380\n",
             "    listen-client-urls: http://0.0.0.0:2379,http://0.0.0.0:4001\n",
             "    listen-peer-urls: http://$", { "Ref": "AdvertisedIPAddress" }, "_ipv4:2380\n",            
+            "  fleet:\n",
+            "    metadata: public=true\n",
             "  update:\n",
             "    reboot-strategy: 'off'\n",
             "  units:\n",
