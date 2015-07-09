@@ -1,0 +1,143 @@
+---
+Dynamite:
+  ServiceFiles:
+    PathList:
+      - '/etc/dynamite/dynamite.yaml'
+  FleetAPIEndpoint:
+    ip: <FLEET_IP>
+    port: <FLEET_PORT>
+  ETCD:
+    application_base_path: /services
+    metrics_base_path: /metrics
+  Service:
+    application:
+      name_of_unit_file: zurmo_application.service
+      type: data_volume
+    configuration:
+      name_of_unit_file: zurmo_config.service
+      type: data_volume
+    zurmo_mysql:
+      name_of_unit_file: zurmo_mysql@.service
+      type: database
+      min_instance: 1
+      max_instance: 1
+      base_instance_prefix_number: 3306
+      ports_per_instance: 1
+      attached_service:
+        - zurmo_mysql_discovery
+        - zurmo_log_courier_mysql
+    zurmo_mysql_discovery:
+      name_of_unit_file: zurmo_mysql_discovery@.service
+      type: service_announcer
+    zurmo_log_courier_mysql:
+      name_of_unit_file: zurmo_log_courier_mysql@.service
+      type: service_announcer
+    zurmo_apache:
+      name_of_unit_file: zurmo_apache@.service
+      type: webserver
+      min_instance: 2
+      max_instance: 5
+      base_instance_prefix_number: 8080
+      ports_per_instance: 1
+      attached_service:
+        - zurmo_apache_discovery
+        - zurmo_log_courier_apache
+      service_dependency:
+        - application
+        - configuration
+      scale_up_policy:
+        ScalingPolicy: apache_scale_up
+      scale_down_policy:
+        ScalingPolicy: apache_scale_down
+    zurmo_apache_discovery:
+      name_of_unit_file: zurmo_apache_discovery@.service
+      type: service_announcer
+    zurmo_log_courier_apache:
+      name_of_unit_file: zurmo_log_courier_apache@.service
+      type: service_announcer
+    zurmo_haproxy:
+      name_of_unit_file: zurmo_haproxy@.service
+      type: loadbalancer
+      min_instance: 1
+      max_instance: 1
+      base_instance_prefix_number: 80
+      ports_per_instance: 1
+      attached_service:
+        - zurmo_haproxy_discovery
+        - zurmo_log_courier_haproxy
+    zurmo_haproxy_discovery:
+      name_of_unit_file: zurmo_haproxy_discovery@.service
+      type: service_announcer
+    zurmo_log_courier_haproxy:
+      name_of_unit_file: zurmo_log_courier_haproxy@.service
+      type: service_announcer
+    zurmo_memcache:
+      name_of_unit_file: zurmo_memcache@.service
+      type: memcache
+      min_instance: 1
+      max_instance: 10
+      base_instance_prefix_number: 11211
+      ports_per_instance: 1
+      attached_service:
+        - zurmo_memcache_discovery
+        - zurmo_log_courier_memcache
+    zurmo_memcache_discovery:
+      name_of_unit_file: zurmo_memcache_discovery@.service
+      type: service_announcer
+    zurmo_log_courier_memcache:
+      name_of_unit_file: zurmo_log_courier_memcache@.service
+      type: service_announcer
+    zurmo_logstash:
+      name_of_unit_file: zurmo_logstash@.service
+      type: logcollector
+      min_instance: 1
+      max_instance: 5
+      base_instance_prefix_number: 5000
+      ports_per_instance: 1
+      attached_service:
+        - zurmo_logstash_discovery
+    zurmo_logstash_discovery:
+      name_of_unit_file: zurmo_logstash_discovery@.service
+      type: service_announcer
+    zurmo_elasticsearch:
+      name_of_unit_file: zurmo_elasticsearch@.service
+      type: logstorage
+      min_instance: 1
+      max_instance: 2
+      base_instance_prefix_number: 6000
+      ports_per_instance: 1
+      attached_service:
+        - zurmo_elasticsearch_discovery
+    zurmo_elasticsearch_discovery:
+      name_of_unit_file: zurmo_elasticsearch_discovery@.service
+      type: service_announcer
+    zurmo_kibana:
+      name_of_unit_file: zurmo_kibana@.service
+      type: visualization
+      min_instance: 1
+      max_instance: 1
+      base_instance_prefix_number: 7000
+      ports_per_instance: 1
+  ScalingPolicy:
+    apache_scale_up:
+      service_type: loadbalancer
+      metric: response_time.time_backend_response.p95
+      metric_aggregated: true
+      comparative_operator: gt
+      threshold: 250
+      threshold_unit: milli_second
+      period: 15
+      period_unit: second
+      cooldown_period: 1
+      cooldown_period_unit: minute
+    apache_scale_down:
+      service_type: webserver
+      metric: cpu_user
+      metric_aggregated: false
+      comparative_operator: lt
+      threshold: 30
+      threshold_unit: percent
+      period: 30
+      period_unit: second
+      cooldown_period: 1
+      cooldown_period_unit: minute
