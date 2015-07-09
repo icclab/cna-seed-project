@@ -17,6 +17,6 @@ https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_logstash/
 https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_memcache/fleet/zurmo_memcache%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_memcache/fleet/zurmo_memcache_discovery%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_mysql/fleet/zurmo_mysql%40.service
-https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_mysql/fleet/zurmo_mysql_demodata%40.service
+https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_mysql/fleet/zurmo_mysql_discovery%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_mysql_demodata/fleet/zurmo_mysql_demodata%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_mysql_demodata/fleet/zurmo_mysql_demodata_discovery%40.service

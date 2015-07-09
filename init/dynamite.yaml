@@ -2,7 +2,7 @@
 Dynamite:
   ServiceFiles:
     PathList:
-      - '/etc/dynamite/dynamite.yaml'
+      - '/etc/dynamite/fleet-files'
   FleetAPIEndpoint:
     ip: <FLEET_IP>
     port: <FLEET_PORT>
