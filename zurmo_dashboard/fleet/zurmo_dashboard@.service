@@ -1,9 +1,9 @@
 [Unit]
 Description=Dashboard for Zurmo (View running instance-graph)
 After=docker.service
-After=etcd.service
+After=etcd2.service
 Requires=docker.service
-Requires=etcd.service
+Requires=etcd2.service
 
 [Service]
 # Get CoreOS environmental variables
