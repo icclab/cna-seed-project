@@ -3,9 +3,6 @@ Dynamite:
   ServiceFiles:
     PathList:
       - '/etc/dynamite/fleet-files'
-  FleetAPIEndpoint:
-    ip: <FLEET_IP>
-    port: <FLEET_PORT>
   ETCD:
     application_base_path: /services
     metrics_base_path: /metrics
