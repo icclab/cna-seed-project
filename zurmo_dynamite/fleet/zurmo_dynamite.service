@@ -14,5 +14,6 @@ ExecStart=/bin/bash -c 'exec /usr/bin/docker run --name zurmo_dynamite -e "ETCD_
 ExecStop=/usr/bin/docker stop zurmo_dynamite
 
 # just for debugging
-[X-Fleet]
-MachineMetadata=instance_nr=1
+# [X-Fleet]
+# MachineMetadata=instance_nr=1
+# MachineOf=dummy_service@1.service
