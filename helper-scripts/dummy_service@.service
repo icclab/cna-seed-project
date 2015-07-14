@@ -1,0 +1,8 @@
+[Unit]
+Description=Dummy Service to place services to specific machines
+
+[Service]
+ExecStart=/usr/bin/bash -c 'while true; do echo "Dummy service %i running"; sleep 10; done;'
+
+[X-Fleet]
+Conflicts=dummy_service@*.service
