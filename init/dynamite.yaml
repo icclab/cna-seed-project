@@ -10,10 +10,10 @@ Dynamite:
     application_base_path: /services
     metrics_base_path: /metrics
   Service:
-    application:
+    zurmo_application:
       name_of_unit_file: zurmo_application.service
       type: service_announcer
-    configuration:
+    zurmo_config:
       name_of_unit_file: zurmo_config.service
       type: service_announcer
     zurmo_mysql:
@@ -42,8 +42,8 @@ Dynamite:
       attached_service:
         - zurmo_apache_discovery
         - zurmo_log_courier_apache
-        - application
-        - configuration
+        - zurmo_application
+        - zurmo_config
       scale_up_policy:
         ScalingPolicy: apache_scale_up
       scale_down_policy:
