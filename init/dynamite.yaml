@@ -107,8 +107,12 @@ Dynamite:
       ports_per_instance: 1
       attached_service:
         - zurmo_elasticsearch_discovery
+        - zurmo_elasticdump
     zurmo_elasticsearch_discovery:
       name_of_unit_file: zurmo_elasticsearch_discovery@.service
+      type: service_announcer
+    zurmo_elasticdump:
+      name_of_unit_file: zurmo_elasticdump@.service
       type: service_announcer
     zurmo_kibana:
       name_of_unit_file: zurmo_kibana@.service

@@ -1,0 +1,24 @@
+[Unit]
+Description=Import Kibana dashboard data into elasticsearch
+PartOf=zurmo_elasticsearch@%i.service
+After=zurmo_elasticsearch@%i.service
+
+[Service]
+EnvironmentFile=/etc/environment
+TimeoutStartSec=0
+ExecStart=/bin/bash -c '\
+	curl -o /tmp/zurmo.dashboard https://raw.githubusercontent.com/icclab/cna-seed-project/master/elasticdump/data/zurmo.dashboard; \
+	curl -o /tmp/import_kibana_data.sh https://raw.githubusercontent.com/icclab/cna-seed-project/master/elasticdump/import_kibana_data.sh; \
+	chmod +x /tmp/import_kibana_data.sh; \
+	RESPONSE=0; \
+	while [[ "$RESPONSE" != 200 ]]; \
+	do \
+		RESPONSE=$(curl --write-out %{http_code} --silent --output /dev/null http://${COREOS_PRIVATE_IPV4}:9200); \
+		sleep 1; \
+	done; \
+	/tmp/import_kibana_data.sh /tmp/zurmo.dashboard ${COREOS_PRIVATE_IPV4}:9200; \
+	sleep infinity'
+Restart=always
+
+[X-Fleet]
+MachineOf=zurmo_elasticsearch@%i.service
