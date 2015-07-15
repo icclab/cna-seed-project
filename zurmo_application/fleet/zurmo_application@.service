@@ -1,0 +1,21 @@
+[Unit]
+Description=Zurmo Application files
+After=docker.service
+After=zurmo_config@%i.service
+Requires=docker.service
+Requires=zurmo_config@%i.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+EnvironmentFile=/etc/environment
+KillMode=none
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill zurmo_application.%i
+ExecStartPre=-/usr/bin/docker rm zurmo_application.%i
+# ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_application:${DOCKER_IMAGE_TAG}
+ExecStart=/usr/bin/docker create --name zurmo_application.%i --volumes-from zurmo_config.%i icclabcna/zurmo_application:${DOCKER_IMAGE_TAG}
+# ExecStop=/usr/bin/docker stop zurmo_application.%i
+
+[X-Fleet]
+MachineOf=zurmo_config@%i.service

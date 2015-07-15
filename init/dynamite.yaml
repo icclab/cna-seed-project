@@ -11,10 +11,10 @@ Dynamite:
     metrics_base_path: /metrics
   Service:
     zurmo_application:
-      name_of_unit_file: zurmo_application.service
+      name_of_unit_file: zurmo_application@.service
       type: service_announcer
     zurmo_config:
-      name_of_unit_file: zurmo_config.service
+      name_of_unit_file: zurmo_config@.service
       type: service_announcer
     zurmo_mysql:
       name_of_unit_file: zurmo_mysql@.service

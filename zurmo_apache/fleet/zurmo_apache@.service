@@ -2,11 +2,11 @@
 Description=Zurmo Apache Web server
 Before=zurmo_apache_discovery@%i.service
 After=docker.service
-After=zurmo_application.service
-After=zurmo_config.service
+After=zurmo_application@%i.service
+After=zurmo_config@%i.service
 Requires=docker.service
-Requires=zurmo_application.service
-Requires=zurmo_config.service
+Wants=zurmo_application@%i.service
+Wants=zurmo_config@%i.service
 Requires=zurmo_apache_discovery@%i.service
 Requires=zurmo_log_courier_apache@%i.service
 
@@ -17,8 +17,10 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker kill zurmo_apache.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_apache.%i
-ExecStart=/bin/bash -c 'exec /usr/bin/docker run --name zurmo_apache.%i -p %i:80 -e "HOST_IP=$(ip route | awk \x27/docker0/ {print $NF }\x27)" -h zurmo_apache.%i --volumes-from zurmo_application --volumes-from zurmo_config icclabcna/zurmo_apache:${DOCKER_IMAGE_TAG}'
+ExecStart=/bin/bash -c 'exec /usr/bin/docker run --name zurmo_apache.%i -p %i:80 -e "HOST_IP=$(ip route | awk \x27/docker0/ {print $NF }\x27)" -h zurmo_apache.%i --volumes-from zurmo_application.%i --volumes-from zurmo_config.%i icclabcna/zurmo_apache:${DOCKER_IMAGE_TAG}'
 ExecStop=/usr/bin/docker stop zurmo_apache.%i
 
 [X-Fleet]
 Conflicts=zurmo_apache@*.service
+MachineOf=zurmo_application@%i.service
+MachineOf=zurmo_config@%i.service
