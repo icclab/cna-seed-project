@@ -16,21 +16,17 @@ Dynamite:
     zurmo_config:
       name_of_unit_file: zurmo_config@.service
       type: service_announcer
-    zurmo_mysql:
-      name_of_unit_file: zurmo_mysql@.service
+    zurmo_mysql_demodata:
+      name_of_unit_file: zurmo_mysql_demodata@.service
       type: database
       min_instance: 1
       max_instance: 1
       base_instance_prefix_number: 3306
       ports_per_instance: 1
       attached_service:
-        - zurmo_mysql_discovery
-        - zurmo_log_courier_mysql
+        - zurmo_mysql_demodata_discovery
     zurmo_mysql_discovery:
-      name_of_unit_file: zurmo_mysql_discovery@.service
-      type: service_announcer
-    zurmo_log_courier_mysql:
-      name_of_unit_file: zurmo_log_courier_mysql@.service
+      name_of_unit_file: zurmo_mysql_demodata_discovery@.service
       type: service_announcer
     zurmo_apache:
       name_of_unit_file: zurmo_apache@.service
