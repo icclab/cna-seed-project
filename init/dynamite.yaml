@@ -10,12 +10,12 @@ Dynamite:
     application_base_path: /services
     metrics_base_path: /metrics
   Service:
-    application:
-      name_of_unit_file: zurmo_application.service
-      type: data_volume
-    configuration:
-      name_of_unit_file: zurmo_config.service
-      type: data_volume
+    zurmo_application:
+      name_of_unit_file: zurmo_application@.service
+      type: service_announcer
+    zurmo_config:
+      name_of_unit_file: zurmo_config@.service
+      type: service_announcer
     zurmo_mysql:
       name_of_unit_file: zurmo_mysql@.service
       type: database
@@ -42,9 +42,8 @@ Dynamite:
       attached_service:
         - zurmo_apache_discovery
         - zurmo_log_courier_apache
-      service_dependency:
-        - application
-        - configuration
+        - zurmo_application
+        - zurmo_config
       scale_up_policy:
         ScalingPolicy: apache_scale_up
       scale_down_policy:
@@ -108,8 +107,12 @@ Dynamite:
       ports_per_instance: 1
       attached_service:
         - zurmo_elasticsearch_discovery
+        - zurmo_elasticdump
     zurmo_elasticsearch_discovery:
       name_of_unit_file: zurmo_elasticsearch_discovery@.service
+      type: service_announcer
+    zurmo_elasticdump:
+      name_of_unit_file: zurmo_elasticdump@.service
       type: service_announcer
     zurmo_kibana:
       name_of_unit_file: zurmo_kibana@.service
@@ -135,7 +138,7 @@ Dynamite:
       metric: cpu_user
       metric_aggregated: false
       comparative_operator: lt
-      threshold: 30
+      threshold: 3
       threshold_unit: percent
       period: 30
       period_unit: second

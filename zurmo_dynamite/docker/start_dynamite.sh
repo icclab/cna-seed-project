@@ -2,12 +2,16 @@
 
 DYNAMITE_CONFIG_PATH=/etc/dynamite/dynamite.yaml
 SERVICE_FOLDER_PATH=/etc/dynamite/fleet-files
-RABBITMQ_ENDPOINT=127.0.0.1:5672
+RABBITMQ_OPTION=""
+DYNAMITE_DOWNLOAD_FILES=${DYNAMITE_DOWNLOAD_FILES:-"True"}
 
-if [ -f ${DYNAMITE_CONFIG_PATH} ]; then
-	sed -i "s/<FLEET_IP>/${FLEET_IP}/g" ${DYNAMITE_CONFIG_PATH}
-	sed -i "s/<FLEET_PORT>/${FLEET_PORT}/g" ${DYNAMITE_CONFIG_PATH}
-	/usr/local/bin/dynamite --config_file ${DYNAMITE_CONFIG_PATH} --service_folder ${SERVICE_FOLDER_PATH} --etcd_endpoint ${ETCD_ENDPOINT} --rabbitmq_endpoint ${RABBITMQ_ENDPOINT} 
-else
-	/usr/local/bin/dynamite --etcd_endpoint ${ETCD_ENDPOINT} --rabbitmq_endpoint ${RABBITMQ_ENDPOINT}
+if [ ! -z ${RABBITMQ_ENDPOINT} ]; then
+	RABBITMQ_OPTION="--rabbitmq_endpoint ${RABBITMQ_ENDPOINT}"
 fi
+
+if [ ${DYNAMITE_DOWNLOAD_FILES} == "True" ]; then
+	/download_files.sh
+fi
+sed -i "s/<FLEET_IP>/${FLEET_IP}/g" ${DYNAMITE_CONFIG_PATH}
+sed -i "s/<FLEET_PORT>/${FLEET_PORT}/g" ${DYNAMITE_CONFIG_PATH}
+exec /usr/local/bin/dynamite --config_file ${DYNAMITE_CONFIG_PATH} --service_folder ${SERVICE_FOLDER_PATH} --etcd_endpoint ${ETCD_ENDPOINT} --fleet_endpoint ${FLEET_IP}:${FLEET_PORT} ${RABBITMQ_OPTION} 
