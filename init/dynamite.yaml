@@ -25,7 +25,7 @@ Dynamite:
       ports_per_instance: 1
       attached_service:
         - zurmo_mysql_demodata_discovery
-    zurmo_mysql_discovery:
+    zurmo_mysql_demodata_discovery:
       name_of_unit_file: zurmo_mysql_demodata_discovery@.service
       type: service_announcer
     zurmo_apache:
