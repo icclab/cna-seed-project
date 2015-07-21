@@ -8,7 +8,7 @@ coreos:
     initial-advertise-peer-urls: http://$private_ipv4:2380
     listen-client-urls: http://0.0.0.0:2379,http://0.0.0.0:4001
     listen-peer-urls: http://$private_ipv4:2380
-    cluster-active-size: 5
+    cluster-active-size: 3
   fleet:
     public-ip: $public_ipv4
     metadata: "public=true,instance_nr=$instance_nr$"
@@ -50,9 +50,8 @@ coreos:
 
       [Service]
       EnvironmentFile=/etc/environment
-
-      Type=oneshot
-
+      RemainAfterExit=true
+      Restart=on-failure
       ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
       ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/$zurmo-git-branch$/init/preload-docker-images.sh
       ExecStartPre=/bin/chmod +x /tmp/zurmo/preload-docker-images.sh
@@ -71,7 +70,7 @@ coreos:
 
       [Service]
       RemainAfterExit=true
-      Type=oneshot
+      Restart=on-failure
       EnvironmentFile=/etc/environment
       ExecStartPre=/bin/bash -c 'wget https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_dynamite/fleet/zurmo_dynamite.service -O /tmp/zurmo_dynamite.service'
       ExecStart=/bin/bash -c 'STATUS_CODE=$(curl -L -o /dev/null -w "%{http_code}" http://127.0.0.1:4001/v2/keys/ --silent); \
@@ -87,6 +86,13 @@ coreos:
               echo "Wait for at least 3 nodes in etcd cluster become healthy"; \
               RUNNING_NODES=$(etcdctl cluster-health | sed 1d | grep -c " healthy"); \
       done; \
+      fleetctl list-units > /dev/null; \
+      while [[ $? != 0 ]]; \
+      do \
+        echo "Fleet not available yet. Waiting..."; \
+        fleetctl list-units > /dev/null; \
+      done; \
+      echo "Fleet is available."; \
       STATUS_CODE=$(curl -L http://127.0.0.1:4001/v2/keys/init?prevExist=false -XPUT -d "%H - %m - %b" -o /dev/null -w "%{http_code}" --silent); \
       if [[ $STATUS_CODE < 400 ]]; then \
               echo "Initializing Cluster"; \
