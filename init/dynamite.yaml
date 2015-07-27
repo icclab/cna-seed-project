@@ -12,10 +12,10 @@ Dynamite:
   Service:
     zurmo_application:
       name_of_unit_file: zurmo_application@.service
-      type: service_announcer
+      type: attached_service
     zurmo_config:
       name_of_unit_file: zurmo_config@.service
-      type: service_announcer
+      type: attached_service
     zurmo_mysql_demodata:
       name_of_unit_file: zurmo_mysql_demodata@.service
       type: database
@@ -27,7 +27,7 @@ Dynamite:
         - zurmo_mysql_demodata_discovery
     zurmo_mysql_demodata_discovery:
       name_of_unit_file: zurmo_mysql_demodata_discovery@.service
-      type: service_announcer
+      type: attached_service
     zurmo_apache:
       name_of_unit_file: zurmo_apache@.service
       type: webserver
@@ -46,10 +46,10 @@ Dynamite:
         ScalingPolicy: apache_scale_down
     zurmo_apache_discovery:
       name_of_unit_file: zurmo_apache_discovery@.service
-      type: service_announcer
+      type: attached_service
     zurmo_log_courier_apache:
       name_of_unit_file: zurmo_log_courier_apache@.service
-      type: service_announcer
+      type: attached_service
     zurmo_haproxy:
       name_of_unit_file: zurmo_haproxy@.service
       type: loadbalancer
@@ -62,10 +62,10 @@ Dynamite:
         - zurmo_log_courier_haproxy
     zurmo_haproxy_discovery:
       name_of_unit_file: zurmo_haproxy_discovery@.service
-      type: service_announcer
+      type: attached_service
     zurmo_log_courier_haproxy:
       name_of_unit_file: zurmo_log_courier_haproxy@.service
-      type: service_announcer
+      type: attached_service
     zurmo_memcache:
       name_of_unit_file: zurmo_memcache@.service
       type: memcache
@@ -78,10 +78,10 @@ Dynamite:
         - zurmo_log_courier_memcache
     zurmo_memcache_discovery:
       name_of_unit_file: zurmo_memcache_discovery@.service
-      type: service_announcer
+      type: attached_service
     zurmo_log_courier_memcache:
       name_of_unit_file: zurmo_log_courier_memcache@.service
-      type: service_announcer
+      type: attached_service
     zurmo_logstash:
       name_of_unit_file: zurmo_logstash@.service
       type: logcollector
@@ -93,7 +93,7 @@ Dynamite:
         - zurmo_logstash_discovery
     zurmo_logstash_discovery:
       name_of_unit_file: zurmo_logstash_discovery@.service
-      type: service_announcer
+      type: attached_service
     zurmo_elasticsearch:
       name_of_unit_file: zurmo_elasticsearch@.service
       type: logstorage
@@ -106,10 +106,10 @@ Dynamite:
         - zurmo_elasticdump
     zurmo_elasticsearch_discovery:
       name_of_unit_file: zurmo_elasticsearch_discovery@.service
-      type: service_announcer
+      type: attached_service
     zurmo_elasticdump:
       name_of_unit_file: zurmo_elasticdump@.service
-      type: service_announcer
+      type: attached_service
     zurmo_kibana:
       name_of_unit_file: zurmo_kibana@.service
       type: visualization
