@@ -126,10 +126,10 @@
         }
       }
     },
-    "IngressKibana8010": {
+    "IngressKibana7000": {
       "Type": "AWS::EC2::SecurityGroupIngress",
       "Properties": {
-        "GroupName": {"Ref": "CoreOSSecurityGroup"}, "IpProtocol": "tcp", "FromPort": "8010", "ToPort": "8010", "CidrIp": "0.0.0.0/0"
+        "GroupName": {"Ref": "CoreOSSecurityGroup"}, "IpProtocol": "tcp", "FromPort": "7000", "ToPort": "7000", "CidrIp": "0.0.0.0/0"
       }
     },
     "IngressDashboard8000": {
