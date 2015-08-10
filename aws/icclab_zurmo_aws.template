@@ -64,6 +64,11 @@
       "Description": "An unique etcd cluster discovery URL. Grab a new token from https://discovery.etcd.io/new",
       "Type": "String"
     },
+    "DYNAMITE_CONFIG_URL": {
+      "Description": "A URL from which to dowload the Dynamite config file. Default is https://raw.githubusercontent.com/icclab/cna-seed-project/master/init/dynamite.yaml",
+      "Default": "https://raw.githubusercontent.com/icclab/cna-seed-project/master/init/dynamite.yaml"
+      "Type": "String"
+    },
     "AdvertisedIPAddress": {
       "Description": "Use 'private' if your etcd cluster is within one region or 'public' if it spans regions or cloud providers.",
       "Default": "private",
@@ -198,6 +203,7 @@
             "    DOCKER_PRELOAD_ENABLED=", { "Ref": "PreloadDockerImages"}, "\n\n",
             "    ZURMO_INIT_GIT_BRANCH=", { "Ref": "ZurmoGitBranch"}, "\n\n",
             "    DOCKER_IMAGE_TAG=", { "Ref": "ZurmoGitBranch"}, "\n\n",
+            "    DYNAMITE_CONFIG_URL=", { "Ref": "DYNAMITE_CONFIG_URL"}, "\n\n",
             "- path: /etc/ssh/sshd_config\n",
             "  permissions: '0600'\n",
             "  owner: root:root\n",
