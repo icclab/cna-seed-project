@@ -21,3 +21,4 @@ ExecStop=/usr/bin/docker stop zurmo_elasticsearch.%i
 
 [X-Fleet]
 Conflicts=zurmo_elasticsearch@*.service
+Conflicts=zurmo_logstash@*.service

@@ -2,21 +2,30 @@
 
 ---
 coreos:
-  etcd:
+  etcd2:
     discovery: $etcd_token$
-    addr: $public_ipv4:4001
-    peer-addr: $public_ipv4:7001
-    cluster-active-size: 5
+    advertise-client-urls: http://$private_ipv4:2379
+    initial-advertise-peer-urls: http://$private_ipv4:2380
+    listen-client-urls: http://0.0.0.0:2379,http://0.0.0.0:4001
+    listen-peer-urls: http://$private_ipv4:2380
+    cluster-active-size: 3
   fleet:
     public-ip: $public_ipv4
     metadata: "public=true,instance_nr=$instance_nr$"
   update:
     reboot-strategy: 'off'
   units:
-  - name: etcd.service
+  - name: etcd2.service
     command: start
   - name: fleet.service
     command: start
+  - name: fleet.socket
+    command: start
+    drop-ins:
+    - name: 30-ListenStream.conf
+      content: |
+        [Socket]
+        ListenStream=$private_ipv4:49153
   - name: docker-tcp.socket
     command: start
     enable: true
@@ -36,19 +45,63 @@ coreos:
     content: |
       [Unit]
       Description=Service to Pre-Download Docker Images for Zurmo
-      Requires=etcd.service
-      After=etcd.service
+      Requires=etcd2.service
+      After=etcd2.service
 
       [Service]
       EnvironmentFile=/etc/environment
-
-      Type=oneshot
-
+      RemainAfterExit=true
+      Restart=on-failure
       ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
       ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/$zurmo-git-branch$/init/preload-docker-images.sh
       ExecStartPre=/bin/chmod +x /tmp/zurmo/preload-docker-images.sh
       ExecStart=/bin/bash -c "/tmp/zurmo/preload-docker-images.sh;"
 
+      [Install]
+      WantedBy=multi-user.target
+  - name: zurmo-init.service
+    command: start
+    content: |
+      [Unit]
+      Description=Start script that is executed only on one node
+      After=fleet.service
+      After=zurmo-predownload-docker-images.service
+      Requires=fleet.service
+
+      [Service]
+      RemainAfterExit=true
+      Restart=on-failure
+      EnvironmentFile=/etc/environment
+      ExecStartPre=/bin/bash -c 'wget https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_dynamite/fleet/zurmo_dynamite.service -O /tmp/zurmo_dynamite.service'
+      ExecStart=/bin/bash -c 'STATUS_CODE=$(curl -L -o /dev/null -w "%{http_code}" http://127.0.0.1:4001/v2/keys/ --silent); \
+      RUNNING_NODES=0; \
+      while [[ $STATUS_CODE > 399 ]]; \
+      do \
+              echo "ETCD not available yet. Waiting..."; \
+              STATUS_CODE=$(curl -L -o /dev/null -w "%{http_code}" http://127.0.0.1:4001/v2/keys/ --silent); \
+              sleep 1; \
+      done; \
+      while [[ $RUNNING_NODES < 3 ]]; \
+      do \
+              echo "Wait for at least 3 nodes in etcd cluster become healthy"; \
+              RUNNING_NODES=$(etcdctl cluster-health | sed 1d | grep -c " healthy"); \
+      done; \
+      fleetctl list-units > /dev/null; \
+      while [[ $? != 0 ]]; \
+      do \
+        echo "Fleet not available yet. Waiting..."; \
+        fleetctl list-units > /dev/null; \
+      done; \
+      echo "Fleet is available."; \
+      STATUS_CODE=$(curl -L http://127.0.0.1:4001/v2/keys/init?prevExist=false -XPUT -d "%H - %m - %b" -o /dev/null -w "%{http_code}" --silent); \
+      if [[ $STATUS_CODE < 400 ]]; then \
+              echo "Initializing Cluster"; \
+              fleetctl load /tmp/zurmo_dynamite.service; \
+              fleetctl start zurmo_dynamite.service; \
+      else \
+              echo "Cluster initialized already. Do nothing"; \
+      fi \
+      '
       [Install]
       WantedBy=multi-user.target
 write_files:
@@ -62,3 +115,4 @@ write_files:
     ZURMO_INIT_ENABLE_DISCOVERY_SERVICES=$enable_discovery_services$
     ZURMO_INIT_DOWNLOAD_FLEET_FILES=$download_fleet_files$
     ZURMO_INIT_START_SERVICES=$zurmo-start-fleet-services$
+    

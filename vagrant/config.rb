@@ -6,9 +6,9 @@ $cloud_config_variables = {
 	"$zurmo-git-branch$" => "master",
 	"$number-of-web-servers$" => "2",
 	"$number-of-cache-servers$" => "2",
-	"$zurmo-start-fleet-services$" => "True",
+	"$zurmo-start-fleet-services$" => "False",
 	"$enable_discovery_services$" => "True",
-	"$download_fleet_files$" => "True"
+	"$download_fleet_files$" => "False"
 }
 
 def replace_cloud_config_variables(cloud_config_path)
@@ -28,14 +28,13 @@ end
 # To automatically replace the discovery token on 'vagrant up', uncomment
 # the lines below:
 #
-if File.exists?('user-data.tmpl') && File.exists?('user-data-master.tmpl') && ARGV[0].eql?('up')
+if File.exists?('user-data.tmpl') && ARGV[0].eql?('up')
   require 'open-uri'
  
   etcd_token = open($new_discovery_url).read
   $cloud_config_variables["$etcd_token$"] = etcd_token
  
   replace_cloud_config_variables('user-data.tmpl')
-  replace_cloud_config_variables('user-data-master.tmpl')
  
 end
 

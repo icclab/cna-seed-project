@@ -5,7 +5,9 @@ Description=Loadbalancer Service (HAProxy)
 After=docker.service
 Requires=docker.service
 Before=zurmo_haproxy_discovery@%i.service
+Before=zurmo_log_courier_haproxy@%i.service
 Requires=zurmo_haproxy_discovery@%i.service
+Requires=zurmo_log_courier_haproxy@%i.service
 
 [Service]
 # Get CoreOS environmental variables

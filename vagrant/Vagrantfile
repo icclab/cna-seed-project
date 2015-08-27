@@ -16,7 +16,7 @@ $update_channel = "stable"
 $enable_serial_logging = false
 $share_home = false
 $vm_gui = false
-$vm_memory = 1024
+$vm_memory = 2048
 $vm_cpus = 1
 
 # Attempt to apply the deprecated environment variable NUM_INSTANCES to
@@ -61,8 +61,10 @@ Vagrant.configure("2") do |config|
   config.ssh.insert_key = false
 
   config.vm.box = "coreos-%s" % $update_channel
-  config.vm.box_version = ">= 308.0.1"
-  config.vm.box_url = "http://%s.release.core-os.net/amd64-usr/current/coreos_production_vagrant.json" % $update_channel
+  # config.vm.box_version = ">= 308.0.1"
+  config.vm.box_version = "681.2.0"
+  # config.vm.box_url = "http://%s.release.core-os.net/amd64-usr/current/coreos_production_vagrant.json" % $update_channel
+  config.vm.box_url = "http://stable.release.core-os.net/amd64-usr/681.2.0/coreos_production_vagrant.json"
   
   ["vmware_fusion", "vmware_workstation"].each do |vmware|
     config.vm.provider vmware do |v, override|
@@ -136,19 +138,11 @@ Vagrant.configure("2") do |config|
         config.vm.synced_folder ENV['HOME'], ENV['HOME'], id: "home", :nfs => true, :mount_options => ['nolock,vers=3,udp']
       end
 
-      if i === 1
-           if File.exist?(MASTER_CLOUD_CONFIG_PATH)
-			build_instance_specific_cloud_config(MASTER_CLOUD_CONFIG_PATH,i)
-            config.vm.provision :file, :source => "#{get_instance_specific_file_path(MASTER_CLOUD_CONFIG_PATH,i)}", :destination => "/tmp/vagrantfile-user-data"
-            config.vm.provision :shell, :inline => "mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/", :privileged => true
-          end    
-      else
-           if File.exist?(CLOUD_CONFIG_PATH)
-			build_instance_specific_cloud_config(CLOUD_CONFIG_PATH,i)
-            config.vm.provision :file, :source => "#{get_instance_specific_file_path(CLOUD_CONFIG_PATH,i)}", :destination => "/tmp/vagrantfile-user-data"
-            config.vm.provision :shell, :inline => "mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/", :privileged => true
-          end
-      end 
+      if File.exist?(CLOUD_CONFIG_PATH)
+        build_instance_specific_cloud_config(CLOUD_CONFIG_PATH,i)
+        config.vm.provision :file, :source => "#{get_instance_specific_file_path(CLOUD_CONFIG_PATH,i)}", :destination => "/tmp/vagrantfile-user-data"
+        config.vm.provision :shell, :inline => "mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/", :privileged => true
+      end
     end
   end
 end

@@ -1,0 +1,18 @@
+[Unit]
+Description=Zurmo Application configuration files
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+EnvironmentFile=/etc/environment
+KillMode=none
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill zurmo_config.%i
+ExecStartPre=-/usr/bin/docker rm zurmo_config.%i
+ExecStart=/usr/bin/docker create --name zurmo_config.%i icclabcna/zurmo_config:${DOCKER_IMAGE_TAG}
+# ExecStop=/usr/bin/docker stop zurmo_config.%i
+
+[X-Fleet]
+Conflicts=zurmo_config@*.service
