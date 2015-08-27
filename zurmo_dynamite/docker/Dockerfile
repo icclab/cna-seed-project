@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -yq python3 \
 	curl \
 	python3-setuptools \
 	python3-pip \
+	python3-yaml \
 	libssl-dev \
 	libffi-dev \
 	rabbitmq-server \
@@ -14,7 +15,7 @@ RUN git clone https://github.com/icclab/dynamite.git \
 	&& cd dynamite \
 	&& ./setup.py install \
 	&& cd dist \
-	&& easy_install dynamite*.egg \
+	&& /usr/bin/easy_install3 dynamite*.egg \
 	&& mkdir /etc/dynamite \
 	&& mkdir /var/log/dynamite # Cache refresh @ 20150713.1416
 	
