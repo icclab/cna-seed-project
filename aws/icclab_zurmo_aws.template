@@ -66,7 +66,12 @@
     },
     "DynamiteConfigURL": {
       "Description": "A URL from which to dowload the Dynamite config file.",
-      "Default": "https://raw.githubusercontent.com/icclab/cna-seed-project/master/init/dynamite.yaml",
+      "Default": "https://raw.githubusercontent.com/oezs/cna-seed-project/master/init/dynamite_dashboard.yaml",
+      "Type": "String"
+    },
+	"DynamiteFleetFilesURL": {
+      "Description": "A URL from which to dowload the Dynamite Fleet files.",
+      "Default": "https://raw.githubusercontent.com/oezs/cna-seed-project/master/init/fleet-files",
       "Type": "String"
     },
     "AdvertisedIPAddress": {
@@ -82,6 +87,7 @@
     },
     "KeyPair" : {
       "Description" : "The name of an EC2 Key Pair to allow SSH access to the instance.",
+	  "Default": "cna_aws",
       "Type" : "String"
     },
     "PreloadDockerImages" : {
@@ -204,6 +210,7 @@
             "    ZURMO_INIT_GIT_BRANCH=", { "Ref": "ZurmoGitBranch"}, "\n\n",
             "    DOCKER_IMAGE_TAG=", { "Ref": "ZurmoGitBranch"}, "\n\n",
             "    DYNAMITE_CONFIG_URL=", { "Ref": "DynamiteConfigURL"}, "\n\n",
+			"    DYNAMITE_FLEET_FILES_URL=", { "Ref": "DynamiteFleetFilesURL"}, "\n\n",
             "- path: /etc/ssh/sshd_config\n",
             "  permissions: '0600'\n",
             "  owner: root:root\n",
