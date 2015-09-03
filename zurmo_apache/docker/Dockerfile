@@ -67,17 +67,26 @@ RUN export COMPOSER_HOME=/usr/local/composer && \
 # Install dockerize
 RUN curl -sSL https://github.com/jwilder/dockerize/releases/download/v0.0.2/dockerize-linux-amd64-v0.0.2.tar.gz | tar -C /usr/local/bin -xzf -
 
-RUN wget --no-check-certificate https://github.com/kelseyhightower/confd/releases/download/v0.7.1/confd-0.7.1-linux-amd64 && \
-  chmod +x confd-0.7.1-linux-amd64 && \
-  mv confd-0.7.1-linux-amd64 /usr/local/bin/confd && \
-  mkdir -p /etc/confd/conf.d && mkdir -p /etc/confd/templates
-
 # Add run file
-ADD apache-run.sh /apache-run.sh
-RUN chmod 0500 /apache-run.sh
+ADD apache-run-kube.sh /apache-run-kube.sh
+RUN chmod 0500 /apache-run-kube.sh
+
+# from zurmo_config
+ADD config /zurmo/zurmo/app/protected/config
+ADD conf.d /etc/confd/apache/conf.d
+ADD templates /etc/confd/apache/templates
+
+# from zurmo_application
+ADD zurmo /zurmo/zurmo
+ADD index.php /zurmo/index.php
+
+RUN chown -R www-data /zurmo
+
+# from
+
 
 VOLUME /var/log/apache2
 VOLUME /var/log/collectd
 
 EXPOSE 80
-CMD ["/apache-run.sh"]
+CMD ["/apache-run-kube.sh"]
