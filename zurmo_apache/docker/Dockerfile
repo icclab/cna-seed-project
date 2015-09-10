@@ -69,7 +69,7 @@ RUN curl -sSL https://github.com/jwilder/dockerize/releases/download/v0.0.2/dock
 
 # Add run file
 ADD apache-run-kube.sh /apache-run-kube.sh
-RUN chmod 0500 /apache-run-kube.sh
+RUN chmod 0755 /apache-run-kube.sh
 
 # from zurmo_config
 ADD config /zurmo/zurmo/app/protected/config
