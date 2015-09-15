@@ -15,7 +15,7 @@ spec:
   - resources:
     limits:
       cpu: 0.5
-    image: mysql
+    image: icclabcna/zurmo_mysql
     name: mysql
     env:
     - name: MYSQL_ROOT_PASSWORD
