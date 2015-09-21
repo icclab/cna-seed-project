@@ -21,3 +21,10 @@ https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_mysql/fle
 https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_mysql_demodata/fleet/zurmo_mysql_demodata%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_mysql_demodata/fleet/zurmo_mysql_demodata_discovery%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/master/elasticdump/fleet/zurmo_elasticdump%40.service
+https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_mysql_cluster/fleet/zurmo_mysql_cluster%40.service
+https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_mysql_cluster/fleet/zurmo_mysql_cluster_discovery%40.service
+https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_mysql_cluster/fleet/zurmo_mysql_cluster_node_discovery%40.service
+https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_mysql_cluster/fleet/zurmo_mysql_cluster_node%40.service
+https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_log_courier/mysql/fleet/zurmo_log_courier_mysql_cluster%40.service
+https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_log_courier/mysql/fleet/zurmo_log_courier_mysql_cluster_node%40.service
+
