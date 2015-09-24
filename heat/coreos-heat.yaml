@@ -9,7 +9,7 @@ parameters:
     label: "Instance Type"
     type: string
     constraints:
-      - allowed_values: [m1.tiny, m1.small, m1.medium, m1.large ]
+      - allowed_values: [m1.small, m1.medium, m1.large ]
         description: Allowed values are m1.small, m1.medium and m1.large
   Image:
     description: "Name of image to use"
