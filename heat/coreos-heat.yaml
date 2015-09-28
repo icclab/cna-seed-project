@@ -9,15 +9,15 @@ parameters:
     label: "Instance Type"
     type: string
     constraints:
-      - allowed_values: [m1.tiny, m1.small, m1.medium, m1.large ]
+      - allowed_values: [m1.small, m1.medium, m1.large ]
         description: Allowed values are m1.small, m1.medium and m1.large
   Image:
     description: "Name of image to use"
-    default: "CoreOS-681.2.0"
+    default: "CoreOS_723.3.0"
     type: string
     constraints:
-      - allowed_values: ["CoreOS-681.2.0"]
-        description: Allowed values are "CoreOS-681.2.0"
+      - allowed_values: ["CoreOS_723.3.0"]
+        description: Allowed values are "CoreOS_723.3.0"
   Public Net ID:
     type: string
     description: ID of public network for which floating IP addresses will be allocated (default net04_ext) 
@@ -38,38 +38,28 @@ parameters:
   CoreOS Cluster Discovery URL:
     description: "URL of the Cluster-Discovery URL"
     type: string
-    default: https://discovery.etcd.io/new?size=5
+    default: https://discovery.etcd.io/new
   Preload Docker Images:
-    description: "URL of the Cluster-Discovery URL"
+    description: "Whether or not to download all docker images on all hosts before units are started"
     type: string
     default: "True"
     constraints:
       - allowed_values: ["True", "False"]
-  Number of Web Servers:
-    description: "Number of Web Servers"
+  Docker Image Tag:
+    description: "Docker Image Tag to use when downloading containers from Docker hub"
     type: string
-    default: "2"
+    default: "latest"
     constraints:
-      - allowed_values: ["2","3","4","5"]
-  Number of Cache Servers:
-    description: "Number of Cache Servers"
+      - allowed_values: ["master", "latest"]
+  DynamiteConfigURL:
+    description: "A URL from which to dowload the Dynamite config file."
     type: string
-    default: "2"
-    constraints:
-      - allowed_values: ["2","3","4","5"]
-  Zurmo Git Branch:
-    description: "Git Branch / Version of Zurmo to use"
+    default: "https://raw.githubusercontent.com/icclab/cna-seed-project/integration/init/dynamite_dashboard.yaml"
+  DynamiteFleetFilesURL: 
+    description: "A URL from which to dowload the Dynamite Fleet files."
+    default: "https://raw.githubusercontent.com/icclab/cna-seed-project/integration/init/fleet-files"
     type: string
-    default: "master"
-    constraints:
-      - allowed_values: ["master", "logging-dev"]
-  Zurmo Start Fleet Services:
-    description: "Start Zurmo Application (Fleet Services)"
-    type: string
-    default: "True"
-    constraints:
-      - allowed_values: ["True", "False"]
-
+      
 resources:
   coreos_init:
     type: OS::Heat::CloudConfig
@@ -83,11 +73,13 @@ resources:
                     COREOS_PUBLIC_IPV4=$public_ipv4
                     COREOS_PRIVATE_IPV4=$private_ipv4
                     DOCKER_PRELOAD_ENABLED=$preload-docker-images$
-                    ZURMO_INIT_GIT_BRANCH=$zurmo-git-branch$
-                    DOCKER_IMAGE_TAG=$zurmo-git-branch$
+                    DOCKER_IMAGE_TAG=$docker_image_tag$
+                    DYNAMITE_CONFIG_URL=$DynamiteConfigURL$
+                    DYNAMITE_FLEET_FILES_URL=$DynamiteFleetFilesURL$
                   params:
-                    $preload-docker-images$: {get_param: "Preload Docker Images"}
-                    $zurmo-git-branch$: {get_param: "Zurmo Git Branch"}
+                    $docker_image_tag$: {get_param: "Docker Image Tag"}
+                    $DynamiteConfigURL$: {get_param: "DynamiteConfigURL"}
+                    $DynamiteFleetFilesURL$: {get_param: "DynamiteFleetFilesURL"}
             - path: /etc/ssh/sshd_config
               permissions: '0600'
               owner: root:root
@@ -101,18 +93,28 @@ resources:
                 PasswordAuthentication no
                 ChallengeResponseAuthentication no
             coreos:
-              etcd:
+              etcd2:
                 discovery: { get_param: "CoreOS Cluster Discovery URL" }
-                addr: $private_ipv4:4001
-                peer-addr: $private_ipv4:7001
-                cluster-active-size: 3
+                advertise-client-urls: http://$private_ipv4:2379
+                initial-advertise-peer-urls: http://$private_ipv4:2380
+                listen-client-urls: http://0.0.0.0:2379,http://0.0.0.0:4001
+                listen-peer-urls: http://$private_ipv4:2380
+              fleet:
+                metadata: public=true
               update:
                 reboot-strategy: 'off'
               units:
-                - name: etcd.service
+                - name: etcd2.service
                   command: start
                 - name: fleet.service
                   command: start
+                - name: fleet.socket
+                  command: start
+                  drop-ins:
+                  - name: 30-ListenStream.conf
+                    content: |
+                      [Socket]
+                      ListenStream=49153
                 - name: docker-tcp.socket
                   command: start
                   enable: true
@@ -125,30 +127,50 @@ resources:
                     Service=docker.service
                     [Install]
                     WantedBy=sockets.target
-                - name: zurmo-predownload-docker-images.service
+                - name: zurmo-init.service
                   command: start
-                  content:
-                    str_replace:
-                      template: |
-                        [Unit]
-                        Description=Service to Pre-Download Docker Images for Zurmo
-                        Requires=etcd.service
-                        After=etcd.service
-
-                        [Service]
-                        EnvironmentFile=/etc/environment
-
-                        Type=oneshot
-
-                        ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
-                        ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/$zurmo-git-branch$/init/preload-docker-images.sh
-                        ExecStartPre=/bin/chmod +x /tmp/zurmo/preload-docker-images.sh
-                        ExecStart=/bin/bash -c "/tmp/zurmo/preload-docker-images.sh;"
-
-                        [Install]
-                        WantedBy=multi-user.target
-                      params:
-                        $zurmo-git-branch$: {get_param: "Zurmo Git Branch"}
+                  content: |
+                    [Unit]
+                    Description=Service to initialize Zurmo
+                    Requires=fleet.service
+                    After=fleet.service
+                    [Service]
+                    RemainAfterExit=true
+                    EnvironmentFile=/etc/environment
+                    Restart=on-failure
+                    ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_dynamite:${DOCKER_IMAGE_TAG}
+                    ExecStartPre=/bin/bash -c 'wget https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_dynamite/fleet/zurmo_dynamite.service -O /tmp/zurmo_dynamite.service'
+                    ExecStart=/bin/bash -c 'STATUS_CODE=$(curl -L -o /dev/null -w "%{http_code}" http://127.0.0.1:4001/v2/keys/ --silent); \
+                    RUNNING_NODES=0; \
+                    while [[ $STATUS_CODE > 399 ]]; \
+                    do \
+                       echo "ETCD not available yet. Waiting..."; \
+                       STATUS_CODE=$(curl -L -o /dev/null -w "%{http_code}" http://127.0.0.1:4001/v2/keys/ --silent); \
+                       sleep 1; \
+                    done; \
+                    while [[ $RUNNING_NODES < 3 ]]; \
+                    do \
+                       echo "Wait for at least 3 nodes in etcd cluster become healthy"; \
+                       RUNNING_NODES=$(etcdctl cluster-health | sed 1d | grep -c " healthy"); \
+                    done; \
+                    fleetctl list-units > /dev/null; \
+                    while [[ $? != 0 ]]; \
+                    do \
+                    echo \"Fleet not available yet. Waiting...\"; \
+                    fleetctl list-units > /dev/null; \
+                    done; \
+                    echo "Fleet is available."; \
+                    STATUS_CODE=$(curl -L http://127.0.0.1:4001/v2/keys/init?prevExist=false -XPUT -d "%H - %m - %b" -o /dev/null -w "%{http_code}" --silent); \
+                    if [[ $STATUS_CODE < 400 ]]; then \
+                       echo "Initializing Cluster"; \
+                       fleetctl load /tmp/zurmo_dynamite.service; \
+                       fleetctl start zurmo_dynamite.service; \
+                    else \
+                       echo "Cluster initialized already. Do nothing"; \
+                     fi \
+                     '
+                    [Install]
+                    WantedBy=multi-user.target
 
   vm_coreos_01:
     type: OS::Nova::Server
@@ -165,108 +187,7 @@ resources:
         - port: { get_resource: vm_coreos_01_port }
       user_data_format: RAW
       user_data:
-        str_replace:
-          template: |
-            #cloud-config
-            write_files:
-            - path: /etc/environment
-              content: |
-                COREOS_PUBLIC_IPV4=$public_ipv4
-                COREOS_PRIVATE_IPV4=$private_ipv4
-                DOCKER_PRELOAD_ENABLED=$preload-docker-images$
-                ZURMO_APACHE_NUM_INSTANCES=$number-of-web-servers$
-                ZURMO_MEMCACHE_NUM_INSTANCES=$number-of-cache-servers$
-                ZURMO_INIT_GIT_BRANCH=$zurmo-git-branch$
-                DOCKER_IMAGE_TAG=$zurmo-git-branch$
-                ZURMO_INIT_START_SERVICES=$zurmo-start-fleet-services$
-            - path: /etc/ssh/sshd_config
-              permissions: '0600'
-              owner: root:root
-              content: |
-                # Use most defaults for sshd configuration.
-                UsePrivilegeSeparation sandbox
-                Subsystem sftp internal-sftp
-
-                PermitRootLogin no
-                AllowUsers core
-                PasswordAuthentication no
-                ChallengeResponseAuthentication no
-            coreos:
-              etcd2:
-                discovery: $etcd_discovery_url$
-                advertise-client-urls: $private_ipv4:2379
-                initial-advertise-peer-urls: $private_ipv4:2380
-                listen-client-urls: http://0.0.0.0:2379,http://0.0.0.0:4001
-                listen-peer-urls: $private_ipv4:2380
-              fleet:
-                metadata: public=true
-              update:
-                reboot-strategy: 'off'
-              units:
-                - name: etcd2.service
-                  command: start
-                - name: fleet.service
-                  command: start
-                - name: docker-tcp.socket
-                  command: start
-                  enable: true
-                  content: |
-                    [Unit]
-                    Description=Docker Socket for the API
-                    [Socket]
-                    ListenStream=2375
-                    BindIPv6Only=both
-                    Service=docker.service
-                    [Install]
-                    WantedBy=sockets.target
-                - name: zurmo-predownload-docker-images.service
-                  command: start
-                  content: |
-                    [Unit]
-                    Description=Service to Pre-Download Docker Images for Zurmo
-                    Requires=etcd.service
-                    After=etcd.service
-
-                    [Service]
-                    EnvironmentFile=/etc/environment
-
-                    Type=oneshot
-
-                    ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
-                    ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/$zurmo-git-branch$/init/preload-docker-images.sh
-                    ExecStartPre=/bin/chmod +x /tmp/zurmo/preload-docker-images.sh
-                    ExecStart=/bin/bash -c "/tmp/zurmo/preload-docker-images.sh;"
-
-                    [Install]
-                    WantedBy=multi-user.target
-                - name: zurmo-init.service
-                  command: start
-                  content: |
-                    [Unit]
-                    Description=Service to initialize Zurmo Application
-                    Requires=etcd.service
-                    After=etcd.service
-                    After=zurmo-predownload-docker-images.service
-
-                    [Service]
-                    EnvironmentFile=/etc/environment
-
-                    Type=oneshot
-
-                    ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
-                    ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/$zurmo-git-branch$/init/startup.sh
-                    ExecStartPre=/bin/chmod +x /tmp/zurmo/startup.sh
-                    ExecStart=/bin/bash -c "/tmp/zurmo/startup.sh;"
-
-                    [Install]
-                    WantedBy=multi-user.target
-          params:
-            $etcd_discovery_url$: { get_param: "CoreOS Cluster Discovery URL" }
-            $preload-docker-images$: {get_param: "Preload Docker Images"}
-            $number-of-web-servers$: {get_param: "Number of Web Servers"}
-            $number-of-cache-servers$: {get_param: "Number of Cache Servers"}
-            $zurmo-git-branch$: {get_param: "Zurmo Git Branch"}
-            $zurmo-start-fleet-services$: {get_param: "Zurmo Start Fleet Services"}
+        get_resource: coreos_init
 
   vm_coreos_01_port:
     type: OS::Neutron::Port

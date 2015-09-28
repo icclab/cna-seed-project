@@ -1,0 +1,14 @@
+confdir = "/etc/confd/mysql"
+
+[template]
+
+src = "my.cnf.tmpl"
+
+dest = "/etc/mysql/my.cnf"
+
+keys = [ "/services/database" ]
+
+owner = "root"
+mode = "0554"
+
+reload_cmd = "mysqladmin shutdown ; mysqld_safe"

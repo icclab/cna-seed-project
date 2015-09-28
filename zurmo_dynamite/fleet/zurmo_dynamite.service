@@ -10,7 +10,7 @@ KillMode=none
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker rm -f zurmo_dynamite
 ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo/dynamite
-ExecStart=/bin/bash -c 'exec /usr/bin/docker run --name zurmo_dynamite -e "ETCD_ENDPOINT=$(ip route | awk \x27/docker0/ {print $NF }\x27):4001" -e "FLEET_PORT=49153" -e "FLEET_IP=${COREOS_PRIVATE_IPV4}" -e "DYNAMITE_DOWNLOAD_FILES=${DYNAMITE_DOWNLOAD_FILES}"  -e "DYNAMITE_CONFIG_URL=${DYNAMITE_CONFIG_URL}" -v /tmp/dynamite:/etc/dynamite icclabcna/zurmo_dynamite:${DOCKER_IMAGE_TAG}'
+ExecStart=/bin/bash -c 'exec /usr/bin/docker run --name zurmo_dynamite -e "ETCD_ENDPOINT=$(ip route | awk \x27/docker0/ {print $NF }\x27):4001" -e "FLEET_PORT=49153" -e "FLEET_IP=${COREOS_PRIVATE_IPV4}" -e "DYNAMITE_DOWNLOAD_FILES=${DYNAMITE_DOWNLOAD_FILES}" -e "DYNAMITE_FLEET_FILES_URL=${DYNAMITE_FLEET_FILES_URL}" -e "DYNAMITE_CONFIG_URL=${DYNAMITE_CONFIG_URL}" -v /tmp/dynamite:/etc/dynamite icclabcna/zurmo_dynamite:${DOCKER_IMAGE_TAG}'
 ExecStop=/usr/bin/docker stop zurmo_dynamite
 
 # just for debugging
