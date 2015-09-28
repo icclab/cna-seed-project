@@ -35,5 +35,5 @@ cat /etc/my.cnf
 confd -interval 10 -node $ETCD_ENDPOINT -config-file /etc/confd/mysql/zurmo_mysql_cluster.toml &
 echo "[mysql-cluster] confd is now monitoring etcd for changes..."
 
-
+tail -f /create_user.sql
 
