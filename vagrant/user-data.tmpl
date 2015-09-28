@@ -110,9 +110,11 @@ write_files:
     COREOS_PUBLIC_IPV4=$public_ipv4
     COREOS_PRIVATE_IPV4=$private_ipv4
     DOCKER_PRELOAD_ENABLED=$preload-docker-images$
-    DOCKER_IMAGE_TAG=$zurmo-git-branch$
+    DOCKER_IMAGE_TAG=latest
     ZURMO_INIT_GIT_BRANCH=$zurmo-git-branch$
     ZURMO_INIT_ENABLE_DISCOVERY_SERVICES=$enable_discovery_services$
     ZURMO_INIT_DOWNLOAD_FLEET_FILES=$download_fleet_files$
     ZURMO_INIT_START_SERVICES=$zurmo-start-fleet-services$
+    DYNAMITE_CONFIG_URL="https://raw.githubusercontent.com/icclab/cna-seed-project/integration/init/dynamite_dashboard.yaml"
+    DYNAMITE_FLEET_FILES_URL="https://raw.githubusercontent.com/icclab/cna-seed-project/integration/init/fleet-files"
     

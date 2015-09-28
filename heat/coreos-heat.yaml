@@ -9,7 +9,7 @@ parameters:
     label: "Instance Type"
     type: string
     constraints:
-      - allowed_values: [m1.tiny, m1.small, m1.medium, m1.large ]
+      - allowed_values: [m1.small, m1.medium, m1.large ]
         description: Allowed values are m1.small, m1.medium and m1.large
   Image:
     description: "Name of image to use"
@@ -45,10 +45,10 @@ parameters:
     default: "True"
     constraints:
       - allowed_values: ["True", "False"]
-  Zurmo Git Branch:
-    description: "Git Branch / Version of Zurmo to use"
+  Docker Image Tag:
+    description: "Docker Image Tag to use when downloading containers from Docker hub"
     type: string
-    default: "master"
+    default: "latest"
     constraints:
       - allowed_values: ["master", "latest"]
   DynamiteConfigURL:
@@ -73,12 +73,11 @@ resources:
                     COREOS_PUBLIC_IPV4=$public_ipv4
                     COREOS_PRIVATE_IPV4=$private_ipv4
                     DOCKER_PRELOAD_ENABLED=$preload-docker-images$
-                    ZURMO_INIT_GIT_BRANCH=$zurmo-git-branch$
-                    DOCKER_IMAGE_TAG=$zurmo-git-branch$
+                    DOCKER_IMAGE_TAG=$docker_image_tag$
                     DYNAMITE_CONFIG_URL=$DynamiteConfigURL$
                     DYNAMITE_FLEET_FILES_URL=$DynamiteFleetFilesURL$
                   params:
-                    $zurmo-git-branch$: {get_param: "Zurmo Git Branch"}
+                    $docker_image_tag$: {get_param: "Docker Image Tag"}
                     $DynamiteConfigURL$: {get_param: "DynamiteConfigURL"}
                     $DynamiteFleetFilesURL$: {get_param: "DynamiteFleetFilesURL"}
             - path: /etc/ssh/sshd_config
