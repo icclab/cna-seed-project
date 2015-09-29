@@ -1,0 +1,4 @@
+[submodule "zurmo_galera_cluster/docker"]
+	path = zurmo_galera_cluster/docker
+	url = git@github.com:gtoff/percona_xtradb_cluster_docker.git
+	branch = fleet

@@ -1,0 +1,22 @@
+[Unit]
+Description=Zurmo MySQL Database
+After=docker.service
+Requires=docker.service
+Before=zurmo_galera_cluster_discovery@%i.service
+#Before=zurmo_log_courier_mysql@%i.service
+Requires=zurmo_galera_cluster_discovery@%i.service
+#Requires=zurmo_log_courier_mysql@%i.service
+
+[Service]
+EnvironmentFile=/etc/environment
+TimeoutStartSec=0
+KillMode=none
+Restart=always
+ExecStartPre=-/usr/bin/docker kill zurmo_mysql.%i
+ExecStartPre=-/usr/bin/docker rm zurmo_mysql.%i
+#ExecStartPre=/usr/bin/docker pull gtoff/zurmo_galera_cluster:${DOCKER_IMAGE_TAG}
+ExecStart=/usr/bin/docker run --name zurmo_galera_cluster.%i -p 3306:3306 -p 4444:4444 -p 4567:4567 -p 4568:4568 gtoff/zurmo_galera_cluster:${DOCKER_IMAGE_TAG}
+ExecStop=/usr/bin/docker stop zurmo_galera_cluster.%i
+
+[X-Fleet]
+Conflicts=zurmo_galera_cluster@*.service
