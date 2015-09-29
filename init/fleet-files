@@ -23,5 +23,3 @@ https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_mysq
 https://raw.githubusercontent.com/icclab/cna-seed-project/integration/elasticdump/fleet/zurmo_elasticdump%40.service
 https://raw.githubusercontent.com/gtoff/cna-seed-project/master/zurmo_galera_cluster/fleet/zurmo_galera_cluster%40.service
 https://raw.githubusercontent.com/gtoff/cna-seed-project/master/zurmo_galera_cluster/fleet/zurmo_galera_cluster_discovery%40.service
-
-
