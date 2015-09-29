@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: zurmo-galera-cluster
+    app: zurmo
+  name: zurmo-galera-cluster 
+spec:
+  replicas: 3
+  selector:
+    name: zurmo-galera-cluster 
+  template:
+    metadata:
+      labels:
+        name: zurmo-galera-cluster 
+    spec:
+      containers:
+        - resources:
+            limits:
+              cpu: 1
+          env:
+            - name: GALERA_CLUSTER
+              value: "true"
+            - name: WSREP_CLUSTER_ADDRESS
+              value: gcomm://
+            - name: WSREP_SST_USER
+              value: sst
+            - name: WSREP_SST_PASSWORD
+              value: sst
+            - name: MYSQL_USER
+              value: mysql
+            - name: MYSQL_PASSWORD
+              value: mysql
+            - name: MYSQL_ROOT_PASSWORD
+              value: PleaseChangeMe 
+          image: "gtoff/zurmo_galera_cluster:latest"
+          name: zurmo-galera-cluster 
+          ports:
+            - containerPort: 3306 
+              name: client 
+            - containerPort: 4444 
+              name: sst 
+            - containerPort: 4567
+              name: rep
+            - containerPort: 4568
+              name: incsst 
