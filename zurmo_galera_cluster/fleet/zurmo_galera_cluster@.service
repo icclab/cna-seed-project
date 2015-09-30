@@ -15,7 +15,7 @@ Restart=always
 ExecStartPre=-/usr/bin/docker kill zurmo_mysql.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_mysql.%i
 #ExecStartPre=/usr/bin/docker pull gtoff/zurmo_galera_cluster:${DOCKER_IMAGE_TAG}
-ExecStart=/usr/bin/docker run --name zurmo_galera_cluster.%i -e "MYSQL_ROOT_PASSWORD=zurmo" -e "ETCD_ENDPOINT=$(ip route | awk \x27/docker0/ {print $NF }\x27):4001" -p 3306:3306 -p 4444:4444 -p 4567:4567 -p 4568:4568 gtoff/zurmo_galera_cluster:${DOCKER_IMAGE_TAG}
+ExecStart==/bin/bash -c 'exec /usr/bin/docker run --name zurmo_galera_cluster.%i -e "MYSQL_ROOT_PASSWORD=zurmo" -e "ETCD_ENDPOINT=$(ip route | awk \x27/docker0/ {print $NF }\x27):4001" -p 3306:3306 -p 4444:4444 -p 4567:4567 -p 4568:4568 gtoff/zurmo_galera_cluster:${DOCKER_IMAGE_TAG}'
 ExecStop=/usr/bin/docker stop zurmo_galera_cluster.%i
 
 [X-Fleet]

@@ -13,7 +13,7 @@ ExecStart=/bin/sh -c "ID=`uuidgen`; echo $ID > /tmp/zurmo_galera_cluster@%i.uuid
     do \
       etcdctl updatedir /services/database/$ID --ttl $TTL; \
       etcdctl set /services/database/$ID/host %H --ttl $TTL; \
-      etcdctl set /services/database/$ID/port %i --ttl $TTL; \
+      etcdctl set /services/database/$ID/port 3306 --ttl $TTL; \
       etcdctl set /services/database/$ID/ip ${COREOS_PRIVATE_IPV4} --ttl $TTL; \
       sleep $SLEEP_TIME; \
     done"
