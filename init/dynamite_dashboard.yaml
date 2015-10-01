@@ -144,7 +144,7 @@ Dynamite:
 #        - zurmo_log_courier_mysql_cluster
       base_instance_prefix_number: 1
       max_instance: 3
-      min_instance: 2
+      min_instance: 3
       name_of_unit_file: zurmo_galera_cluster@.service
       ports_per_instance: 1
       type: database
