@@ -5,20 +5,6 @@
   # from dockerfile/ubuntu
 FROM ubuntu:14.04
 
-# Install.
-RUN \
-  sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
-  apt-get update && \
-  apt-get -y upgrade && \
-  apt-get install -y build-essential && \
-  apt-get install -y software-properties-common && \
-  apt-get install -y byobu curl git htop man unzip vim wget && \
-  rm -rf /var/lib/apt/lists/*
-
-# Add files.
-ADD root/.bashrc /root/.bashrc
-ADD root/.gitconfig /root/.gitconfig
-ADD root/.scripts /root/.scripts
 
 # Set environment variables.
 ENV HOME /root
@@ -31,25 +17,19 @@ WORKDIR /root
 
   # from dockerfile/haproxy
 
+# Install confd on the container
 # Install Haproxy.
-RUN \
-  sed -i 's/^# \(.*-backports\s\)/\1/g' /etc/apt/sources.list && \
-  apt-get update && \
-  apt-get install -y haproxy=1.5.3-1~ubuntu14.04.1 && \
-  sed -i 's/^ENABLED=.*/ENABLED=1/' /etc/default/haproxy && \
-  rm -rf /var/lib/apt/lists/*
-
-
-MAINTAINER Sandorkan <brunnersandro@hotmail.com>
+RUN apt-get update \
+  && apt-get install -y haproxy wget \
+  && wget https://github.com/kelseyhightower/confd/releases/download/v0.7.1/confd-0.7.1-linux-amd64 \
+  && mv confd-0.7.1-linux-amd64 /usr/local/bin/confd \
+  && chmod u+x /usr/local/bin/confd \
+  && mkdir -p /etc/confd/{conf.d,templates} \
+  && sed -i 's/^# \(.*-backports\s\)/\1/g' /etc/apt/sources.list \
+  && sed -i 's/^ENABLED=.*/ENABLED=1/' /etc/default/haproxy \
+  && rm -rf /var/lib/apt/lists/*
 
 COPY haproxy.cfg /etc/haproxy/haproxy.cfg
-
-# Install confd on the container
-RUN wget https://github.com/kelseyhightower/confd/releases/download/v0.7.1/confd-0.7.1-linux-amd64
-RUN mv confd-0.7.1-linux-amd64 /usr/local/bin/confd
-RUN chmod u+x /usr/local/bin/confd
-RUN mkdir -p /etc/confd/{conf.d,templates}
-
 COPY haproxy.toml /etc/confd/conf.d/haproxy.toml
 COPY haproxy.cfg.tmpl /etc/confd/templates/haproxy.cfg.tmpl
 
