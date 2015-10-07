@@ -51,4 +51,4 @@ listen mysql_galera_lb
   option httpchk
   default-server port 9200 inter 2s downinter  5s rise 3 fall 2 slowstart 60s maxconn 256
 {{ range $dir := lsdir "/components/galera/" }} {{$ippath := printf "/components/galera/%s/ip" $dir}}
-  server mysql_galera_{{ getv $ippath }} {{ getv $ippath }}:3306 check {{ end }}
+  server mysql_galera_{{ getv $ippath }} {{ getv $ippath }}:3306 {{ end }}
