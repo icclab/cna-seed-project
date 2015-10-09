@@ -29,12 +29,12 @@
     },
     "DynamiteConfigURL": {
       "Description": "A URL from which to dowload the Dynamite config file.",
-      "Default": "https://raw.githubusercontent.com/icclab/cna-seed-project/integration/init/dynamite_dashboard.yaml",
+      "Default": "https://raw.githubusercontent.com/gtoff/cna-seed-project/master/init/dynamite_dashboard.yaml",
       "Type": "String"
     },
 	"DynamiteFleetFilesURL": {
       "Description": "A URL from which to dowload the Dynamite Fleet files.",
-      "Default": "https://raw.githubusercontent.com/icclab/cna-seed-project/integration/init/fleet-files",
+      "Default": "https://raw.githubusercontent.com/gtoff/cna-seed-project/master/init/fleet-files",
       "Type": "String"
     },
     "AdvertisedIPAddress": {
