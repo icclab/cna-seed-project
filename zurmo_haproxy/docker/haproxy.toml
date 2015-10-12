@@ -11,7 +11,7 @@ dest = "/etc/haproxy/haproxy.cfg"
 
 # The etcd keys or directory to watch. This is where the information to fill in
 # the template will come from.
-keys = [ "/services/webserver","components/galera" ]
+keys = [ "/services/webserver" ]
 
 # File ownership and mode information
 owner = "root"
