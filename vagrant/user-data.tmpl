@@ -40,25 +40,25 @@ coreos:
 
       [Install]
       WantedBy=sockets.target
-  - name: zurmo-predownload-docker-images.service
-    command: start
-    content: |
-      [Unit]
-      Description=Service to Pre-Download Docker Images for Zurmo
-      Requires=etcd2.service
-      After=etcd2.service
+#  - name: zurmo-predownload-docker-images.service
+#    command: start
+#    content: |
+#      [Unit]
+#      Description=Service to Pre-Download Docker Images for Zurmo
+#      Requires=etcd2.service
+#      After=etcd2.service
 
-      [Service]
-      EnvironmentFile=/etc/environment
-      RemainAfterExit=true
-      Restart=on-failure
-      ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
-      ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/$zurmo-git-branch$/init/preload-docker-images.sh
-      ExecStartPre=/bin/chmod +x /tmp/zurmo/preload-docker-images.sh
-      ExecStart=/bin/bash -c "/tmp/zurmo/preload-docker-images.sh;"
+#      [Service]
+#      EnvironmentFile=/etc/environment
+#      RemainAfterExit=true
+#      Restart=on-failure
+#      ExecStartPre=/usr/bin/mkdir -p /tmp/zurmo
+#      ExecStartPre=/usr/bin/wget -P /tmp/zurmo https://raw.githubusercontent.com/icclab/cna-seed-project/$zurmo-git-branch$/init/preload-docker-images.sh
+#      ExecStartPre=/bin/chmod +x /tmp/zurmo/preload-docker-images.sh
+#      ExecStart=/bin/bash -c "/tmp/zurmo/preload-docker-images.sh;"
 
-      [Install]
-      WantedBy=multi-user.target
+#      [Install]
+#      WantedBy=multi-user.target
   - name: zurmo-init.service
     command: start
     content: |
@@ -110,9 +110,11 @@ write_files:
     COREOS_PUBLIC_IPV4=$public_ipv4
     COREOS_PRIVATE_IPV4=$private_ipv4
     DOCKER_PRELOAD_ENABLED=$preload-docker-images$
-    DOCKER_IMAGE_TAG=$zurmo-git-branch$
+    DOCKER_IMAGE_TAG=latest
     ZURMO_INIT_GIT_BRANCH=$zurmo-git-branch$
     ZURMO_INIT_ENABLE_DISCOVERY_SERVICES=$enable_discovery_services$
     ZURMO_INIT_DOWNLOAD_FLEET_FILES=$download_fleet_files$
     ZURMO_INIT_START_SERVICES=$zurmo-start-fleet-services$
+    DYNAMITE_CONFIG_URL="https://raw.githubusercontent.com/gtoff/cna-seed-project/master/init/dynamite_dashboard.yaml"
+    DYNAMITE_FLEET_FILES_URL="https://raw.githubusercontent.com/gtoff/cna-seed-project/master/init/fleet-files"
     

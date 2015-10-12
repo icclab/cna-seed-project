@@ -253,6 +253,17 @@ if [[ ${DOWNLOAD_FLEET_FILES} == "True" ]]; then
   create_logstash $LOGSTASH_NUM_INSTANCES
 fi
 
+#  Check if etcd cluster is up and we're leader
+lead=`curl -L -s http://localhost:4001/v2/stats/leader | awk -F, 'match($0, /leader\":\"([0-9a-zA-Z]+)/, lead) {print lead[1]}'`
+myself=`curl -L -s http://localhost:4001/v2/stats/self | awk -F, 'match($0, /id\":\"([0-9a-zA-Z]+)/, lead) {print lead[1]}'`
+log_and_print "Lead: $lead"
+log_and_print "Myself: $myself"
+output_l=`curl -L -s http://localhost:4001/v2/stats/leader`
+output_s=`curl -L -s http://localhost:4001/v2/stats/self`
+log_and_print "$output_l"
+log_and_print "$output_s"
+
+
 if [[ ${START_SERVICES} == "True" ]]; then
   # ----------------------
   # Start the services
