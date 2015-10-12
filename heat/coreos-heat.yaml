@@ -4,7 +4,7 @@ description: Template to deploy a CoreOS Cluster of 5 Machines
 
 parameters:
   Flavor: 
-    default: m1.tiny
+    default: m1.small
     description: "Type of instance (flavor) to be used"
     label: "Instance Type"
     type: string
@@ -54,10 +54,10 @@ parameters:
   DynamiteConfigURL:
     description: "A URL from which to dowload the Dynamite config file."
     type: string
-    default: "https://raw.githubusercontent.com/icclab/cna-seed-project/integration/init/dynamite_dashboard.yaml"
+    default: "https://raw.githubusercontent.com/gtoff/cna-seed-project/master/init/dynamite_dashboard.yaml"
   DynamiteFleetFilesURL: 
     description: "A URL from which to dowload the Dynamite Fleet files."
-    default: "https://raw.githubusercontent.com/icclab/cna-seed-project/integration/init/fleet-files"
+    default: "https://raw.githubusercontent.com/gtoff/cna-seed-project/master/init/fleet-files"
     type: string
       
 resources:
