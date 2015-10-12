@@ -5,7 +5,7 @@ https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_conf
 https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_dashboard/fleet/zurmo_dashboard%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_elasticsearch/fleet/zurmo_elasticsearch%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_elasticsearch/fleet/zurmo_elasticsearch_discovery%40.service
-https://raw.githubusercontent.com/gtoff/cna-seed-project/master/zurmo_haproxy/fleet/zurmo_haproxy%40.service
+https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_haproxy/fleet/zurmo_haproxy%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_haproxy/fleet/zurmo_haproxy_discovery%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_kibana/fleet/zurmo_kibana%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_log_courier/apache/fleet/zurmo_log_courier_apache%40.service
@@ -16,8 +16,6 @@ https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_logs
 https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_logstash/fleet/zurmo_logstash_discovery%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_memcache/fleet/zurmo_memcache%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_memcache/fleet/zurmo_memcache_discovery%40.service
-https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_mysql_demodata/fleet/zurmo_mysql_demodata%40.service
-https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_mysql_demodata/fleet/zurmo_mysql_demodata_discovery%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/integration/elasticdump/fleet/zurmo_elasticdump%40.service
-https://raw.githubusercontent.com/gtoff/cna-seed-project/master/zurmo_galera_cluster/fleet/zurmo_galera_cluster%40.service
-https://raw.githubusercontent.com/gtoff/cna-seed-project/master/zurmo_galera_cluster/fleet/zurmo_galera_cluster_discovery%40.service
+https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_galera_cluster/fleet/zurmo_galera_cluster%40.service
+https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_galera_cluster/fleet/zurmo_galera_cluster_discovery%40.service
