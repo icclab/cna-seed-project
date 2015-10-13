@@ -11,7 +11,7 @@ https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_kiba
 https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_log_courier/apache/fleet/zurmo_log_courier_apache%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_log_courier/haproxy/fleet/zurmo_log_courier_haproxy%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_log_courier/memcache/fleet/zurmo_log_courier_memcache%40.service
-https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_log_courier/mysql/fleet/zurmo_log_courier_mysql%40.service
+https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_log_courier/mysql/fleet/zurmo_log_courier_galera_cluster%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_logstash/fleet/zurmo_logstash%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_logstash/fleet/zurmo_logstash_discovery%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_memcache/fleet/zurmo_memcache%40.service

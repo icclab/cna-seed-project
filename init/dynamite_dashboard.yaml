@@ -107,12 +107,9 @@ Dynamite:
     zurmo_log_courier_memcache: 
       name_of_unit_file: zurmo_log_courier_memcache@.service
       type: attached_service
-#    zurmo_log_courier_mysql_cluster: 
-#      name_of_unit_file: zurmo_log_courier_mysql_cluster@.service
-#      type: attached_service
-#    zurmo_log_courier_mysql_cluster_node: 
-#      name_of_unit_file: zurmo_log_courier_mysql_cluster_node@.service
-#      type: attached_service
+     zurmo_log_courier_galera_cluster: 
+       name_of_unit_file: zurmo_log_courier_galera_cluster@.service
+       type: attached_service
     zurmo_logstash: 
       attached_service: 
         - zurmo_logstash_discovery
@@ -141,7 +138,7 @@ Dynamite:
     zurmo_galera_cluster: 
       attached_service: 
         - zurmo_galera_cluster_discovery
-#        - zurmo_log_courier_mysql_cluster
+        - zurmo_log_courier_galera_cluster
       base_instance_prefix_number: 1
       max_instance: 3
       min_instance: 3
