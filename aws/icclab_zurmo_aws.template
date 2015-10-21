@@ -13,7 +13,7 @@
     "InstanceType" : {
       "Description" : "EC2 HVM instance type (t2.small, etc).",
       "Type" : "String",
-      "Default" : "t2.small",
+      "Default" : "t2.medium",
       "ConstraintDescription" : "Must be a valid EC2 HVM instance type."
     },
     "ClusterSize": {
