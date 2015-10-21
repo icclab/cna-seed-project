@@ -12,14 +12,13 @@ ENV TERM linux
 # File::Copy
 # Sys::Hostname
 # Data::Dumper
-RUN apt-get update 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y perl curl --no-install-recommends && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -y perl curl --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 # gpg: key 5072E1F5: public key "MySQL Release Engineering <mysql-build@oss.oracle.com>" imported
-RUN apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A
-
-RUN echo "deb http://repo.percona.com/apt trusty main" > /etc/apt/sources.list.d/percona.list
-RUN echo "deb-src http://repo.percona.com/apt trusty main" >> /etc/apt/sources.list.d/percona.list
+RUN apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A && \
+  echo "deb http://repo.percona.com/apt trusty main" > /etc/apt/sources.list.d/percona.list && \
+  echo "deb-src http://repo.percona.com/apt trusty main" >> /etc/apt/sources.list.d/percona.list
 
 # the "/var/lib/mysql" stuff here is because the mysql-server postinst doesn't have an explicit way to disable the mysql_install_db codepath besides having a database already "configured" (ie, stuff in /var/lib/mysql/mysql)
 # also, we set debconf keys to make APT a little quieter
@@ -42,8 +41,8 @@ RUN /tmp/random.sh
 
 # add confd
 ADD https://github.com/kelseyhightower/confd/releases/download/v0.7.1/confd-0.7.1-linux-amd64 /usr/local/bin/confd
-RUN chmod u+x /usr/local/bin/confd
-RUN mkdir -p /etc/confd/conf.d && \
+RUN chmod u+x /usr/local/bin/confd && \
+  mkdir -p /etc/confd/conf.d && \
   mkdir -p /etc/confd/templates
 ADD conf.d /etc/confd/mysql/conf.d
 ADD templates /etc/confd/mysql/templates
