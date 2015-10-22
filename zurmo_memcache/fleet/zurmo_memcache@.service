@@ -4,8 +4,8 @@ After=docker.service
 Requires=docker.service
 Before=zurmo_memcache_discovery@%i.service
 Before=zurmo_log_courier_memcache@%i.service
-Requires=zurmo_memcache_discovery@%i.service
-Requires=zurmo_log_courier_memcache@%i.service
+Wants=zurmo_memcache_discovery@%i.service
+Wants=zurmo_log_courier_memcache@%i.service
 
 [Service]
 EnvironmentFile=/etc/environment

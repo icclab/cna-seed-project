@@ -2,6 +2,7 @@
 Description=Announces Logstash
 BindsTo=zurmo_logstash@%i.service
 After=zurmo_logstash@%i.service
+Requires=zurmo_logstash@%i.service
 
 [Service]
 EnvironmentFile=/etc/environment
