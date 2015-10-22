@@ -2,6 +2,7 @@
 Description=Announce mysql
 BindsTo=zurmo_galera_cluster@%i.service
 After=zurmo_galera_cluster@%i.service
+Requires=zurmo_galera_cluster@%i.service
 
 [Service]
 EnvironmentFile=/etc/environment
