@@ -145,7 +145,7 @@ else
           sleep 5 
         done
         # double check that DB has not yet been initialized
-        if  [ $(mysql --password=$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE -e "show tables;" | wc -l) -eq 0 ]; then
+        if  [ $(mysql --password=$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE -e "show tables;" | wc -l) -lt 100 ]; then
           echo "Database tables do not exist. Initializing database"
           mysql --password=$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < /zurmo.sql
         fi
