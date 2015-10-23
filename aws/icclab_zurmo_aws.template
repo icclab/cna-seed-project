@@ -157,7 +157,7 @@
     "CoreOSServerLaunchConfig": {
       "Type": "AWS::AutoScaling::LaunchConfiguration",
       "Properties": {
-        "ImageId" : "ami-768c806b",
+        "ImageId" : "ami-cc8e82d1",
         "InstanceType": {"Ref": "InstanceType"},
         "KeyName": {"Ref": "KeyPair"},
         "SecurityGroups": [{"Ref": "CoreOSSecurityGroup"}],
