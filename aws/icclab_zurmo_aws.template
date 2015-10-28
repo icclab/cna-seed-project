@@ -230,7 +230,7 @@
             "        RemainAfterExit=true\n",
             "        EnvironmentFile=/etc/environment\n",
             "        Restart=on-failure\n",
-            "        #ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_dynamite:${DOCKER_IMAGE_TAG}\n",
+            "        ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_dynamite:${DOCKER_IMAGE_TAG}\n",
             "        ExecStartPre=/bin/bash -c 'wget https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_dynamite/fleet/zurmo_dynamite.service -O /tmp/zurmo_dynamite.service'\n",
             "        ExecStart=/bin/bash -c 'STATUS_CODE=$(curl -L -o /dev/null -w \"%{http_code}\" http://127.0.0.1:4001/v2/keys/ --silent); \\\n",
             "        RUNNING_NODES=0; \\\n",
