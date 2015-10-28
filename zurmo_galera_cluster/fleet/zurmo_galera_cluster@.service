@@ -15,7 +15,7 @@ Restart=always
 ExecStartPre=-/usr/bin/docker kill zurmo_galera_cluster.%i
 ExecStartPre=-/usr/bin/docker rm zurmo_galera_cluster.%i
 #ExecStartPre=/usr/bin/docker pull gtoff/zurmo_galera_cluster:${DOCKER_IMAGE_TAG}
-ExecStart=/usr/bin/bash -c 'exec /usr/bin/docker run --name zurmo_galera_cluster.%i -e "MYSQL_ROOT_PASSWORD=zurmo" -e "MYSQL_DATABASE=zurmo" -e "MYSQL_USER=zurmo" -e "MYSQL_PASSWORD=zurmo" -e "ETCD_ENDPOINT=$(ip route | awk \x27/docker0/ {print $NF }\x27):4001" -e "COREOS_PRIVATE_IPV4=$COREOS_PRIVATE_IPV4" -e "GALERA_CLUSTER_NODE_ID=%i" -e "GALERA_CLUSTER=true" -e "WSREP_SST_USER=sst" -e "WSREP_SST_PASSWORD=zurmo" -e "INIT_ZURMO_DB=true" -p 3306:3306 -p 4444:4444 -p 4567:4567 -p 4568:4568 icclabcna/zurmo_galera_cluster:${DOCKER_IMAGE_TAG}'
+ExecStart=/usr/bin/bash -c 'exec /usr/bin/docker run --name zurmo_galera_cluster.%i -e "MYSQL_ROOT_PASSWORD=zurmo" -e "MYSQL_DATABASE=zurmo" -e "MYSQL_USER=zurmo" -e "MYSQL_PASSWORD=zurmo" -e "ETCD_ENDPOINT=$(ip route | awk \x27/docker0/ {print $NF }\x27):4001" -e "COREOS_PRIVATE_IPV4=$COREOS_PRIVATE_IPV4" -e "GALERA_CLUSTER_NODE_ID=%i" -e "GALERA_CLUSTER=true" -e "WSREP_SST_USER=sst" -e "WSREP_SST_PASSWORD=zurmo" -e "INIT_ZURMO_DB=true" -p 3306:3306 -p 4444:4444 -p 4567:4567 -p 4568:4568 -p 9200:9200 -p 9201:9201 icclabcna/zurmo_galera_cluster:${DOCKER_IMAGE_TAG}'
 ExecStop=/usr/bin/docker stop zurmo_galera_cluster.%i
 
 [X-Fleet]
