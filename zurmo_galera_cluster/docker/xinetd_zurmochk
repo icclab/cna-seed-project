@@ -1,0 +1,16 @@
+# default: on
+# description: mysqlchk
+service mysqlchk
+{
+        flags           = REUSE
+        socket_type     = stream
+        port            = 9200
+        wait            = no
+        user            = nobody
+        server          = /usr/local/bin/zurmochk.sh
+        log_on_failure  += USERID
+        disable         = no
+        bind = 0.0.0.0
+#        only_from       = 0.0.0.0/0
+        per_source      = UNLIMITED
+}
