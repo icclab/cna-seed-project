@@ -114,6 +114,8 @@ fi
 export ETCD_ENDPOINT=${ETCD_ENDPOINT:-172.17.42.1:4001}
 # Starting xinetd
 sudo service xinetd start
+sed -i s/clustercheckuser/$MYSQL_USER/g /usr/bin/clustercheck
+sed -i s/clustercheckpassword!/$MYSQL_PASSWORD/g /usr/bin/clustercheck
 # Check if cluster  has been previously successfully initialized
 export INITIALIZED=`curl -X GET http://$ETCD_ENDPOINT/v2/keys/zurmo_galera/initialized | grep -o 'true'`
 # if initialized or we are a node with id > 1 then rejoin the cluster
