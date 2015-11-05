@@ -3,9 +3,8 @@
   "Description": "CoreOS on EC2: http://coreos.com/docs/running-coreos/cloud-providers/ec2/",
   "Mappings" : {
       "RegionMap" : {
-
           "eu-central-1" : {
-              "AMI" : "ami-768c806b"
+              "AMI" : "ami-c4d0c3a8"
           }
       }
   },
@@ -17,7 +16,7 @@
       "ConstraintDescription" : "Must be a valid EC2 HVM instance type."
     },
     "ClusterSize": {
-      "Default": "12",
+      "Default": "5",
       "MinValue": "3",
       "MaxValue": "12",
       "Description": "Number of nodes in cluster (3-12).",
@@ -157,7 +156,7 @@
     "CoreOSServerLaunchConfig": {
       "Type": "AWS::AutoScaling::LaunchConfiguration",
       "Properties": {
-        "ImageId" : "ami-54898549",
+        "ImageId" : { "Fn::FindInMap" : [ "RegionMap", { "Ref" : "AWS::Region" }, "AMI"]},
         "InstanceType": {"Ref": "InstanceType"},
         "KeyName": {"Ref": "KeyPair"},
         "SecurityGroups": [{"Ref": "CoreOSSecurityGroup"}],
