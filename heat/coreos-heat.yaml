@@ -48,16 +48,16 @@ parameters:
   Docker Image Tag:
     description: "Docker Image Tag to use when downloading containers from Docker hub"
     type: string
-    default: "latest"
+    default: "master"
     constraints:
       - allowed_values: ["master", "latest"]
   DynamiteConfigURL:
     description: "A URL from which to dowload the Dynamite config file."
     type: string
-    default: "https://raw.githubusercontent.com/icclab/cna-seed-project/integration/init/dynamite_dashboard.yaml"
+    default: "https://raw.githubusercontent.com/icclab/cna-seed-project/master/init/dynamite.yaml"
   DynamiteFleetFilesURL: 
     description: "A URL from which to dowload the Dynamite Fleet files."
-    default: "https://raw.githubusercontent.com/icclab/cna-seed-project/integration/init/fleet-files"
+    default: "https://raw.githubusercontent.com/icclab/cna-seed-project/master/init/fleet-files"
     type: string
       
 resources:
@@ -139,7 +139,7 @@ resources:
                     EnvironmentFile=/etc/environment
                     Restart=on-failure
                     ExecStartPre=/usr/bin/docker pull icclabcna/zurmo_dynamite:${DOCKER_IMAGE_TAG}
-                    ExecStartPre=/bin/bash -c 'wget https://raw.githubusercontent.com/icclab/cna-seed-project/integration/zurmo_dynamite/fleet/zurmo_dynamite.service -O /tmp/zurmo_dynamite.service'
+                    ExecStartPre=/bin/bash -c 'wget https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_dynamite/fleet/zurmo_dynamite.service -O /tmp/zurmo_dynamite.service'
                     ExecStart=/bin/bash -c 'STATUS_CODE=$(curl -L -o /dev/null -w "%{http_code}" http://127.0.0.1:4001/v2/keys/ --silent); \
                     RUNNING_NODES=0; \
                     while [[ $STATUS_CODE > 399 ]]; \
