@@ -27,7 +27,7 @@ Dynamite:
       period: 15
       period_unit: second
       service_type: loadbalancer
-      threshold: 1000
+      threshold: 500
       threshold_unit: milli_second
   Service: 
     zurmo_apache: 

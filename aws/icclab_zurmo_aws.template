@@ -13,11 +13,11 @@
     "InstanceType" : {
       "Description" : "EC2 HVM instance type (t2.small, etc).",
       "Type" : "String",
-      "Default" : "t2.medium",
+      "Default" : "t2.small",
       "ConstraintDescription" : "Must be a valid EC2 HVM instance type."
     },
     "ClusterSize": {
-      "Default": "3",
+      "Default": "12",
       "MinValue": "3",
       "MaxValue": "12",
       "Description": "Number of nodes in cluster (3-12).",
