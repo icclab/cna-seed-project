@@ -11,13 +11,11 @@ https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_kibana/fl
 https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_log_courier/apache/fleet/zurmo_log_courier_apache%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_log_courier/haproxy/fleet/zurmo_log_courier_haproxy%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_log_courier/memcache/fleet/zurmo_log_courier_memcache%40.service
-https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_log_courier/mysql/fleet/zurmo_log_courier_mysql%40.service
+https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_log_courier/mysql/fleet/zurmo_log_courier_galera_cluster%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_logstash/fleet/zurmo_logstash%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_logstash/fleet/zurmo_logstash_discovery%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_memcache/fleet/zurmo_memcache%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_memcache/fleet/zurmo_memcache_discovery%40.service
-https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_mysql/fleet/zurmo_mysql%40.service
-https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_mysql/fleet/zurmo_mysql_discovery%40.service
-https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_mysql_demodata/fleet/zurmo_mysql_demodata%40.service
-https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_mysql_demodata/fleet/zurmo_mysql_demodata_discovery%40.service
 https://raw.githubusercontent.com/icclab/cna-seed-project/master/elasticdump/fleet/zurmo_elasticdump%40.service
+https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_galera_cluster/fleet/zurmo_galera_cluster%40.service
+https://raw.githubusercontent.com/icclab/cna-seed-project/master/zurmo_galera_cluster/fleet/zurmo_galera_cluster_discovery%40.service

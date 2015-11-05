@@ -3,7 +3,7 @@ Description=Elasticsearch Service
 After=docker.service
 Requires=docker.service
 Before=zurmo_elasticsearch_discovery@%i.service
-Requires=zurmo_elasticsearch_discovery@%i.service
+Wants=zurmo_elasticsearch_discovery@%i.service
 
 [Service]
 

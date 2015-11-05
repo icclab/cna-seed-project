@@ -7,8 +7,8 @@ After=zurmo_config@%i.service
 Requires=docker.service
 Wants=zurmo_application@%i.service
 Wants=zurmo_config@%i.service
-Requires=zurmo_apache_discovery@%i.service
-Requires=zurmo_log_courier_apache@%i.service
+Wants=zurmo_apache_discovery@%i.service
+Wants=zurmo_log_courier_apache@%i.service
 
 [Service]
 EnvironmentFile=/etc/environment
