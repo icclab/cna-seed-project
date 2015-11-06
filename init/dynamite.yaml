@@ -9,8 +9,8 @@ Dynamite:
   ScalingPolicy: 
     apache_scale_down: 
       comparative_operator: lt
-      cooldown_period: 1
-      cooldown_period_unit: minute
+      cooldown_period: 15
+      cooldown_period_unit: second
       metric: cpu_user
       metric_aggregated: false
       period: 30
@@ -20,8 +20,8 @@ Dynamite:
       threshold_unit: percent
     apache_scale_up: 
       comparative_operator: gt
-      cooldown_period: 1
-      cooldown_period_unit: minute
+      cooldown_period: 30
+      cooldown_period_unit: second
       metric: response_time.time_backend_response.p95
       metric_aggregated: true
       period: 15
