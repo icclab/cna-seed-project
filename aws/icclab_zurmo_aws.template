@@ -4,7 +4,7 @@
   "Mappings" : {
       "RegionMap" : {
           "eu-central-1" : {
-              "AMI" : "ami-c4d0c3a8"
+              "AMI" : "ami-1fdccf73"
           }
       }
   },
