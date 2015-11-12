@@ -41,7 +41,7 @@ How to start a cluster with vagrant:
  11. You can see the containers and where they run using fleetctl:
   * run `fleetctl list-units`
  12. An instance of Kibana is accessible to see the monitoring of the system:
-  * Run: export kibana_priv=`fleetctl list-units | grep "zurmo_kibana@7000.service" | grep -o -e "[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}"`; ssh $kibana_priv 'cat /etc/environment' | grep COREOS_PUBLIC_IPV4
+  * Run: ```export kibana_priv=`fleetctl list-units | grep "zurmo_kibana@7000.service" | grep -o -e "[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}"`; ssh $kibana_priv 'cat /etc/environment' | grep COREOS_PUBLIC_IPV4```
   * Access the Kibana at COREOS_PUBLIC_IPV4:7000
   * The first time you access Kibana you will have to choose @Timestamp as the 'Time-field name' to be used for time indexing
   * Go to "Dashboard" and click "Load saved dashboard", choose the dashboard called "zurmo_dashboard_req_rate" 
