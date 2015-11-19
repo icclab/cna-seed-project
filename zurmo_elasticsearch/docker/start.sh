@@ -1,13 +1,14 @@
 #!/bin/bash
 
 set -eo pipefail
-
-export ETCD_ENDPOINT=${ETCD_ENDPOINT:-10.1.42.1:4001}
+export ETCD_ENDPOINT=${ETCD_ENDPOINT:-$(/sbin/ip route|awk '/default/ { print $3 }'):4001}
+#/usr/bin/curl -L http://${ETCD_ENDPOINT}/v2/keys
 
 echo "[elasticsearch] booting container"
 echo "[elasticsearch] setting publish ip ${HOST_PRIVATE_IPV4}"
 
 sed -i "s/<HOST_IP>/${HOST_PRIVATE_IPV4}/g" /etc/confd/templates/elasticsearch.yml.tmpl
+echo "ETCD_ENDPOINT is: ${ETCD_ENDPOINT}"
 echo "[elasticsearch] elasticsearch configuration template is now:"
 cat /etc/confd/templates/elasticsearch.yml.tmpl
 
@@ -27,6 +28,6 @@ echo "[elasticsearch] confd is now monitoring etcd for changes..."
 
 # Start the HAProxy service using the generated config
 echo "[elasticsearch] starting elasticsearch service..."
-/elasticsearch/bin/elasticsearch -Des.config=/data/elasticsearch.yml
+/usr/share/elasticsearch/bin/elasticsearch -Des.config=/data/elasticsearch.yml
 
 tail -f /data/log/*.log

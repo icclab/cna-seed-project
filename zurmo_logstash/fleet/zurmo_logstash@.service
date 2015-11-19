@@ -2,7 +2,7 @@
 Description=Logstash Service that writes logs to elasticsearch
 After=docker.service
 Requires=docker.service
-Requires=zurmo_logstash_discovery@%i.service
+Wants=zurmo_logstash_discovery@%i.service
 Before=zurmo_logstash_discovery@%i.service
 
 [Service]

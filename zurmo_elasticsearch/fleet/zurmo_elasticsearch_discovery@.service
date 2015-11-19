@@ -2,6 +2,7 @@
 Description=Announces Elasticsearch
 BindsTo=zurmo_elasticsearch@%i.service
 After=zurmo_elasticsearch@%i.service
+Requires=zurmo_elasticsearch@%i.service
 
 [Service]
 EnvironmentFile=/etc/environment

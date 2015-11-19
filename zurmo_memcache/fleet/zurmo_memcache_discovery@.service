@@ -2,6 +2,7 @@
 Description=Announce Memcache
 BindsTo=zurmo_memcache@%i.service
 After=zurmo_memcache@%i.service
+Requires=zurmo_memcache@%i.service
 
 [Service]
 EnvironmentFile=/etc/environment

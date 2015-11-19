@@ -2,6 +2,7 @@
 Description=Announces Loadbalancer
 BindsTo=zurmo_haproxy@%i.service
 After=zurmo_haproxy@%i.service
+Requires=zurmo_haproxy@%i.service
 
 [Service]
 EnvironmentFile=/etc/environment

@@ -3,6 +3,7 @@ Description=Announce apache
 BindsTo=zurmo_apache@%i.service
 After=docker.service
 After=zurmo_apache@%i.service
+Requires=zurmo_apache@%i.service
 
 [Service]
 EnvironmentFile=/etc/environment
