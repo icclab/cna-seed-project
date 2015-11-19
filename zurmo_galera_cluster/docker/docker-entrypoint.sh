@@ -75,6 +75,9 @@ EOSQL
     export MYSQL_USER=${MYSQL_USER:-zurmo}
     export MYSQL_PASSWORD=${MYSQL_PASSWORD:-zurmo}
     if [ "$MYSQL_USER" -a "$MYSQL_PASSWORD" ]; then
+      # workaround for MySQL bug not allowing to add previously deleted users
+      echo "DROP USER '$MYSQL_USER'@'%';" >> "$tempSqlFile"
+      echo "FLUSH PRIVILEGES ;" >> "$tempSqlFile"
       echo "CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' ;" >> "$tempSqlFile"
       
       if [ "$MYSQL_DATABASE" ]; then

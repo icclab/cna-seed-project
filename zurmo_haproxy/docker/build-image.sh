@@ -1,1 +1,1 @@
-sudo docker build -t="icclabcna/zurmo_haproxy" .
+sudo docker build -t="icclabcna/zurmo_haproxy:master" .
