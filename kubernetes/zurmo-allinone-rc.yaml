@@ -21,8 +21,8 @@ spec:
         - name: logcourier
           image: icclabcna/zurmo_log_courier_apache
         - resources:
-          limits:
-            cpu: 0.5
+#          limits:
+#            cpu: 0.5
           image: icclabcna/zurmo_mysql
           name: mysql
           env:
