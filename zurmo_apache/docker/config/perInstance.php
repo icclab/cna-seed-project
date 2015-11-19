@@ -53,7 +53,7 @@
     $maintenanceMode  = false; // Set to true during upgrade process or other maintenance tasks.
     $instanceConfig   = array(); //Set any parameters you want to have merged into configuration array.
                                  //@see CustomManagement
-    $instanceConfig['components']['request']['hostInfo']         = 'http://localhost';
+    //$instanceConfig['components']['request']['hostInfo']         = 'http://localhost';
     $instanceConfig['components']['request']['scriptUrl']         = '/zurmo/app/index.php';
 
     $urlManager = array (); // Set any parameters you want to customize url manager.
