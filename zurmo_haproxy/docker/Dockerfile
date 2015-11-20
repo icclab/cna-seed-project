@@ -16,7 +16,7 @@ WORKDIR /root
 # CMD ["bash"]
 
 # add PPA to get haproxy >= 1.5
-RUN apt-get install -y software-properties-common && add-apt-repository ppa:vbernat/haproxy-1.5
+RUN apt-get install -y software-properties-common && add-apt-repository ppa:vbernat/haproxy-1.6
 
 # Install confd on the container
 # Install Haproxy.
