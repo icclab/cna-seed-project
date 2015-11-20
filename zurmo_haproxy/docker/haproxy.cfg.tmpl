@@ -44,11 +44,13 @@ backend webserver_nodes
 
 listen mysql_galera_lb
   mode tcp
+  option tcplog
+  log 127.0.0.1 local1 notice
   bind *:33306
   timeout client 60s
   timeout server 60s
   balance leastconn
   option httpchk
-  default-server port 9202 inter 2s downinter  5s rise 3 fall 2 slowstart 60s maxconn 256
+  default-server port 9202 fastinter 2s downinter 5s rise 3 fall 2 slowstart 60s maxconn 256
 {{ range $dir := lsdir "/components/galera/" }} {{$ippath := printf "/components/galera/%s/ip" $dir}}
   server mysql_galera_{{ getv $ippath }} {{ getv $ippath }}:3306 check port 9202{{ end }}

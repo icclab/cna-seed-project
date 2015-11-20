@@ -15,11 +15,12 @@ WORKDIR /root
 # Define default command.
 # CMD ["bash"]
 
-  # from dockerfile/haproxy
+# add PPA to get haproxy >= 1.5
+RUN apt-get install -y software-properties-common && add-apt-repository ppa:vbernat/haproxy-1.5
 
 # Install confd on the container
 # Install Haproxy.
-RUN apt-get update \
+RUN apt-get update && apt-get dist-upgrade -y \
   && apt-get install -y haproxy wget \
   && wget https://github.com/kelseyhightower/confd/releases/download/v0.7.1/confd-0.7.1-linux-amd64 \
   && mv confd-0.7.1-linux-amd64 /usr/local/bin/confd \
