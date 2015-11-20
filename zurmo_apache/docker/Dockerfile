@@ -34,7 +34,7 @@ ENV PATH $PATH:/usr/local/composer/vendor/bin
 ADD default-vhost.conf /etc/apache2/sites-available/000-default.conf
 
 ADD set_data_permissions.sh /
-ADD install_xdebug.sh /RUN
+ADD install_xdebug.sh /install_xdebug.sh
 ADD set_debug.sh /
 ADD php.ini /etc/php5/apache2/php.ini
 ADD debug_php.ini /etc/php5/apache2/debug_php.ini
