@@ -1,3 +1,4 @@
+sudo systemctl stop update-engine.service
 cd /tmp
 wget https://raw.githubusercontent.com/icclab/cna-seed-project/master/init/fleet-files
 wget -i fleet-files
