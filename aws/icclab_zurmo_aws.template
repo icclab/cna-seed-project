@@ -5,6 +5,9 @@
       "RegionMap" : {
           "eu-central-1" : {
               "AMI" : "ami-12c9db7e"
+          },
+          "eu-west-1" : {
+              "AMI" : "ami-f90bae8a"
           }
       }
   },
