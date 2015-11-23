@@ -36,7 +36,7 @@ frontend localnodes
 
 backend webserver_nodes
   mode http
-  balance roundrobin
+  balance leastconn
   option forwardfor
   #http-request set-header X-Forwarded-Port %[dst_port]
   #http-request add-header X-Forwarded-Proto https if { ssl_fc }
