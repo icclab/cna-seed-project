@@ -6,4 +6,5 @@
 echo $LINK
 echo "Link: ${LINK}"
 sed -i "s@LINK@${LINK}@g" tsung_sample_config.xml
-#tsung -f tsung_sample_config.xml start
+cat tsung_sample_config.xml
+tsung -f tsung_sample_config.xml start
