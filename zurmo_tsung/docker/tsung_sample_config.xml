@@ -19,21 +19,12 @@
   </monitoring>-->
   
   
-  <load duration="10" unit="minute">
+  <load duration="60" unit="minute">
   <!-- several arrival phases can be set: for each phase, you can set
   the mean inter-arrival time between new clients and the phase
   duration -->
-   <arrivalphase phase="1" duration="1" unit="minute">
+   <arrivalphase phase="1" duration="60" unit="minute">
      <users maxnumber="5"  interarrival="2" unit="second"></users>
-   </arrivalphase>
-   <arrivalphase phase="2" duration="2" unit="minute">
-     <users maxnumber="15"  interarrival="2" unit="second"></users>
-   </arrivalphase>
-   <arrivalphase phase="3" duration="3" unit="minute">
-     <users maxnumber="30"  interarrival="2" unit="second"></users>
-   </arrivalphase>
-   <arrivalphase phase="4" duration="4" unit="minute">
-     <users maxnumber="50"  interarrival="2" unit="second"></users>
    </arrivalphase>
   </load>
 
