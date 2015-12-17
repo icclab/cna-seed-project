@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: apache
-          image: gtoff/zurmo_apache:kubernetes
+          image: icclabcna/zurmo_apache:kubernetes
           ports:
           - containerPort: 80
         - name: logcourier
@@ -29,6 +29,8 @@ spec:
           - name: MYSQL_ROOT_PASSWORD
             # Change this password!
             value: zurmo
+          - name: MYSQLHOST
+            value: localhost
           ports:
           - containerPort: 3306
             name: mysql

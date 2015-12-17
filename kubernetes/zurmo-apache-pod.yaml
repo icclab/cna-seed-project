@@ -7,7 +7,7 @@ metadata:
   name: apache.zurmo
 spec: 
   containers: 
-    - image: "gtoff/zurmo_apache:kubernetes"
+    - image: "icclabcna/zurmo_apache:kubernetes"
       name: apache
       ports: 
         - containerPort: 80

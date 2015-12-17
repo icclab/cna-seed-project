@@ -9,6 +9,8 @@ collectd -C /collectd.conf
 #/set_data_permissions.sh
 chown -R www-data /zurmo
 
+sed -i "s@MYSQLHOST@${MYSQLHOST}@g" 
+
 exec dockerize \
      -stdout /var/log/apache2/access.log \
      -stderr /var/log/apache2/error.log \
