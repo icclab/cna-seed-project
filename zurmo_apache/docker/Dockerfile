@@ -34,14 +34,15 @@ ENV PATH $PATH:/usr/local/composer/vendor/bin
 ADD default-vhost.conf /etc/apache2/sites-available/000-default.conf
 
 ADD set_data_permissions.sh /
-ADD install_xdebug.sh /RUN
+#ADD install_xdebug.sh /RUN
 ADD set_debug.sh /
 ADD php.ini /etc/php5/apache2/php.ini
 ADD debug_php.ini /etc/php5/apache2/debug_php.ini
 ADD my.cnf /etc/mysql/my.cnf
 ADD 000-default.conf /etc/apache2/sites-enabled/000-default.conf
 ADD apache2.conf /etc/apache2/apache2.conf
-RUN /install_xdebug.sh && mkdir /tmp/xdebug_profiling
+#install_xdebug doesn't exist
+#RUN /install_xdebug.sh && mkdir /tmp/xdebug_profiling
 ADD collectd.conf /collectd.conf
 
 # Enable apache modules
