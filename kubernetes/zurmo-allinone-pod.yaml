@@ -10,6 +10,7 @@ spec:
     image: icclabcna/zurmo_apache:kubernetes
     ports:
     - containerPort: 80
+    imagePullPolicy: Always
   - name: logcourier
     image: icclabcna/zurmo_log_courier_apache
   - resources:
@@ -26,4 +27,4 @@ spec:
     ports:
     - containerPort: 3306
       name: mysql
-
+    imagePullPolicy: Always
