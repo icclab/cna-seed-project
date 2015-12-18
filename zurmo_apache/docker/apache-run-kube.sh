@@ -9,7 +9,7 @@ collectd -C /collectd.conf
 #/set_data_permissions.sh
 chown -R www-data /zurmo
 
-sed -i "s@MYSQLHOST@${MYSQLHOST}@g" 
+sed -i "s@MYSQLHOST@${MYSQLHOST}@g" config/perInstance.php
 
 exec dockerize \
      -stdout /var/log/apache2/access.log \

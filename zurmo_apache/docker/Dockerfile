@@ -2,9 +2,9 @@ FROM ubuntu:14.04
 
 # Install base packages
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update && \
-    apt-get -yq upgrade && \
-    apt-get -yq install \
+RUN apt-get update --no-install-recommends && \
+    apt-get -yq upgrade --no-install-recommends && \
+    apt-get -yq install --no-install-recommends \
         mysql-client \
         apache2 \
         libapache2-mod-php5 \
@@ -48,24 +48,24 @@ ADD collectd.conf /collectd.conf
 # Enable apache modules
 # Enable php modules
 RUN a2enmod rewrite php5 vhost_alias headers unique_id && \
-  php5enmod apcu curl gd mcrypt mongo mysql intl json imap xsl overrides/99 && \
+ php5enmod apcu curl gd mcrypt mongo mysql intl json imap xsl overrides/99
 
 # Install composer and drush
-export COMPOSER_HOME=/usr/local/composer && \
-  curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
-    composer global require drush/drush:dev-master && \
-    composer global install && \
-    composer selfupdate && \
-    composer global require phpunit/phpunit "3.*" && \
-    composer global require phpunit/phpunit-story && \
-    composer global require phpunit/php-invoker && \
-    composer global require phpunit/dbunit "1.3.2" && \
-    composer global require phpunit/phpunit-selenium "1.4.2" && \
-    composer global require symfony/yaml && \
-    ln -s /usr/local/composer/vendor/drush/drush/drush /usr/local/bin/drush
+#export COMPOSER_HOME=/usr/local/composer && \
+#  curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --#filename=composer && \
+#    composer global require drush/drush:dev-master && \
+#    composer global install && \
+#    composer selfupdate && \
+#    composer global require phpunit/phpunit "3.*" && \
+#    composer global require phpunit/phpunit-story && \
+#    composer global require phpunit/php-invoker && \
+#    composer global require phpunit/dbunit "1.3.2" && \
+#    composer global require phpunit/phpunit-selenium "1.4.2" && \
+#    composer global require symfony/yaml && \
+#    ln -s /usr/local/composer/vendor/drush/drush/drush /usr/local/bin/drush
 
 # Install dockerize
-RUN curl -sSL https://github.com/jwilder/dockerize/releases/download/v0.0.2/dockerize-linux-amd64-v0.0.2.tar.gz | tar -C /usr/local/bin -xzf -
+#curl -sSL https://github.com/jwilder/dockerize/releases/download/v0.0.2/dockerize-linux-amd64-#v0.0.2.tar.gz | tar -C /usr/local/bin -xzf -
 
 # Add run file
 ADD apache-run-kube.sh /apache-run-kube.sh
@@ -73,7 +73,7 @@ RUN chmod 0755 /apache-run-kube.sh
 
 # from zurmo_config
 ADD config /zurmo/zurmo/app/protected/config
-ADD conf.d /etc/confd/apache/conf.d
+#ADD conf.d /etc/confd/apache/conf.d
 ADD templates /etc/confd/apache/templates
 
 # from zurmo_application
@@ -81,9 +81,6 @@ ADD zurmo /zurmo/zurmo
 ADD index.php /zurmo/index.php
 
 RUN chown -R www-data /zurmo
-
-# from
-
 
 VOLUME /var/log/apache2
 VOLUME /var/log/collectd
