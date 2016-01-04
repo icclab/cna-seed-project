@@ -65,7 +65,7 @@ RUN a2enmod rewrite php5 vhost_alias headers unique_id && \
 #    ln -s /usr/local/composer/vendor/drush/drush/drush /usr/local/bin/drush
 
 # Install dockerize
-#curl -sSL https://github.com/jwilder/dockerize/releases/download/v0.0.2/dockerize-linux-amd64-#v0.0.2.tar.gz | tar -C /usr/local/bin -xzf -
+RUN curl -sSL -k https://github.com/jwilder/dockerize/releases/download/v0.0.4/dockerize-linux-amd64-v0.0.4.tar.gz | tar -C /usr/local/bin -xzf -
 
 # Add run file
 ADD apache-run-kube.sh /apache-run-kube.sh

@@ -22,12 +22,12 @@ spec:
           env:
           - name: MYSQLHOST
             value: localhost
-        - name: logcourier
+          name: logcourier
           image: icclabcna/zurmo_log_courier_apache
         - resources:
 #          limits:
 #            cpu: 0.5
-        - name: mysql
+          name: mysql
           image: icclabcna/zurmo_mysql
           env:
           - name: MYSQL_ROOT_PASSWORD

@@ -9,9 +9,10 @@ collectd -C /collectd.conf
 #/set_data_permissions.sh
 #chown -R www-data /zurmo
 
-sed -i "s@MYSQLHOST@${MYSQLHOST}@g" config/perInstance.php
+sed -i "s@MYSQLHOST@${MYSQLHOST}@g" /zurmo/zurmo/app/protected/config/perInstance.php
+cat /zurmo/zurmo/app/protected/config/perInstance.php
 
-#exec dockerize \
-#     -stdout /var/log/apache2/access.log \
-#     -stderr /var/log/apache2/error.log \
-#     /usr/sbin/apache2 -DFOREGROUND
+exec dockerize \
+     -stdout /var/log/apache2/access.log \
+     -stderr /var/log/apache2/error.log \
+     /usr/sbin/apache2 -DFOREGROUND
