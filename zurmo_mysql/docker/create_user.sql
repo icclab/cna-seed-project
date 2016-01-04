@@ -1,4 +1,4 @@
-create user 'zurmo' identified by 'zurmo';
+create user 'zurmo' identified by 'ZURMO_PASSWORD';
 grant all privileges on *.* to zurmo;
 
 create user 'zurmo_test' identified by 'zurmo_test';

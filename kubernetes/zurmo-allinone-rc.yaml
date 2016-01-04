@@ -22,16 +22,16 @@ spec:
           env:
           - name: MYSQLHOST
             value: localhost
-          name: logcourier
-          image: icclabcna/zurmo_log_courier_apache
-        - resources:
+#        - name: logcourier
+#          image: icclabcna/zurmo_log_courier_apache
+#        - resources:
 #          limits:
 #            cpu: 0.5
-          name: mysql
+        - name: mysql
           image: icclabcna/zurmo_mysql
           env:
           - name: MYSQL_ROOT_PASSWORD
-            # Change this password!
+          # Change this password!
             value: zurmo
           ports:
           - containerPort: 3306
