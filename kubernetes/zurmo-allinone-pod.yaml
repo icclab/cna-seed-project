@@ -6,25 +6,21 @@ metadata:
     name: zurmo-webapp-allinone
 spec:
   containers:
-  - name: apache
-    image: icclabcna/zurmo_apache:kubernetes
-    ports:
-    - containerPort: 80
-    imagePullPolicy: Always
-  - name: logcourier
-    image: icclabcna/zurmo_log_courier_apache
-  - resources:
-    limits:
-      cpu: 0.5
-    image: icclabcna/zurmo_mysql
-    name: mysql
-    env:
-    - name: MYSQL_ROOT_PASSWORD
-      # Change this password!
-      value: zurmo
-    - name: MYSQLHOST
-      value: localhost
-    ports:
-    - containerPort: 3306
-      name: mysql
-    imagePullPolicy: Always
+        - name: apache
+          image: icclabcna/zurmo_apache:kubernetes
+          ports:
+          - containerPort: 80
+          imagePullPolicy: Always
+          env:
+          - name: MYSQLHOST
+            value: localhost
+        - name: mysql
+          image: icclabcna/zurmo_mysql:kubernetes
+          env:
+          - name: MYSQL_ROOT_PASSWORD
+          # Change this password!
+            value: zurmo
+          ports:
+          - containerPort: 3306
+            name: mysql
+          imagePullPolicy: Always
