@@ -9,22 +9,22 @@ Dynamite:
   ScalingPolicy: 
     apache_scale_down: 
       comparative_operator: lt
-      cooldown_period: 15
+      cooldown_period: 1
       cooldown_period_unit: second
       metric: cpu_user
       metric_aggregated: false
-      period: 30
+      period: 1
       period_unit: second
       service_type: webserver
       threshold: 10
       threshold_unit: percent
     apache_scale_up: 
       comparative_operator: gt
-      cooldown_period: 30
+      cooldown_period: 2
       cooldown_period_unit: second
       metric: response_time.time_backend_response.p95
       metric_aggregated: true
-      period: 15
+      period: 2
       period_unit: second
       service_type: loadbalancer
       threshold: 500
