@@ -5,7 +5,7 @@ metadata:
   labels:
     name: apache.zurmo
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     name: apache.zurmo
   template:
@@ -15,8 +15,9 @@ spec:
     spec:
       containers:
       - name: apache
-        image: gtoff/zurmo_apache:kubernetes
+        image: icclabcna/zurmo_apache:kubernetes
+        env:
+        - name: MYSQLHOST
+          value: db
         ports:
         - containerPort: 80
-
-

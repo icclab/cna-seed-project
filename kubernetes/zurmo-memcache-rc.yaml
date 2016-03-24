@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: memcache.zurmo
+  labels:
+    name: memcache.zurmo
+spec:
+  replicas: 3
+  selector:
+    name: memcache.zurmo
+  template:
+    metadata:
+      labels:
+        name: memcache.zurmo
+    spec:
+      containers:
+      - name: memcache
+        image: icclabcna/zurmo_memcache:kubernetes
+        ports:
+        - containerPort: 11211

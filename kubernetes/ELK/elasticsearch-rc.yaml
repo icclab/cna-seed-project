@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    version: v1
+  name: elasticsearch
+spec:
+  replicas: 2
+  selector:
+    k8s-app: elasticsearch
+    version: v1
+  template:
+    metadata:
+      labels:
+        k8s-app: elasticsearch
+        kubernetes.io/cluster-service: "true"
+        version: v1
+    spec:
+      containers:
+      - image: gcr.io/google_containers/elasticsearch:1.7
+        imagePullPolicy: IfNotPresent
+        name: elasticsearch
+        ports:
+        - containerPort: 9200
+          name: db
+          protocol: TCP
+        - containerPort: 9300
+          name: transport
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+        terminationMessagePath: /dev/termination-log
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30

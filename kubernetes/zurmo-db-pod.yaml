@@ -8,8 +8,11 @@ metadata:
 spec: 
   containers: 
     - resources:
-      image: icclabcna/zurmo_mysql
+      image: icclabcna/zurmo_mysql:kubernetes
       name: mysql
+      env:
+      - name: MYSQL_ROOT_PASSWORD
+        value: zurmo
       ports: 
         - containerPort: 3306
-          name: mysql
+      imagePullPolicy: Always

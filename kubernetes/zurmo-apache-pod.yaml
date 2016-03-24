@@ -9,9 +9,13 @@ spec:
   containers: 
     - image: "icclabcna/zurmo_apache:kubernetes"
       name: apache
+      env:
+        - name: MYSQLHOST
+          value: db
       ports: 
         - containerPort: 80
           hostPort: 80
+      imagePullPolicy: Always
     - image: icclabcna/zurmo_log_courier_apache
       name: logcourier
 
