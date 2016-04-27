@@ -1,0 +1,5 @@
+cluster.name: elasticsearch_zurmo
+node.name: <NODE_NAME>
+discovery.zen.ping.multicast.enabled: false
+discovery.zen.ping.unicast.hosts:  elasticsearch:9200
+network.publish_host: "<HOST_IP>"
